@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.About_all">
+   <LinearLayout
+       android:id="@+id/titletext"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+      <TextView
+          android:textSize="40dp"
+          android:textAllCaps="true"
+          android:text="About Us"
+          android:textAlignment="center"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" />
+   </LinearLayout>
+    <android.support.v7.widget.CardView
+        android:layout_below="@+id/titletext"
+        app:cardElevation="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+   <TextView
+       android:padding="5dp"
+       android:layout_marginRight="2dp"
+       android:layout_marginLeft="2dp"
+       android:breakStrategy="high_quality"
+
+       android:layout_centerHorizontal="true"
+       android:layout_centerVertical="true"
+       android:layout_centerInParent="true"
+       android:id="@+id/about_web"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"></TextView>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/group1">
+        <item
+            android:id="@+id/nav_homepage"
+            android:icon="@drawable/home_icon"
+            android:title="HomePage"
+            />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/group2">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/profile_icon"
+            android:title="My Profile" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/group3">
+        <item
+            android:id="@+id/nav_buy_package"
+            android:icon="@drawable/buy_package_icon"
+            android:title="Buy Package" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/group4">
+        <item
+            android:id="@+id/nav_my_test"
+            android:icon="@drawable/ma_tests"
+            android:title="My Test" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/group5">
+        <item
+            android:id="@+id/nav_group"
+            android:icon="@drawable/groupd"
+            android:title="Groups" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/group6">
+        <item
+            android:id="@+id/nav_bookmark"
+            android:icon="@drawable/bookmark_icon"
+            android:title="My Bookmark" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/group7">
+        <item
+            android:id="@+id/nav_news"
+            android:icon="@drawable/news_icon"
+            android:title="News" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/group8">
+        <item
+            android:id="@+id/nav_offers"
+            android:icon="@drawable/offer_icon"
+            android:title="Offers" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/group9">
+        <item
+            android:id="@+id/nav_ex_offer"
+            android:icon="@drawable/offer_icon"
+            android:title="Exclusive Offer" />
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/group10">
+        <item
+            android:id="@+id/nav_ask_expert"
+            android:icon="@drawable/ask_exp"
+            android:title="Ask an Expert" />
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/group11">
+        <item
+            android:id="@+id/nav_rate_us"
+            android:icon="@drawable/rate_us"
+            android:title="Rate Us" />
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/group12">
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/logout"
+            android:title="Logout" />
+    </group>
+        <group android:checkableBehavior="single"
+        android:id="@+id/group13">
+        <item
+            android:id="@+id/aboutus"
+            android:icon="@drawable/about_us"
+            android:title="About Us" />
+    </group>
+
+    </group>
+
+    <!--<item android:title="Communicate">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@drawable/ic_menu_share"-->
+                <!--android:title="Share" />-->
+            <!--<item-->
+                <!--android:id="@+id/nav_send"-->
+                <!--android:icon="@drawable/ic_menu_send"-->
+                <!--android:title="Send" />-->
+        <!--</menu>-->
+    <!--</item>-->
+
+</menu>

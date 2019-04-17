@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <android.support.design.widget.CollapsingToolbarLayout
+        android:padding="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar_post"
+        android:layout_width="match_parent"
+        app:expandedTitleGravity="top"
+        android:focusable="true"
+        android:focusedByDefault="true"
+        android:focusableInTouchMode="true"
+        app:layout_scrollFlags="scroll|snap"
+        android:background="@color/colorPrimary"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:weightSum="1"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="start|center"
+            android:text="Register"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/viewPost"-->
+            <!--android:layout_weight="0.80"-->
+            <!--android:src="@drawable/view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+    </LinearLayout>
+
+    </android.support.design.widget.CollapsingToolbarLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+    <LinearLayout
+        android:padding="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="@dimen/login_page_margin1"
+        android:layout_marginLeft="@dimen/login_page_margin1"
+        android:layout_marginBottom="10dp"
+        >
+
+
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+            <LinearLayout
+                android:padding="17dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:layout_gravity="center"
+                    android:src="@drawable/person_icon"/>
+
+                <EditText
+                    android:nextFocusUp="@id/toolbar_post"
+                    android:background="#fff"
+                    android:id="@+id/ful_nam"
+                    android:layout_weight="0.1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="Full Name"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="138dp" />
+
+            </LinearLayout>
+        </android.support.design.card.MaterialCardView>
+
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+            <LinearLayout
+                android:padding="17dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:layout_gravity="center"
+                    android:src="@drawable/email_icon"/>
+
+                <EditText
+                    android:background="#fff"
+                    android:id="@+id/email"
+                    android:layout_weight="0.1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:hint="Email"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="138dp" />
+
+            </LinearLayout>
+        </android.support.design.card.MaterialCardView>
+
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+            <LinearLayout
+                android:padding="17dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:layout_gravity="center"
+                    android:src="@drawable/email_icon"/>
+
+                <EditText
+                    android:background="#fff"
+                    android:id="@+id/password"
+                    android:layout_weight="0.1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="Password"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="138dp" />
+
+            </LinearLayout>
+        </android.support.design.card.MaterialCardView>
+
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+            <LinearLayout
+                android:padding="17dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:layout_gravity="center"
+                    android:src="@drawable/mobile_icon"/>
+
+                <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:id="@+id/etPasswordLayout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:passwordToggleEnabled="true">-->
+                <EditText
+                    android:id="@+id/mobile"
+                    android:layout_weight="0.1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Mobile"
+                    android:background="#fff"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="214dp" />
+                <!--</android.support.design.widget.TextInputLayout>-->
+            </LinearLayout>
+        </android.support.design.card.MaterialCardView>
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+            <LinearLayout
+                android:padding="17dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:layout_gravity="center"
+                    android:src="@drawable/passoutyr"/>
+
+                <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:id="@+id/etPasswordLayout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:passwordToggleEnabled="true">-->
+                <EditText
+                    android:id="@+id/passout_year"
+                    android:layout_weight="0.1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Passout year"
+                    android:background="#fff"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="214dp" />
+                <!--</android.support.design.widget.TextInputLayout>-->
+            </LinearLayout>
+        </android.support.design.card.MaterialCardView>
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+            <LinearLayout
+                android:padding="17dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.9"
+                    android:layout_gravity="center"
+                    android:src="@drawable/passoutyr"/>
+
+                <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:id="@+id/etPasswordLayout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:passwordToggleEnabled="true">-->
+                <EditText
+                    android:id="@+id/collage_name"
+                    android:layout_weight="0.1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Collage Name"
+                    android:background="#fff"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="214dp" />
+                <!--</android.support.design.widget.TextInputLayout>-->
+            </LinearLayout>
+        </android.support.design.card.MaterialCardView>
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+            <LinearLayout
+                android:padding="17dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.9"
+                    android:src="@drawable/address" />
+
+                <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:id="@+id/etPasswordLayout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:passwordToggleEnabled="true">-->
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_weight="0.1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:hint="Address"
+                    android:background="#fff"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="214dp" />
+                <!--</android.support.design.widget.TextInputLayout>-->
+            </LinearLayout>
+        </android.support.design.card.MaterialCardView>
+
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+
+            <LinearLayout
+                android:padding="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:orientation="vertical">
+
+                <ImageView
+                   android:id="@+id/gate_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_weight="0.5"
+                    android:layout_gravity="center"
+                    android:src="@drawable/no_photo"/>
+                <TextView
+                    android:text="Please select an image which you have uploaded in GATE"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </android.support.design.card.MaterialCardView>
+
+        <android.support.design.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+
+            <LinearLayout
+                android:padding="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/gate_sign"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_weight="0.5"
+                    android:layout_gravity="center"
+                    android:src="@drawable/nosign"/>
+                <TextView
+                    android:text="Please select an image which you have uploaded in GATE"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </android.support.design.card.MaterialCardView>
+
+    </LinearLayout>
+            <android.support.design.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="10dp"
+                >
+                <Button
+                    android:focusableInTouchMode="true"
+                    android:focusedByDefault="true"
+                    android:focusable="true"
+                    android:id="@+id/reg_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Register"
+                    android:textAlignment="center"
+                    android:textColor="#FAFAFA"
+                    tools:layout_editor_absoluteX="16dp"
+                    android:background="@color/app_bar_color"
+                    tools:layout_editor_absoluteY="341dp" />
+
+            </android.support.design.card.MaterialCardView>
+        </LinearLayout>
+</ScrollView>
+
+
+
+
+</LinearLayout>
