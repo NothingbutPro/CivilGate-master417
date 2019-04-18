@@ -75,6 +75,7 @@ public class Main_Test_Activity extends AppCompatActivity {
         Toast.makeText(this, "student naME IS"+student_id, Toast.LENGTH_SHORT).show();
         quelinrecy = findViewById(R.id.gridlay);
         bottomSheetBehavior.setHideable(true);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         GridLayoutManager manager = new GridLayoutManager(this, 9, GridLayoutManager.VERTICAL, false);
         quelinrecy.setLayoutManager(manager);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -107,7 +108,6 @@ public class Main_Test_Activity extends AppCompatActivity {
      //     call the constructor of CustomAdapter to send the reference and data to Adapter
 
 //        Log.e("jhsadsa" , ""+main_test_activity.student_id);
-        
         getAllQuestions(student_id);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -226,34 +226,50 @@ public class Main_Test_Activity extends AppCompatActivity {
                 case R.id.navigation_forward:
 //                    if()
                     int next = ++queposition ;
-                    if(questions_jJavaList.get(next).getType() == 1)
+                    try{
+                        if(questions_jJavaList.get(next).getType() == 1)
+                        {
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.container_dik , new Multiple_Que_Test()).commit();
+                        }else{
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.container_dik , new Fill_In_Que_Test()).commit();
+                        }
+                    }catch (Exception e)
                     {
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.container_dik , new Multiple_Que_Test()).commit();
-                    }else{
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.container_dik , new Fill_In_Que_Test()).commit();
+                        queposition--;
+                        Toast.makeText(Main_Test_Activity.this, "Can't go forward", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
                     }
+
               //      mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_save:
 //                    mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_back:
-                    int back = --queposition ;
-                    if(questions_jJavaList.get(back).getType() == 1)
-                    {
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.container_dik , new Multiple_Que_Test()).commit();
-                    }else
+                    int back = --queposition;
+                    try {
+                        if(questions_jJavaList.get(back).getType() == 1)
                         {
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                        fragmentTransaction.replace(R.id.container_dik , new Fill_In_Que_Test()).commit();
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.container_dik , new Multiple_Que_Test()).commit();
+                        }else
+                        {
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.container_dik , new Fill_In_Que_Test()).commit();
+                        }
+                    }catch (Exception e)
+                    {
+                        ++queposition;
+                        Toast.makeText(Main_Test_Activity.this, "No back possible", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
                     }
+
    //                 mTextMessage.setText(R.string.title_notifications);
                     return true;
             }

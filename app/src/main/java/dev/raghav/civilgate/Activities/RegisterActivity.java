@@ -31,13 +31,22 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import dev.raghav.civilgate.Const_Files.Retro_Urls;
 import dev.raghav.civilgate.Parsingfiles.LoginReg.RegisPars_responce;
@@ -441,26 +450,66 @@ public class RegisterActivity extends AppCompatActivity {
         protected String doInBackground(Void... Void) {
             try {
 
+                URL url = new URL("https://ihisaab.com/Api/taxreturn");
 
-                MultipartEntity entity = new MultipartEntity(
-                        HttpMultipartMode.BROWSER_COMPATIBLE);
+                JSONObject postDataParams = new JSONObject();
+//                postDataParams.put("name", names);
+//
+//                postDataParams.put("email", emails);
+//                postDataParams.put("pan_no", pan_nos);
+//                postDataParams.put("adhan_no", adhan_nos);
+//                postDataParams.put("mobile", mobiles);
+//                postDataParams.put("ret_email", emails);
+//                postDataParams.put("ret_mobile", mobiles);
 
-                entity.addPart("name", new StringBody(ful_name.getText().toString()));
-                entity.addPart("email", new StringBody("" + email.getText().toString()));
-                entity.addPart("mobile", new StringBody("" + mobile.getText().toString()));
-                entity.addPart("password", new StringBody("" + password.getText().toString()));
-                entity.addPart("passout_year", new StringBody("" + passing_year.getText().toString()));
-                entity.addPart("collage_name", new StringBody("" + collage_name.getText().toString()));
-                entity.addPart("address", new StringBody("" + address.getText().toString()));
-                entity.addPart("profile_image", new FileBody(gate_photo));
-                entity.addPart("sign_image", new FileBody(gate_sign));
-//                    result = Utilities.postEntityAndFindJson("https://www.spellclasses.co.in/DM/Api/taxreturn", entity);
-//                 //   result = Utilities.postEntityAndFindJson("https://www.spellclasses.co.in/DM/Api/taxreturn", entity);
-                result = Utilities.postEntityAndFindJson("http://ihisaab.in/lms/api/Ragistration", entity);
+
+                Log.e("postDataParams", postDataParams.toString());
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(15000  /*milliseconds*/);
+                conn.setConnectTimeout(15000  /*milliseconds*/);
+                conn.setRequestMethod("POST");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+                writer.write(getPostDataString(postDataParams));
+
+                writer.flush();
+                writer.close();
+                os.close();
+
+                int responseCode = conn.getResponseCode();
+
+                if (responseCode == HttpsURLConnection.HTTP_OK) {
+
+                    BufferedReader in = new BufferedReader(new
+                            InputStreamReader(
+                            conn.getInputStream()));
+
+                    StringBuffer sb = new StringBuffer("");
+                    String line = "";
+
+                    while ((line = in.readLine()) != null) {
+
+                        StringBuffer Ss = sb.append(line);
+                        Log.e("Ss", Ss.toString());
+                        sb.append(line);
+                        break;
+                    }
+
+                    in.close();
+                    return sb.toString();
+
+                } else {
+                    return new String("false : " + responseCode);
+                }
             } catch (Exception e) {
-                       e.printStackTrace();
+                return new String("Exception: " + e.getMessage());
             }
-            return null;
+
         }
         @Override
         protected void onPostExecute(String result) {
@@ -484,6 +533,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         }
         }
+
+    private int getPostDataString(JSONObject postDataParams) {
+        return 0;
+    }
 
 
 //    @Override

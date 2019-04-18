@@ -97,6 +97,7 @@ public class Basic_Level_Test_Fragment  extends Fragment {
                         p =new int[response.body().getData().size()];
                         for(int i=0;i<response.body().getData().size();i++)
                         {
+                            Log.e("id" , ""+response.body().getData().get(i).getId());
                             px= px+1;
 //                            p[0] =i;
                             String s = response.body().getData().get(i).getTestName();
@@ -129,14 +130,7 @@ public class Basic_Level_Test_Fragment  extends Fragment {
 
             }
         });
-//            if(px>0)
-//            {
-//                ExamprogressDialog.dismiss();
-//            }
-//        tests_recy.setLayoutManager(mLayoutManager);
-//        tests_recy.setItemAnimator(new DefaultItemAnimator());
-//        tests_recy.setAdapter(testAdapter);
-     //   p = null;
+
         return true;
     }
 

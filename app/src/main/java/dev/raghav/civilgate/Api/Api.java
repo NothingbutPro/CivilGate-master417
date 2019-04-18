@@ -12,6 +12,7 @@ import dev.raghav.civilgate.Other_Parsing_Files.Get_Level;
 import dev.raghav.civilgate.Other_Parsing_Files.Test_Question;
 import dev.raghav.civilgate.Parsingfiles.LoginReg.Login_Responce;
 import dev.raghav.civilgate.Parsingfiles.LoginReg.RegisPars_responce;
+import dev.raghav.civilgate.Test_Activities.Test_Types.TestStart;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -70,5 +71,8 @@ Call<Exam_Test> Get_GetExam(@Query("student_id") int student_id);
 @FormUrlEncoded
 @POST(Retro_Urls.GetQuestion)
 Call<Test_Question> GetQuestion(@Field("subject_id") String subject_id);
+@FormUrlEncoded
+@POST(Retro_Urls.Srarttest)
+Call<TestStart> GetTestQuestionCall(@Field("subject_id") String subject_id , @Field("student_id") String student_id );
 
 }
