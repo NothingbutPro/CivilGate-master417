@@ -38,6 +38,7 @@ public class Basic_Level_Test_Fragment  extends Fragment {
     SessionManager manager;
     Test_Adapter testAdapter;
     RecyclerView tests_recy;
+
     Thread thread;
      int  px =0;
     int[] p = new  int[20];
@@ -60,7 +61,7 @@ public class Basic_Level_Test_Fragment  extends Fragment {
 
      if (getAllLowerLevels())
         {
-            Toast.makeText(getActivity(), "tyfjuyjutuyt true", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "true", Toast.LENGTH_SHORT).show();
 
          //   ExamprogressDialog.dismiss();
         }
@@ -103,7 +104,7 @@ public class Basic_Level_Test_Fragment  extends Fragment {
 //                            p[0] =i;
                             String s = response.body().getData().get(i).getTestName();
                             Log.e("elements" , "are"+response.body().getData().get(0).getTestName());
-                            Tests_Name tests_name = new Tests_Name(response.body().getData().get(i).getTestName() , response.body().getData().size() , response.body().getData().get(i).getSubjectIds());
+                            Tests_Name tests_name = new Tests_Name(response.body().getData().get(i).getTestName() , response.body().getData().size() , response.body().getData().get(i).getSubjectIds(),response.body().getData().get(i).getCatId(),response.body().getData().get(i).getQStatus(),response.body().getData().get(i).getId() );
                             tests_names.add(tests_name);
                         }
 

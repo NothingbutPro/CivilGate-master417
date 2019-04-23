@@ -4,16 +4,51 @@ import dev.raghav.civilgate.R;
 
 public class Tests_Name {
 
- public String test_name , test_start_date,test_end_date,subject_ids ;
+ public String test_name;
+    public String test_start_date;
+    public String test_end_date;
+    public String subject_ids;
+    public String level_id ;
+    public String sub_level_cat_id ;
+    public String QStatus ;
     public   float test_len;
+    public String getSub_level_cat_id() {
+        return sub_level_cat_id;
+    }
 
-    public Tests_Name(String test_name, float test_len , String subject_ids) {
+    public void setSub_level_cat_id(String sub_level_cat_id) {
+        this.sub_level_cat_id = sub_level_cat_id;
+    }
+
+
+
+
+    public String getTest_id() {
+        return level_id;
+    }
+
+    public String getQStatus() {
+        return QStatus;
+    }
+
+    public void setQStatus(String QStatus) {
+        this.QStatus = QStatus;
+    }
+
+
+
+    public Tests_Name(String test_name, float test_len , String subject_ids ,String level_id , String QStatus ,String Sub_level_cat_id) {
         this.test_name = test_name;
         this.test_len = test_len;
         this.subject_ids = subject_ids;
+        this.level_id = level_id;
+        this.QStatus = QStatus;
+        this.sub_level_cat_id = Sub_level_cat_id;
 
     }
-
+    public void setTest_id(String test_id) {
+        this.level_id = test_id;
+    }
     public String getSubject_ids() {
         return subject_ids;
     }

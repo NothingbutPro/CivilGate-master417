@@ -79,6 +79,9 @@ Call<Exam_Test> Get_GetExam(@Query("level_id") int level_id);
 Call<Test_Question> GetQuestion(@Field("subject_id") String subject_id);
 @FormUrlEncoded
 @POST(Retro_Urls.Srarttest)
-Call<TestStart> GetTestQuestionCall(@Field("subject_id") String subject_id , @Field("student_id") String student_id );
+Call<TestStart> GetTestQuestionCall(
+        @Field("Que_id") String Que_id , @Field("student_id") int student_id,
+        @Field("level_id") int level_id,
+        @Field("level_sub_id") String level_sub_id, @Field("que_status") int que_status, @Field("subject_id") String subject_id );
 
 }

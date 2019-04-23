@@ -38,11 +38,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Test_Adapter  extends RecyclerView.Adapter<Test_Adapter.MyViewHolder> {
     private List<Tests_Name> levelAdapterList;
     SessionManager sessionManager;
+
     public Test_Adapter(List<Tests_Name> levelAdapterList) {
         this.levelAdapterList = levelAdapterList;
     }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView id, Test_name , Test_start , Test_finishes,Test_status,Test_len;
+        public TextView id, Test_name, Test_start, Test_finishes, Test_status, Test_len;
         MaterialCardView test_mat;
 
         public MyViewHolder(View view) {
@@ -74,27 +76,72 @@ public class Test_Adapter  extends RecyclerView.Adapter<Test_Adapter.MyViewHolde
 
         Tests_Name tests_Name = levelAdapterList.get(i);
 //        myViewHolder.id.setText(String.valueOf(tests_Name.getTest_start_date()) );
-        Log.e("test at adapter" , "name at"+tests_Name.getTest_name());
-       myViewHolder.Test_name.setText(tests_Name.getTest_name());
-       myViewHolder.Test_len.setText(String.valueOf(tests_Name.getTest_len()));
+        Log.e("test at adapter", "name at" + tests_Name.getTest_name());
+        myViewHolder.Test_name.setText(tests_Name.getTest_name());
+        myViewHolder.Test_len.setText(String.valueOf(tests_Name.getTest_len()));
 
-       myViewHolder.Test_start.setText(tests_Name.test_start_date);
-       myViewHolder.Test_finishes.setText(tests_Name.test_end_date);
-       myViewHolder.test_mat.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-                new Start_the_test(v, sessionManager.getCoustId() , tests_Name.getSubject_ids());
+        myViewHolder.Test_start.setText(tests_Name.test_start_date);
+        myViewHolder.Test_finishes.setText(tests_Name.test_end_date);
+        myViewHolder.test_mat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             //   new Start_the_test(v, sessionManager.getCoustId(), tests_Name.getSubject_ids());
+                StartTheTest(v ,tests_Name.getTest_name(), tests_Name.getTest_id(),sessionManager.getCoustId(),1,tests_Name.getSub_level_cat_id() ,0,tests_Name.getSubject_ids());
 
-                   Toast.makeText(v.getContext(), "ids are "+tests_Name.getSubject_ids(), Toast.LENGTH_SHORT).show();
-                   //  Intent getquestionIntent = new Intent(v.getContext() , Main_Test_Activity.class);
-                   Intent getquestionIntent = new Intent(v.getContext() , Main_Test_Activity.class);
-                   getquestionIntent.putExtra("sub_id" ,tests_Name.getSubject_ids() );
+
+
+            }
+        });
+
+    }
+
+    private void StartTheTest(View v, String test_name, String test_id, int coustId, int i, String sub_level_cat_id, int i1, String subject_ids) {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(150, TimeUnit.SECONDS)
+                .readTimeout(300,TimeUnit.SECONDS).writeTimeout(200 , TimeUnit.SECONDS).build();
+        ProgressDialog ExamprogressDialog;
+        ExamprogressDialog = new ProgressDialog(v.getContext());
+        ExamprogressDialog.setMax(100);
+        ExamprogressDialog.setTitle("Starting your test");
+        ExamprogressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        ExamprogressDialog.setCancelable(false);
+        ExamprogressDialog.show();
+        Retrofit RetroGEtExam = new Retrofit.Builder()
+                .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api EmamApi = RetroGEtExam.create(Api.class);
+        Call<TestStart> exam_testCall = EmamApi.GetTestQuestionCall(test_id ,coustId,i,sub_level_cat_id,i1,subject_ids);
+        exam_testCall.enqueue(new Callback<TestStart>() {
+            @Override
+            public void onResponse(Call<TestStart> call, Response<TestStart> response) {
+
+                //  Toast.makeText(getActivity(), "Test name"+response.body().getData().get(0).getTestName(), Toast.LENGTH_SHORT).show();
+                if(response.isSuccessful())
+                {
+                    ExamprogressDialog.dismiss();
+                    if(response.body().getResponce() == true)
+                    {
+                        Log.e("elements" , " are "+response.body().getData().get(0).getQue());
+                        Toast.makeText(v.getContext(), "Test Started", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(v.getContext(), "ids are " + tests_Name.getSubject_ids(), Toast.LENGTH_SHORT).show();
+                        //  Intent getquestionIntent = new Intent(v.getContext() , Main_Test_Activity.class);
+                        Intent getquestionIntent = new Intent(v.getContext(), Main_Test_Activity.class);
+                        getquestionIntent.putExtra("sub_id", subject_ids);
 //               getquestionIntent.putExtra("no_of_que" , tests_Name.)
-                   v.getContext().startActivity(getquestionIntent);
+                        v.getContext().startActivity(getquestionIntent);
+                    }
+//
+                }
 
+            }
 
-           }
-       });
+            @Override
+            public void onFailure(Call<TestStart> call, Throwable t) {
+                Log.w("MyTag", "requestFailedwa"+t);
+                //            Log.w("MyTag", "requestFailed "+ call.clone().isExecuted());
+
+            }
+        });
 
     }
 
@@ -108,14 +155,4 @@ public class Test_Adapter  extends RecyclerView.Adapter<Test_Adapter.MyViewHolde
         return levelAdapterList.size();
     }
 
-    private class Start_the_test extends AsyncTask<Void ,Void,String> {
-        public Start_the_test(View v, int coustId, String subject_ids) {
-
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            return null;
-        }
-    }
 }

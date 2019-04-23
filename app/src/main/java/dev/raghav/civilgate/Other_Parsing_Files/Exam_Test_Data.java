@@ -21,7 +21,7 @@ public class Exam_Test_Data{
     private String subjectIds;
     @SerializedName("QStatus")
     @Expose
-    private Object qStatus;
+    private String qStatus;
 
     public String getId() {
         return id;
@@ -63,11 +63,11 @@ public class Exam_Test_Data{
         this.subjectIds = subjectIds;
     }
 
-    public Object getQStatus() {
+    public String getQStatus() {
         return qStatus;
     }
 
-    public void setQStatus(Object qStatus) {
+    public void setQStatus(String qStatus) {
         this.qStatus = qStatus;
     }
 }
