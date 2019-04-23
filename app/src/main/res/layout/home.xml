@@ -360,7 +360,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textStyle="bold"
-                    android:typeface="monospace"
+                    android:typeface="normal"
                     android:text="Top Package"
                     android:textColor="#fff"
                     android:textSize="16dp" />
@@ -427,7 +427,7 @@
 
                 <TextView
                     android:textStyle="bold"
-                    android:typeface="monospace"
+                    android:typeface="normal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
