@@ -6,4 +6,5 @@
 
     <color name="menu_item_text_color">#4E4D4D</color>
     <color name="app_bar_color">#00008B</color>
+    <color name="grey">#A59F9F</color>
 </resources>

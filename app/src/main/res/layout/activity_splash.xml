@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    >
+    android:background="#fff">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,20 +12,20 @@
         android:gravity="center"
         android:orientation="vertical">
         <!--<TextView-->
-            <!--android:text="Civil Gate"-->
-            <!--android:textColor="@color/colorPrimary"-->
-            <!--android:textSize="40dp"-->
-            <!--android:gravity="center"-->
-            <!--android:textStyle="italic|bold"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
+        <!--android:text="Civil Gate"-->
+        <!--android:textColor="@color/colorPrimary"-->
+        <!--android:textSize="40dp"-->
+        <!--android:gravity="center"-->
+        <!--android:textStyle="italic|bold"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
 
         <ImageView
-        android:layout_width="238dp"
-        android:layout_height="161dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/logo_icon" />
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/logoimg" />
     </LinearLayout>
 
 </RelativeLayout>

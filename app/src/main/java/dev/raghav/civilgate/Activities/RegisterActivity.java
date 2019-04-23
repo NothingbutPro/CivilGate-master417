@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
         init();
 //         a=10;
 //        Toast.makeText(this, "a value at oncreate is"+a, Toast.LENGTH_SHORT).show();
-        getSupportActionBar().hide();
+//        getSupportActionBar().hide();
         apiInterface = RetrofitClientApi.getClient().create(Api.class);
         checkforpermission();
 
