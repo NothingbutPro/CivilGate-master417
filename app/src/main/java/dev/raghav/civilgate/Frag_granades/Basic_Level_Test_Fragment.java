@@ -92,26 +92,26 @@ public class Basic_Level_Test_Fragment  extends Fragment {
                 if(response.isSuccessful())
                 {
                     ExamprogressDialog.dismiss();
-//                    if(response.body().getResponce() == true)
-//                    {
+                    if(response.body().getResponce() == true)
+                    {
                         Log.e("elements" , " are "+response.body().getData());
-//                        p =new int[response.body().getData().size()];
-//                        for(int i=0;i<response.body().getData().size();i++)
-//                        {
-//                            Log.e("id" , ""+response.body().getData().get(i).getId());
-//                            px= px+1;
-////                            p[0] =i;
-//                            String s = response.body().getData().get(i).getTestName();
-//                            Log.e("elements" , "are"+response.body().getData().get(0).getTestName());
-//                            Tests_Name tests_name = new Tests_Name(response.body().getData().get(i).getTestName() , response.body().getData().size() , response.body().getData().get(i).getSubjectIds());
-//                            tests_names.add(tests_name);
-//                        }
+                        p =new int[response.body().getData().size()];
+                        for(int i=0;i<response.body().getData().size();i++)
+                        {
+                            Log.e("id" , ""+response.body().getData().get(i).getId());
+                            px= px+1;
+//                            p[0] =i;
+                            String s = response.body().getData().get(i).getTestName();
+                            Log.e("elements" , "are"+response.body().getData().get(0).getTestName());
+                            Tests_Name tests_name = new Tests_Name(response.body().getData().get(i).getTestName() , response.body().getData().size() , response.body().getData().get(i).getSubjectIds());
+                            tests_names.add(tests_name);
+                        }
 
 //                        if(p[0] >=1)
 //                        {
 
                             testAdapter = new Test_Adapter(tests_names);
-                              RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+                        //      RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                             LinearLayoutManager llm = new LinearLayoutManager(getActivity());
                             llm.setOrientation(LinearLayoutManager.VERTICAL);
                             tests_recy.setLayoutManager(llm);
@@ -121,7 +121,7 @@ public class Basic_Level_Test_Fragment  extends Fragment {
 
                     }
 //
-//                }
+                }
 
             }
 

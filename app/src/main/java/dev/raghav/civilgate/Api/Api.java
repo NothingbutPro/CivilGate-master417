@@ -68,10 +68,11 @@ Call<Get_Level> GetLevels();
 //@Headers("Content-Type: application/x-www-form-urlencoded")
 //@POST(Retro_Urls.Get_GetExam)
 //@POST(Retro_Urls.Get_GetExam+"/{level_id}")
-@POST("GetExam/{level_id}")
-@Headers("Content-Type: text/json;charset=UTF-8")
+//@POST("GetExam/{level_id}")
+//@Headers("Content-Type: text/json;charset=UTF-8")
+@GET(Retro_Urls.Get_GetExam)
 //@FormUrlEncoded
-Call<Exam_Test> Get_GetExam(@Path("level_id") int level_id);
+Call<Exam_Test> Get_GetExam(@Query("level_id") int level_id);
 @Headers("Content-Type: application/x-www-form-urlencoded")
 @FormUrlEncoded
 @POST(Retro_Urls.GetQuestion)
