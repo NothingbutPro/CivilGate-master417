@@ -6,13 +6,13 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Exam_Test{
-    @SerializedName("data")
-    @Expose
-    private List<Exam_Test_Data> data;
+
     @SerializedName("responce")
     @Expose
     private Boolean responce;
-
+    @SerializedName("data")
+    @Expose
+    private List<Exam_Test_Data> data;
     public List<Exam_Test_Data> getData() {
         return data;
     }

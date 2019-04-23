@@ -6,51 +6,36 @@ import com.google.gson.annotations.SerializedName;
 public class Exam_Test_Data{
     @SerializedName("id")
     @Expose
-    private int id;
+    private String id;
     @SerializedName("cat_id")
     @Expose
-    private int catId;
+    private String catId;
     @SerializedName("test_name")
     @Expose
     private String testName;
-    @SerializedName("test_type")
-    @Expose
-    private int testType;
-    @SerializedName("test_start_date")
-    @Expose
-    private String testStartDate;
-    @SerializedName("test_end_date")
-    @Expose
-    private String testEndDate;
     @SerializedName("testtime")
     @Expose
-    private float testtime;
-    @SerializedName("instant_result")
-    @Expose
-    private int instantResult;
-    @SerializedName("create_date")
-    @Expose
-    private String createDate;
+    private String testtime;
     @SerializedName("subject_ids")
     @Expose
     private String subjectIds;
-    @SerializedName("status")
+    @SerializedName("QStatus")
     @Expose
-    private int status;
+    private Object qStatus;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getCatId() {
+    public String getCatId() {
         return catId;
     }
 
-    public void setCatId(int catId) {
+    public void setCatId(String catId) {
         this.catId = catId;
     }
 
@@ -62,52 +47,12 @@ public class Exam_Test_Data{
         this.testName = testName;
     }
 
-    public int getTestType() {
-        return testType;
-    }
-
-    public void setTestType(int testType) {
-        this.testType = testType;
-    }
-
-    public String getTestStartDate() {
-        return testStartDate;
-    }
-
-    public void setTestStartDate(String testStartDate) {
-        this.testStartDate = testStartDate;
-    }
-
-    public String getTestEndDate() {
-        return testEndDate;
-    }
-
-    public void setTestEndDate(String testEndDate) {
-        this.testEndDate = testEndDate;
-    }
-
-    public Float getTesttime() {
+    public String getTesttime() {
         return testtime;
     }
 
-    public void setTesttime(float testtime) {
+    public void setTesttime(String testtime) {
         this.testtime = testtime;
-    }
-
-    public int getInstantResult() {
-        return instantResult;
-    }
-
-    public void setInstantResult(int instantResult) {
-        this.instantResult = instantResult;
-    }
-
-    public String getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
     }
 
     public String getSubjectIds() {
@@ -118,11 +63,11 @@ public class Exam_Test_Data{
         this.subjectIds = subjectIds;
     }
 
-    public int getStatus() {
-        return status;
+    public Object getQStatus() {
+        return qStatus;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setQStatus(Object qStatus) {
+        this.qStatus = qStatus;
     }
 }

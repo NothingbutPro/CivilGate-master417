@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test_Data;
 import dev.raghav.civilgate.SessionManage.SessionManager;
 import dev.raghav.civilgate.Api.Api;
 import dev.raghav.civilgate.Const_Files.Retro_Urls;
@@ -82,7 +83,7 @@ public class Basic_Level_Test_Fragment  extends Fragment {
                 .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api EmamApi = RetroGEtExam.create(Api.class);
-        Call<Exam_Test> exam_testCall = EmamApi.Get_GetExam(manager.getCoustId());
+        Call<Exam_Test> exam_testCall = EmamApi.Get_GetExam(1);
         exam_testCall.enqueue(new Callback<Exam_Test>() {
             @Override
             public void onResponse(Call<Exam_Test> call, Response<Exam_Test> response) {
@@ -93,24 +94,24 @@ public class Basic_Level_Test_Fragment  extends Fragment {
                     ExamprogressDialog.dismiss();
 //                    if(response.body().getResponce() == true)
 //                    {
-                        Log.e("elements" , " are "+response.body());
-                        p =new int[response.body().getData().size()];
-                        for(int i=0;i<response.body().getData().size();i++)
-                        {
-                            Log.e("id" , ""+response.body().getData().get(i).getId());
-                            px= px+1;
-//                            p[0] =i;
-                            String s = response.body().getData().get(i).getTestName();
-                            Log.e("elements" , "are"+response.body().getData().get(0).getTestName());
-                            Tests_Name tests_name = new Tests_Name(response.body().getData().get(i).getTestName() , response.body().getData().get(i).getTestStartDate() , response.body().getData().get(i).getTestEndDate(),response.body().getData().get(i).getTesttime() , response.body().getData().get(i).getSubjectIds());
-                            tests_names.add(tests_name);
-                        }
+                        Log.e("elements" , " are "+response.body().getData());
+//                        p =new int[response.body().getData().size()];
+//                        for(int i=0;i<response.body().getData().size();i++)
+//                        {
+//                            Log.e("id" , ""+response.body().getData().get(i).getId());
+//                            px= px+1;
+////                            p[0] =i;
+//                            String s = response.body().getData().get(i).getTestName();
+//                            Log.e("elements" , "are"+response.body().getData().get(0).getTestName());
+//                            Tests_Name tests_name = new Tests_Name(response.body().getData().get(i).getTestName() , response.body().getData().size() , response.body().getData().get(i).getSubjectIds());
+//                            tests_names.add(tests_name);
+//                        }
 
 //                        if(p[0] >=1)
 //                        {
 
                             testAdapter = new Test_Adapter(tests_names);
-                            //  RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+                              RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
                             LinearLayoutManager llm = new LinearLayoutManager(getActivity());
                             llm.setOrientation(LinearLayoutManager.VERTICAL);
                             tests_recy.setLayoutManager(llm);
@@ -126,7 +127,8 @@ public class Basic_Level_Test_Fragment  extends Fragment {
 
             @Override
             public void onFailure(Call<Exam_Test> call, Throwable t) {
-                Log.w("MyTag", "requestFailed", t);
+                Log.w("MyTag", "requestFailed"+t);
+    //            Log.w("MyTag", "requestFailed "+ call.clone().isExecuted());
 
             }
         });

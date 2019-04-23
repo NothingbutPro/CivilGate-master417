@@ -2,6 +2,7 @@ package dev.raghav.civilgate.Api;
 import android.database.Observable;
 
 import java.io.File;
+import java.util.List;
 
 import dev.raghav.civilgate.Const_Files.Level_Java;
 import dev.raghav.civilgate.Const_Files.Retro_Urls;
@@ -65,8 +66,12 @@ Call<Get_About> TellAbout();
 @GET(Retro_Urls.Get_level)
 Call<Get_Level> GetLevels();
 //@Headers("Content-Type: application/x-www-form-urlencoded")
-@GET(Retro_Urls.Get_GetExam)
-Call<Exam_Test> Get_GetExam(@Query("student_id") int student_id);
+//@POST(Retro_Urls.Get_GetExam)
+//@POST(Retro_Urls.Get_GetExam+"/{level_id}")
+@POST("GetExam/{level_id}")
+@Headers("Content-Type: text/json;charset=UTF-8")
+//@FormUrlEncoded
+Call<Exam_Test> Get_GetExam(@Path("level_id") int level_id);
 @Headers("Content-Type: application/x-www-form-urlencoded")
 @FormUrlEncoded
 @POST(Retro_Urls.GetQuestion)
