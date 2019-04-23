@@ -89,15 +89,14 @@
 
 
 
-            <ImageView
-                android:src="@drawable/calculator"
+            <TextView
                 android:padding="10dp"
                 android:background="@drawable/fabshape"
                 android:layout_marginLeft="120dp"
                 android:elevation="16dp"
                 android:textColor="#fff"
                 android:gravity="center_vertical"
-                android:text="Open Calculator"
+                android:text="Timer"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/fab2"
                 android:layout_width="wrap_content"

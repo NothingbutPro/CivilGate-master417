@@ -10,7 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -41,6 +43,7 @@ public class Level_Tab_Activities extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
      ProgressDialog progressDialog;
+     Toolbar toolbar_level;
 
      //public List<Level_Java> level_javaList = new ArrayList<>();
     private ArrayList<Level_Java> level_javas ;
@@ -63,6 +66,16 @@ public class Level_Tab_Activities extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level__tab__activities);
 //        level_resicler = findViewById(R.id.level_resid);
+
+        toolbar_level = (Toolbar) findViewById(R.id.toolbar_level);
+        toolbar_level.setNavigationIcon(R.drawable.arrow);
+        toolbar_level.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //   stopActivityTask();
+                onBackPressed();
+            }
+        });
 
         tabLayout = findViewById(R.id.tably);
         serviceGeneratoradapter = new ServiceGenerator(getSupportFragmentManager() , Level_Tab_Activities.this);
@@ -218,4 +231,8 @@ public class Level_Tab_Activities extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

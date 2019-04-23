@@ -359,7 +359,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textStyle="bold"
+                    android:textStyle="normal"
                     android:typeface="normal"
                     android:text="Top Package"
                     android:textColor="#fff"
@@ -426,7 +426,7 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:textStyle="bold"
+                    android:textStyle="normal"
                     android:typeface="normal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

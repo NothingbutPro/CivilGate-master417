@@ -58,7 +58,7 @@ public class Basic_Level_Test_Fragment  extends Fragment {
       //  ExamprogressDialog = new ProgressDialog(getActivity());
         manager = new SessionManager(getActivity());
 
-        if (getAllLowerLevels())
+     if (getAllLowerLevels())
         {
             Toast.makeText(getActivity(), "tyfjuyjutuyt true", Toast.LENGTH_SHORT).show();
 
