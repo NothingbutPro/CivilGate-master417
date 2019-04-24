@@ -260,6 +260,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                       //      Submit_The_Query();
                             if(questionsJJavaHashMap.get(frontback).getWritten_ans().equals("Not answered"))
                             {
+
                                 Submit_The_Query(questions_jJavaList.get(frontback).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(frontback).getTIme_taken(),2 , questionsJJavaHashMap.get(frontback).getWritten_ans());
                             }else {
                                 Submit_The_Query(questions_jJavaList.get(frontback).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(frontback).getTIme_taken(),1 , questionsJJavaHashMap.get(frontback).getWritten_ans());
@@ -275,6 +276,13 @@ public class Main_Test_Activity extends AppCompatActivity {
                         }
                     } catch (Exception e) {
                         queposition--;
+                        if(questionsJJavaHashMap.get(frontback).getWritten_ans().equals("Not answered"))
+                        {
+
+                            Submit_The_Query(questions_jJavaList.get(frontback).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(frontback).getTIme_taken(),2 , questionsJJavaHashMap.get(frontback).getWritten_ans());
+                        }else {
+                            Submit_The_Query(questions_jJavaList.get(frontback).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(frontback).getTIme_taken(),1 , questionsJJavaHashMap.get(frontback).getWritten_ans());
+                        }
                         Toast.makeText(Main_Test_Activity.this, "Can't go forward", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
@@ -320,6 +328,13 @@ public class Main_Test_Activity extends AppCompatActivity {
                         }
                     } catch (Exception e) {
                         ++queposition;
+                        if(questionsJJavaHashMap.get(getbackhash).getWritten_ans().equals("Not answered"))
+                        {
+
+                            Submit_The_Query(questions_jJavaList.get(getbackhash).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(getbackhash).getTIme_taken(),2 , questionsJJavaHashMap.get(getbackhash).getWritten_ans());
+                        }else {
+                            Submit_The_Query(questions_jJavaList.get(getbackhash).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(getbackhash).getTIme_taken(),1 , questionsJJavaHashMap.get(getbackhash).getWritten_ans());
+                        }
                         Toast.makeText(Main_Test_Activity.this, "No back possible", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
@@ -398,5 +413,11 @@ public class Main_Test_Activity extends AppCompatActivity {
 
     };
 
-
+    @Override
+    public void onBackPressed() {
+        queposition =0;
+//        questionsJJavaHashMap =null;
+//        questionsJJavaLinkedList = null;
+        super.onBackPressed();
+    }
 }

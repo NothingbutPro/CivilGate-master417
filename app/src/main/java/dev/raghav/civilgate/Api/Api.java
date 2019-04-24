@@ -86,8 +86,9 @@ Call<Exam_Test> Get_GetExam(@Query("level_id") int level_id);
 Call<Test_Question> GetQuestion(@Field("subject_id") String subject_id);
 //@POST(Retro_Urls.Teststatus)
 //Call<Submit_Question> SubmitQuery(@Field("que_id") int que_id,@Field("student_id") int student_id,@Field("time") String time,@Field("q_status") int q_status,@Field("que_ans") String que_an);
-@GET(Retro_Urls.Teststatus)
-Call<Submit_Question> SubmitQuery(@Query("que_id") int que_id,@Query("student_id") int student_id,@Query("time") String time,@Query("q_status") int q_status,@Query("que_ans") String que_an);
+@FormUrlEncoded
+@POST(Retro_Urls.Teststatus)
+Call<Submit_Question> SubmitQuery(@Field("que_id") int que_id,@Field("student_id") int student_id,@Field("time") String time,@Field("q_status") int q_status,@Field("que_ans") String que_an);
 @FormUrlEncoded
 @POST(Retro_Urls.Srarttest)
 Call<TestStart> GetTestQuestionCall(

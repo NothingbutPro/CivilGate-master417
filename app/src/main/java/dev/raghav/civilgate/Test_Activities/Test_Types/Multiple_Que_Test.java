@@ -63,9 +63,55 @@ public class Multiple_Que_Test extends Fragment {
 //        radio_grp.findViewById(R.id.ans2);
 //        radio_grp.findViewById(R.id.ans3);
 //        radio_grp.findViewById(R.id.ans3);
-        questionsJJavaHashMap.remove(queposition);
-        questionsJJavaHashMap.put(queposition , new Questions_jJava("Not answered" , TimeTaken));
-        Log.d("writtebn xfsadf" , "sdf"+questionsJJavaHashMap.get(queposition).getWritten_ans());
+
+         Runnable updateTimerThread = new Runnable() {
+
+            public void run() {
+
+                timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+
+                updatedTime = timeSwapBuff + timeInMilliseconds;
+                    try {
+                        if(!TimeTaken.isEmpty())
+                        {
+                            int secs = (int) (updatedTime / 1000);
+                            int mins = secs / 60;
+                            secs = secs % 60;
+                            int milliseconds = (int) (updatedTime % 1000);
+                            clock.setText("" + mins + ":"
+                                    + String.format("%02d", secs)/* + ":"
+                    + String.format("%03d", milliseconds)*/);
+                            TimeTaken = String.format("%02d", secs);
+//                            questionsJJavaHashMap.remove(queposition);
+//                            questionsJJavaHashMap.put(queposition, new Questions_jJava("Not answered", TimeTaken));
+                      //      Log.d("writtebn xfsadf", "sdf" + questionsJJavaHashMap.get(queposition).getWritten_ans());
+                        }
+
+                    }catch (Exception e)
+                    {
+                        int secs = (int) (updatedTime / 1000);
+                        int mins = secs / 60;
+                        secs = secs % 60;
+                        int milliseconds = (int) (updatedTime % 1000);
+                        clock.setText("" + mins + ":"
+                                + String.format("%02d", secs)/* + ":"
+                    + String.format("%03d", milliseconds)*/);
+                        TimeTaken = String.format("%02d", secs);
+                        questionsJJavaHashMap.remove(queposition);
+                        questionsJJavaHashMap.put(queposition, new Questions_jJava("Not answered", TimeTaken));
+                        Log.d("writtebn xfsadf", "sdf" + questionsJJavaHashMap.get(queposition).getWritten_ans());
+                    }
+
+
+
+
+                // Toast.makeText(getActivity(), ""+String.format("%02d", secs), Toast.LENGTH_SHORT).show();
+                customHandler.postDelayed(this, 0);
+            }
+
+        };
+
+
         ans1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -138,26 +184,5 @@ public class Multiple_Que_Test extends Fragment {
         super.onAttachFragment(childFragment);
     }
 
-    private Runnable updateTimerThread = new Runnable() {
-
-        public void run() {
-
-            timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
-
-            updatedTime = timeSwapBuff + timeInMilliseconds;
-
-            int secs = (int) (updatedTime / 1000);
-            int mins = secs / 60;
-            secs = secs % 60;
-            int milliseconds = (int) (updatedTime % 1000);
-            clock.setText("" + mins + ":"
-                    + String.format("%02d", secs)/* + ":"
-                    + String.format("%03d", milliseconds)*/);
-            TimeTaken = String.format("%02d", secs);
-           // Toast.makeText(getActivity(), ""+String.format("%02d", secs), Toast.LENGTH_SHORT).show();
-            customHandler.postDelayed(this, 0);
-        }
-
-    };
 
 }
