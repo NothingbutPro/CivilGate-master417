@@ -10,6 +10,7 @@ import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test;
 import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test_Data;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_About;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_Level;
+import dev.raghav.civilgate.Other_Parsing_Files.Submit_Question;
 import dev.raghav.civilgate.Other_Parsing_Files.Test_Question;
 import dev.raghav.civilgate.Parsingfiles.LoginReg.Login_Responce;
 import dev.raghav.civilgate.Parsingfiles.LoginReg.RegisPars_responce;
@@ -59,6 +60,12 @@ Call<Login_Responce> Login_that_dk(
         @Field("email") String email,
         @Field("password") String password
 );
+@FormUrlEncoded
+@POST("login")
+Call<Login_Responce> Teststatus(
+        @Field("email") String email,
+        @Field("password") String password
+);
 @Headers("Content-Type: application/x-www-form-urlencoded")
 @GET(Retro_Urls.About_us)
 Call<Get_About> TellAbout();
@@ -77,6 +84,10 @@ Call<Exam_Test> Get_GetExam(@Query("level_id") int level_id);
 @FormUrlEncoded
 @POST(Retro_Urls.GetQuestion)
 Call<Test_Question> GetQuestion(@Field("subject_id") String subject_id);
+//@POST(Retro_Urls.Teststatus)
+//Call<Submit_Question> SubmitQuery(@Field("que_id") int que_id,@Field("student_id") int student_id,@Field("time") String time,@Field("q_status") int q_status,@Field("que_ans") String que_an);
+@GET(Retro_Urls.Teststatus)
+Call<Submit_Question> SubmitQuery(@Query("que_id") int que_id,@Query("student_id") int student_id,@Query("time") String time,@Query("q_status") int q_status,@Query("que_ans") String que_an);
 @FormUrlEncoded
 @POST(Retro_Urls.Srarttest)
 Call<TestStart> GetTestQuestionCall(

@@ -5,15 +5,48 @@ import android.provider.MediaStore;
 public class Questions_jJava {
     int id ,sub_id ,minusmark,marks,Status,type;
    String video;
-    String Que,Ans_1,Ans_2,Ans_3,Ans_4,solution,Ans,video_url,Createdate;
+    String Que;
+    String Ans_1;
+    String Ans_2;
+    String Ans_3;
+    String Ans_4;
+    String solution;
+    String Ans;
+    String video_url;
+    String Createdate;
+
+
+
+    String Written_ans;
+    String TIme_taken;
 
     public Questions_jJava(int id ) {
         this.id = id;
+    }
+    public String getWritten_ans() {
+        return Written_ans;
+    }
+
+    public void setWritten_ans(String written_ans) {
+        Written_ans = written_ans;
+    }
+
+    public String getTIme_taken() {
+        return TIme_taken;
+    }
+
+    public void setTIme_taken(String TIme_taken) {
+        this.TIme_taken = TIme_taken;
     }
     public Questions_jJava(int id , int type ,String que) {
         this.id = id;
         this.type = type;
         this.Que = que;
+    }
+
+    public Questions_jJava(String Ans, String timeTaken) {
+        this.Written_ans = Ans;
+        this.TIme_taken = timeTaken;
     }
 
     public int getType() {

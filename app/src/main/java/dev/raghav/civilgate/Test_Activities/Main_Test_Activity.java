@@ -1,5 +1,6 @@
 package dev.raghav.civilgate.Test_Activities;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -7,24 +8,21 @@ import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -33,10 +31,10 @@ import java.util.concurrent.TimeUnit;
 import dev.raghav.civilgate.Api.Api;
 import dev.raghav.civilgate.Const_Files.Questions_jJava;
 import dev.raghav.civilgate.Const_Files.Retro_Urls;
-import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test;
+import dev.raghav.civilgate.Other_Parsing_Files.Submit_Question;
 import dev.raghav.civilgate.Other_Parsing_Files.Test_Question;
-import dev.raghav.civilgate.Parsingfiles.LoginReg.Login_Responce;
 import dev.raghav.civilgate.R;
+import dev.raghav.civilgate.SessionManage.SessionManager;
 import dev.raghav.civilgate.Test_Activities.Dapter.Questions_Adapter;
 import dev.raghav.civilgate.Test_Activities.Test_Types.Fill_In_Que_Test;
 import dev.raghav.civilgate.Test_Activities.Test_Types.Multiple_Que_Test;
@@ -52,18 +50,14 @@ public class Main_Test_Activity extends AppCompatActivity {
     public static int queposition = 0;
     RecyclerView quelinrecy;
     static int no_of_questions;
-    Toolbar toolbar_col;
+
     TextView fab2;
     TextView fab;
-    private Button startButton;
-    private Button pauseButton;
-
-    private TextView timerValue;
-
+   public static HashMap<Integer , Questions_jJava> questionsJJavaHashMap = new HashMap<>();
     private long startTime = 0L;
 
     private Handler customHandler = new Handler();
-
+    SessionManager sessionManager;
     long timeInMilliseconds = 0L;
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
@@ -72,14 +66,14 @@ public class Main_Test_Activity extends AppCompatActivity {
     NestedScrollView nestedScrollView;
     public static LinkedList<Questions_jJava> questionsJJavaLinkedList = new LinkedList<>();
     String student_id;
-
+   // public static int Ansposition =0;
     List<Questions_jJava> questions_jJavaList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collapse);
-
+        sessionManager = new SessionManager(this);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         nestedScrollView = findViewById(R.id.nestedScrollView);
@@ -209,7 +203,9 @@ public class Main_Test_Activity extends AppCompatActivity {
                                 response.body().getData().get(k).getStatus(), response.body().getData().get(k).getCreatedate(), response.body().getData().get(k).getVideo()
                                 , response.body().getData().get(k).getQue(), response.body().getData().get(k).getAns1(), response.body().getData().get(k).getAns2(), response.body().getData().get(k).getAns3()
                                 , response.body().getData().get(k).getAns4(), response.body().getData().get(k).getAns(), response.body().getData().get(k).getVideoUrl()));
-                    } else {
+                    }
+                    else
+                        {
                         questionsJJavaLinkedList.add(new Questions_jJava(response.body().getData().get(k).getId(), response.body().getData().get(k).getSubId(),
                                 response.body().getData().get(k).getMarks(), response.body().getData().get(k).getMarks(), response.body().getData().get(k).getSolution(),
                                 response.body().getData().get(k).getStatus(), response.body().getData().get(k).getCreatedate(), response.body().getData().get(k).getVideo()
@@ -222,13 +218,16 @@ public class Main_Test_Activity extends AppCompatActivity {
                 //getAllQuestions(student_id);
                 //    questions_adapter = new Questions_Adapter(Main_Test_Activity.this ,questions_jJavaList);
                 Log.e("no of questiobn", "jsdajksd " + questionsJJavaLinkedList.get(0).getType());
-                if (questions_jJavaList.get(0).getType() == 1) {
+                if (questions_jJavaList.get(0).getType() == 1)
+                {
 
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
 
-                } else {
+                }
+                else
+                    {
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
@@ -253,8 +252,19 @@ public class Main_Test_Activity extends AppCompatActivity {
                 case R.id.navigation_forward:
 //                    if()
                     int next = ++queposition;
+                    int frontback = next - 1;
+                  //  int nextquery = ++Ansposition;
                     try {
                         if (questions_jJavaList.get(next).getType() == 1) {
+
+                      //      Submit_The_Query();
+                            if(questionsJJavaHashMap.get(frontback).getWritten_ans().equals("Not answered"))
+                            {
+                                Submit_The_Query(questions_jJavaList.get(frontback).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(frontback).getTIme_taken(),2 , questionsJJavaHashMap.get(frontback).getWritten_ans());
+                            }else {
+                                Submit_The_Query(questions_jJavaList.get(frontback).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(frontback).getTIme_taken(),1 , questionsJJavaHashMap.get(frontback).getWritten_ans());
+                            }
+                            Log.d("ans is" , ""+questionsJJavaHashMap.get(frontback).getWritten_ans().length());
                             FragmentManager fragmentManager = getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                             fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
@@ -272,16 +282,38 @@ public class Main_Test_Activity extends AppCompatActivity {
                     //      mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_save:
+                    int saveornot = queposition;
+                    Toast.makeText(Main_Test_Activity.this, "that's que", Toast.LENGTH_SHORT).show();
+                    questionsJJavaHashMap.remove(queposition);
+                    questionsJJavaHashMap.put(queposition , new Questions_jJava("Mark as review" , "0.00"));
+                    if(questionsJJavaHashMap.get(saveornot).getWritten_ans().equals("Not answered"))
+                    {
+                        Submit_The_Query(questions_jJavaList.get(saveornot).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(saveornot).getTIme_taken(),3 , questionsJJavaHashMap.get(saveornot).getWritten_ans());
+                    }else {
+                        Submit_The_Query(questions_jJavaList.get(saveornot).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(saveornot).getTIme_taken(),4 , questionsJJavaHashMap.get(saveornot).getWritten_ans());
+                    }
+                  //  Submit_The_Query();
+//                    Log.e("written ans" , "is "+questionsJJavaHashMap.get(--queposition).getWritten_ans());
 //                    mTextMessage.setText(R.string.title_dashboard);
                     return true;
                 case R.id.navigation_back:
                     int back = --queposition;
+                    int getbackhash = back +1;
+                   // int backquery = --Ansposition;
                     try {
-                        if (questions_jJavaList.get(back).getType() == 1) {
+                        if (questions_jJavaList.get(back).getType() == 1 ) {
+                            Log.d("ans is" , ""+questionsJJavaHashMap.get(getbackhash).getWritten_ans());
+                            if(questionsJJavaHashMap.get(getbackhash).getWritten_ans().equals("Not answered"))
+                            {
+                                Submit_The_Query(questions_jJavaList.get(getbackhash).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(getbackhash).getTIme_taken(),2 , questionsJJavaHashMap.get(getbackhash).getWritten_ans());
+                            }else {
+                                Submit_The_Query(questions_jJavaList.get(getbackhash).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(getbackhash).getTIme_taken(),1 , questionsJJavaHashMap.get(getbackhash).getWritten_ans());
+                            }
                             FragmentManager fragmentManager = getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                             fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
                         } else {
+                            Submit_The_Query(questions_jJavaList.get(queposition).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(queposition).getTIme_taken(), 2, questionsJJavaHashMap.get(queposition).getWritten_ans());
                             FragmentManager fragmentManager = getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                             fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
@@ -298,6 +330,52 @@ public class Main_Test_Activity extends AppCompatActivity {
             return false;
         }
     };
+
+    private void Submit_The_Query(int que_id, int coustId, String tIme_taken, int q_status, String written_ans) {
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(150, TimeUnit.SECONDS)
+                .readTimeout(300,TimeUnit.SECONDS).writeTimeout(200 , TimeUnit.SECONDS).build();
+        ProgressDialog ExamprogressDialog;
+        ExamprogressDialog = new ProgressDialog(Main_Test_Activity.this);
+        ExamprogressDialog.setMax(100);
+        ExamprogressDialog.setTitle("Submitting Your Ans");
+        ExamprogressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        ExamprogressDialog.setCancelable(false);
+        ExamprogressDialog.show();
+        Retrofit RetroGEtExam = new Retrofit.Builder()
+                .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api EmamApi = RetroGEtExam.create(Api.class);
+        Call<Submit_Question> exam_testCall = EmamApi.SubmitQuery(que_id,coustId,tIme_taken,q_status,written_ans);
+        exam_testCall.enqueue(new Callback<Submit_Question>() {
+            @Override
+            public void onResponse(Call<Submit_Question> call, Response<Submit_Question> response) {
+
+                //  Toast.makeText(getActivity(), "Test name"+response.body().getData().get(0).getTestName(), Toast.LENGTH_SHORT).show();
+                if(response.isSuccessful())
+                {
+                    ExamprogressDialog.dismiss();
+                    if(response.body().getResponce() == true)
+                    {
+                        Log.e("Question" , " submited "+response.body().getData());
+                        Toast.makeText(Main_Test_Activity.this, "successfully submited", Toast.LENGTH_SHORT).show();
+
+                    }
+//
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Submit_Question> call, Throwable t) {
+                Log.w("MyTag", "requestFailed"+t);
+                //            Log.w("MyTag", "requestFailed "+ call.clone().isExecuted());
+
+            }
+        });
+
+    }
 
     //------------------------------------------------
     private Runnable updateTimerThread = new Runnable() {
