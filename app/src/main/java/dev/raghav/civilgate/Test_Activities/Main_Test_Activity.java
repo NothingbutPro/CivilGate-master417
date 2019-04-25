@@ -1,6 +1,7 @@
 package dev.raghav.civilgate.Test_Activities;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,7 +48,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Main_Test_Activity extends AppCompatActivity {
-    Questions_Adapter questions_adapter;
+    public static Questions_Adapter questions_adapter;
     public static int queposition = 0;
     RecyclerView quelinrecy;
     static int no_of_questions;
@@ -110,20 +112,18 @@ public class Main_Test_Activity extends AppCompatActivity {
         quelinrecy = findViewById(R.id.gridlay);
         bottomSheetBehavior.setHideable(true);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-        GridLayoutManager manager = new GridLayoutManager(this, 9, GridLayoutManager.VERTICAL, false);
+        GridLayoutManager manager = new GridLayoutManager(this, 6, GridLayoutManager.VERTICAL, false);
         quelinrecy.setLayoutManager(manager);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED && bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_COLLAPSED) {
-                    fab.setText("Open Question Tab");
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-                } else {
-                    fab.setText("Close Question Tab");
-                    bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }
+        fab.setOnClickListener(v -> {
+            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED && bottomSheetBehavior.getState() != BottomSheetBehavior.STATE_COLLAPSED) {
+                fab.setText("Open Question Tab");
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+            } else {
+                fab.setText("Close Question Tab");
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
             }
+
         });
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,6 +228,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                 }
                 else
                     {
+
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
@@ -260,9 +261,10 @@ public class Main_Test_Activity extends AppCompatActivity {
                       //      Submit_The_Query();
                             if(questionsJJavaHashMap.get(frontback).getWritten_ans().equals("Not answered"))
                             {
-
+                                quelinrecy.findViewHolderForAdapterPosition(1).itemView.setBackgroundColor(Color.GREEN);
                                 Submit_The_Query(questions_jJavaList.get(frontback).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(frontback).getTIme_taken(),2 , questionsJJavaHashMap.get(frontback).getWritten_ans());
                             }else {
+                                quelinrecy.findViewHolderForAdapterPosition(2).itemView.setBackgroundColor(Color.GREEN);
                                 Submit_The_Query(questions_jJavaList.get(frontback).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(frontback).getTIme_taken(),1 , questionsJJavaHashMap.get(frontback).getWritten_ans());
                             }
                             Log.d("ans is" , ""+questionsJJavaHashMap.get(frontback).getWritten_ans().length());

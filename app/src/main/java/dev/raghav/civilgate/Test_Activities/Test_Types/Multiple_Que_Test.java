@@ -9,6 +9,7 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.SpannableString;
 import android.util.Log;
@@ -24,16 +25,19 @@ import android.widget.Toast;
 import dev.raghav.civilgate.Api.Long_Login;
 import dev.raghav.civilgate.Const_Files.Questions_jJava;
 import dev.raghav.civilgate.R;
+import dev.raghav.civilgate.Test_Activities.Dapter.Questions_Adapter;
 
 import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.queposition;
 import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.questionsJJavaHashMap;
 import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.questionsJJavaLinkedList;
+import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.questions_adapter;
 
 public class Multiple_Que_Test extends Fragment {
     TextView que_txt;
     RadioGroup radio_grp;
     RadioButton ans1, ans2, ans3, ans4;
     SpannableString spannableStringque;
+    View Itemview;
     TextView clock;
     private long startTime = 0L;
     private Handler customHandler = new Handler();
@@ -63,6 +67,7 @@ public class Multiple_Que_Test extends Fragment {
 //        radio_grp.findViewById(R.id.ans2);
 //        radio_grp.findViewById(R.id.ans3);
 //        radio_grp.findViewById(R.id.ans3);
+
 
          Runnable updateTimerThread = new Runnable() {
 
