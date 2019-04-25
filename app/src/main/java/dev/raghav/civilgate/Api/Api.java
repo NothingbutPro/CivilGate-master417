@@ -62,6 +62,13 @@ Call<Login_Responce> Login_that_dk(
 );
 @FormUrlEncoded
 @POST("login")
+Call<Login_Responce> EndTest(
+        @Field("email") String level_id,
+        @Field("password") String level_sub_id,
+        @Field("password") String student_id
+);
+@FormUrlEncoded
+@POST("login")
 Call<Login_Responce> Teststatus(
         @Field("email") String email,
         @Field("password") String password
