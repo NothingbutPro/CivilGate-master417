@@ -10,10 +10,10 @@ public class End_Test {
 
     @SerializedName("data")
     @Expose
-    private List<End_Test_Data> data = null;
+    public List<End_Test_Data> data;
     @SerializedName("responce")
     @Expose
-    private Boolean responce;
+    public Boolean responce;
 
     public List<End_Test_Data> getData() {
         return data;

@@ -103,7 +103,7 @@ public class Multiple_Que_Test extends Fragment {
                     + String.format("%03d", milliseconds)*/);
                         TimeTaken = String.format("%02d", secs);
                         questionsJJavaHashMap.remove(queposition);
-                        questionsJJavaHashMap.put(queposition, new Questions_jJava("Not answered", TimeTaken));
+                        questionsJJavaHashMap.put(queposition, new Questions_jJava(0, TimeTaken));
                         Log.d("writtebn xfsadf", "sdf" + questionsJJavaHashMap.get(queposition).getWritten_ans());
                     }
 
@@ -123,7 +123,7 @@ public class Multiple_Que_Test extends Fragment {
                 if(isChecked ==true)
                 {
                     questionsJJavaHashMap.remove(queposition);
-                    questionsJJavaHashMap.put(queposition , new Questions_jJava(ans1.getText().toString() , TimeTaken));
+                    questionsJJavaHashMap.put(queposition , new Questions_jJava(1 , TimeTaken));
                     Log.d("writtebn xfsadf" , "sdf"+questionsJJavaHashMap.get(queposition).getWritten_ans());
                   //  questionsJJavaHashMap.put(queposition , new Questions_jJava(ans1.getText().toString() , ))
                     ans2.setChecked(false);
@@ -138,7 +138,7 @@ public class Multiple_Que_Test extends Fragment {
                 {
                  //   questionsJJavaHashMap.put(queposition , new Questions_jJava())
                     questionsJJavaHashMap.remove(queposition);
-                    questionsJJavaHashMap.put(queposition , new Questions_jJava(ans2.getText().toString() , TimeTaken));
+                    questionsJJavaHashMap.put(queposition , new Questions_jJava(2 , TimeTaken));
                     Log.d("writtebn xfsadf" , "sdf"+questionsJJavaHashMap.get(queposition).getWritten_ans());
                     ans1.setChecked(false);
                     ans3.setChecked(false);
@@ -151,7 +151,7 @@ public class Multiple_Que_Test extends Fragment {
                 if(isChecked ==true)
                 {
                     questionsJJavaHashMap.remove(queposition);
-                    questionsJJavaHashMap.put(queposition , new Questions_jJava(ans3.getText().toString() , TimeTaken));
+                    questionsJJavaHashMap.put(queposition , new Questions_jJava(3 , TimeTaken));
                     Log.d("writtebn xfsadf" , "sdf"+questionsJJavaHashMap.get(queposition).getWritten_ans());
                     ans4.setChecked(false);
                     ans2.setChecked(false);
@@ -165,7 +165,7 @@ public class Multiple_Que_Test extends Fragment {
                 if(isChecked ==true)
                 {
                     questionsJJavaHashMap.remove(queposition);
-                    questionsJJavaHashMap.put(queposition , new Questions_jJava(ans4.getText().toString() , TimeTaken));
+                    questionsJJavaHashMap.put(queposition , new Questions_jJava(4 , TimeTaken));
                     Log.d("writtebn xfsadf" , "sdf"+questionsJJavaHashMap.get(queposition).getWritten_ans());
                     ans2.setChecked(false);
                     ans3.setChecked(false);

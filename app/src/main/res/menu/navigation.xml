@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+
         android:id="@+id/navigation_back"
         android:icon="@drawable/ic_arrow_back"
         android:title="@string/title_home" />
 
     <item
+        app:actionViewClass="android.widget.TextView"
         android:id="@+id/navigation_save"
         android:icon="@drawable/ic_save_black_24dp"
         android:title="@string/title_dashboard" />
+    <item
+        android:visible="false"
+        android:id="@+id/navigation_submit"
+        android:icon="@drawable/ic_save_black_24dp"
+        android:title="Submit" />
 
     <item
-        android:id="@+id/navigation_forward"
+
+        android:id="@+id/navigation_forwardsdfsdf"
         android:icon="@drawable/ic_arrow_forward"
         android:title="Next Question" />
 

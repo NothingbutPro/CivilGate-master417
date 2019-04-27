@@ -1,5 +1,6 @@
 package dev.raghav.civilgate.Dapter;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -122,13 +123,20 @@ public class Test_Adapter  extends RecyclerView.Adapter<Test_Adapter.MyViewHolde
                     if(response.body().getResponce() == true)
                     {
                         Log.e("elements" , " are "+response.body().getData().get(0).getQue());
+                        Log.e("id elements" , " are "+response.body().getData().get(0).getId());
+                        Log.e("sub elements" , " are "+response.body().getData().get(0).getSubId());
                         Toast.makeText(v.getContext(), "Test Started", Toast.LENGTH_SHORT).show();
                       //  Toast.makeText(v.getContext(), "ids are " + tests_Name.getSubject_ids(), Toast.LENGTH_SHORT).show();
                         //  Intent getquestionIntent = new Intent(v.getContext() , Main_Test_Activity.class);
+                        Log.e("sub_leve_id" ,""+sub_level_cat_id);
+                        Log.e("level_id" ,""+coustId);
                         Intent getquestionIntent = new Intent(v.getContext(), Main_Test_Activity.class);
                         getquestionIntent.putExtra("sub_id", subject_ids);
+                        getquestionIntent.putExtra("sub_leve_id", sub_level_cat_id);
+                        getquestionIntent.putExtra("level_id", i);
 //               getquestionIntent.putExtra("no_of_que" , tests_Name.)
                         v.getContext().startActivity(getquestionIntent);
+                        ((Activity)v.getContext()).finish();
                     }
 //
                 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import dev.raghav.civilgate.Const_Files.Level_Java;
 import dev.raghav.civilgate.Const_Files.Retro_Urls;
+import dev.raghav.civilgate.Other_Parsing_Files.End_Test;
 import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test;
 import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test_Data;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_About;
@@ -62,14 +63,15 @@ Call<Login_Responce> Login_that_dk(
 );
 @FormUrlEncoded
 @POST("login")
-Call<Login_Responce> EndTest(
-        @Field("email") String level_id,
-        @Field("password") String level_sub_id,
-        @Field("password") String student_id
+Call<End_Test> EndTest(
+        @Field("level_id") String level_id,
+        @Field("level_sub_id") int level_sub_id,
+        @Field("student_id") int student_id
 );
 @FormUrlEncoded
 @POST("login")
-Call<Login_Responce> Teststatus(
+Call<Login_Responce> Teststatus
+        (
         @Field("email") String email,
         @Field("password") String password
 );

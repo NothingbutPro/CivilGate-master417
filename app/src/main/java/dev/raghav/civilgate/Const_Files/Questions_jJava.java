@@ -1,7 +1,5 @@
 package dev.raghav.civilgate.Const_Files;
 
-import android.provider.MediaStore;
-
 public class Questions_jJava {
     int id ,sub_id ,minusmark,marks,Status,type;
    String video;
@@ -17,17 +15,17 @@ public class Questions_jJava {
 
 
 
-    String Written_ans;
+    int Written_ans;
     String TIme_taken;
 
     public Questions_jJava(int id ) {
         this.id = id;
     }
-    public String getWritten_ans() {
+    public int getWritten_ans() {
         return Written_ans;
     }
 
-    public void setWritten_ans(String written_ans) {
+    public void setWritten_ans(int written_ans) {
         Written_ans = written_ans;
     }
 
@@ -44,7 +42,7 @@ public class Questions_jJava {
         this.Que = que;
     }
 
-    public Questions_jJava(String Ans, String timeTaken) {
+    public Questions_jJava(int Ans, String timeTaken) {
         this.Written_ans = Ans;
         this.TIme_taken = timeTaken;
     }

@@ -28,7 +28,7 @@ public class End_Test_Data {
     private String queStatus;
     @SerializedName("time")
     @Expose
-    private String time;
+    private int time;
     @SerializedName("type")
     @Expose
     private String type;
@@ -64,10 +64,10 @@ public class End_Test_Data {
     private String ans;
     @SerializedName("minusmark")
     @Expose
-    private String minusmark;
+    private int minusmark;
     @SerializedName("marks")
     @Expose
-    private String marks;
+    private int marks;
     @SerializedName("solution")
     @Expose
     private String solution;
@@ -143,11 +143,11 @@ public class End_Test_Data {
         this.queStatus = queStatus;
     }
 
-    public String getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(int time) {
         this.time = time;
     }
 
@@ -239,19 +239,19 @@ public class End_Test_Data {
         this.ans = ans;
     }
 
-    public String getMinusmark() {
+    public int getMinusmark() {
         return minusmark;
     }
 
-    public void setMinusmark(String minusmark) {
+    public void setMinusmark(int minusmark) {
         this.minusmark = minusmark;
     }
 
-    public String getMarks() {
+    public int getMarks() {
         return marks;
     }
 
-    public void setMarks(String marks) {
+    public void setMarks(int marks) {
         this.marks = marks;
     }
 
