@@ -68,6 +68,7 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpclient-android:4.3.5'
     implementation 'com.android.support:multidex:1.0.1'
     implementation 'org.apache.httpcomponents:httpclient-android:4.3.5'
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
 
 
 }
