@@ -62,11 +62,13 @@ Call<Login_Responce> Login_that_dk(
         @Field("password") String password
 );
 @FormUrlEncoded
-@POST("login")
+@POST("endTest")
 Call<End_Test> EndTest(
-        @Field("level_id") String level_id,
-        @Field("level_sub_id") int level_sub_id,
-        @Field("student_id") int student_id
+        @Field("student_id") int student_id,
+        @Field("level_sub_id") String level_sub_id,
+        @Field("level_id") int level_id
+
+
 );
 @FormUrlEncoded
 @POST("login")

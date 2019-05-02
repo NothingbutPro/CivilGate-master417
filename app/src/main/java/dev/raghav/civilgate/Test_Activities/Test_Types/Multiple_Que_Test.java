@@ -48,7 +48,8 @@ public class Multiple_Que_Test extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         View MultipleView = inflater.inflate(R.layout.multiple_que, container, false);
         que_txt = MultipleView.findViewById(R.id.que_txtview);
         radio_grp = MultipleView.findViewById(R.id.radio_grp);

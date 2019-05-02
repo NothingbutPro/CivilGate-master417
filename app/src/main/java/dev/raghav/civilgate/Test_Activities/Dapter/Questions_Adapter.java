@@ -2,6 +2,7 @@ package dev.raghav.civilgate.Test_Activities.Dapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -48,13 +49,13 @@ public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.My
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         myViewHolder.id.setText(String.valueOf(questionsJJavas.get(i).getId()));
         Log.d("postions" , "are working with"+i);
-
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int p = 0;
                 Toast.makeText(context, ""+i, Toast.LENGTH_SHORT).show();
                 int linksize = questionsJJavaLinkedList.size();
+//                myViewHolder.itemView.setBackgroundColor(Color.GREEN);
 //                if(questionsJJavaLinkedList.get(i).getId() == questionsJJavas.get(i).)
                 Log.e("linked lis is" , ""+questionsJJavaLinkedList);
                 while (questionsJJavaLinkedList.iterator().hasNext() && p<questionsJJavaLinkedList.size())
@@ -97,7 +98,7 @@ public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.My
     }
     public class MyViewHolder extends RecyclerView.ViewHolder {
         // init the item view's
-        TextView id;
+       public   TextView id;
        // LinearLayout cardViewkli;
         //   ImageView image;
         public MyViewHolder(View itemView) {
