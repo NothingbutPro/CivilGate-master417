@@ -273,6 +273,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                     int nextsubmit = queposition;
                    // int frontbacksubmit = nextsubmit - 1;
                     //  int nextquery = ++Ansposition;
+                    Log.e("at Naviga" , "tion submit");
                     try {
                         if (questions_jJavaList.get(nextsubmit).getType() == 1) {
 
@@ -402,6 +403,23 @@ public class Main_Test_Activity extends AppCompatActivity {
                     questionsJJavaHashMap.put(queposition , new Questions_jJava(5 , "0.00"));
 
                     Log.e("Position" , ""+saveornot);
+//                    try {
+//                        if (questions_jJavaList.get(saveornot+1) == null)
+//                        {
+//
+//                        }
+//                    }
+//                    catch (Exception e)
+//                    {
+//                        View menuItem = navigation.findViewById(R.id.navigation_forwardsdfsdf);
+//                        View menuItem2 = navigation.findViewById(R.id.navigation_back);
+//                        View menuItem3 = navigation.findViewById(R.id.navigation_save);
+//                        View menuItem4 = navigation.findViewById(R.id.navigation_submit);
+//                        menuItem.setVisibility(View.GONE);
+//                        menuItem4.setVisibility(View.VISIBLE);
+//                        e.printStackTrace();
+//                    }
+
                     if (questions_jJavaList.get(queposition).getType() == 1) {
 
                         if (questionsJJavaHashMap.get(saveornot).getWritten_ans() == 0) {
@@ -422,6 +440,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                                 fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
 
                         }
+
                     }
                   //  Submit_The_Query();
 //                    Log.e("written ans" , "is "+questionsJJavaHashMap.get(--queposition).getWritten_ans());
@@ -509,8 +528,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                         Log.e("level_id" , ""+level_id);
                         Log.e("last Question" , " submited "+response.body().getData().getLevelId());
                         Toast.makeText(Main_Test_Activity.this, "Test successfully submitted ", Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(Main_Test_Activity.this , Instant_Results.class);
-//                        startActivity(intent);
+
                         Log.e("at session",""+sessionManager.getCoustId());
                         Log.e("at cousst(sub id)",""+sub_leve_id);
                         Log.e("at level",""+level_id);
@@ -536,66 +554,13 @@ public class Main_Test_Activity extends AppCompatActivity {
     }
 
     private void Sumbit_the_set(int coustId, String sub_leve_id, int level_id) {
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(150, TimeUnit.SECONDS)
-                .readTimeout(300,TimeUnit.SECONDS).writeTimeout(200 , TimeUnit.SECONDS).build();
-        ProgressDialog ExamprogressDialog;
-        ExamprogressDialog = new ProgressDialog(Main_Test_Activity.this);
-        ExamprogressDialog.setMax(100);
-        ExamprogressDialog.setTitle("Submitting Your Test");
-        ExamprogressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        ExamprogressDialog.setCancelable(false);
-        ExamprogressDialog.show();
-        Retrofit RetroGEtExam = new Retrofit.Builder()
-                .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
-                .build();
-        Api EmamApi = RetroGEtExam.create(Api.class);
-        Call<End_Test> exam_testCall = EmamApi.EndTest(sessionManager.getCoustId(), sub_leve_id,level_id);
-        exam_testCall.enqueue(new Callback<End_Test>() {
-            @Override
-            public void onResponse(Call<End_Test> call, Response<End_Test> response) {
+        Intent intent = new Intent(Main_Test_Activity.this , Instant_Results.class);
+        intent.putExtra("coustId" ,coustId );
+        intent.putExtra("sub_leve_id" ,sub_leve_id );
+        intent.putExtra("level_id" ,level_id );
+        startActivity(intent);
+        finish();
 
-                //  Toast.makeText(getActivity(), "Test name"+response.body().getData().get(0).getTestName(), Toast.LENGTH_SHORT).show();
-                if(response.isSuccessful())
-                {
-                    ExamprogressDialog.dismiss();
-                   Boolean res = response.body().getResponce();
-                   Log.e("last responce is" , "  "+res);
-//                   int s = response.body().getData().get(0).getMarks();
-
-                        JsonParser jsonObject = new JsonParser();
-                        jsonObject.parse(String.valueOf(response.body()));
-                        Log.e("last responce json is" , ""+jsonObject);
-
-                    if(response.body().getResponce() )
-                    {
-                        Log.e("las" , " submited marks"+response.body().getResponce());
-                        Intent to_result = new Intent(Main_Test_Activity.this , Instant_Results.class);
-                        startActivity(to_result);
-                        Toast.makeText(Main_Test_Activity.this, "test successfully submit", Toast.LENGTH_SHORT ).show();
-                        questions_jJavaList.clear();
-                        questionsJJavaHashMap.clear();
-                        questionsJJavaLinkedList.clear();
-                        System.gc();
-                        finish();
-
-                    }else {
-                        JsonParser jsonObject2 = new JsonParser();
-                        jsonObject2.parse(String.valueOf(response.body().getData()));
-                        Log.e("last responce json is" , ""+jsonObject2);
-                    }
-//
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<End_Test> call, Throwable t) {
-                Log.w("MyTag", "requestFailed"+t);
-                //            Log.w("MyTag", "requestFailed "+ call.clone().isExecuted());
-
-            }
-        });
     }
 
     private Boolean Submit_The_Query(int que_id, int coustId, String tIme_taken, int q_status, int written_ans) {

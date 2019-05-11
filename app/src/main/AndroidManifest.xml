@@ -15,7 +15,8 @@
         android:roundIcon="@drawable/logoimg"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Instant_Report.Instant_Results"></activity>
+        <activity android:name=".Activities.ShowAllPakages"></activity>
+        <activity android:name=".Instant_Report.Instant_Results" />
         <activity android:name=".Activities.Results_Activity" />
         <activity
             android:name=".MAin_test_collpase"

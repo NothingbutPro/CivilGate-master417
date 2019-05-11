@@ -5,12 +5,15 @@ import java.io.File;
 import java.util.List;
 
 import dev.raghav.civilgate.Const_Files.Level_Java;
+import dev.raghav.civilgate.Const_Files.Package;
 import dev.raghav.civilgate.Const_Files.Retro_Urls;
 import dev.raghav.civilgate.Other_Parsing_Files.End_Test;
 import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test;
 import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test_Data;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_About;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_Level;
+import dev.raghav.civilgate.Other_Parsing_Files.Instant_Report;
+import dev.raghav.civilgate.Other_Parsing_Files.Instant_Report_Data;
 import dev.raghav.civilgate.Other_Parsing_Files.Submit_Question;
 import dev.raghav.civilgate.Other_Parsing_Files.Test_Question;
 import dev.raghav.civilgate.Parsingfiles.LoginReg.Login_Responce;
@@ -63,20 +66,16 @@ Call<Login_Responce> Login_that_dk(
 );
 @FormUrlEncoded
 @POST("endTest")
-Call<End_Test> EndTest(
+Call<Instant_Report> EndTest(
         @Field("student_id") int student_id,
         @Field("level_sub_id") String level_sub_id,
         @Field("level_id") int level_id
 
 
 );
-@FormUrlEncoded
-@POST("login")
-Call<Login_Responce> Teststatus
-        (
-        @Field("email") String email,
-        @Field("password") String password
-);
+@Headers("Content-Type: application/x-www-form-urlencoded")
+@GET("Get_Package")
+Call<Package> Get_Package();
 @Headers("Content-Type: application/x-www-form-urlencoded")
 @GET(Retro_Urls.About_us)
 Call<Get_About> TellAbout();

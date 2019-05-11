@@ -10,5 +10,6 @@ public  static String The_Base = "http://ihisaab.in/lms/api/";
   public String GetQuestion = "GetQuestion";
   public String Srarttest = "starttest";
   public String About_us = "aboutus";
- 
+  public String Get_Package = "Get_Package";
+
 }

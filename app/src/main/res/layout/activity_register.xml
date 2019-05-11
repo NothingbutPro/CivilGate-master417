@@ -8,7 +8,8 @@
     android:orientation="vertical">
 
 
-    <android.support.design.widget.CollapsingToolbarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.design.widget.CollapsingToolbarLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/toolbar_post"
         android:layout_width="match_parent"
@@ -95,7 +96,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.9"
-                            android:src="@drawable/person_icon" />
+                            app:srcCompat="@drawable/person_icon" />
 
                         <EditText
                             android:id="@+id/ful_nam"
@@ -132,7 +133,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.9"
-                            android:src="@drawable/email_icon" />
+                            app:srcCompat="@drawable/email_icon" />
 
                         <EditText
                             android:id="@+id/email"
@@ -168,7 +169,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.9"
-                            android:src="@drawable/email_icon" />
+                            app:srcCompat="@drawable/email_icon" />
 
                         <EditText
                             android:id="@+id/password"
@@ -204,7 +205,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.9"
-                            android:src="@drawable/mobile_icon" />
+                            app:srcCompat="@drawable/mobile_icon" />
 
                         <!--<android.support.design.widget.TextInputLayout-->
                         <!--android:id="@+id/etPasswordLayout"-->
@@ -245,7 +246,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.9"
-                            android:src="@drawable/passoutyr" />
+                            app:srcCompat="@drawable/passoutyr" />
 
                         <!--<android.support.design.widget.TextInputLayout-->
                         <!--android:id="@+id/etPasswordLayout"-->
@@ -286,7 +287,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.9"
-                            android:src="@drawable/passoutyr" />
+                            app:srcCompat="@drawable/passoutyr" />
 
                         <!--<android.support.design.widget.TextInputLayout-->
                         <!--android:id="@+id/etPasswordLayout"-->
@@ -327,7 +328,7 @@
                             android:layout_height="30dp"
                             android:layout_gravity="center"
                             android:layout_weight="0.9"
-                            android:src="@drawable/address" />
+                            app:srcCompat="@drawable/address" />
 
                         <!--<android.support.design.widget.TextInputLayout-->
                         <!--android:id="@+id/etPasswordLayout"-->

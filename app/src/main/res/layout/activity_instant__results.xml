@@ -82,6 +82,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/totcandidate"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="5dp"
@@ -105,6 +106,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/totalQue"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="5dp"
@@ -128,6 +130,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/mark"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="5dp"
@@ -151,6 +154,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/duration"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="5dp"
@@ -347,6 +351,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/rightmark"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="5dp"
@@ -370,6 +375,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/negative"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="5dp"
@@ -393,6 +399,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/left"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="5dp"
@@ -425,6 +432,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/mytime"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="5dp"
@@ -448,6 +456,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/unproductive"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="5dp"
@@ -471,6 +480,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/idleTime"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="5dp"

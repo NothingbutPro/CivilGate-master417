@@ -1,7 +1,12 @@
 package dev.raghav.civilgate.Instant_Report;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
@@ -10,18 +15,50 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
+import dev.raghav.civilgate.Api.Api;
+import dev.raghav.civilgate.Const_Files.Retro_Urls;
+import dev.raghav.civilgate.Other_Parsing_Files.End_Test;
+import dev.raghav.civilgate.Other_Parsing_Files.Instant_Report;
+import dev.raghav.civilgate.Other_Parsing_Files.Instant_Report_Data;
 import dev.raghav.civilgate.R;
+import dev.raghav.civilgate.SessionManage.SessionManager;
+import okhttp3.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Instant_Results extends AppCompatActivity {
     PieChart pieChart;
+    int coustId;
+    String sub_leve_id;
+    TextView totcandidate,totalQue,duration,rightmark,negative,left,mytime,unproductive,idleTime,mark;
+    int level_id;
+    SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant__results);
         pieChart = findViewById(R.id.piechart);
         ArrayList NoOfEmp = new ArrayList();
-
+        totcandidate = findViewById(R.id.totcandidate);
+        rightmark = findViewById(R.id.rightmark);
+        negative = findViewById(R.id.negative);
+        left = findViewById(R.id.left);
+        mytime = findViewById(R.id.mytime);
+        unproductive = findViewById(R.id.unproductive);
+        idleTime = findViewById(R.id.idleTime);
+        duration = findViewById(R.id.duration);
+        mark = findViewById(R.id.mark);
+        totalQue = findViewById(R.id.totalQue);
+        coustId = getIntent().getIntExtra("coustId" ,0);
+        sub_leve_id = getIntent().getStringExtra("sub_leve_id");
+        level_id = getIntent().getIntExtra("level_id" ,200);
+        sessionManager = new SessionManager(this);
+        ShowMeResult(coustId , sub_leve_id , level_id);
         NoOfEmp.add(new Entry(945f, 0));
         NoOfEmp.add(new Entry(1040f, 1));
         NoOfEmp.add(new Entry(1133f, 2));
@@ -40,5 +77,85 @@ public class Instant_Results extends AppCompatActivity {
         pieChart.animateXY(5000, 5000);
 
 
+    }
+
+    private void ShowMeResult(int coustId, String sub_leve_id, int level_id)
+    {
+                OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(150, TimeUnit.SECONDS)
+                .readTimeout(300,TimeUnit.SECONDS).writeTimeout(200 , TimeUnit.SECONDS).build();
+        ProgressDialog ExamprogressDialog;
+        ExamprogressDialog = new ProgressDialog(Instant_Results.this);
+        ExamprogressDialog.setMax(100);
+        ExamprogressDialog.setTitle("Generating the report");
+        ExamprogressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        ExamprogressDialog.setCancelable(false);
+        ExamprogressDialog.show();
+        Retrofit RetroGEtExam = new Retrofit.Builder()
+                .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api EmamApi = RetroGEtExam.create(Api.class);
+        Call<Instant_Report> exam_testCall = EmamApi.EndTest(sessionManager.getCoustId(), sub_leve_id,level_id);
+        exam_testCall.enqueue(new Callback<Instant_Report>() {
+            @Override
+            public void onResponse(Call<Instant_Report> call, Response<Instant_Report> response) {
+
+                //  Toast.makeText(getActivity(), "Test name"+response.body().getData().get(0).getTestName(), Toast.LENGTH_SHORT).show();
+                if(response.isSuccessful())
+                {
+                    ExamprogressDialog.dismiss();
+               //    Boolean res = response.body().getCorrect();
+               //    Log.e("last responce is" , "  "+res);
+//                   int s = response.body().getData().get(0).getMarks();
+
+
+                    if(response.isSuccessful() )
+                    {
+                        Log.e("las" , " submited marks"+response.body().getResponce());
+                        Log.e("las" , " duration marks"+response.body().getData().getDuration());
+                     //   idleTime.setText(String.valueOf(response.body().getData().getIdleTime()));
+
+                       totcandidate.setText(String.valueOf(response.body().getData().getTotcandidate()));
+                       totalQue.setText(String.valueOf(response.body().getData().getTotalQue()));
+                       duration.setText(String.valueOf(response.body().getData().getDuration()));
+                       rightmark.setText(String.valueOf(response.body().getData().getRightmark()));
+                        negative.setText(String.valueOf(response.body().getData().getNegative()));
+                       left.setText(String.valueOf(response.body().getData().getLeft()));
+                       mytime.setText(String.valueOf(response.body().getData().getMytime()));
+                        unproductive.setText(String.valueOf(response.body().getData().getUnproductive()));
+                        mark.setText(String.valueOf(response.body().getData().getMark()));
+                      //  idleTime.setText(String.valueOf(response.body().getData().getIdleTime()));
+                        Log.e("las" , " submited marks"+response.body().getResponce());
+                        idleTime.setText(String.valueOf(response.body().getData().getIdleTime()));
+                        totcandidate.setText(String.valueOf(response.body().getData().getTotcandidate()));
+                        totalQue.setText(String.valueOf(response.body().getData().getTotalQue()));
+                        duration.setText(String.valueOf(response.body().getData().getDuration()));
+                        rightmark.setText(String.valueOf(response.body().getData().getRightmark()));
+                        negative.setText(String.valueOf(response.body().getData().getNegative()));
+                        left.setText(String.valueOf(response.body().getData().getLeft()));
+                        mytime.setText(String.valueOf(response.body().getData().getMytime()));
+                        unproductive.setText(String.valueOf(response.body().getData().getUnproductive()));
+                        idleTime.setText(String.valueOf(response.body().getData().getIdleTime()));
+ //                       Intent to_result = new Intent(Instant_Results.this , Instant_Results.class);
+//                       startActivity(to_result);
+                        Toast.makeText(Instant_Results.this, "test successfully submit", Toast.LENGTH_SHORT ).show();
+
+                  //      System.gc();
+                   //     finish();
+
+                    }else {
+                    }
+//
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Instant_Report> call, Throwable t) {
+                Log.w("MyTag", "requestFailed"+t);
+                //            Log.w("MyTag", "requestFailed "+ call.clone().isExecuted());
+
+            }
+        });
     }
 }

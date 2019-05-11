@@ -28,7 +28,8 @@ import dev.raghav.civilgate.Test_Activities.Test_Types.Multiple_Que_Test;
 import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.queposition;
 import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.questionsJJavaLinkedList;
 
-public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.MyViewHolder> {
+public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.MyViewHolder>
+{
     List<Questions_jJava> questionsJJavas ;
     ArrayList personImages;
 
