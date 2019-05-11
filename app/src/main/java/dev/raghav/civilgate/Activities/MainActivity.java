@@ -25,8 +25,9 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-   Response<Login_Responce> response;
-   Fragment mainFragment =null;
+    Response<Login_Responce> response;
+    Fragment mainFragment = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,9 +67,9 @@ public class MainActivity extends AppCompatActivity
     private Fragment LoadGodamnFrags(Fragment mainFragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.dasboard_frame , mainFragment);
+        fragmentTransaction.replace(R.id.dasboard_frame, mainFragment);
         fragmentTransaction.commit();
-        return  mainFragment;
+        return mainFragment;
     }
 
     @Override
@@ -117,8 +118,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_my_test) {
 
-        }
-        else if (id == R.id.nav_group) {
+        } else if (id == R.id.nav_group) {
 
         } else if (id == R.id.nav_bookmark) {
 
@@ -128,14 +128,14 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_ex_offer) {
 
-        }else if (id == R.id.nav_ask_expert) {
+        } else if (id == R.id.nav_ask_expert) {
 
-        }else if (id == R.id.nav_rate_us) {
+        } else if (id == R.id.nav_rate_us) {
 
-        }else if (id == R.id.logout) {
+        } else if (id == R.id.logout) {
 
-        }else if (id == R.id.aboutus) {
-            Intent aboutIntent = new Intent(MainActivity.this , About_all.class);
+        } else if (id == R.id.aboutus) {
+            Intent aboutIntent = new Intent(MainActivity.this, About_all.class);
             startActivity(aboutIntent);
 
         }

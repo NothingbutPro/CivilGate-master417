@@ -15,14 +15,46 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:layout_weight="0.50"
             android:background="@color/app_bar_color"
-            app:popupTheme="@style/AppTheme.PopupOverlay" >
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        </android.support.v7.widget.Toolbar>
+      <!--  <FrameLayout
+            android:layout_margin="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right">
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:color/transparent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:elevation="16dp"
+                android:text="Credit"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/white" />
+        </FrameLayout>-->
 
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main" />
 
+
+
+    <!-- <android.support.design.widget.FloatingActionButton
+         android:id="@+id/fab2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_gravity="top|end"
+         android:layout_marginRight="@dimen/fab_margin"
+         app:backgroundTint="@color/colorAccent"
+         app:elevation="6dp"
+         app:pressedTranslationZ="12dp"
+         app:srcCompat="@android:drawable/btn_radio" />-->
 
 </android.support.design.widget.CoordinatorLayout>
