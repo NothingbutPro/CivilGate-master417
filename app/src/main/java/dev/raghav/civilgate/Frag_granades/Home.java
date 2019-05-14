@@ -12,18 +12,28 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import dev.raghav.civilgate.Activities.Level_Tab_Activities;
+import dev.raghav.civilgate.Activities.Profile_Activity;
 import dev.raghav.civilgate.Activities.ShowAllPakages;
 import dev.raghav.civilgate.R;
 
 public class Home extends Fragment {
     ImageView leve_id;
+    CardView procard;
     CardView buy_package_icon;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.home,container,false);
         leve_id = v.findViewById(R.id.leve_id);
+        procard = v.findViewById(R.id.procard);
         buy_package_icon = v.findViewById(R.id.buyicon);
+        procard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity() , Profile_Activity.class);
+                startActivity(intent);
+            }
+        });
         buy_package_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

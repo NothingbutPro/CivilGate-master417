@@ -1,4 +1,4 @@
-package dev.raghav.civilgate.Const_Files;
+package dev.raghav.civilgate.Dapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,11 +11,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LowerServiceGenerator extends FragmentStatePagerAdapter {
+public class HistoryAdapter  extends FragmentStatePagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
     Context context;
-    public LowerServiceGenerator(FragmentManager fm , Context c) {
+    public HistoryAdapter(FragmentManager fm , Context c) {
         super(fm);
         this.context = c;
     }
@@ -31,7 +31,7 @@ public class LowerServiceGenerator extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-     //   Toast.makeText(context, "positiobn is"+position, Toast.LENGTH_SHORT).show();
+        //   Toast.makeText(context, "positiobn is"+position, Toast.LENGTH_SHORT).show();
         return mFragmentTitleList.get(position);
     }
     @Override
@@ -41,7 +41,7 @@ public class LowerServiceGenerator extends FragmentStatePagerAdapter {
 
     @Override
     public int getItemPosition(@NonNull Object object) {
-      //  Toast.makeText(context, "object is"+object.toString(), Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(context, "object is"+object.toString(), Toast.LENGTH_SHORT).show();
         return super.getItemPosition(object);
     }
 

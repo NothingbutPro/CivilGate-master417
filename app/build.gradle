@@ -70,6 +70,7 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.1'
     implementation 'org.apache.httpcomponents:httpclient-android:4.3.5'
     implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 
 
 }

@@ -29,7 +29,7 @@ import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.quepositio
 import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.questionsJJavaLinkedList;
 
 public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.MyViewHolder>
-{
+  {
     List<Questions_jJava> questionsJJavas ;
     ArrayList personImages;
 

@@ -261,7 +261,7 @@
                             android:layout_weight="0.1"
                             android:background="#fff"
                             android:hint="Passout year"
-                            android:inputType="number"
+                            android:inputType="date"
                             android:textSize="14dp"
                             tools:layout_editor_absoluteX="16dp"
                             tools:layout_editor_absoluteY="214dp" />
@@ -302,7 +302,7 @@
                             android:layout_weight="0.1"
                             android:background="#fff"
                             android:hint="Collage Name"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:textSize="14dp"
                             tools:layout_editor_absoluteX="16dp"
                             tools:layout_editor_absoluteY="214dp" />
@@ -343,7 +343,7 @@
                             android:layout_weight="0.1"
                             android:background="#fff"
                             android:hint="Address"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:textSize="14dp"
                             tools:layout_editor_absoluteX="16dp"
                             tools:layout_editor_absoluteY="214dp" />

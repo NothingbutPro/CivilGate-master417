@@ -34,8 +34,6 @@ public class ShowAllPakages extends AppCompatActivity {
         setContentView(R.layout.activity_show_all_pakages);
         pakagerecyler = findViewById(R.id.pakagerecyler);
         ShowAllPakagess();
-
-
     }
 
     private void ShowAllPakagess() {

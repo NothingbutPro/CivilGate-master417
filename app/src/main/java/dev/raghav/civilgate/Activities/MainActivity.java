@@ -117,6 +117,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_buy_package) {
 
         } else if (id == R.id.nav_my_test) {
+            Intent intent = new Intent(MainActivity.this , HisHistoryActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_group) {
 

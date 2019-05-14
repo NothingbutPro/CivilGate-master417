@@ -7,6 +7,7 @@ import java.util.List;
 import dev.raghav.civilgate.Const_Files.Level_Java;
 import dev.raghav.civilgate.Const_Files.Package;
 import dev.raghav.civilgate.Const_Files.Retro_Urls;
+import dev.raghav.civilgate.Other_Parsing_Files.Credit;
 import dev.raghav.civilgate.Other_Parsing_Files.End_Test;
 import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test;
 import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test_Data;
@@ -73,9 +74,17 @@ Call<Instant_Report> EndTest(
 
 
 );
+@FormUrlEncoded
+@POST("endTest")
+Call<Instant_Report> Gethistory(
+        @Field("student_id") int student_id
+);
 @Headers("Content-Type: application/x-www-form-urlencoded")
 @GET("Get_Package")
 Call<Package> Get_Package();
+    @Headers("Content-Type: application/x-www-form-urlencoded")
+    @GET("Get_creditPoin")
+    Call<Credit> Get_Credits(@Query("student_id") int student_id);
 @Headers("Content-Type: application/x-www-form-urlencoded")
 @GET(Retro_Urls.About_us)
 Call<Get_About> TellAbout();
@@ -98,7 +107,7 @@ Call<Test_Question> GetQuestion(@Field("subject_id") String subject_id);
 //Call<Submit_Question> SubmitQuery(@Field("que_id") int que_id,@Field("student_id") int student_id,@Field("time") String time,@Field("q_status") int q_status,@Field("que_ans") String que_an);
 @FormUrlEncoded
 @POST(Retro_Urls.Teststatus)
-Call<Submit_Question> SubmitQuery(@Field("que_id") int que_id,@Field("student_id") int student_id,@Field("time") String time,@Field("q_status") int q_status,@Field("que_ans") String que_an);
+Call<Submit_Question> SubmitQuery(@Field("que_id") int que_id,@Field("student_id") int student_id,@Field("time") int time,@Field("q_status") int q_status,@Field("que_ans") String que_an);
 @FormUrlEncoded
 @POST(Retro_Urls.Srarttest)
 Call<TestStart> GetTestQuestionCall(

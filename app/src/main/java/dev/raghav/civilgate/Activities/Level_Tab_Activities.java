@@ -176,46 +176,9 @@ public class Level_Tab_Activities extends AppCompatActivity {
                                 level_javas.add(4 , new Level_Java(100 , "xxxxxxxxxxx"));
 
                             }
-//                            for (int k=0 ;k<getLevel.getData().size();k++)
-//                            {
-//
-//                            }
-//                        }
-//                        // Find the minimum element in unsorted array
-//                        int min_idx = i;
-//                        for (int j = i+1; j < n; j++) {
-//                            if (getLevel.getData().get(j).getId() < getLevel.getData().get(min_idx).getId()) {
-//
-//                                min_idx = j;
-//                                Log.d("sorying"+i , "j is"+getLevel.getData().get(j).getId());
-//
-//                            }
-//
-//
-//                            // Swap the found minimum element with the first
-//                            // element
-//                            int temp = getLevel.getData().get(min_idx).getId();
-//                            String temp_level = getLevel.getData().get(min_idx).getLevel();
-//                            getLevel.getData().set(min_idx, new New_Level_Data(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
-//                            getLevel.getData().set(i, new New_Level_Data(temp, temp_level));
-////                        Log.e("responce level" , ""+getLevel.getData().get(i).getLevel());
-////                        Level_Java level_java = new Level_Java(getLevel.getData().get(i).getId() , getLevel.getData().get(i).getLevel());
-////                        level_javas.add(level_java);
-////
-////                        serviceGeneratoradapter.addFragment(new Home(), level_java.getLevel());
-//                        }
-//                    }
 
-//                    serviceGeneratoradapter.addFragment(new Home(), "Tab 2");
-//                    serviceGeneratoradapter.addFragment(new Home(), "Tab 3");
                     viewPager.setAdapter(serviceGeneratoradapter);
                     tabLayout.setupWithViewPager(viewPager);
-//                    level_adapter = new Level_Adapter(level_javas);
-//                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-//                    level_resicler.setLayoutManager(mLayoutManager);
-//                    level_resicler.setItemAnimator(new DefaultItemAnimator());
-//                    level_resicler.setAdapter(level_adapter);
-
 
 
                 }

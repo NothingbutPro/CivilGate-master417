@@ -1,6 +1,8 @@
 package dev.raghav.civilgate.Test_Activities;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -23,12 +25,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.JsonParser;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -36,13 +32,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import dev.raghav.civilgate.Activities.Level_Tab_Activities;
-import dev.raghav.civilgate.Activities.MainActivity;
 import dev.raghav.civilgate.Api.Api;
 import dev.raghav.civilgate.Const_Files.Questions_jJava;
 import dev.raghav.civilgate.Const_Files.Retro_Urls;
-import dev.raghav.civilgate.Instant_Report.Instant_Results;
-import dev.raghav.civilgate.Other_Parsing_Files.End_Test;
+import dev.raghav.civilgate.Instant_Report.Instant_Results_Activity;
 import dev.raghav.civilgate.Other_Parsing_Files.Submit_Question;
 import dev.raghav.civilgate.Other_Parsing_Files.Test_Question;
 import dev.raghav.civilgate.R;
@@ -62,6 +55,7 @@ public class Main_Test_Activity extends AppCompatActivity {
     public static int queposition = 0;
     RecyclerView quelinrecy;
     static int no_of_questions;
+    TextView fab23;
     BottomNavigationView navigation;
     TextView fab2;
     TextView fab;
@@ -96,10 +90,75 @@ public class Main_Test_Activity extends AppCompatActivity {
         bottomSheetBehavior = BottomSheetBehavior.from(nestedScrollView);
         fab = findViewById(R.id.fab);
         fab2 = findViewById(R.id.fab2);
+        fab23 = findViewById(R.id.fab23);
         sub_leve_id =getIntent().getStringExtra("sub_leve_id" );
         level_id =getIntent().getIntExtra("level_id" ,50);
         Log.d("the sub leve" ,""+level_id);
+        fab23.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(v.getContext());
+                alertDialogBuilder.setMessage("Are you sure, you want to submit the test");
+                        alertDialogBuilder.setPositiveButton("Submit Test",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface arg0, int arg1) {
+                                        Toast.makeText(Main_Test_Activity.this,"You clicked yes button",Toast.LENGTH_LONG).show();
+                                        int nextsubmit = queposition;
+                                        // int frontbacksubmit = nextsubmit - 1;
+                                        //  int nextquery = ++Ansposition;
+                                        Log.e("at Naviga" , "tion submit");
+                                        try {
+                                            if (questions_jJavaList.get(nextsubmit).getType() == 1) {
 
+                                                //      Submit_The_Query();
+                                                if(questionsJJavaHashMap.get(nextsubmit).getWritten_ans() ==0)
+                                                {
+
+                                                    quelinrecy.findViewHolderForLayoutPosition(2).itemView.setBackgroundColor(Color.GREEN);
+                                                    //  quelinrecy.findViewHolderForAdapterPosition(1).itemView.setBackgroundColor(Color.GREEN);
+                                                    Submit_The_Query_Final(questions_jJavaList.get(nextsubmit).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(nextsubmit).getTIme_taken(),2 , questionsJJavaHashMap.get(nextsubmit).getWritten_ans());
+                                                }else {
+                                                    quelinrecy.findViewHolderForLayoutPosition(2).itemView.setBackgroundColor(Color.GREEN);
+//                                quelinrecy.findViewHolderForAdapterPosition(2).itemView.setBackgroundColor(Color.GREEN);
+                                                    Submit_The_Query_Final(questions_jJavaList.get(nextsubmit).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(nextsubmit).getTIme_taken(),1 , questionsJJavaHashMap.get(nextsubmit).getWritten_ans());
+                                                }
+                                                Log.d("ans at map is" , ""+questionsJJavaHashMap.get(nextsubmit).getWritten_ans());
+                                                Log.d("id at map is" , ""+questionsJJavaHashMap.get(nextsubmit).getId());
+                                                Log.d("sub at map is" , ""+questionsJJavaHashMap.get(nextsubmit).getSub_id());
+                                                FragmentManager fragmentManager = getSupportFragmentManager();
+                                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                                fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
+                                            } else {
+                                                FragmentManager fragmentManager = getSupportFragmentManager();
+                                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                                fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
+                                            }
+                                        } catch (Exception e) {
+                                            queposition--;
+                                            if(questionsJJavaHashMap.get(nextsubmit).getWritten_ans() ==0)
+                                            {
+
+                                                Submit_The_Query_Final(questions_jJavaList.get(nextsubmit).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(nextsubmit).getTIme_taken(),2 , questionsJJavaHashMap.get(nextsubmit).getWritten_ans());
+                                            }else {
+                                                Submit_The_Query_Final(questions_jJavaList.get(nextsubmit).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(nextsubmit).getTIme_taken(),1 , questionsJJavaHashMap.get(nextsubmit).getWritten_ans());
+                                            }
+                                            Toast.makeText(Main_Test_Activity.this, "Can't go forward", Toast.LENGTH_SHORT).show();
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+
+                alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
+        });
         //---------------------------Timer------------------
 
         new CountDownTimer(1800000, 1000) {
@@ -142,8 +201,7 @@ public class Main_Test_Activity extends AppCompatActivity {
 
             }
 
-        }
-        );
+        });
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -273,6 +331,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                     int nextsubmit = queposition;
                    // int frontbacksubmit = nextsubmit - 1;
                     //  int nextquery = ++Ansposition;
+                    Toast.makeText(Main_Test_Activity.this, "that's que" +queposition, Toast.LENGTH_SHORT).show();
                     Log.e("at Naviga" , "tion submit");
                     try {
                         if (questions_jJavaList.get(nextsubmit).getType() == 1) {
@@ -318,7 +377,7 @@ public class Main_Test_Activity extends AppCompatActivity {
 //                    if()
                     int next = ++queposition;
                     int frontback = next - 1;
-
+                    Toast.makeText(Main_Test_Activity.this, "that's que" +queposition, Toast.LENGTH_SHORT).show();
                   //  int nextquery = ++Ansposition;
                     try {
                         if (questions_jJavaList.get(next).getType() == 1) {
@@ -327,7 +386,6 @@ public class Main_Test_Activity extends AppCompatActivity {
                             Log.e("Position" , ""+frontback);
                             if(questionsJJavaHashMap.get(frontback).getWritten_ans() ==0)
                             {
-
                                 quelinrecy.findViewHolderForLayoutPosition(frontback).itemView.setBackgroundColor(Color.GREEN);
                               //  quelinrecy.findViewHolderForAdapterPosition(1).itemView.setBackgroundColor(Color.GREEN);
                                Submit_The_Query(questions_jJavaList.get(frontback).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(frontback).getTIme_taken(),2 , questionsJJavaHashMap.get(frontback).getWritten_ans());
@@ -337,7 +395,8 @@ public class Main_Test_Activity extends AppCompatActivity {
                                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                     fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
 
-                            }else {
+                            }
+                            else {
                                 quelinrecy.findViewHolderForLayoutPosition(frontback).itemView.setBackgroundColor(Color.GREEN);
                               //  quelinrecy.findViewHolderForAdapterPosition(2).itemView.setBackgroundColor(Color.GREEN);
                               Submit_The_Query(questions_jJavaList.get(frontback).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(frontback).getTIme_taken(),1 , questionsJJavaHashMap.get(frontback).getWritten_ans());
@@ -368,6 +427,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                             View menuItem4 = navigation.findViewById(R.id.navigation_submit);
                             menuItem.setVisibility(View.GONE);
                             menuItem4.setVisibility(View.VISIBLE);
+//                            queposition--;
                             e.printStackTrace();
                         }
                     } catch (Exception e) {
@@ -398,9 +458,9 @@ public class Main_Test_Activity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_save:
                     int saveornot = ++queposition;
-                    Toast.makeText(Main_Test_Activity.this, "that's que", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Main_Test_Activity.this, "that's que" +queposition, Toast.LENGTH_SHORT).show();
                     questionsJJavaHashMap.remove(queposition);
-                    questionsJJavaHashMap.put(queposition , new Questions_jJava(5 , "0.00"));
+                    questionsJJavaHashMap.put(queposition , new Questions_jJava(5 , 0));
 
                     Log.e("Position" , ""+saveornot);
 //                    try {
@@ -449,6 +509,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                 case R.id.navigation_back:
                     int back = --queposition;
                     int getbackhash = back +1;
+                    Toast.makeText(Main_Test_Activity.this, "that's que" +queposition, Toast.LENGTH_SHORT).show();
                    // int backquery = --Ansposition;
                     try {
                         if (questions_jJavaList.get(back).getType() == 1 ) {
@@ -464,11 +525,12 @@ public class Main_Test_Activity extends AppCompatActivity {
                              //   quelinrecy.findViewHolderForLayoutPosition(2).itemView.setBackgroundColor(Color.GREEN);
                                 if(Submit_The_Query(questions_jJavaList.get(getbackhash).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(getbackhash).getTIme_taken(),1 , questionsJJavaHashMap.get(getbackhash).getWritten_ans()))
                                 {
-                                    FragmentManager fragmentManager = getSupportFragmentManager();
-                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
+
                                 }
                             }
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
 
                         } else {
                             Submit_The_Query(questions_jJavaList.get(queposition).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(queposition).getTIme_taken(), 2, questionsJJavaHashMap.get(queposition).getWritten_ans());
@@ -496,7 +558,7 @@ public class Main_Test_Activity extends AppCompatActivity {
         }
     };
 
-    private void Submit_The_Query_Final(int que_id, int coustId, String tIme_taken, int q_status, int written_ans) {
+    private void Submit_The_Query_Final(int que_id, int coustId, int tIme_taken, int q_status, int written_ans) {
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(150, TimeUnit.SECONDS)
@@ -554,7 +616,7 @@ public class Main_Test_Activity extends AppCompatActivity {
     }
 
     private void Sumbit_the_set(int coustId, String sub_leve_id, int level_id) {
-        Intent intent = new Intent(Main_Test_Activity.this , Instant_Results.class);
+        Intent intent = new Intent(Main_Test_Activity.this , Instant_Results_Activity.class);
         intent.putExtra("coustId" ,coustId );
         intent.putExtra("sub_leve_id" ,sub_leve_id );
         intent.putExtra("level_id" ,level_id );
@@ -563,7 +625,7 @@ public class Main_Test_Activity extends AppCompatActivity {
 
     }
 
-    private Boolean Submit_The_Query(int que_id, int coustId, String tIme_taken, int q_status, int written_ans) {
+    private Boolean Submit_The_Query(int que_id, int coustId, int tIme_taken, int q_status, int written_ans) {
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(150, TimeUnit.SECONDS)

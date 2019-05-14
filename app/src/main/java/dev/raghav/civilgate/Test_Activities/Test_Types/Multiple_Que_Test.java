@@ -44,7 +44,8 @@ public class Multiple_Que_Test extends Fragment {
     long timeInMilliseconds = 0L;
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
-    String TimeTaken;
+    int TimeTaken ;
+    int oldmin;
 
     @Nullable
     @Override
@@ -75,23 +76,52 @@ public class Multiple_Que_Test extends Fragment {
             public void run() {
 
                 timeInMilliseconds = SystemClock.uptimeMillis() - startTime;
+//                timeInMilliseconds = System.uptimeMillis() - startTime;
 
                 updatedTime = timeSwapBuff + timeInMilliseconds;
                     try {
-                        if(!TimeTaken.isEmpty())
-                        {
+
                             int secs = (int) (updatedTime / 1000);
                             int mins = secs / 60;
                             secs = secs % 60;
+                        oldmin = mins;
                             int milliseconds = (int) (updatedTime % 1000);
-                            clock.setText("" + mins + ":"
-                                    + String.format("%02d", secs)/* + ":"
+                        clock.setText("" + mins + ":"
+                                +secs/* + ":"
                     + String.format("%03d", milliseconds)*/);
-                            TimeTaken = String.format("%02d", secs);
+//                        long start = System.currentTimeMillis();
+//                        long runTime = System.currentTimeMillis() - start;
+//                        Log.e("System time" , ""+runTime);
+//                            clock.setText("" + mins + ":"
+//                                    + String.format("%02d", secs)/* + ":"
+//                    + String.format("%03d", milliseconds)*/);
+                        //    TimeTaken = String.format("%02d, secs);
+                    //    Log.e("updatedTime is" , ""+updatedTime);
+                        if(oldmin !=0)
+                        {
+                          //  Log.e("min ansd seoc" , ""+mins + Integer.valueOf(String.format("%02d", secs)));
+                            oldmin =0;
+                        }
+//                        if(secs ==59)
+//                        {
+//                            TimeTaken = secs +1;
+//                            Log.d("before 59" , "time is "+TimeTaken);
+//                        }else {
+//
+//                            TimeTaken = TimeTaken+secs;
+//                            Log.d("after 59" , "time is "+TimeTaken);
+//                        }
+
+                        questionsJJavaHashMap.remove(queposition);
+                       // Log.d("secs" , ""+secs);
+//                        Toast.makeText(getActivity(), "secs is "+secs, Toast.LENGTH_SHORT).show();
+                        //  questionsJJavaHashMap.put(queposition, new Questions_jJava(0, TimeTaken));
+                        questionsJJavaHashMap.put(queposition, new Questions_jJava(0, secs));
+                      //  Log.d("writtebn xfsadf", "sdf" + questionsJJavaHashMap.get(queposition).getWritten_ans());
 //                            questionsJJavaHashMap.remove(queposition);
 //                            questionsJJavaHashMap.put(queposition, new Questions_jJava("Not answered", TimeTaken));
                       //      Log.d("writtebn xfsadf", "sdf" + questionsJJavaHashMap.get(queposition).getWritten_ans());
-                        }
+
 
                     }catch (Exception e)
                     {
@@ -102,9 +132,11 @@ public class Multiple_Que_Test extends Fragment {
                         clock.setText("" + mins + ":"
                                 + String.format("%02d", secs)/* + ":"
                     + String.format("%03d", milliseconds)*/);
-                        TimeTaken = String.format("%02d", secs);
+//                        TimeTaken = String.format("%02d", secs);
+                        TimeTaken = secs;
                         questionsJJavaHashMap.remove(queposition);
-                        questionsJJavaHashMap.put(queposition, new Questions_jJava(0, TimeTaken));
+                      //  questionsJJavaHashMap.put(queposition, new Questions_jJava(0, TimeTaken));
+                        questionsJJavaHashMap.put(queposition, new Questions_jJava(0, secs));
                         Log.d("writtebn xfsadf", "sdf" + questionsJJavaHashMap.get(queposition).getWritten_ans());
                     }
 

@@ -16,7 +16,7 @@ public class Questions_jJava {
 
 
     int Written_ans;
-    String TIme_taken;
+    int TIme_taken;
 
     public Questions_jJava(int id ) {
         this.id = id;
@@ -29,11 +29,11 @@ public class Questions_jJava {
         Written_ans = written_ans;
     }
 
-    public String getTIme_taken() {
+    public int getTIme_taken() {
         return TIme_taken;
     }
 
-    public void setTIme_taken(String TIme_taken) {
+    public void setTIme_taken(int TIme_taken) {
         this.TIme_taken = TIme_taken;
     }
     public Questions_jJava(int id , int type ,String que) {
@@ -42,7 +42,7 @@ public class Questions_jJava {
         this.Que = que;
     }
 
-    public Questions_jJava(int Ans, String timeTaken) {
+    public Questions_jJava(int Ans, int timeTaken) {
         this.Written_ans = Ans;
         this.TIme_taken = timeTaken;
     }
