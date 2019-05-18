@@ -1,7 +1,9 @@
 package dev.raghav.civilgate.Const_Files;
 
 public class Questions_jJava {
-    int id ,sub_id ,minusmark,marks,Status,type;
+    int id ,sub_id
+            ,marks,Status,type;
+    float minusmark;
    String video;
     String Que;
     String Ans_1;
@@ -13,19 +15,17 @@ public class Questions_jJava {
     String video_url;
     String Createdate;
 
-
-
-    int Written_ans;
+    String Written_ans;
     int TIme_taken;
 
     public Questions_jJava(int id ) {
         this.id = id;
     }
-    public int getWritten_ans() {
+    public String getWritten_ans() {
         return Written_ans;
     }
 
-    public void setWritten_ans(int written_ans) {
+    public void setWritten_ans(String written_ans) {
         Written_ans = written_ans;
     }
 
@@ -42,7 +42,7 @@ public class Questions_jJava {
         this.Que = que;
     }
 
-    public Questions_jJava(int Ans, int timeTaken) {
+    public Questions_jJava(String Ans, int timeTaken) {
         this.Written_ans = Ans;
         this.TIme_taken = timeTaken;
     }
@@ -69,7 +69,7 @@ public class Questions_jJava {
         this.video_url = video_url;
     }
 
-    public Questions_jJava(int id, int sub_id, int minusmark, int marks, String solution, int status, String createdate,String video, String que, String ans_1, String ans_2, String ans_3, String ans_4, String ans, String video_url) {
+    public Questions_jJava(int id, int sub_id, float minusmark, int marks, String solution, int status, String createdate,String video, String que, String ans_1, String ans_2, String ans_3, String ans_4, String ans, String video_url) {
         this.id = id;
         this.sub_id = sub_id;
         this.minusmark = minusmark;
@@ -103,7 +103,7 @@ public class Questions_jJava {
         this.sub_id = sub_id;
     }
 
-    public int getMinusmark() {
+    public float getMinusmark() {
         return minusmark;
     }
 

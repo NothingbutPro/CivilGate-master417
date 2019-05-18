@@ -13,6 +13,7 @@ import dev.raghav.civilgate.R;
 
 public class Basic_Reports extends Fragment {
     RecyclerView basichis;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

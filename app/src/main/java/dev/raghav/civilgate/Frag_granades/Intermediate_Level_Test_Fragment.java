@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import dev.raghav.civilgate.R;
 
@@ -17,5 +18,11 @@ public class Intermediate_Level_Test_Fragment extends Fragment {
         View IntermediateView  = inflater.inflate(R.layout.intermediate_level_layout , container , false);
         return IntermediateView;
 //        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onDetach() {
+        Toast.makeText(getActivity(), " Intermediate_Level_Test_Fragment Its Detached", Toast.LENGTH_SHORT).show();
+        super.onDetach();
     }
 }

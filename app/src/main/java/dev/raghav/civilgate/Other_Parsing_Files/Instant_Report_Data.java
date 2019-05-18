@@ -37,6 +37,9 @@ public class Instant_Report_Data {
     @SerializedName("correct")
     @Expose
     private Integer correct;
+    @SerializedName("totalmark")
+    @Expose
+    private Double totalmark;
     @SerializedName("incorrect")
     @Expose
     private Integer incorrect;
@@ -127,6 +130,14 @@ public class Instant_Report_Data {
 
     public void setCorrect(Integer correct) {
         this.correct = correct;
+    }
+
+    public Double getTotalmark() {
+        return totalmark;
+    }
+
+    public void setTotalmark(Double totalmark) {
+        this.totalmark = totalmark;
     }
 
     public Integer getIncorrect() {

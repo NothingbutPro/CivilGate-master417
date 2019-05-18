@@ -495,6 +495,7 @@
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:text="Idle Time" />
+
                                 </LinearLayout>
 
                             </LinearLayout>
@@ -546,8 +547,8 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:visibility="gone"
-                                android:gravity="center"
+
+                               android:visibility="gone"
                                 android:layout_marginBottom="10dp"
                                 android:layout_marginLeft="40dp"
                                 android:layout_marginRight="20dp"
@@ -595,6 +596,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/correctans"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="5dp"
@@ -609,6 +611,7 @@
                                         android:layout_height="wrap_content"
                                         android:gravity="center"
                                         android:text="Correct" />
+
                                 </LinearLayout>
 
                                 <LinearLayout
@@ -619,6 +622,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/wrongans"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="5dp"
@@ -643,6 +647,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/leftans"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginBottom="5dp"

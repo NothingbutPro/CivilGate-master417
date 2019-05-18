@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Instant_Report {
+
     @SerializedName("data")
     @Expose
     private Instant_Report_Data data;
@@ -26,5 +27,4 @@ public class Instant_Report {
     public void setResponce(Boolean responce) {
         this.responce = responce;
     }
-
 }

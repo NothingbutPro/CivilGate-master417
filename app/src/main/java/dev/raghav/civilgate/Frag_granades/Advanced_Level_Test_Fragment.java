@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
@@ -47,5 +48,11 @@ public class Advanced_Level_Test_Fragment extends Fragment {
 
         return AdvanceView;
 //        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onDetach() {
+        Toast.makeText(getActivity(), "Advanced_Level_Test_Fragment  Its Detached", Toast.LENGTH_SHORT).show();
+        super.onDetach();
     }
 }

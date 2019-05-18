@@ -3,9 +3,6 @@ package dev.raghav.civilgate.Activities;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
-import android.util.Log;
-import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +19,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class About_all extends AppCompatActivity {
+public class About_All extends AppCompatActivity {
     ProgressDialog Aboutusdialog;
     TextView about_web;
     @Override
@@ -43,7 +40,7 @@ public class About_all extends AppCompatActivity {
         get_aboutCall.enqueue(new Callback<Get_About>() {
             @Override
             public void onResponse(Call<Get_About> call, Response<Get_About> response) {
-                Toast.makeText(About_all.this, ""+response.body().getData().getDescription(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(About_All.this, ""+response.body().getData().getDescription(), Toast.LENGTH_SHORT).show();
             }
 
             @Override

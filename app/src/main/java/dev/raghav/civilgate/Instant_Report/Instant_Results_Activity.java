@@ -1,6 +1,7 @@
 package dev.raghav.civilgate.Instant_Report;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,19 +29,24 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.queposition;
+
 public class Instant_Results_Activity extends AppCompatActivity {
     PieChart pieChart;
     int coustId;
     String sub_leve_id;
-    TextView totcandidate,totalQue,duration,rightmark,negative,left,mytime,unproductive,idleTime,mark;
+    TextView totcandidate,totalQue,duration,rightmark,negative,left,mytime,unproductive,idleTime,mark ;
+    TextView leftans ,correctans ,wrongans ;
     int level_id;
+    ArrayList NoOfEmp = new ArrayList();
+    int Colors[] = {Color.GREEN , Color.RED ,Color.YELLOW};
     SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instant__results);
         pieChart = findViewById(R.id.piechart);
-        ArrayList NoOfEmp = new ArrayList();
+
         totcandidate = findViewById(R.id.totcandidate);
         rightmark = findViewById(R.id.rightmark);
         negative = findViewById(R.id.negative);
@@ -56,22 +62,25 @@ public class Instant_Results_Activity extends AppCompatActivity {
         level_id = getIntent().getIntExtra("level_id" ,200);
         sessionManager = new SessionManager(this);
         ShowMeResult(coustId , sub_leve_id , level_id);
-        NoOfEmp.add(new Entry(945f, 0));
-        NoOfEmp.add(new Entry(1040f, 1));
-        NoOfEmp.add(new Entry(1133f, 2));
-
-        PieDataSet dataSet = new PieDataSet(NoOfEmp, "");
-
-        ArrayList year = new ArrayList();
-
-        year.add("Correct");
-        year.add("Incorrect");
-        year.add("Left");
-
-        PieData data = new PieData(year, dataSet);
-        pieChart.setData(data);
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        pieChart.animateXY(5000, 5000);
+        leftans = findViewById(R.id.leftans);
+        correctans = findViewById(R.id.correctans);
+        wrongans = findViewById(R.id.wrongans);
+//        NoOfEmp.add(new Entry(945f, 0));
+//        NoOfEmp.add(new Entry(1040f, 1));
+//        NoOfEmp.add(new Entry(1133f, 2));
+//
+//        PieDataSet dataSet = new PieDataSet(NoOfEmp, "");
+//
+//        ArrayList year = new ArrayList();
+//
+//        year.add("Correct");
+//        year.add("Incorrect");
+//        year.add("Left");
+//
+//        PieData data = new PieData(year, dataSet);
+//        pieChart.setData(data);
+//        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+//        pieChart.animateXY(5000, 5000);
 
 
     }
@@ -122,7 +131,7 @@ public class Instant_Results_Activity extends AppCompatActivity {
                         unproductive.setText(String.valueOf(response.body().getData().getUnproductive()));
                         mark.setText(String.valueOf(response.body().getData().getMark()));
                       //  idleTime.setText(String.valueOf(response.body().getData().getIdleTime()));
-                        Log.e("las" , " submited marks"+response.body().getResponce());
+                        Log.e("leftedddd" , "submited marks"+response.body().getData().getLeft());
                         idleTime.setText(String.valueOf(response.body().getData().getIdleTime()));
                         totcandidate.setText(String.valueOf(response.body().getData().getTotcandidate()));
                         totalQue.setText(String.valueOf(response.body().getData().getTotalQue()));
@@ -133,6 +142,25 @@ public class Instant_Results_Activity extends AppCompatActivity {
                         mytime.setText(String.valueOf(response.body().getData().getMytime()));
                         unproductive.setText(String.valueOf(response.body().getData().getUnproductive()));
                         idleTime.setText(String.valueOf(response.body().getData().getIdleTime()));
+                        correctans.setText(String.valueOf(response.body().getData().getCorrect()));
+                        leftans.setText(String.valueOf(response.body().getData().getLeft()));
+                        wrongans.setText(String.valueOf(response.body().getData().getIncorrect()));
+                        NoOfEmp.add(new Entry(response.body().getData().getCorrect(), 0));
+                        NoOfEmp.add(new Entry(response.body().getData().getIncorrect(), 1));
+                        NoOfEmp.add(new Entry(response.body().getData().getLeft(), 2));
+
+                        PieDataSet dataSet = new PieDataSet(NoOfEmp, "");
+
+                        ArrayList year = new ArrayList();
+
+                        year.add("Correct");
+                        year.add("Incorrect");
+                        year.add("Left");
+
+                        PieData data = new PieData(year, dataSet);
+                        pieChart.setData(data);
+                        dataSet.setColors(ColorTemplate.createColors(Colors));
+                        pieChart.animateXY(5000, 5000);
  //                       Intent to_result = new Intent(Instant_Results_Activity.this , Instant_Results_Activity.class);
 //                       startActivity(to_result);
                         Toast.makeText(Instant_Results_Activity.this, "test successfully submit", Toast.LENGTH_SHORT ).show();
@@ -140,7 +168,9 @@ public class Instant_Results_Activity extends AppCompatActivity {
                   //      System.gc();
                    //     finish();
 
-                    }else {
+                    }
+                    else
+                        {
 
 
                     }
@@ -156,5 +186,11 @@ public class Instant_Results_Activity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        queposition =0;
+        super.onBackPressed();
     }
 }

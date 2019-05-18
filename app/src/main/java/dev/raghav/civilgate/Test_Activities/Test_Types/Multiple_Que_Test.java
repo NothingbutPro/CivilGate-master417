@@ -45,6 +45,7 @@ public class Multiple_Que_Test extends Fragment {
     long timeSwapBuff = 0L;
     long updatedTime = 0L;
     int TimeTaken ;
+    int clicks;
     int oldmin;
 
     @Nullable
@@ -88,7 +89,10 @@ public class Multiple_Que_Test extends Fragment {
                             int milliseconds = (int) (updatedTime % 1000);
                         clock.setText("" + mins + ":"
                                 +secs/* + ":"
+
                     + String.format("%03d", milliseconds)*/);
+
+                        TimeTaken = secs;
 //                        long start = System.currentTimeMillis();
 //                        long runTime = System.currentTimeMillis() - start;
 //                        Log.e("System time" , ""+runTime);
@@ -97,10 +101,13 @@ public class Multiple_Que_Test extends Fragment {
 //                    + String.format("%03d", milliseconds)*/);
                         //    TimeTaken = String.format("%02d, secs);
                     //    Log.e("updatedTime is" , ""+updatedTime);
-                        if(oldmin !=0)
+                        if(secs ==0 && mins ==0 )
                         {
-                          //  Log.e("min ansd seoc" , ""+mins + Integer.valueOf(String.format("%02d", secs)));
-                            oldmin =0;
+                            questionsJJavaHashMap.remove(queposition);
+                            // Log.d("secs" , ""+secs);
+//                        Toast.makeText(getActivity(), "secs is "+secs, Toast.LENGTH_SHORT).show();
+                            //  questionsJJavaHashMap.put(queposition, new Questions_jJava(0, TimeTaken));
+                            questionsJJavaHashMap.put(queposition, new Questions_jJava(String.valueOf(0), secs));
                         }
 //                        if(secs ==59)
 //                        {
@@ -112,11 +119,7 @@ public class Multiple_Que_Test extends Fragment {
 //                            Log.d("after 59" , "time is "+TimeTaken);
 //                        }
 
-                        questionsJJavaHashMap.remove(queposition);
-                       // Log.d("secs" , ""+secs);
-//                        Toast.makeText(getActivity(), "secs is "+secs, Toast.LENGTH_SHORT).show();
-                        //  questionsJJavaHashMap.put(queposition, new Questions_jJava(0, TimeTaken));
-                        questionsJJavaHashMap.put(queposition, new Questions_jJava(0, secs));
+
                       //  Log.d("writtebn xfsadf", "sdf" + questionsJJavaHashMap.get(queposition).getWritten_ans());
 //                            questionsJJavaHashMap.remove(queposition);
 //                            questionsJJavaHashMap.put(queposition, new Questions_jJava("Not answered", TimeTaken));
@@ -134,9 +137,9 @@ public class Multiple_Que_Test extends Fragment {
                     + String.format("%03d", milliseconds)*/);
 //                        TimeTaken = String.format("%02d", secs);
                         TimeTaken = secs;
-                        questionsJJavaHashMap.remove(queposition);
+                      //  questionsJJavaHashMap.remove(queposition);
                       //  questionsJJavaHashMap.put(queposition, new Questions_jJava(0, TimeTaken));
-                        questionsJJavaHashMap.put(queposition, new Questions_jJava(0, secs));
+                     //   questionsJJavaHashMap.put(queposition, new Questions_jJava(0, secs));
                         Log.d("writtebn xfsadf", "sdf" + questionsJJavaHashMap.get(queposition).getWritten_ans());
                     }
 
@@ -155,13 +158,22 @@ public class Multiple_Que_Test extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked ==true)
                 {
+
                     questionsJJavaHashMap.remove(queposition);
-                    questionsJJavaHashMap.put(queposition , new Questions_jJava(1 , TimeTaken));
-                    Log.d("writtebn xfsadf" , "sdf"+questionsJJavaHashMap.get(queposition).getWritten_ans());
+                    questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(1) , TimeTaken));
+                    Log.d("writtebn xfsadf" , "sdf "+questionsJJavaHashMap.get(queposition).getWritten_ans());
                   //  questionsJJavaHashMap.put(queposition , new Questions_jJava(ans1.getText().toString() , ))
                     ans2.setChecked(false);
                     ans3.setChecked(false);
                     ans4.setChecked(false);
+                    if(clicks !=0)
+                    {
+                        Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+                        ans1.setChecked(false);
+                        clicks =1;
+                    }
+
+
                 }
             }
         });   ans2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -171,11 +183,17 @@ public class Multiple_Que_Test extends Fragment {
                 {
                  //   questionsJJavaHashMap.put(queposition , new Questions_jJava())
                     questionsJJavaHashMap.remove(queposition);
-                    questionsJJavaHashMap.put(queposition , new Questions_jJava(2 , TimeTaken));
+                    questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(2) , TimeTaken));
                     Log.d("writtebn xfsadf" , "sdf"+questionsJJavaHashMap.get(queposition).getWritten_ans());
                     ans1.setChecked(false);
                     ans3.setChecked(false);
                     ans4.setChecked(false);
+                    if(clicks !=0)
+                    {
+                        Toast.makeText(getActivity(), " clicked", Toast.LENGTH_SHORT).show();
+                        ans2.setChecked(false);
+                        clicks =1;
+                    }
                 }
             }
         });   ans3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -184,11 +202,17 @@ public class Multiple_Que_Test extends Fragment {
                 if(isChecked ==true)
                 {
                     questionsJJavaHashMap.remove(queposition);
-                    questionsJJavaHashMap.put(queposition , new Questions_jJava(3 , TimeTaken));
+                    questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(3) , TimeTaken));
                     Log.d("writtebn xfsadf" , "sdf"+questionsJJavaHashMap.get(queposition).getWritten_ans());
                     ans4.setChecked(false);
                     ans2.setChecked(false);
                     ans1.setChecked(false);
+                    if(clicks !=0)
+                    {
+                        Toast.makeText(getActivity(), " clicked", Toast.LENGTH_SHORT).show();
+                        ans3.setChecked(false);
+                        clicks =1;
+                    }
                 }
             }
         });
@@ -198,11 +222,17 @@ public class Multiple_Que_Test extends Fragment {
                 if(isChecked ==true)
                 {
                     questionsJJavaHashMap.remove(queposition);
-                    questionsJJavaHashMap.put(queposition , new Questions_jJava(4 , TimeTaken));
+                    questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(4) , TimeTaken));
                     Log.d("writtebn xfsadf" , "sdf"+questionsJJavaHashMap.get(queposition).getWritten_ans());
                     ans2.setChecked(false);
                     ans3.setChecked(false);
                     ans1.setChecked(false);
+                    if(clicks !=0)
+                    {
+                        Toast.makeText(getActivity(), " clicked", Toast.LENGTH_SHORT).show();
+                        ans4.setChecked(false);
+                        clicks =1;
+                    }
                 }
             }
         });

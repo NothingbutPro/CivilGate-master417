@@ -31,7 +31,7 @@ public class Test_Question_Data {
     private String ans;
     @SerializedName("minusmark")
     @Expose
-    private int minusmark;
+    private float minusmark;
     @SerializedName("marks")
     @Expose
     private int marks;
@@ -146,7 +146,7 @@ public class Test_Question_Data {
         this.ans = ans;
     }
 
-    public int getMinusmark() {
+    public float getMinusmark() {
         return minusmark;
     }
 

@@ -25,6 +25,7 @@ import dev.raghav.civilgate.Frag_granades.Subject_Wise_Level_Test_Fragment;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_Level;
 import dev.raghav.civilgate.R;
 import dev.raghav.civilgate.Reports_Fragments.Basic_Reports;
+import dev.raghav.civilgate.Reports_Fragments.Daily_Reports;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -90,16 +91,18 @@ public class HisHistoryActivity extends AppCompatActivity {
                     if (getLevel.getData().get(2).getId() == 7 && level_javas.get(2).getId() == 7) {
 
                         // level_javas.remove(0, new Level_Java(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
-                        historyAdapter.addFragment(new Daily_Level_Test_Fragment(), level_javas.get(2).getLevel());
+                        historyAdapter.addFragment(new Daily_Reports(), level_javas.get(2).getLevel());
                         level_javas.add(2 , new Level_Java(100 , "Intermediate Test"));
 
-                    }  if (getLevel.getData().get(1).getId() == 2 && level_javas.get(1).getId() == 2) {
+                    }
+                    if (getLevel.getData().get(1).getId() == 2 && level_javas.get(1).getId() == 2) {
 
                     //  level_javas.add(1, new Level_Java(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
                     historyAdapter.addFragment(new Basic_Reports(), level_javas.get(1).getLevel());
                     level_javas.add(1 , new Level_Java(100 , "cccccccc"));
 
-                }  if (getLevel.getData().get(5).getId() == 6 && level_javas.get(5).getId() != 6) {
+                      }
+                    if (getLevel.getData().get(5).getId() == 6 && level_javas.get(5).getId() != 6) {
 
                     //  level_javas.add(2, new Level_Java(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
                     historyAdapter.addFragment(new Subject_Wise_Level_Test_Fragment(), "Subjectwise");
@@ -120,7 +123,6 @@ public class HisHistoryActivity extends AppCompatActivity {
                     historyAdapter.addFragment(new Mock_Level_Test_Fragment(), "Mock Test");
 //                                level_javas.remove(4);
                     level_javas.add(4 , new Level_Java(100 , "xxxxxxxxxxx"));
-
                 }
 
                     viewPager.setAdapter(historyAdapter);

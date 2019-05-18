@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import dev.raghav.civilgate.R;
 
@@ -16,5 +17,11 @@ public class Subject_Wise_Level_Test_Fragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View Subjec_wiseView  = inflater.inflate(R.layout.subjectwise_level_layout , container , false);
             return Subjec_wiseView;
+    }
+
+    @Override
+    public void onDetach() {
+        Toast.makeText(getActivity(), "Subject_Wise_Level_Test_Fragment  Its Detached", Toast.LENGTH_SHORT).show();
+        super.onDetach();
     }
 }

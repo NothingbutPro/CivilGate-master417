@@ -137,7 +137,9 @@ public class Test_Adapter  extends RecyclerView.Adapter<Test_Adapter.MyViewHolde
 //               getquestionIntent.putExtra("no_of_que" , tests_Name.)
                         v.getContext().startActivity(getquestionIntent);
                         ((Activity)v.getContext()).finish();
-                    }else{
+                    }
+                    else
+                        {
                         Log.e("Que is" , ""+response.body().getData().get(0).getQue());
                         Toast.makeText(v.getContext(), ""+response.body().getData().get(0).getQue(), Toast.LENGTH_SHORT).show();
                     }
