@@ -465,7 +465,8 @@ public class RegisterActivity extends AppCompatActivity {
                 entity.addPart("sign_image", new FileBody(gate_sign));
 //                    result = Utilities.postEntityAndFindJson("https://www.spellclasses.co.in/DM/Api/taxreturn", entity);
 //                 //   result = Utilities.postEntityAndFindJson("https://www.spellclasses.co.in/DM/Api/taxreturn", entity);
-                result = Utilities.postEntityAndFindJson("http://ihisaab.in/lms/api/Ragistration/", entity);
+               // result = Utilities.postEntityAndFindJson("http://ihisaab.in/lms/api/Ragistration/", entity);
+                result = Utilities.postEntityAndFindJson("https://gogateexam.com/api/Ragistration/", entity);
             } catch (Exception e) {
                 e.printStackTrace();
             }

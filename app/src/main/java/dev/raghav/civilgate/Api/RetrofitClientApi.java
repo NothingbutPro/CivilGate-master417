@@ -11,7 +11,8 @@ public class RetrofitClientApi {
 
     //  private static final String AUTH = "Basic " + Base64.encodeToString(("belalkhan:123456").getBytes(), Base64.NO_WRAP);
 
-    private static final String BASE_URL = "http://ihisaab.in/lms/api/";
+   // private static final String BASE_URL = "http://ihisaab.in/lms/api/";
+    private static final String BASE_URL = "https://gogateexam.com/api/";
     private static RetrofitClientApi mInstance;
     private static Retrofit retrofit = null;
 
