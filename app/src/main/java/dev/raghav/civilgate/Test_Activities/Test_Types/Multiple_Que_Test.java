@@ -1,15 +1,11 @@
 package dev.raghav.civilgate.Test_Activities.Test_Types;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.SpannableString;
 import android.util.Log;
@@ -22,15 +18,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import dev.raghav.civilgate.Api.Long_Login;
 import dev.raghav.civilgate.Const_Files.Questions_jJava;
 import dev.raghav.civilgate.R;
-import dev.raghav.civilgate.Test_Activities.Dapter.Questions_Adapter;
 
 import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.queposition;
 import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.questionsJJavaHashMap;
 import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.questionsJJavaLinkedList;
-import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.questions_adapter;
 
 public class Multiple_Que_Test extends Fragment {
     TextView que_txt;
@@ -55,17 +48,24 @@ public class Multiple_Que_Test extends Fragment {
         View MultipleView = inflater.inflate(R.layout.multiple_que, container, false);
         que_txt = MultipleView.findViewById(R.id.que_txtview);
         radio_grp = MultipleView.findViewById(R.id.radio_grp);
-        spannableStringque = SpannableString.valueOf(questionsJJavaLinkedList.get(queposition).getQue());
+
         ans1 = MultipleView.findViewById(R.id.ans1);
         ans2 = MultipleView.findViewById(R.id.ans2);
         ans3 = MultipleView.findViewById(R.id.ans3);
         ans4 = MultipleView.findViewById(R.id.ans4);
         clock = MultipleView.findViewById(R.id.cock);
-        que_txt.setText(Html.fromHtml(questionsJJavaLinkedList.get(queposition).getQue()));
-        ans1.setText(questionsJJavaLinkedList.get(queposition).getAns_1());
-        ans2.setText(questionsJJavaLinkedList.get(queposition).getAns_2());
-        ans3.setText(questionsJJavaLinkedList.get(queposition).getAns_3());
-        ans4.setText(questionsJJavaLinkedList.get(queposition).getAns_4());
+        try {
+            spannableStringque = SpannableString.valueOf(questionsJJavaLinkedList.get(queposition).getQue());
+            que_txt.setText(Html.fromHtml(questionsJJavaLinkedList.get(queposition).getQue()));
+            ans1.setText(questionsJJavaLinkedList.get(queposition).getAns_1());
+            ans2.setText(questionsJJavaLinkedList.get(queposition).getAns_2());
+            ans3.setText(questionsJJavaLinkedList.get(queposition).getAns_3());
+            ans4.setText(questionsJJavaLinkedList.get(queposition).getAns_4());
+        }catch (Exception e)
+        {
+            Toast.makeText(getActivity(), "screwed ", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
 //        radio_grp.findViewById(R.id.ans1);
 //        radio_grp.findViewById(R.id.ans2);
 //        radio_grp.findViewById(R.id.ans3);

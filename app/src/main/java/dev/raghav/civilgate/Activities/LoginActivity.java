@@ -16,13 +16,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
-import java.io.IOException;
-
 import dev.raghav.civilgate.SessionManage.SessionManager;
 import dev.raghav.civilgate.Api.Api;
-import dev.raghav.civilgate.Const_Files.Retro_Urls;
+import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Parsingfiles.LoginReg.Login_Responce;
 import dev.raghav.civilgate.R;
 import retrofit2.Call;

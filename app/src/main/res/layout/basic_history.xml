@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
     <android.support.v7.widget.CardView
         android:id="@+id/uppercard"
         android:padding="10dp"
@@ -24,14 +25,14 @@
                 <TextView
                     android:gravity="left"
                     android:layout_marginLeft="10dp"
-                    android:id="@+id/group_name"
+                    android:id="@+id/group_namexh"
                     android:text="dgfsdf"
                     android:layout_weight="0.80"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
 
-                    android:id="@+id/group_info"
+                    android:id="@+id/group_infoxh"
                     android:text="sdgfsdf"
                     android:textAlignment="textEnd"
                     android:layout_weight="0.60"
@@ -62,66 +63,20 @@
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
-
     <LinearLayout
-        android:layout_below="@+id/uppercard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:weightSum="3"
-            android:orientation="horizontal"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/basihis"
+            android:padding="10dp"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            />
-            <LinearLayout
-                android:layout_weight="0.8"
-                android:orientation="vertical"
-                android:weightSum="2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_weight="1"
-                    android:text="Your Current Credit : "
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-                </TextView>
-
-                <TextView
-                    android:layout_weight="1"
-                    android:text="You Need:"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
 
 
 
-                </TextView>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:padding="8dp"
-                    android:drawableLeft="@drawable/ic_add_circle_black_24dp"
-                    android:text="Add More"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" >
-                </TextView>
-      <!--          <ImageView
-                    app:srcCompat="@drawable/arrow_forward"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />-->
-
-            </LinearLayout>
-
-        </LinearLayout>
-
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
-</RelativeLayout>
+
+</LinearLayout>

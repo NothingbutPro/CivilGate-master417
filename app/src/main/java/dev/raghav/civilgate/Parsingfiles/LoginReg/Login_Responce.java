@@ -2,11 +2,8 @@ package dev.raghav.civilgate.Parsingfiles.LoginReg;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-import java.io.File;
 
-import dev.raghav.civilgate.Api.Long_Login;
+import dev.raghav.civilgate.Const_Files.Long_Login;
 
 public class Login_Responce  {
 

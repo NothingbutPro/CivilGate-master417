@@ -1,11 +1,7 @@
 package dev.raghav.civilgate.Dapter;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.design.card.MaterialCardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,29 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import dev.raghav.civilgate.Api.Api;
-import dev.raghav.civilgate.Const_Files.Package;
 import dev.raghav.civilgate.Const_Files.Package_Const;
-import dev.raghav.civilgate.Const_Files.Retro_Urls;
-import dev.raghav.civilgate.Const_Files.Tests_Name;
 import dev.raghav.civilgate.R;
 import dev.raghav.civilgate.SessionManage.SessionManager;
-import dev.raghav.civilgate.Test_Activities.Main_Test_Activity;
-import dev.raghav.civilgate.Test_Activities.Test_Types.TestStart;
-import okhttp3.OkHttpClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Pakages_Adapter extends RecyclerView.Adapter<Pakages_Adapter.MyViewHolder> {
     private List<Package_Const> packageList;

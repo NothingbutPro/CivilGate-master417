@@ -1,6 +1,5 @@
 package dev.raghav.civilgate.Activities;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,9 +13,8 @@ import java.util.List;
 import dev.raghav.civilgate.Api.Api;
 import dev.raghav.civilgate.Const_Files.Package;
 import dev.raghav.civilgate.Const_Files.Package_Const;
-import dev.raghav.civilgate.Const_Files.Retro_Urls;
+import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Dapter.Pakages_Adapter;
-import dev.raghav.civilgate.Parsingfiles.LoginReg.Login_Responce;
 import dev.raghav.civilgate.R;
 import retrofit2.Call;
 import retrofit2.Callback;

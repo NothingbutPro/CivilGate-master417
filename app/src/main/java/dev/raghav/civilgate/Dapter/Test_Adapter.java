@@ -3,10 +3,8 @@ package dev.raghav.civilgate.Dapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.card.MaterialCardView;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,13 +16,9 @@ import android.widget.Toast;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import dev.raghav.civilgate.Activities.MainActivity;
 import dev.raghav.civilgate.Api.Api;
-import dev.raghav.civilgate.Const_Files.Level_Java;
-import dev.raghav.civilgate.Const_Files.Retro_Urls;
+import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Const_Files.Tests_Name;
-import dev.raghav.civilgate.MAin_test_collpase;
-import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test;
 import dev.raghav.civilgate.R;
 import dev.raghav.civilgate.SessionManage.SessionManager;
 import dev.raghav.civilgate.Test_Activities.Main_Test_Activity;
@@ -87,6 +81,7 @@ public class Test_Adapter  extends RecyclerView.Adapter<Test_Adapter.MyViewHolde
             @Override
             public void onClick(View v) {
              //   new Start_the_test(v, sessionManager.getCoustId(), tests_Name.getSubject_ids());
+
                 StartTheTest(v ,tests_Name.getTest_name(), tests_Name.getTest_id(),sessionManager.getCoustId(),1,tests_Name.getSub_level_cat_id() ,0,tests_Name.getSubject_ids());
 
 
@@ -97,6 +92,13 @@ public class Test_Adapter  extends RecyclerView.Adapter<Test_Adapter.MyViewHolde
     }
 
     private void StartTheTest(View v, String test_name, String test_id, int coustId, int i, String sub_level_cat_id, int i1, String subject_ids) {
+        Log.d("test name" , ""+test_name);
+        Log.d("sess const id" , ""+sessionManager.getCoustId());
+        Log.d("sess const id" , ""+coustId);
+        Log.d("test name" , "1");
+        Log.d("sub elvel cat" , ""+sub_level_cat_id);
+        Log.d("i1" , ""+i1);
+        Log.d("subject ids" , ""+subject_ids);
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(150, TimeUnit.SECONDS)
                 .readTimeout(300,TimeUnit.SECONDS).writeTimeout(200 , TimeUnit.SECONDS).build();
@@ -111,7 +113,7 @@ public class Test_Adapter  extends RecyclerView.Adapter<Test_Adapter.MyViewHolde
                 .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api EmamApi = RetroGEtExam.create(Api.class);
-        Call<TestStart> exam_testCall = EmamApi.GetTestQuestionCall(test_id ,coustId,i,sub_level_cat_id,i1,subject_ids);
+        Call<TestStart> exam_testCall = EmamApi.GetTestQuestionCall(coustId,i,sub_level_cat_id,subject_ids);
         exam_testCall.enqueue(new Callback<TestStart>() {
             @Override
             public void onResponse(Call<TestStart> call, Response<TestStart> response) {
@@ -119,6 +121,10 @@ public class Test_Adapter  extends RecyclerView.Adapter<Test_Adapter.MyViewHolde
                 //  Toast.makeText(getActivity(), "Test name"+response.body().getData().get(0).getTestName(), Toast.LENGTH_SHORT).show();
                 if(response.isSuccessful())
                 {
+                    for(int k=0 ; k<response.body().getData().size() ;k++)
+                    {
+                        Log.i("responce's question " , ""+response.body().getData().get(k).getQue());
+                    }
                     ExamprogressDialog.dismiss();
                     if(response.body().getResponce() == true)
                     {

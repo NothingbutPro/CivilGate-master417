@@ -1,4 +1,4 @@
-package dev.raghav.civilgate.Api;
+package dev.raghav.civilgate.Const_Files;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

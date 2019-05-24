@@ -1,4 +1,4 @@
-package dev.raghav.civilgate.Other_Parsing_Files;
+package dev.raghav.civilgate.Reports_Adapters.Parsing_files;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

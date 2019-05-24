@@ -18,10 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test_Data;
 import dev.raghav.civilgate.SessionManage.SessionManager;
 import dev.raghav.civilgate.Api.Api;
-import dev.raghav.civilgate.Const_Files.Retro_Urls;
+import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Const_Files.Tests_Name;
 import dev.raghav.civilgate.Dapter.Test_Adapter;
 import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test;
@@ -46,7 +45,6 @@ public class Basic_Level_Test_Fragment  extends Fragment {
 
     @Override
     public void onAttach(Context context) {
-
         super.onAttach(context);
     }
 
@@ -116,7 +114,7 @@ public class Basic_Level_Test_Fragment  extends Fragment {
                             LinearLayoutManager llm = new LinearLayoutManager(getActivity());
                             llm.setOrientation(LinearLayoutManager.VERTICAL);
                             tests_recy.setLayoutManager(llm);
-                            tests_recy.setAdapter( testAdapter );
+                            tests_recy.setAdapter(testAdapter);
 
 //                        }
 
@@ -128,6 +126,7 @@ public class Basic_Level_Test_Fragment  extends Fragment {
 
             @Override
             public void onFailure(Call<Exam_Test> call, Throwable t) {
+                ExamprogressDialog.dismiss();
                 Log.w("MyTag", "requestFailed"+t);
     //            Log.w("MyTag", "requestFailed "+ call.clone().isExecuted());
 

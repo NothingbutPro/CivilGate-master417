@@ -9,7 +9,7 @@ import android.widget.Toast;
 import java.util.concurrent.TimeUnit;
 
 import dev.raghav.civilgate.Api.Api;
-import dev.raghav.civilgate.Const_Files.Retro_Urls;
+import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_About;
 import dev.raghav.civilgate.R;
 import okhttp3.OkHttpClient;

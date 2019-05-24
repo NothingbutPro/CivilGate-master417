@@ -1,7 +1,6 @@
 package dev.raghav.civilgate.Activities;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,36 +32,22 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
-import javax.net.ssl.HttpsURLConnection;
-
-import dev.raghav.civilgate.Const_Files.Retro_Urls;
 import dev.raghav.civilgate.Parsingfiles.LoginReg.RegisPars_responce;
 import dev.raghav.civilgate.R;
 import dev.raghav.civilgate.Api.Api;
 
 import dev.raghav.civilgate.Api.RetrofitClientApi;
 import dev.raghav.civilgate.Utils.Utilities;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;

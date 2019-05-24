@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import dev.raghav.civilgate.Api.Api;
-import dev.raghav.civilgate.Const_Files.Retro_Urls;
+import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Other_Parsing_Files.Instant_Report;
 import dev.raghav.civilgate.R;
 import dev.raghav.civilgate.SessionManage.SessionManager;

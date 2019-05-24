@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import dev.raghav.civilgate.Api.Api;
-import dev.raghav.civilgate.Const_Files.Retro_Urls;
+import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Const_Files.Tests_Name;
 import dev.raghav.civilgate.R;
 import dev.raghav.civilgate.SessionManage.SessionManager;
@@ -88,62 +88,62 @@ public class Report_Dapter  extends RecyclerView.Adapter<Report_Dapter.MyViewHol
     }
 
     private void StartTheTest(View v, String test_name, String test_id, int coustId, int i, String sub_level_cat_id, int i1, String subject_ids) {
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(150, TimeUnit.SECONDS)
-                .readTimeout(300,TimeUnit.SECONDS).writeTimeout(200 , TimeUnit.SECONDS).build();
-        ProgressDialog ExamprogressDialog;
-        ExamprogressDialog = new ProgressDialog(v.getContext());
-        ExamprogressDialog.setMax(100);
-        ExamprogressDialog.setTitle("Starting your test");
-        ExamprogressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        ExamprogressDialog.setCancelable(false);
-        ExamprogressDialog.show();
-        Retrofit RetroGEtExam = new Retrofit.Builder()
-                .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
-                .build();
-        Api EmamApi = RetroGEtExam.create(Api.class);
-        Call<TestStart> exam_testCall = EmamApi.GetTestQuestionCall(test_id ,coustId,i,sub_level_cat_id,i1,subject_ids);
-        exam_testCall.enqueue(new Callback<TestStart>() {
-            @Override
-            public void onResponse(Call<TestStart> call, Response<TestStart> response) {
-
-                //  Toast.makeText(getActivity(), "Test name"+response.body().getData().get(0).getTestName(), Toast.LENGTH_SHORT).show();
-                if(response.isSuccessful())
-                {
-                    ExamprogressDialog.dismiss();
-                    if(response.body().getResponce() == true)
-                    {
-                        Log.e("elements" , " are "+response.body().getData().get(0).getQue());
-                        Log.e("id elements" , " are "+response.body().getData().get(0).getId());
-                        Log.e("sub elements" , " are "+response.body().getData().get(0).getSubId());
-                        Toast.makeText(v.getContext(), "Test Started", Toast.LENGTH_SHORT).show();
-                        //  Toast.makeText(v.getContext(), "ids are " + tests_Name.getSubject_ids(), Toast.LENGTH_SHORT).show();
-                        //  Intent getquestionIntent = new Intent(v.getContext() , Main_Test_Activity.class);
-                        Log.e("sub_leve_id" ,""+sub_level_cat_id);
-                        Log.e("level_id" ,""+coustId);
-                        Intent getquestionIntent = new Intent(v.getContext(), Main_Test_Activity.class);
-                        getquestionIntent.putExtra("sub_id", subject_ids);
-                        getquestionIntent.putExtra("sub_leve_id", sub_level_cat_id);
-                        getquestionIntent.putExtra("level_id", i);
-//               getquestionIntent.putExtra("no_of_que" , tests_Name.)
-                        v.getContext().startActivity(getquestionIntent);
-                        ((Activity)v.getContext()).finish();
-                    }else{
-                        Log.e("Que is" , ""+response.body().getData().get(0).getQue());
-                        Toast.makeText(v.getContext(), ""+response.body().getData().get(0).getQue(), Toast.LENGTH_SHORT).show();
-                    }
+//        OkHttpClient client = new OkHttpClient.Builder()
+//                .connectTimeout(150, TimeUnit.SECONDS)
+//                .readTimeout(300,TimeUnit.SECONDS).writeTimeout(200 , TimeUnit.SECONDS).build();
+//        ProgressDialog ExamprogressDialog;
+//        ExamprogressDialog = new ProgressDialog(v.getContext());
+//        ExamprogressDialog.setMax(100);
+//        ExamprogressDialog.setTitle("Starting your test");
+//        ExamprogressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//        ExamprogressDialog.setCancelable(false);
+//        ExamprogressDialog.show();
+//        Retrofit RetroGEtExam = new Retrofit.Builder()
+//                .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        Api EmamApi = RetroGEtExam.create(Api.class);
+//        Call<TestStart> exam_testCall = EmamApi.GetTestQuestionCall(test_id ,coustId,i,sub_level_cat_id,i1,subject_ids);
+//        exam_testCall.enqueue(new Callback<TestStart>() {
+//            @Override
+//            public void onResponse(Call<TestStart> call, Response<TestStart> response) {
 //
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<TestStart> call, Throwable t) {
-                Log.w("MyTag", "requestFailedwa"+t);
-                //            Log.w("MyTag", "requestFailed "+ call.clone().isExecuted());
-
-            }
-        });
+//                //  Toast.makeText(getActivity(), "Test name"+response.body().getData().get(0).getTestName(), Toast.LENGTH_SHORT).show();
+//                if(response.isSuccessful())
+//                {
+//                    ExamprogressDialog.dismiss();
+//                    if(response.body().getResponce() == true)
+//                    {
+//                        Log.e("elements" , " are "+response.body().getData().get(0).getQue());
+//                        Log.e("id elements" , " are "+response.body().getData().get(0).getId());
+//                        Log.e("sub elements" , " are "+response.body().getData().get(0).getSubId());
+//                        Toast.makeText(v.getContext(), "Test Started", Toast.LENGTH_SHORT).show();
+//                        //  Toast.makeText(v.getContext(), "ids are " + tests_Name.getSubject_ids(), Toast.LENGTH_SHORT).show();
+//                        //  Intent getquestionIntent = new Intent(v.getContext() , Main_Test_Activity.class);
+//                        Log.e("sub_leve_id" ,""+sub_level_cat_id);
+//                        Log.e("level_id" ,""+coustId);
+//                        Intent getquestionIntent = new Intent(v.getContext(), Main_Test_Activity.class);
+//                        getquestionIntent.putExtra("sub_id", subject_ids);
+//                        getquestionIntent.putExtra("sub_leve_id", sub_level_cat_id);
+//                        getquestionIntent.putExtra("level_id", i);
+////               getquestionIntent.putExtra("no_of_que" , tests_Name.)
+//                        v.getContext().startActivity(getquestionIntent);
+//                        ((Activity)v.getContext()).finish();
+//                    }else{
+//                        Log.e("Que is" , ""+response.body().getData().get(0).getQue());
+//                        Toast.makeText(v.getContext(), ""+response.body().getData().get(0).getQue(), Toast.LENGTH_SHORT).show();
+//                    }
+////
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<TestStart> call, Throwable t) {
+//                Log.w("MyTag", "requestFailedwa"+t);
+//                //            Log.w("MyTag", "requestFailed "+ call.clone().isExecuted());
+//
+//            }
+//        });
 
     }
 

@@ -1,9 +1,13 @@
-package dev.raghav.civilgate.Other_Parsing_Files;
+package dev.raghav.civilgate.Reports_Adapters.History_Java;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class HisHistoryData {
+import java.util.Date;
+
+public class Basic_History {
+
+
 
     @SerializedName("levelname")
     @Expose
@@ -41,6 +45,12 @@ public class HisHistoryData {
     @SerializedName("negative")
     @Expose
     private String negative;
+    @SerializedName("nagtivemarkone")
+    @Expose
+    private String nagtivemarkone;
+    @SerializedName("nagtivemarktwo")
+    @Expose
+    private String nagtivemarktwo;
     @SerializedName("left")
     @Expose
     private String left;
@@ -59,10 +69,24 @@ public class HisHistoryData {
     @SerializedName("incorrect")
     @Expose
     private String incorrect;
+    @SerializedName("totalmark")
+    @Expose
+    private String totalmark;
+    @SerializedName("date")
+    @Expose
+    private String date;
     @SerializedName("status")
     @Expose
     private String status;
-
+    public Basic_History(String levelname, String testName, String tId, String studentId, String levelId, String levelSubId, String date) {
+        this.levelname = levelname;
+        this.testName = testName;
+        this.tId = tId;
+        this.studentId = studentId;
+        this.levelId = levelId;
+        this.levelSubId = levelSubId;
+        this.date = date;
+    }
     public String getLevelname() {
         return levelname;
     }
@@ -159,6 +183,22 @@ public class HisHistoryData {
         this.negative = negative;
     }
 
+    public String getNagtivemarkone() {
+        return nagtivemarkone;
+    }
+
+    public void setNagtivemarkone(String nagtivemarkone) {
+        this.nagtivemarkone = nagtivemarkone;
+    }
+
+    public String getNagtivemarktwo() {
+        return nagtivemarktwo;
+    }
+
+    public void setNagtivemarktwo(String nagtivemarktwo) {
+        this.nagtivemarktwo = nagtivemarktwo;
+    }
+
     public String getLeft() {
         return left;
     }
@@ -205,6 +245,22 @@ public class HisHistoryData {
 
     public void setIncorrect(String incorrect) {
         this.incorrect = incorrect;
+    }
+
+    public String getTotalmark() {
+        return totalmark;
+    }
+
+    public void setTotalmark(String totalmark) {
+        this.totalmark = totalmark;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getStatus() {

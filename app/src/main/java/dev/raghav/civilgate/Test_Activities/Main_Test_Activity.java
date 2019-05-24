@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 
 import dev.raghav.civilgate.Api.Api;
 import dev.raghav.civilgate.Const_Files.Questions_jJava;
-import dev.raghav.civilgate.Const_Files.Retro_Urls;
+import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Instant_Report.Instant_Results_Activity;
 import dev.raghav.civilgate.Other_Parsing_Files.Submit_Question;
 import dev.raghav.civilgate.Other_Parsing_Files.Test_Question;
@@ -318,8 +318,10 @@ public class Main_Test_Activity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Test_Question> call, Throwable t) {
-                getAllQuestions(student_id);
-                Log.d("cause", "" + t.getCause());
+                //getAllQuestions(student_id);
+                Log.e("at local" , ""+t.getLocalizedMessage());
+                Log.e("at local" , ""+t.getStackTrace());
+                Log.d("cause", "" + t.getMessage());
             }
         });
     }
@@ -359,7 +361,6 @@ public class Main_Test_Activity extends AppCompatActivity {
                         } else {
                             if(questionsJJavaHashMap.get(nextsubmit).getWritten_ans().length() ==0)
                             {
-
                                 quelinrecy.findViewHolderForLayoutPosition(2).itemView.setBackgroundColor(Color.GREEN);
                                 //  quelinrecy.findViewHolderForAdapterPosition(1).itemView.setBackgroundColor(Color.GREEN);
                                 Submit_The_Query_Final(questions_jJavaList.get(nextsubmit).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(nextsubmit).getTIme_taken(),2 , questionsJJavaHashMap.get(nextsubmit).getWritten_ans());
@@ -402,8 +403,6 @@ public class Main_Test_Activity extends AppCompatActivity {
                                 quelinrecy.findViewHolderForLayoutPosition(frontback).itemView.setBackgroundColor(Color.GREEN);
                               //  quelinrecy.findViewHolderForAdapterPosition(1).itemView.setBackgroundColor(Color.GREEN);
                                Submit_The_Query(questions_jJavaList.get(frontback).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(frontback).getTIme_taken(),2 , questionsJJavaHashMap.get(frontback).getWritten_ans());
-
-
                                     FragmentManager fragmentManager = getSupportFragmentManager();
                                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                     fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
@@ -423,7 +422,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                             }
 
                         } else {
-                            Log.d("ans is" , ""+questionsJJavaHashMap.get(frontback).getWritten_ans());
+                            Log.d("else ans is" , ""+questionsJJavaHashMap.get(frontback).getWritten_ans());
                             //      Submit_The_Query();
                             Log.e("Position" , ""+frontback);
                             if(questionsJJavaHashMap.get(frontback).getWritten_ans().length() ==0)
@@ -443,7 +442,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                                 //  quelinrecy.findViewHolderForAdapterPosition(2).itemView.setBackgroundColor(Color.GREEN);
                                 Submit_The_Query(questions_jJavaList.get(frontback).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(frontback).getTIme_taken(),1 , questionsJJavaHashMap.get(frontback).getWritten_ans());
 
-                                Log.d("ans is" , ""+questionsJJavaHashMap.get(frontback).getWritten_ans());
+                                Log.d("else ans is" , ""+questionsJJavaHashMap.get(frontback).getWritten_ans());
                                 FragmentManager fragmentManager = getSupportFragmentManager();
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                 fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
@@ -471,6 +470,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                         }
                     } catch (Exception e) {
                         queposition--;
+
 //                        if(questionsJJavaHashMap.get(frontback).getWritten_ans() ==0)
 //                        {
 //                            quelinrecy.findViewHolderForLayoutPosition(frontback).itemView.setBackgroundColor(Color.GREEN);
@@ -496,12 +496,12 @@ public class Main_Test_Activity extends AppCompatActivity {
                     //      mTextMessage.setText(R.string.title_home);
                     return true;
                 case R.id.navigation_save:
-                    int saveornot = ++queposition;
+                    int saveornot = queposition;
                     Toast.makeText(Main_Test_Activity.this, "that's que" +queposition, Toast.LENGTH_SHORT).show();
                     questionsJJavaHashMap.remove(queposition);
                     questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(5) , 0));
 
-                    Log.e("Position" , ""+saveornot);
+                    Log.e("Position" , ""+queposition);
 //                    try {
 //                        if (questions_jJavaList.get(saveornot+1) == null)
 //                        {
@@ -519,25 +519,44 @@ public class Main_Test_Activity extends AppCompatActivity {
 //                        e.printStackTrace();
 //                    }
 
-                    if (questions_jJavaList.get(queposition).getType() == 1) {
+                    if (questions_jJavaList.get(saveornot).getType() == 1) {
 
                         if (questionsJJavaHashMap.get(saveornot).getWritten_ans().equals("0")) {
 
-                            quelinrecy.findViewHolderForLayoutPosition(saveornot-1).itemView.setBackgroundColor(Color.GREEN);
+                            quelinrecy.findViewHolderForLayoutPosition(saveornot).itemView.setBackgroundColor(Color.GREEN);
                                 Submit_The_Query(questions_jJavaList.get(saveornot).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(saveornot).getTIme_taken(), 3, questionsJJavaHashMap.get(saveornot).getWritten_ans());
-                                Log.d("ans is", "" + questionsJJavaHashMap.get(queposition).getWritten_ans());
+                                Log.d("ans is", "" + questionsJJavaHashMap.get(saveornot).getWritten_ans());
                                 FragmentManager fragmentManager = getSupportFragmentManager();
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                 fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
+                                ++queposition;
 
                         } else {
-                            quelinrecy.findViewHolderForLayoutPosition(saveornot-1).itemView.setBackgroundColor(Color.GREEN);
+
+                            quelinrecy.findViewHolderForLayoutPosition(saveornot).itemView.setBackgroundColor(Color.GREEN);
                             Submit_The_Query(questions_jJavaList.get(saveornot).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(saveornot).getTIme_taken(), 4, questionsJJavaHashMap.get(saveornot).getWritten_ans());
-                               Log.d("ans is", "" + questionsJJavaHashMap.get(queposition).getWritten_ans());
+                               Log.d("ans is", "" + questionsJJavaHashMap.get(saveornot).getWritten_ans());
                                 FragmentManager fragmentManager = getSupportFragmentManager();
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                 fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
+                                 ++queposition;
+                        }
+                        try {
+                            if (questions_jJavaList.get(saveornot+1) == null)
+                            {
 
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            View menuItem = navigation.findViewById(R.id.navigation_forwardsdfsdf);
+                            View menuItem2 = navigation.findViewById(R.id.navigation_back);
+                            View menuItem3 = navigation.findViewById(R.id.navigation_save);
+                            View menuItem4 = navigation.findViewById(R.id.navigation_submit);
+                            menuItem.setVisibility(View.GONE);
+                            menuItem4.setVisibility(View.VISIBLE);
+                            queposition--;
+                            e.printStackTrace();
                         }
 
                     }
@@ -613,7 +632,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                 .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api EmamApi = RetroGEtExam.create(Api.class);
-        Call<Submit_Question> exam_testCall = EmamApi.SubmitQuery(que_id,coustId,tIme_taken,q_status, String.valueOf(written_ans));
+        Call<Submit_Question> exam_testCall = EmamApi.SubmitQuery(level_id ,sub_leve_id,que_id,coustId,tIme_taken,q_status, String.valueOf(written_ans));
         exam_testCall.enqueue(new Callback<Submit_Question>() {
             @Override
             public void onResponse(Call<Submit_Question> call, Response<Submit_Question> response) {
@@ -636,7 +655,8 @@ public class Main_Test_Activity extends AppCompatActivity {
                         ExamprogressDialog.dismiss();
                         Sumbit_the_set(sessionManager.getCoustId(),sub_leve_id,level_id);
                         System.gc();
-//                        finish();
+                        queposition =0;
+                    //                        finish();
 
                     }
 //
@@ -646,7 +666,9 @@ public class Main_Test_Activity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Submit_Question> call, Throwable t) {
-                Log.w("MyTag", "requestFailed"+t);
+                Log.w("MyTag", "requestFailed"+t.getMessage());
+                Log.w("MyTag", "requestFailed"+t.getLocalizedMessage());
+                ExamprogressDialog.dismiss();
                 //            Log.w("MyTag", "requestFailed "+ call.clone().isExecuted());
 
             }
@@ -682,7 +704,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                 .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api EmamApi = RetroGEtExam.create(Api.class);
-        Call<Submit_Question> exam_testCall = EmamApi.SubmitQuery(que_id,coustId,tIme_taken,q_status, String.valueOf(written_ans));
+        Call<Submit_Question> exam_testCall = EmamApi.SubmitQuery(level_id , sub_leve_id,que_id,coustId,tIme_taken,q_status, String.valueOf(written_ans));
         exam_testCall.enqueue(new Callback<Submit_Question>() {
             @Override
             public void onResponse(Call<Submit_Question> call, Response<Submit_Question> response) {
@@ -706,7 +728,10 @@ public class Main_Test_Activity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Submit_Question> call, Throwable t) {
-                Log.w("MyTag", "requestFailed"+t);
+
+                Log.w("MyTag", "requestFailed"+t.getMessage());
+                Log.w("Tag", "request "+t.getLocalizedMessage());
+                ExamprogressDialog.dismiss();
                 //            Log.w("MyTag", "requestFailed "+ call.clone().isExecuted());
 
             }

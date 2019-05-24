@@ -1,4 +1,4 @@
-package dev.raghav.civilgate.Const_Files;
+package dev.raghav.civilgate.Api;
 
 public interface Retro_Urls {
 //public  static String The_Base = "http://ihisaab.in/lms/api/";
@@ -11,6 +11,5 @@ public  static String The_Base = "https://gogateexam.com/api/";
   public String GetQuestion = "GetQuestion";
   public String Srarttest = "starttest";
   public String About_us = "aboutus";
-  public String Get_Package = "Get_Package";
 
 }

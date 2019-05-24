@@ -49,6 +49,7 @@
             android:icon="@drawable/bookmark_icon"
             android:title="My Bookmark" />
     </group>
+
     <group android:checkableBehavior="single"
         android:id="@+id/group7">
         <item
@@ -56,20 +57,24 @@
             android:icon="@drawable/news_icon"
             android:title="News" />
     </group>
-    <group android:checkableBehavior="single"
-        android:id="@+id/group8">
-        <item
-            android:id="@+id/nav_offers"
-            android:icon="@drawable/offer_icon"
-            android:title="Offers" />
-    </group>
-    <group android:checkableBehavior="single"
-        android:id="@+id/group9">
-        <item
-            android:id="@+id/nav_ex_offer"
-            android:icon="@drawable/offer_icon"
-            android:title="Exclusive Offer" />
-    </group>
+
+    <!--<group-->
+        <!---->
+        <!--android:checkableBehavior="single"-->
+        <!--android:id="@+id/group8">-->
+        <!--<item-->
+            <!--android:id="@+id/nav_offers"-->
+            <!--android:icon="@drawable/offer_icon"-->
+
+            <!--android:title="Offers" />-->
+    <!--</group>-->
+    <!--<group android:checkableBehavior="single"-->
+        <!--android:id="@+id/group9">-->
+        <!--<item-->
+            <!--android:id="@+id/nav_ex_offer"-->
+            <!--android:icon="@drawable/offer_icon"-->
+            <!--android:title="Exclusive Offer" />-->
+    <!--</group>-->
 
     <group android:checkableBehavior="single"
         android:id="@+id/group10">

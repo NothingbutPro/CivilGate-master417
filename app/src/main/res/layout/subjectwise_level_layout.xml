@@ -2,8 +2,64 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-<TextView
-    android:text="this is Subjwect"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    <LinearLayout
+        android:layout_below="@+id/uppercard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:weightSum="3"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            />
+            <LinearLayout
+                android:layout_weight="0.8"
+                android:orientation="vertical"
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="Your Current Credit : "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </TextView>
+
+                <TextView
+                    android:layout_weight="1"
+                    android:text="You Need:"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+
+
+                </TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:padding="8dp"
+                    android:drawableLeft="@drawable/ic_add_circle_black_24dp"
+                    android:text="Add More"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" >
+                </TextView>
+                <!--          <ImageView
+                              app:srcCompat="@drawable/arrow_forward"
+                              android:layout_weight="1"
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent" />-->
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>

@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 import dev.raghav.civilgate.Api.Api;
 import dev.raghav.civilgate.Const_Files.Level_Java;
-import dev.raghav.civilgate.Const_Files.Retro_Urls;
+import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Const_Files.ServiceGenerator;
 import dev.raghav.civilgate.Frag_granades.Advanced_Level_Test_Fragment;
 import dev.raghav.civilgate.Frag_granades.Basic_Level_Test_Fragment;
@@ -30,7 +30,6 @@ import dev.raghav.civilgate.Frag_granades.Subject_Wise_Level_Test_Fragment;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_Level;
 import dev.raghav.civilgate.R;
 import okhttp3.OkHttpClient;
-import okio.Timeout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -187,7 +186,8 @@ public class Level_Tab_Activities extends AppCompatActivity {
 //
             @Override
             public void onFailure(Call<Get_Level> call, Throwable t) {
-                Log.d("cause" , ""+t.getCause());
+                progressDialog.dismiss();
+                Log.d("cause" , ""+t.getMessage());
             }
         });
 

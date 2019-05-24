@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(7).setActionView(R.layout.menu_image);
         navigationView.getMenu().getItem(8).setActionView(R.layout.menu_image);
         navigationView.getMenu().getItem(9).setActionView(R.layout.menu_image);
-        navigationView.getMenu().getItem(10).setActionView(R.layout.menu_image);
-        navigationView.getMenu().getItem(11).setActionView(R.layout.menu_image);
+       // navigationView.getMenu().getItem(10).setActionView(R.layout.menu_image);
+//        navigationView.getMenu().getItem(11).setActionView(R.layout.menu_image);
         navigationView.setItemIconTintList(null);
 //        response = getIntent().getStringArrayExtra("respoce");
 
@@ -122,11 +122,15 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_news) {
 
-        } else if (id == R.id.nav_offers) {
+        }
 
-        } else if (id == R.id.nav_ex_offer) {
-
-        } else if (id == R.id.nav_ask_expert) {
+//        else if (id == R.id.nav_offers) {
+//
+//        }
+//        else if (id == R.id.nav_ex_offer) {
+//
+//        }
+        else if (id == R.id.nav_ask_expert) {
 
         } else if (id == R.id.nav_rate_us) {
 

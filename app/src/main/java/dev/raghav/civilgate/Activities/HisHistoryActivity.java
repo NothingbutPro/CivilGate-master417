@@ -13,19 +13,16 @@ import java.util.concurrent.TimeUnit;
 
 import dev.raghav.civilgate.Api.Api;
 import dev.raghav.civilgate.Const_Files.Level_Java;
-import dev.raghav.civilgate.Const_Files.Retro_Urls;
-import dev.raghav.civilgate.Const_Files.ServiceGenerator;
+import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Dapter.HistoryAdapter;
-import dev.raghav.civilgate.Frag_granades.Advanced_Level_Test_Fragment;
-import dev.raghav.civilgate.Frag_granades.Basic_Level_Test_Fragment;
-import dev.raghav.civilgate.Frag_granades.Daily_Level_Test_Fragment;
-import dev.raghav.civilgate.Frag_granades.Intermediate_Level_Test_Fragment;
-import dev.raghav.civilgate.Frag_granades.Mock_Level_Test_Fragment;
-import dev.raghav.civilgate.Frag_granades.Subject_Wise_Level_Test_Fragment;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_Level;
 import dev.raghav.civilgate.R;
-import dev.raghav.civilgate.Reports_Fragments.Basic_Reports;
+import dev.raghav.civilgate.Reports_Adapters.History_Fragments.Basic_History;
+import dev.raghav.civilgate.Reports_Fragments.Advanced_Level_Report;
 import dev.raghav.civilgate.Reports_Fragments.Daily_Reports;
+import dev.raghav.civilgate.Reports_Fragments.Intermidiate_Reports;
+import dev.raghav.civilgate.Reports_Fragments.Mock_Test_Reports;
+import dev.raghav.civilgate.Reports_Fragments.Subject_WiseReport;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -98,29 +95,29 @@ public class HisHistoryActivity extends AppCompatActivity {
                     if (getLevel.getData().get(1).getId() == 2 && level_javas.get(1).getId() == 2) {
 
                     //  level_javas.add(1, new Level_Java(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
-                    historyAdapter.addFragment(new Basic_Reports(), level_javas.get(1).getLevel());
+                    historyAdapter.addFragment(new Basic_History(), level_javas.get(1).getLevel());
                     level_javas.add(1 , new Level_Java(100 , "cccccccc"));
 
                       }
                     if (getLevel.getData().get(5).getId() == 6 && level_javas.get(5).getId() != 6) {
 
                     //  level_javas.add(2, new Level_Java(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
-                    historyAdapter.addFragment(new Subject_Wise_Level_Test_Fragment(), "Subjectwise");
+                    historyAdapter.addFragment(new Subject_WiseReport(), "Subjectwise");
                     level_javas.add(5 , new Level_Java(100 , "ppppppp"));
 
                 }  if (getLevel.getData().get(3).getId() == 3 && level_javas.get(3).getId() != 3) {
                     //  level_javas.add(3, new Level_Java(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
-                    historyAdapter.addFragment(new Intermediate_Level_Test_Fragment(), "Intermediate Test");
+                    historyAdapter.addFragment(new Intermidiate_Reports(), "Intermediate Test");
                     level_javas.add(3 , new Level_Java(100 , "kkkkkkk"));
 
                 }  if (getLevel.getData().get(0).getId() == 4 && level_javas.get(0).getId() != 100) {
                     //  level_javas.add(4, new Level_Java(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
-                    historyAdapter.addFragment(new Advanced_Level_Test_Fragment(), "Advanced_Level");
+                    historyAdapter.addFragment(new Advanced_Level_Report(), "Advanced_Level");
                     level_javas.add(0 , new Level_Java(100 , "lllllllllll"));
 
                 }   if (getLevel.getData().get(4).getId() == 5 && level_javas.get(4).getId() != 5) {
                     //  level_javas.add(4, new Level_Java(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
-                    historyAdapter.addFragment(new Mock_Level_Test_Fragment(), "Mock Test");
+                    historyAdapter.addFragment(new Mock_Test_Reports(), "Mock Test");
 //                                level_javas.remove(4);
                     level_javas.add(4 , new Level_Java(100 , "xxxxxxxxxxx"));
                 }
@@ -135,6 +132,7 @@ public class HisHistoryActivity extends AppCompatActivity {
             //
             @Override
             public void onFailure(Call<Get_Level> call, Throwable t) {
+                progressDialog.dismiss();
                 Log.d("cause" , ""+t.getCause());
             }
         });
