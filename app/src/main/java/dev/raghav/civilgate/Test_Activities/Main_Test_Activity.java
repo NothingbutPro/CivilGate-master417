@@ -385,6 +385,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                         Toast.makeText(Main_Test_Activity.this, "Can't go forward", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                     }
+
                     return true;
 
                 case R.id.navigation_forwardsdfsdf:
@@ -463,14 +464,16 @@ public class Main_Test_Activity extends AppCompatActivity {
                             View menuItem2 = navigation.findViewById(R.id.navigation_back);
                             View menuItem3 = navigation.findViewById(R.id.navigation_save);
                             View menuItem4 = navigation.findViewById(R.id.navigation_submit);
+                            View menuItem5 = navigation.findViewById(R.id.navigation_save_lastsdfgdf);
                             menuItem.setVisibility(View.GONE);
+                            menuItem3.setVisibility(View.GONE);
                             menuItem4.setVisibility(View.VISIBLE);
+                            menuItem5.setVisibility(View.VISIBLE);
 //                            queposition--;
                             e.printStackTrace();
                         }
                     } catch (Exception e) {
                         queposition--;
-
 //                        if(questionsJJavaHashMap.get(frontback).getWritten_ans() ==0)
 //                        {
 //                            quelinrecy.findViewHolderForLayoutPosition(frontback).itemView.setBackgroundColor(Color.GREEN);
@@ -495,8 +498,66 @@ public class Main_Test_Activity extends AppCompatActivity {
 
                     //      mTextMessage.setText(R.string.title_home);
                     return true;
-                case R.id.navigation_save:
-                    int saveornot = queposition;
+                case R.id.navigation_save_lastsdfgdf:
+                    Log.w("nav last savcev " , "navigation_save_lastsdfgdf   sdfsdfsdfsd");
+                    int finalsaveornot = queposition;
+                    int finalyessave = finalsaveornot-1;
+                    Toast.makeText(Main_Test_Activity.this, "that's que" +queposition, Toast.LENGTH_SHORT).show();
+                    Log.e("at Naviga" , "tion submit");
+                    try {
+                        if (questions_jJavaList.get(finalsaveornot).getType() == 1) {
+
+                            //      Submit_The_Query();
+                            if(questionsJJavaHashMap.get(finalsaveornot).getWritten_ans().equals("0"))
+                            {
+
+                                quelinrecy.findViewHolderForLayoutPosition(2).itemView.setBackgroundColor(Color.GREEN);
+                                //  quelinrecy.findViewHolderForAdapterPosition(1).itemView.setBackgroundColor(Color.GREEN);
+                                Submit_The_Query_Final(questions_jJavaList.get(finalsaveornot).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(finalsaveornot).getTIme_taken(),2 , questionsJJavaHashMap.get(finalsaveornot).getWritten_ans());
+                            }else {
+                                quelinrecy.findViewHolderForLayoutPosition(2).itemView.setBackgroundColor(Color.GREEN);
+//                                quelinrecy.findViewHolderForAdapterPosition(2).itemView.setBackgroundColor(Color.GREEN);
+                                Submit_The_Query_Final(questions_jJavaList.get(finalsaveornot).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(finalsaveornot).getTIme_taken(),1 , questionsJJavaHashMap.get(finalsaveornot).getWritten_ans());
+                            }
+                            Log.d("ans at map is" , ""+questionsJJavaHashMap.get(finalsaveornot).getWritten_ans());
+                            Log.d("id at map is" , ""+questionsJJavaHashMap.get(finalsaveornot).getId());
+                            Log.d("sub at map is" , ""+questionsJJavaHashMap.get(finalsaveornot).getSub_id());
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
+                        } else {
+                            if(questionsJJavaHashMap.get(finalsaveornot).getWritten_ans().length() ==0)
+                            {
+                                quelinrecy.findViewHolderForLayoutPosition(2).itemView.setBackgroundColor(Color.GREEN);
+                                //  quelinrecy.findViewHolderForAdapterPosition(1).itemView.setBackgroundColor(Color.GREEN);
+                                Submit_The_Query_Final(questions_jJavaList.get(finalsaveornot).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(finalsaveornot).getTIme_taken(),2 , questionsJJavaHashMap.get(finalsaveornot).getWritten_ans());
+                            }else {
+                                quelinrecy.findViewHolderForLayoutPosition(2).itemView.setBackgroundColor(Color.GREEN);
+//                                quelinrecy.findViewHolderForAdapterPosition(2).itemView.setBackgroundColor(Color.GREEN);
+                                Submit_The_Query_Final(questions_jJavaList.get(finalsaveornot).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(finalsaveornot).getTIme_taken(),1 , questionsJJavaHashMap.get(finalsaveornot).getWritten_ans());
+                            }
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
+                        }
+                    } catch (Exception e) {
+                        queposition--;
+                        if(questionsJJavaHashMap.get(finalsaveornot).getWritten_ans().equals("0"))
+                        {
+
+                            Submit_The_Query_Final(questions_jJavaList.get(finalsaveornot).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(finalsaveornot).getTIme_taken(),2 , questionsJJavaHashMap.get(finalsaveornot).getWritten_ans());
+                        }else {
+                            Submit_The_Query_Final(questions_jJavaList.get(finalsaveornot).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(finalsaveornot).getTIme_taken(),1 , questionsJJavaHashMap.get(finalsaveornot).getWritten_ans());
+                        }
+                        Toast.makeText(Main_Test_Activity.this, "Can't go forward", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                    }
+
+
+                    return true;
+                case R.id.navigation_save :
+                    int saveornot = ++queposition;
+                    int yessave = saveornot-1;
                     Toast.makeText(Main_Test_Activity.this, "that's que" +queposition, Toast.LENGTH_SHORT).show();
                     questionsJJavaHashMap.remove(queposition);
                     questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(5) , 0));
@@ -518,47 +579,102 @@ public class Main_Test_Activity extends AppCompatActivity {
 //                        menuItem4.setVisibility(View.VISIBLE);
 //                        e.printStackTrace();
 //                    }
+                    try {
+                        if (questions_jJavaList.get(saveornot).getType() == 1) {
 
-                    if (questions_jJavaList.get(saveornot).getType() == 1) {
-
-                        if (questionsJJavaHashMap.get(saveornot).getWritten_ans().equals("0")) {
-
-                            quelinrecy.findViewHolderForLayoutPosition(saveornot).itemView.setBackgroundColor(Color.GREEN);
-                                Submit_The_Query(questions_jJavaList.get(saveornot).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(saveornot).getTIme_taken(), 3, questionsJJavaHashMap.get(saveornot).getWritten_ans());
-                                Log.d("ans is", "" + questionsJJavaHashMap.get(saveornot).getWritten_ans());
+                            if (questionsJJavaHashMap.get(yessave).getWritten_ans().equals("0")) {
+//                            ++queposition;
+                                quelinrecy.findViewHolderForLayoutPosition(yessave).itemView.setBackgroundColor(Color.GREEN);
+                                Submit_The_Query(questions_jJavaList.get(yessave).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(yessave).getTIme_taken(), 3, questionsJJavaHashMap.get(yessave).getWritten_ans());
+                                Log.d("ans is", "" + questionsJJavaHashMap.get(yessave).getWritten_ans());
                                 FragmentManager fragmentManager = getSupportFragmentManager();
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                 fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
-                                ++queposition;
+
+
+                            } else {
+
+                                quelinrecy.findViewHolderForLayoutPosition(yessave).itemView.setBackgroundColor(Color.GREEN);
+//                            ++queposition;
+                                Submit_The_Query(questions_jJavaList.get(yessave).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(yessave).getTIme_taken(), 4, questionsJJavaHashMap.get(yessave).getWritten_ans());
+                                Log.d("ans is", "" + questionsJJavaHashMap.get(yessave).getWritten_ans());
+                                FragmentManager fragmentManager = getSupportFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
+
+                            }
+//                        try {
+//
+//                            if (questions_jJavaList.get(saveornot+2) == null)
+//                            {
+//
+//                            }
+//                        }
+//                        catch (Exception e)
+//                        {
+//
+//                            e.printStackTrace();
+//
+////                            View menuItem = navigation.findViewById(R.id.navigation_forwardsdfsdf);
+////                            View menuItem2 = navigation.findViewById(R.id.navigation_back);
+////                            View menuItem3 = navigation.findViewById(R.id.navigation_save);
+////                            View menuItem4 = navigation.findViewById(R.id.navigation_submit);
+////                            menuItem.setVisibility(View.GONE);
+////                            menuItem4.setVisibility(View.VISIBLE);
+//////                            queposition--;
+////                            e.printStackTrace();
+//                        }
+
+                        }
+                    }
+                    catch (Exception e)
+                    {
+
+                        e.printStackTrace();
+                        if (questionsJJavaHashMap.get(yessave).getWritten_ans().equals("0")) {
+//                            ++queposition;
+                            quelinrecy.findViewHolderForLayoutPosition(yessave).itemView.setBackgroundColor(Color.GREEN);
+                            Submit_The_Query(questions_jJavaList.get(yessave).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(yessave).getTIme_taken(), 3, questionsJJavaHashMap.get(yessave).getWritten_ans());
+                            Log.d("ans is", "" + questionsJJavaHashMap.get(yessave).getWritten_ans());
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
+
 
                         } else {
 
-                            quelinrecy.findViewHolderForLayoutPosition(saveornot).itemView.setBackgroundColor(Color.GREEN);
-                            Submit_The_Query(questions_jJavaList.get(saveornot).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(saveornot).getTIme_taken(), 4, questionsJJavaHashMap.get(saveornot).getWritten_ans());
-                               Log.d("ans is", "" + questionsJJavaHashMap.get(saveornot).getWritten_ans());
-                                FragmentManager fragmentManager = getSupportFragmentManager();
-                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
-                                 ++queposition;
-                        }
-                        try {
-                            if (questions_jJavaList.get(saveornot+1) == null)
-                            {
+                            quelinrecy.findViewHolderForLayoutPosition(yessave).itemView.setBackgroundColor(Color.GREEN);
+//                            ++queposition;
+                            Submit_The_Query(questions_jJavaList.get(yessave).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(yessave).getTIme_taken(), 4, questionsJJavaHashMap.get(yessave).getWritten_ans());
+                            Log.d("ans is", "" + questionsJJavaHashMap.get(yessave).getWritten_ans());
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
 
-                            }
                         }
-                        catch (Exception e)
+                    }
+
+                    try{
+                        if (questions_jJavaList.get(saveornot+1) == null)
                         {
-                            View menuItem = navigation.findViewById(R.id.navigation_forwardsdfsdf);
-                            View menuItem2 = navigation.findViewById(R.id.navigation_back);
-                            View menuItem3 = navigation.findViewById(R.id.navigation_save);
-                            View menuItem4 = navigation.findViewById(R.id.navigation_submit);
-                            menuItem.setVisibility(View.GONE);
-                            menuItem4.setVisibility(View.VISIBLE);
-                            queposition--;
-                            e.printStackTrace();
-                        }
 
+                        }
+                    }catch (Exception ex)
+                    {
+                        Log.e("we" ,"moved forward");
+                        ex.printStackTrace();
+                        View menuItem = navigation.findViewById(R.id.navigation_forwardsdfsdf);
+                        View menuItem2 = navigation.findViewById(R.id.navigation_back);
+                        View menuItem3 = navigation.findViewById(R.id.navigation_save);
+                        View menuItem4 = navigation.findViewById(R.id.navigation_submit);
+                        View menuItem5 = navigation.findViewById(R.id.navigation_save_lastsdfgdf);
+                        menuItem.setVisibility(View.GONE);
+                        menuItem3.setVisibility(View.GONE);
+                        menuItem4.setVisibility(View.VISIBLE);
+                        menuItem5.setVisibility(View.VISIBLE);
+
+//                        queposition--;
+                        ex.printStackTrace();
                     }
                   //  Submit_The_Query();
 //                    Log.e("written ans" , "is "+questionsJJavaHashMap.get(--queposition).getWritten_ans());
@@ -616,8 +732,8 @@ public class Main_Test_Activity extends AppCompatActivity {
         }
     };
 
-    private void Submit_The_Query_Final(int que_id, int coustId, int tIme_taken, int q_status, String written_ans) {
-
+    private void Submit_The_Query_Final(int que_id, int coustId, int tIme_taken, int q_status, String written_ans)
+    {
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(150, TimeUnit.SECONDS)
                 .readTimeout(300,TimeUnit.SECONDS).writeTimeout(200 , TimeUnit.SECONDS).build();
@@ -633,6 +749,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                 .build();
         Api EmamApi = RetroGEtExam.create(Api.class);
         Call<Submit_Question> exam_testCall = EmamApi.SubmitQuery(level_id ,sub_leve_id,que_id,coustId,tIme_taken,q_status, String.valueOf(written_ans));
+
         exam_testCall.enqueue(new Callback<Submit_Question>() {
             @Override
             public void onResponse(Call<Submit_Question> call, Response<Submit_Question> response) {
@@ -648,7 +765,6 @@ public class Main_Test_Activity extends AppCompatActivity {
                         Log.e("level_id" , ""+level_id);
                         Log.e("last Question" , " submited "+response.body().getData().getLevelId());
                         Toast.makeText(Main_Test_Activity.this, "Test successfully submitted ", Toast.LENGTH_SHORT).show();
-
                         Log.e("at session",""+sessionManager.getCoustId());
                         Log.e("at cousst(sub id)",""+sub_leve_id);
                         Log.e("at level",""+level_id);

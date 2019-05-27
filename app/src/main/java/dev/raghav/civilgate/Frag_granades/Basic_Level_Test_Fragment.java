@@ -127,7 +127,10 @@ public class Basic_Level_Test_Fragment  extends Fragment {
             @Override
             public void onFailure(Call<Exam_Test> call, Throwable t) {
                 ExamprogressDialog.dismiss();
+
                 Log.w("MyTag", "requestFailed"+t);
+                Log.w("MyTag", "requestFailed"+t.getLocalizedMessage());
+                Log.w("MyTag", "requestFailed"+t.getMessage());
     //            Log.w("MyTag", "requestFailed "+ call.clone().isExecuted());
 
             }

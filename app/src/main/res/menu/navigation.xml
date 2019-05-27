@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-
         android:id="@+id/navigation_back"
         android:icon="@drawable/ic_arrow_back"
         android:title="@string/title_home" />
@@ -13,6 +12,12 @@
         android:id="@+id/navigation_save"
         android:icon="@drawable/ic_save_black_24dp"
         android:title="@string/title_dashboard" />
+    <item
+        android:visible="false"
+        app:actionViewClass="android.widget.TextView"
+        android:id="@+id/navigation_save_lastsdfgdf"
+        android:icon="@drawable/ic_save_black_24dp"
+        android:title="Non Dashbo" />
     <item
         android:visible="false"
         android:id="@+id/navigation_submit"
