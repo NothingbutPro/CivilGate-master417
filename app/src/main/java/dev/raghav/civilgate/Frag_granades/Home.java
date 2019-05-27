@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import dev.raghav.civilgate.Activities.Critical_Thinking;
 import dev.raghav.civilgate.Activities.Level_Tab_Activities;
 import dev.raghav.civilgate.Activities.Profile_Activity;
 import dev.raghav.civilgate.Activities.ShowAllPakages;
@@ -19,14 +20,24 @@ import dev.raghav.civilgate.R;
 public class Home extends Fragment {
     ImageView leve_id;
     CardView procard;
-    CardView buy_package_icon;
+
+    CardView buy_package_icon ,mythink;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.home,container,false);
         leve_id = v.findViewById(R.id.leve_id);
         procard = v.findViewById(R.id.procard);
+        mythink = v.findViewById(R.id.mythink);
         buy_package_icon = v.findViewById(R.id.buyicon);
+        mythink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity() , Critical_Thinking.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
         procard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

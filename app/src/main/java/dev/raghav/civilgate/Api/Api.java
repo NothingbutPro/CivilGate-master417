@@ -2,6 +2,7 @@ package dev.raghav.civilgate.Api;
 
 import java.io.File;
 
+import dev.raghav.civilgate.Const_Files.Brain_Questions;
 import dev.raghav.civilgate.Const_Files.Package;
 import dev.raghav.civilgate.Const_Files.Percentage;
 import dev.raghav.civilgate.Other_Parsing_Files.Credit;
@@ -37,6 +38,20 @@ public interface Api {
             @Field("address") String address,
             @Field("profile_image") File profile_image,
             @Field("sign_image") File sign_image
+    );
+
+    @FormUrlEncoded
+    @POST("StudentQue")
+    Call<Brain_Questions> StudentQue(
+            @Field("student_id") int student_id,
+            @Field("question") String question,
+            @Field("ans_1") String ans_1,
+            @Field("ans_2") String ans_2,
+            @Field("ans_3") String ans_3,
+            @Field("ans_4") String ans_4,
+            @Field("ans") String ans,
+            @Field("solution") String solution
+
     );
 ////jackson
 //    @POST("login/{email}/{password}")

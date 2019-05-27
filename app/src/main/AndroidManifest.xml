@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.HisHistoryActivity"></activity>
+        <activity android:name=".Activities.Critical_Thinking"></activity>
+        <activity android:name=".Activities.HisHistoryActivity" />
         <activity android:name=".Activities.Profile_Activity" />
 
         <uses-library

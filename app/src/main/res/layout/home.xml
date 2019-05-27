@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,7 +12,6 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -21,7 +21,8 @@
                 android:layout_height="wrap_content"
                 app:cardElevation="10dp">
 
-                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                <RelativeLayout
+                    xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/reel1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -210,6 +211,7 @@
                     android:weightSum="1">
 
                     <android.support.v7.widget.CardView
+                        android:id="@+id/mythink"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/mainmenu_cardview_margin"
@@ -217,6 +219,7 @@
                         android:padding="@dimen/mainmenu_cardview_paddin">
 
                         <LinearLayout
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/reel1"
@@ -229,14 +232,14 @@
                                 android:layout_height="@dimen/mainpage_cardview_icon_size"
                                 android:layout_gravity="center"
                                 android:padding="8dp"
-                                app:srcCompat="@drawable/news_icon" />
+                                app:srcCompat="@drawable/intelligence141" />
 
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="3dp"
-                                android:text="News"
+                                android:text="My Thinking"
                                 android:textAlignment="center"
                                 android:textSize="@dimen/mainpage_cardview_textsize" />
                         </LinearLayout>
