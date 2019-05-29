@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 import dev.raghav.civilgate.Activities.LoginActivity;
+import dev.raghav.civilgate.Activities.MainActivity;
+import dev.raghav.civilgate.SessionManage.SessionManager;
 
 public class SplashActivity extends AppCompatActivity {
     private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 20;
@@ -30,6 +32,7 @@ public class SplashActivity extends AppCompatActivity {
     AlertDialog finialpermissionDialog;
     private static int SPLASH_TIME_OUT = 2000;
      Context context = SplashActivity.this;
+     SessionManager manager;
     Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,27 +41,28 @@ public class SplashActivity extends AppCompatActivity {
 
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        //manager =new SessionManager(SplashActivity.this);
-         i = new Intent(SplashActivity.this, LoginActivity.class);
-        setContentView(R.layout.activity_splash);
+        // i = new Intent(SplashActivity.this, LoginActivity.class);
+             setContentView(R.layout.activity_splash);
+
+        manager =new SessionManager(SplashActivity.this);
 
             new Handler().postDelayed(() -> {
-                startActivity(i);
-                finish();
-//                try{
-//
-//                    if (manager.isLoggedIn()) {
-//
-//                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-//                        startActivity(intent);
-//                        SplashActivity.this.finish();
-//                    } else {
-//                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-//                        startActivity(intent);
-//                        SplashActivity.this.finish();
-//                    }
-//                }catch (Exception e) {
-//                }
+//                startActivity(i);
+//                finish();
+                try{
+
+                    if (manager.isLoggedIn()) {
+
+                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        SplashActivity.this.finish();
+                    } else {
+                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        SplashActivity.this.finish();
+                    }
+                }catch (Exception e) {
+                }
 
 
 
