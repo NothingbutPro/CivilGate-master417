@@ -102,6 +102,7 @@ public class LoginActivity  extends AppCompatActivity {
                                 intent.putExtra("respoce", ""+response);
                                 startActivity(intent);
                                 finish();
+                                manager.setLogin(true);
                             }else{
                                 Toast.makeText(LoginActivity.this, "Either Email is wrong or Password", Toast.LENGTH_SHORT).show();
                             }

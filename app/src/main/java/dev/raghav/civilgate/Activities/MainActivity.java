@@ -1,5 +1,7 @@
 package dev.raghav.civilgate.Activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,12 +19,14 @@ import android.view.MenuItem;
 import dev.raghav.civilgate.Frag_granades.Home;
 import dev.raghav.civilgate.Parsingfiles.LoginReg.Login_Responce;
 import dev.raghav.civilgate.R;
+import dev.raghav.civilgate.SessionManage.SessionManager;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Response<Login_Responce> response;
     Fragment mainFragment = null;
+     SessionManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 //putt home frags
+        manager=new SessionManager(MainActivity.this);
+
         mainFragment = new Home();
         LoadGodamnFrags(mainFragment);
         //
@@ -135,6 +141,37 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_rate_us) {
 
         } else if (id == R.id.logout) {
+
+            final AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this).setTitle("Go Gate Exam")
+                    .setMessage("Are you sure, you want to logout this app");
+
+            dialog.setNegativeButton("no", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    exitLauncher();
+                }
+
+                private void exitLauncher() {
+                    manager.logoutUser();
+                   // manager.setAfterName(null);
+                   // AppPreference.setAfterId(getApplicationContext(), "null");
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+            final AlertDialog alert = dialog.create();
+            alert.show();
+
+            return true;
+
 
         } else if (id == R.id.aboutus) {
             Intent aboutIntent = new Intent(MainActivity.this, About_All.class);

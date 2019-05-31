@@ -41,13 +41,17 @@ public class Multiple_Que_Test extends Fragment {
     int clicks;
     int oldmin;
 
+    TextView clear_all;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         View MultipleView = inflater.inflate(R.layout.multiple_que, container, false);
+
         que_txt = MultipleView.findViewById(R.id.que_txtview);
         radio_grp = MultipleView.findViewById(R.id.radio_grp);
+        clear_all = MultipleView.findViewById(R.id.clear_all);
 
         ans1 = MultipleView.findViewById(R.id.ans1);
         ans2 = MultipleView.findViewById(R.id.ans2);
@@ -234,11 +238,30 @@ public class Multiple_Que_Test extends Fragment {
                         clicks =1;
                     }
                 }
+
+
+
+            }
+        });
+
+
+        clear_all.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ans1.setChecked(false);
+                ans2.setChecked(false);
+                ans3.setChecked(false);
+                ans4.setChecked(false);
             }
         });
 
         startTime = SystemClock.uptimeMillis();
         customHandler.postDelayed(updateTimerThread, 0);
+
+
+
+
+
 
         return MultipleView;
 //        return super.onCreateView(inflater, container, savedInstanceState);
