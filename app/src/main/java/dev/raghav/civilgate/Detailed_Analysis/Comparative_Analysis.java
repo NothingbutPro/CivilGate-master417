@@ -1,4 +1,4 @@
-package dev.raghav.civilgate.Reports;
+package dev.raghav.civilgate.Detailed_Analysis;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,11 +10,12 @@ import android.view.ViewGroup;
 
 import dev.raghav.civilgate.R;
 
-public class Subject_Wise_Report extends Fragment {
+public class Comparative_Analysis extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.subject_wise_report , container , false);
+        View view = inflater.inflate(R.layout.comparitive_analysis ,container ,false);
         return view;
 //        return super.onCreateView(inflater, container, savedInstanceState);
     }

@@ -169,6 +169,7 @@
 
 
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 android:layout_weight="1"
                 android:layout_margin="1dp"
@@ -189,6 +190,7 @@
 
 
                     </TextView>
+
                     <TextView
                         android:layout_weight="0.5"
                         android:textAlignment="center"
@@ -257,7 +259,7 @@
             </View>
             <Button
                 android:id="@+id/analysis"
-                android:paddingRight="170dp"
+                android:paddingRight="160dp"
                 android:text="Analysis Report"
                 android:background="@color/colorAccent"
                 android:layout_weight="0"

@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 import dev.raghav.civilgate.Api.Api;
 import dev.raghav.civilgate.Const_Files.Level_Java;
 import dev.raghav.civilgate.Api.Retro_Urls;
-import dev.raghav.civilgate.Const_Files.ServiceGenerator;
+import dev.raghav.civilgate.Dapter.ServiceGenerator;
 import dev.raghav.civilgate.Frag_granades.Advanced_Level_Test_Fragment;
 import dev.raghav.civilgate.Frag_granades.Basic_Level_Test_Fragment;
 import dev.raghav.civilgate.Frag_granades.Daily_Level_Test_Fragment;

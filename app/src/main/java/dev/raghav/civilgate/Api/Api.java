@@ -3,8 +3,11 @@ package dev.raghav.civilgate.Api;
 import java.io.File;
 
 import dev.raghav.civilgate.Const_Files.Brain_Questions;
+import dev.raghav.civilgate.Const_Files.Detailed_Analysis_const;
+import dev.raghav.civilgate.Const_Files.Full_Solutions;
 import dev.raghav.civilgate.Const_Files.Package;
 import dev.raghav.civilgate.Const_Files.Percentage;
+import dev.raghav.civilgate.Const_Files.PostBookMarks;
 import dev.raghav.civilgate.Other_Parsing_Files.Credit;
 import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_About;
@@ -39,7 +42,29 @@ public interface Api {
             @Field("profile_image") File profile_image,
             @Field("sign_image") File sign_image
     );
+    @FormUrlEncoded
+    @POST("GettestQuestion")
+    Call<Detailed_Analysis_const> DETAILED_ANALYSIS_CONST_CALL(
+            @Field("student_id") int  student_id,
+            @Field("level_id") String level_id,
+            @Field("level_sub_id") String level_sub_id
 
+    );
+    @FormUrlEncoded
+    @POST("Gettestrecord")
+    Call<Full_Solutions> FULL_SOLUTIONS_CALL(
+            @Field("student_id") int  student_id,
+            @Field("level_id") String level_id,
+            @Field("level_sub_id") String level_sub_id
+
+    );
+    @FormUrlEncoded
+    @POST("addbookmark")
+    Call<PostBookMarks> PostBookMarks(
+            @Field("student_id") int  student_id,
+            @Field("que_id") String que_id
+
+    );
     @FormUrlEncoded
     @POST("StudentQue")
     Call<Brain_Questions> StudentQue(

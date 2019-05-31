@@ -1,4 +1,4 @@
-package dev.raghav.civilgate.Reports;
+package dev.raghav.civilgate.Detailed_Analysis;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,11 +10,12 @@ import android.view.ViewGroup;
 
 import dev.raghav.civilgate.R;
 
-public class Question_Report extends Fragment {
+public class Score_Card extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.question_report , container , false);
+        View view = inflater.inflate(R.layout.score_card , container,false);
         return view;
 //        return super.onCreateView(inflater, container, savedInstanceState);
     }

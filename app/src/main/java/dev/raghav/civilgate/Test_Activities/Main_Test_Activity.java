@@ -544,7 +544,6 @@ public class Main_Test_Activity extends AppCompatActivity {
                         queposition--;
                         if(questionsJJavaHashMap.get(finalsaveornot).getWritten_ans().equals("0"))
                         {
-
                             Submit_The_Query_Final(questions_jJavaList.get(finalsaveornot).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(finalsaveornot).getTIme_taken(),2 , questionsJJavaHashMap.get(finalsaveornot).getWritten_ans());
                         }else {
                             Submit_The_Query_Final(questions_jJavaList.get(finalsaveornot).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(finalsaveornot).getTIme_taken(),1 , questionsJJavaHashMap.get(finalsaveornot).getWritten_ans());
@@ -593,7 +592,6 @@ public class Main_Test_Activity extends AppCompatActivity {
 
 
                             } else {
-
                                 quelinrecy.findViewHolderForLayoutPosition(yessave).itemView.setBackgroundColor(Color.GREEN);
 //                            ++queposition;
                                 Submit_The_Query(questions_jJavaList.get(yessave).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(yessave).getTIme_taken(), 4, questionsJJavaHashMap.get(yessave).getWritten_ans());

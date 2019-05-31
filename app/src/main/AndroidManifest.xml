@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.Critical_Thinking"></activity>
+        <activity android:name=".Full_Solution.Full_Solution_Act"></activity>
+        <activity android:name=".Detailed_Analysis.Detailed_Analysis" />
+        <activity android:name=".Activities.Critical_Thinking" />
         <activity android:name=".Activities.HisHistoryActivity" />
         <activity android:name=".Activities.Profile_Activity" />
 
@@ -26,7 +28,6 @@
 
         <activity android:name=".Activities.ShowAllPakages" />
         <activity android:name=".Instant_Report.Instant_Results_Activity" />
-        <activity android:name=".Activities.Results_Activity" />
         <activity
             android:name=".MAin_test_collpase"
             android:label="@string/title_activity_main_test_collpase"

@@ -1,6 +1,7 @@
 package dev.raghav.civilgate.Reports_Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,6 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import dev.raghav.civilgate.Detailed_Analysis.Detailed_Analysis;
+import dev.raghav.civilgate.Full_Solution.Full_Solution_Act;
 import dev.raghav.civilgate.R;
 import dev.raghav.civilgate.Reports_Adapters.History_Java.Basic_History;
 import dev.raghav.civilgate.SessionManage.SessionManager;
@@ -34,20 +37,19 @@ public Basic_History_Adapter(List<Basic_History> basic_histories) {
         }
 
 public class MyViewHolder extends RecyclerView.ViewHolder {
-    TextView test_name,test_id,pkgtype,tesdate;
+    TextView test_name,test_id,pkgtype,tesdate,analysis,solution;
     ImageView pkgimg;
 
     public MyViewHolder(View view) {
         super(view);
         test_name = view.findViewById(R.id.test_namep);
-
+        analysis = view.findViewById(R.id.analysis);
         tesdate = view.findViewById(R.id.tesdate);
+        solution = view.findViewById(R.id.solution);
 //        test_name = view.findViewById(R.id.package_mrp);
 //        pkgtype = view.findViewById(R.id.pkgtype);
 //        pkgimg = view.findViewById(R.id.pkgimg);
-
 //            id = (TextView) view.findViewById(R.id.level_id);
-
         sessionManager = new SessionManager(view.getContext());
         context  = view.getContext();
     }
@@ -68,6 +70,24 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
         Basic_History basic_history = basic_histories.get(i);
         myViewHolder.test_name.setText(String.valueOf(basic_history.getTestName()));
+        myViewHolder.solution.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(v.getContext() , Full_Solution_Act.class);
+                intent.putExtra("levelid" , basic_history.getLevelId());
+                intent.putExtra("sublevelid" , basic_history.getLevelSubId());
+                v.getContext().startActivity(intent);
+            }
+        });
+        myViewHolder.analysis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext() , Detailed_Analysis.class);
+                intent.putExtra("levelid" , basic_history.getLevelId());
+                intent.putExtra("sublevelid" , basic_history.getLevelSubId());
+                v.getContext().startActivity(intent);
+            }
+        });
         try {
             Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(basic_history.getDate().toString());
             myViewHolder.tesdate.setText(date1.toLocaleString());
