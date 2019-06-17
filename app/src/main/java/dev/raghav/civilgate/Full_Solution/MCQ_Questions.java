@@ -1,5 +1,6 @@
 package dev.raghav.civilgate.Full_Solution;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,15 +8,20 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import dev.raghav.civilgate.Activities.All_Reviews_Questions;
 import dev.raghav.civilgate.Api.Api;
 import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Const_Files.Detailed_Analysis_const;
@@ -37,9 +43,13 @@ import static dev.raghav.civilgate.Full_Solution.Full_Solution_Act.sublel_id;
 public class MCQ_Questions extends Fragment {
    SessionManager sessionManager;
    WebView webque;
-   TextView soledit ,ansss1,ansss2,ansss3,ansss4;
+   ImageView opt1 ,opt2 ,opt3,opt4;
+   TextView  optxt1 ,optxt2 ,optxt3 ,optxt4 ;
+   TextView allques;
+   TextView soledit, ansss1,ansss2,ansss3,ansss4;
    static public int solutioncounter =0;
    ImageView bookmark;
+   int nx,pre;
    Full_Solutions full_solutions;
    TextView next ,previous;
     @Nullable
@@ -55,16 +65,42 @@ public class MCQ_Questions extends Fragment {
         ansss2 = view.findViewById(R.id.ansss2);
         ansss3 = view.findViewById(R.id.ansss3);
         ansss4 = view.findViewById(R.id.ansss4);
+        soledit = view.findViewById(R.id.soledit);
+        allques = view.findViewById(R.id.allques);
+        optxt1 = view.findViewById(R.id.optxt1);
+        optxt2 = view.findViewById(R.id.optxt2);
+        optxt3 = view.findViewById(R.id.optxt3);
+        optxt4 = view.findViewById(R.id.optxt4);
+        opt1 = view.findViewById(R.id.opt1);
+        opt2 = view.findViewById(R.id.opt2);
+        opt3 = view.findViewById(R.id.opt3);
+        opt4 = view.findViewById(R.id.opt4);
+
         GetTheFullSolution();
+        allques.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity() , All_Reviews_Questions.class);
+                intent.putExtra("maque" , full_solutions.getData().get(solutioncounter).getQueid());
+                startActivity(intent);
+            }
+        });
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.solframe , new MCQ_Questions());
-                fragmentTransaction.commit();
-                fragmentTransaction.addToBackStack(null);
+                optxt1.setText("");
+                optxt2.setText("");
+                optxt3.setText("");
+                optxt4.setText("");
+                opt1.setImageDrawable(null);
+                opt2.setImageDrawable(null);
+                opt3.setImageDrawable(null);
+                opt4.setImageDrawable(null);
+                nx =1;
                 solutioncounter++;
+                GetTheFullSolution();
+                nx =0;
+
             }
         }
         );
@@ -86,12 +122,22 @@ public class MCQ_Questions extends Fragment {
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.solframe , new MCQ_Questions());
-                fragmentTransaction.commit();
-                fragmentTransaction.addToBackStack(null);
-                --solutioncounter;
+                if(!(solutioncounter <=0 )) {
+                    optxt1.setText("");
+                    optxt2.setText("");
+                    optxt3.setText("");
+                    optxt4.setText("");
+                    opt1.setImageDrawable(null);
+                    opt2.setImageDrawable(null);
+                    opt3.setImageDrawable(null);
+                    opt4.setImageDrawable(null);
+                    pre =1;
+                    --solutioncounter;
+                    GetTheFullSolution();
+                    pre =0;
+                }else {
+                    Toast.makeText(getActivity(), "No Backward possible", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         return view;
@@ -111,13 +157,18 @@ public class MCQ_Questions extends Fragment {
                 Log.d("string" , ""+response.message());
                 if(response.isSuccessful())
                 {
-                    if(response.body().getResponce() ==true)
+                    if(response.body().getResponce() == true)
                     {
                         Toast.makeText(getActivity(), "Book Mark added successfully", Toast.LENGTH_SHORT).show();
-                    }else{
+
+                    }
+                    else{
+
                         Toast.makeText(getActivity(), "Not able to add book mark", Toast.LENGTH_SHORT).show();
                     }
-                }else {
+                }
+                else
+                    {
                     Toast.makeText(getActivity(), ""+response.errorBody(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -132,10 +183,6 @@ public class MCQ_Questions extends Fragment {
 
             }
         });
-
-
-
-
     }
 
     private void GetTheFullSolution() {
@@ -148,19 +195,119 @@ public class MCQ_Questions extends Fragment {
             @Override
             public void onResponse(Call<Full_Solutions> call, Response<Full_Solutions> response) {
                 Log.d("string" , ""+response.body().getResponce());
+
 //                            Log.d("string" , ""+response.body().getData().getEmail());
                 if(response.body().getResponce())
                 {
+                    if(response.body().getResponce()){
+                        Log.e("we" , "get some");
+                        full_solutions = response.body();
                     //   Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
                     for(int k=0;k< response.body().getData().size() ;k++) {
                        Log.w("whtas" , ""+response.body().getData().get(k).getQue());
                        if(solutioncounter <response.body().getData().size() &&  solutioncounter==k) {
+                           if( nx ==1)
+                           {
+
+                               if(solutioncounter >=0) {
+                                   FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                                   FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                   fragmentTransaction.replace(R.id.solframe, new MCQ_Questions());
+                                   fragmentTransaction.commit();
+                                   fragmentTransaction.addToBackStack(null);
+
+                               }else {
+                                   Toast.makeText(getActivity(), "No forward possible", Toast.LENGTH_SHORT).show();
+                               }
+                           }else if(pre ==1)
+                           {
+                               FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                               FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                               fragmentTransaction.replace(R.id.solframe, new MCQ_Questions());
+                               fragmentTransaction.commit();
+                               fragmentTransaction.addToBackStack(null);
+
+                           }
+
                            webque.loadData(response.body().getData().get(solutioncounter).getQue().toString(), "text/html", null);
-                         int maans = Integer.valueOf(response.body().getData().get(solutioncounter).getAns());
-                         int rightans = Integer.valueOf(response.body().getData().get(solutioncounter).getQueAns());
+                           int maans = Integer.valueOf(response.body().getData().get(solutioncounter).getAns());
+                           int rightans = Integer.valueOf(response.body().getData().get(solutioncounter).getQueAns());
+                           Log.w("maans" , ""+maans);
+                           Log.w("rightans" , ""+rightans);
+                           ansss1.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns1()));
+                           ansss2.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns2()));
+                           ansss3.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns3()));
+                           ansss4.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns4()));
+                           if(maans ==rightans)
+                           {
+                               if(maans ==1)
+                               {
+                                   optxt1.setText("Your Answer");
+                                   opt1.setImageResource(R.drawable.ic_correct);
+                               }
+                               if(maans ==2)
+                               {
+                                   optxt2.setText("Your Answer");
+                                   opt2.setImageResource(R.drawable.ic_correct);
+                               }
+                               if(maans ==3)
+                               {
+                                   optxt3.setText("Your Answer");
+                                   opt3.setImageResource(R.drawable.ic_correct);
+                               }
+                               if(maans ==4)
+                               {
+                                   optxt4.setText("Your Answer");
+                                   opt4.setImageResource(R.drawable.ic_correct);
+                               }
+                               if(maans ==0)
+                               {
+
+
+//                                   opt1.setImageResource(R.drawable.ic_correct);
+                               }
+                           }else {
+                               if(rightans ==1)
+                               {
+                                   optxt1.setText("Actual Ans");
+                                   opt1.setImageResource(R.drawable.ic_correct);
+                               }
+                               if(rightans ==2)
+                               {
+                                   optxt2.setText("Actual Ans");
+                                   opt3.setImageResource(R.drawable.ic_correct);
+                               }
+                               if(rightans ==3)
+                               {
+                                   optxt3.setText("Actual Ans");
+                                   opt3.setImageResource(R.drawable.ic_correct);
+                               }
+                               if(rightans ==4)
+                               {
+                                   optxt4.setText("Actual Ans");
+                                   opt4.setImageResource(R.drawable.ic_correct);
+                               }
+                               if(rightans ==0)
+                               {
+
+//                                   opt1.setImageResource(R.drawable.ic_correct);
+                               }
+                           }
+                           Log.e("solution  is", "" + solutioncounter);
+                           String soul = Html.escapeHtml(response.body().getData().get(solutioncounter).getSolution());
+                           soledit.setText(String.valueOf(soul));
+
+                           // soledit.loadData(response.body().getData().get(solutioncounter).getSolution() , "text/html" , null);
+                       }else {
+                           if(solutioncounter +1 >response.body().getData().size())
+                           {
+                               solutioncounter = response.body().getData().size()-1;
+                               Log.e("dfsd" , "dxdxdx");
+                           }
 
                        }
-                        full_solutions = response.body();
+                       }
+
                         //      Log.e("image" , "url"+ response.body().getData().get(k).getPackageImage());
                     }
 
@@ -189,9 +336,6 @@ public class MCQ_Questions extends Fragment {
 
             }
         });
-
-
-
 
     }
 

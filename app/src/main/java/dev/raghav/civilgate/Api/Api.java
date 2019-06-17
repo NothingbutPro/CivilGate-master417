@@ -4,6 +4,7 @@ import java.io.File;
 
 import dev.raghav.civilgate.Const_Files.Brain_Questions;
 import dev.raghav.civilgate.Const_Files.Detailed_Analysis_const;
+import dev.raghav.civilgate.Const_Files.Forgotten_Passowrd;
 import dev.raghav.civilgate.Const_Files.Full_Solutions;
 import dev.raghav.civilgate.Const_Files.Package;
 import dev.raghav.civilgate.Const_Files.Percentage;
@@ -63,6 +64,12 @@ public interface Api {
     Call<PostBookMarks> PostBookMarks(
             @Field("student_id") int  student_id,
             @Field("que_id") String que_id
+
+    );
+    @FormUrlEncoded
+    @POST("forgetpassword")
+    Call<Forgotten_Passowrd> Forgetpassword(
+            @Field("email") String email
 
     );
     @FormUrlEncoded
@@ -135,6 +142,9 @@ Call<Exam_Test> Get_GetExam(@Query("level_id") int level_id);
 @FormUrlEncoded
 @POST(Retro_Urls.GetQuestion)
 Call<Test_Question> GetQuestion(@Field("subject_id") String subject_id);
+    @FormUrlEncoded
+    @POST(Retro_Urls.Toppers_list)
+    Call<Test_Question> Toppers_list(@Field("test_id") String test_id ,@Field("user_id") String user_id);
 //@POST(Retro_Urls.Teststatus)
 //Call<Submit_Question> SubmitQuery(@Field("que_id") int que_id,@Field("student_id") int student_id,@Field("time") String time,@Field("q_status") int q_status,@Field("que_ans") String que_an);
 @FormUrlEncoded

@@ -879,8 +879,14 @@ public class Main_Test_Activity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         queposition =0;
+        Toast.makeText(this, "backf pressed", Toast.LENGTH_SHORT).show();
+        Thread.currentThread().interrupt();
+//        Thread.currentThread().stop();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.getFragments().clear();
 //        questionsJJavaHashMap =null;
 //        questionsJJavaLinkedList = null;
+        finish();
         super.onBackPressed();
     }
 }

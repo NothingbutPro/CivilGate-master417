@@ -44,6 +44,13 @@ public class Full_Solution_Data {
     @Expose
     private String time;
 
+    public Full_Solution_Data(String queid ,String  queAns , String ans ) {
+        this.queid = queid;
+        this.queAns =  queAns;
+        this.ans = ans;
+
+    }
+
     public String getQueid() {
         return queid;
     }

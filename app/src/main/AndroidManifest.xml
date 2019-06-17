@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Full_Solution.Full_Solution_Act"></activity>
+        <activity android:name=".Activities.All_Reviews_Questions"></activity>
+        <activity android:name=".Activities.Forgotten_Password" />
+        <activity android:name=".Full_Solution.Full_Solution_Act" />
         <activity android:name=".Detailed_Analysis.Detailed_Analysis" />
         <activity android:name=".Activities.Critical_Thinking" />
         <activity android:name=".Activities.HisHistoryActivity" />

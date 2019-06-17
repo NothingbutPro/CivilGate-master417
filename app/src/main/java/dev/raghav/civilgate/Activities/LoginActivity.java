@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class LoginActivity  extends AppCompatActivity {
     TextView NewRegister;
     Button Btn_Signin;
     EditText emailfx, passwordtxt;
+    TextView forgotit;
     AlertDialog.Builder builder;
     final String[] permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
     private int MY_PERMISSIONS_REQUESTS = 141;
@@ -47,7 +49,14 @@ public class LoginActivity  extends AppCompatActivity {
         passwordtxt = findViewById(R.id.passwordtxt);
         NewRegister = findViewById(R.id.new_reg);
         Btn_Signin = findViewById(R.id.button_signin);
-
+        forgotit = findViewById(R.id.forgotit);
+        forgotit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this , Forgotten_Password.class);
+                startActivity(intent);
+            }
+        });
         checkforpermission();
 
         NewRegister.setOnClickListener(v -> {

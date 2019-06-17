@@ -143,8 +143,13 @@ public class Basic_Level_Test_Fragment  extends Fragment {
     public void onDetach() {
         Toast.makeText(getActivity(), "Basic_Level_Test_Fragment   Its Detached", Toast.LENGTH_SHORT).show();
         tests_names.clear();
-        tests_recy.setAdapter(null);
-        testAdapter.notifyDataSetChanged();
+        try {
+            tests_recy.setAdapter(null);
+            testAdapter.notifyDataSetChanged();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         super.onDetach();
     }
 }
