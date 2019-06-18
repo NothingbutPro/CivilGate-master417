@@ -7,16 +7,16 @@ public class Percentage {
 
     @SerializedName("data")
     @Expose
-    private Double data;
+    private float data;
     @SerializedName("responce")
     @Expose
     private Boolean responce;
 
-    public Double getData() {
+    public float getData() {
         return data;
     }
 
-    public void setData(Double data) {
+    public void setData(float data) {
         this.data = data;
     }
 

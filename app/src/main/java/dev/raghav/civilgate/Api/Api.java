@@ -3,6 +3,7 @@ package dev.raghav.civilgate.Api;
 import java.io.File;
 
 import dev.raghav.civilgate.Const_Files.Brain_Questions;
+import dev.raghav.civilgate.Const_Files.CompareGraph;
 import dev.raghav.civilgate.Const_Files.Detailed_Analysis_const;
 import dev.raghav.civilgate.Const_Files.Forgotten_Passowrd;
 import dev.raghav.civilgate.Const_Files.Full_Solutions;
@@ -99,6 +100,7 @@ Call<Login_Responce> Login_that_dk(
         @Field("email") String email,
         @Field("password") String password
 );
+
 @FormUrlEncoded
 @POST("Get_Percentage")
 Call<Percentage> PERCENTAGE_CALL(
@@ -144,7 +146,7 @@ Call<Exam_Test> Get_GetExam(@Query("level_id") int level_id);
 Call<Test_Question> GetQuestion(@Field("subject_id") String subject_id);
     @FormUrlEncoded
     @POST(Retro_Urls.Toppers_list)
-    Call<Test_Question> Toppers_list(@Field("test_id") String test_id ,@Field("user_id") String user_id);
+    Call<CompareGraph> Toppers_list(@Field("test_id") String test_id , @Field("user_id") String user_id);
 //@POST(Retro_Urls.Teststatus)
 //Call<Submit_Question> SubmitQuery(@Field("que_id") int que_id,@Field("student_id") int student_id,@Field("time") String time,@Field("q_status") int q_status,@Field("que_ans") String que_an);
 @FormUrlEncoded

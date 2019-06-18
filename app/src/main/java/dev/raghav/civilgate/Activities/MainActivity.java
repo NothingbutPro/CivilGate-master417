@@ -54,7 +54,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(2).setActionView(R.layout.menu_image);
         navigationView.getMenu().getItem(3).setActionView(R.layout.menu_image);
         navigationView.getMenu().getItem(4).setActionView(R.layout.menu_image);
+        navigationView.getMenu().findItem(R.id.nav_news).setVisible(false);
         navigationView.getMenu().getItem(5).setActionView(R.layout.menu_image);
+        navigationView.getMenu().findItem(R.id.nav_group).setVisible(false);
         navigationView.getMenu().getItem(6).setActionView(R.layout.menu_image);
         navigationView.getMenu().getItem(7).setActionView(R.layout.menu_image);
         navigationView.getMenu().getItem(8).setActionView(R.layout.menu_image);
@@ -116,8 +118,11 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_homepage) {
             // Handle the camera action
         } else if (id == R.id.nav_profile) {
-
+            Intent intent = new Intent(MainActivity.this , Profile_Activity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_buy_package) {
+            Intent intent = new Intent(MainActivity.this ,  ShowAllPakages.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_my_test) {
             Intent intent = new Intent(MainActivity.this , HisHistoryActivity.class);

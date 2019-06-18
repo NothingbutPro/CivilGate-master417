@@ -181,7 +181,10 @@ public class Instant_Results_Activity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Instant_Report> call, Throwable t) {
+                ExamprogressDialog.dismiss();
                 Log.w("MyTag", "requestFailed"+t);
+                Log.w("MyTag", "requestFailed"+t.getLocalizedMessage());
+                Log.w("MyTag", "requestFailed"+t.getMessage());
                 //            Log.w("MyTag", "requestFailed "+ call.clone().isExecuted());
 
             }

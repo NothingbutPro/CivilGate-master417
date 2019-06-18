@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -29,16 +31,34 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+import dev.raghav.civilgate.Activities.Profile_Activity;
+import dev.raghav.civilgate.Api.Api;
+import dev.raghav.civilgate.Api.Retro_Urls;
+import dev.raghav.civilgate.Const_Files.CompareGraph;
+import dev.raghav.civilgate.Const_Files.Percentage;
 import dev.raghav.civilgate.R;
+import dev.raghav.civilgate.SessionManage.SessionManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static dev.raghav.civilgate.Detailed_Analysis.Detailed_Analysis.levelid;
 
 public class Comparative_Analysis extends Fragment {
     BarChart toppercahrt;
-    private BarChart chart;
+    private BarChart barChart;
 //    private SeekBar seekBarX, seekBarY;
     private TextView tvX, tvY;
-
+    private ArrayList<BarEntry> categories = new ArrayList<>();
+    private List<BarEntry> entries = new ArrayList<>();
+    public int Color[] = {android.graphics.Color.GREEN ,android.graphics.Color.YELLOW,android.graphics.Color.RED,android.graphics.Color.BLUE,
+            android.graphics.Color.BLACK};
     protected Typeface tfRegular;
     protected Typeface tfLight;
+    private SessionManager sessionManager;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -46,38 +66,96 @@ public class Comparative_Analysis extends Fragment {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         View view = inflater.inflate(R.layout.comparitive_analysis ,container ,false);
 //        toppercahrt = view.findViewById(R.id.toppercahrt);
-        chart = view.findViewById(R.id.comp_chart);
-        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+        sessionManager = new SessionManager(getActivity());
+        barChart = (BarChart) view.findViewById(R.id.comp_chart);
+        Retrofit RetroLogin = new Retrofit.Builder()
+                .baseUrl(Retro_Urls.The_Base).addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api RegApi = RetroLogin.create(Api.class);
+        Call<CompareGraph> login_responceCall = RegApi.Toppers_list(levelid,String.valueOf(sessionManager.getCoustId()));
+        login_responceCall.enqueue(new Callback<CompareGraph>() {
             @Override
-            public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+            public void onResponse(Call<CompareGraph> call, Response<CompareGraph> response) {
+                Log.d("string" , ""+response.body().getResponce());
+//                            Log.d("string" , ""+response.body().getData().getEmail());
+                if(response.body().getResponce() ==true)
+                {
+
+                    ArrayList<BarEntry> bargroup2 = new ArrayList<>();
+                    for(int i=0;i<response.body().getData().size();i++)
+                    {
+                        for(int j=0;j<response.body().getData().size();j++)
+                        {
+                            if(response.body().getData().get(i).getRank() > response.body().getData().get(j).getRank())
+                            {
+                                bargroup2.add(new BarEntry(Integer.valueOf(response.body().getData().get(i).getTotalmark()), 0));
+                            }
+
+                        }
+
+//                        bargroup2.add(new BarEntry(10f, 1));
+//                        bargroup2.add(new BarEntry(5f, 2));
+//                        bargroup2.add(new BarEntry(25f, 3));
+//                        bargroup2.add(new BarEntry(4f, 4));
+
+                    }
+
+
+
+// creating dataset for Bar Group1
+                    //     BarDataSet barDataSet1 = new BarDataSet(bargroup1, "Bar Group 1");
+
+//barDataSet1.setColor(Color.rgb(0, 155, 0));
+                    //    barDataSet1.setColors(ColorTemplate.COLORFUL_COLORS);
+
+// creating dataset for Bar Group 2
+                    BarDataSet barDataSet2 = new BarDataSet(bargroup2, "My Rank");
+                    barDataSet2.setColors(Color);
+
+                    ArrayList<String> labels = new ArrayList<String>();
+                    labels.add("2016");
+                    labels.add("2015");
+                    labels.add("2014");
+                    labels.add("2013");
+                    labels.add("2012");
+                    labels.add("2011");
+
+
+                    BarData data = new BarData(labels,barDataSet2);
+
+                    barChart.setData(data); // set the data and list of labels into chart
+
+//                    Intent intent=new Intent(ShowAllPakages.this,MainActivity.class);
+//                    //manager.serverLogin(response.body().getData().getId() , response.body().getData().getName(),response.body().getData().getStatus());
+//                    intent.putExtra("respoce", ""+response);
+//                    startActivity(intent);
+//                    finish();
+                }else{
+                    Toast.makeText(getActivity(), "Either Email is wrong or Password", Toast.LENGTH_SHORT).show();
+                }
 
             }
 
             @Override
-            public void onNothingSelected() {
+            public void onFailure(Call<CompareGraph> call, Throwable t) {
+
+                Log.d("cause" , ""+t.getMessage());
+                Log.d("cause" , ""+t.getLocalizedMessage());
+                Toast.makeText(getActivity(), "Network problem", Toast.LENGTH_SHORT).show();
 
             }
         });
 
+        // create BarEntry for Bar Group 1
+//        ArrayList<BarEntry> bargroup1 = new ArrayList<>();
+//        bargroup1.add(new BarEntry(8f, 0));
+//        bargroup1.add(new BarEntry(2f, 1));
+//        bargroup1.add(new BarEntry(5f, 2));
+//        bargroup1.add(new BarEntry(20f, 3));
+//        bargroup1.add(new BarEntry(15f, 4));
+//        bargroup1.add(new BarEntry(19f, 5));
 
-        chart.setDrawBarShadow(false);
-        chart.setDrawValueAboveBar(true);
-        chart.setMaxVisibleValueCount(60);
-
-        // scaling can now only be done on x- and y-axis separately
-        chart.setPinchZoom(false);
-
-        chart.setDrawGridBackground(false);
-//        chart.getDescription().setEnabled(false);
-        // if more than 60 entries are displayed in the chart, no values will be
-        // drawn
-        chart.setMaxVisibleValueCount(60);
-
-        // scaling can now only be done on x- and y-axis separately
-        chart.setPinchZoom(false);
-
-        chart.setDrawGridBackground(false);
-        // chart.setDrawYLabels(false);
+// create BarEntry for Bar Group 1
 
 
 

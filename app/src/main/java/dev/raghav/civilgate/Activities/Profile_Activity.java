@@ -52,7 +52,7 @@ SessionManager sessionManager;
         progressBar.setReachedBarHeight(5);
         progressBar.setUnreachedBarHeight(5);
         i = 0;
-        progressBar.incrementProgressBy(33);
+      //  progressBar.incrementProgressBy(33);
         // Start the lengthy operation in a background thread
 //        timer = new Timer();
 //        timer.schedule(new TimerTask() {
@@ -85,6 +85,7 @@ SessionManager sessionManager;
                 {
                     Toast.makeText(Profile_Activity.this, "percentage is"+response.body().getData(), Toast.LENGTH_SHORT).show();
                     Log.e("per" , "percentage is"+response.body().getData());
+                    progressBar.incrementProgressBy(Integer.valueOf(String.valueOf(Math.round(response.body().getData()))));
 //                    Toast.makeText(ShowAllPakages.this, "Login successful", Toast.LENGTH_SHORT).show();
 
 

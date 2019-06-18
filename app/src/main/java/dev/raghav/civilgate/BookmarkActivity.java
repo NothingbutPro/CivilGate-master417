@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
+
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -14,6 +15,7 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import java.util.ArrayList;
@@ -21,69 +23,58 @@ import java.util.List;
 
 public class BookmarkActivity extends AppCompatActivity {
 
-    BarChart chart;
+    BarChart barChart;
     private ArrayList<BarEntry> categories = new ArrayList<>();
+    private List<BarEntry> entries = new ArrayList<>();
+    public int Color[] = {android.graphics.Color.GREEN ,android.graphics.Color.YELLOW,android.graphics.Color.RED,android.graphics.Color.BLUE,
+            android.graphics.Color.BLACK};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmark);
+         barChart = (BarChart) findViewById(R.id.barchart);
+        // create BarEntry for Bar Group 1
+//        ArrayList<BarEntry> bargroup1 = new ArrayList<>();
+//        bargroup1.add(new BarEntry(8f, 0));
+//        bargroup1.add(new BarEntry(2f, 1));
+//        bargroup1.add(new BarEntry(5f, 2));
+//        bargroup1.add(new BarEntry(20f, 3));
+//        bargroup1.add(new BarEntry(15f, 4));
+//        bargroup1.add(new BarEntry(19f, 5));
 
-
-        BarEntry e = new BarEntry(50,60,70);
-        categories.add(e);
-
-
-        chart = findViewById(R.id.comp_chart);
-        chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-
-            }
-
-            @Override
-            public void onNothingSelected() {
-
-            }
-        });
-
-        chart.setDrawBarShadow(false);
-        chart.setDrawValueAboveBar(true);
-        chart.setMaxVisibleValueCount(60);
-        // scaling can now only be done on x- and y-axis separately
-        chart.setPinchZoom(false);
-        chart.setDrawGridBackground(false);
-
-
-        Legend legend = chart.getLegend();
-        legend.setEnabled(false);
-
-        ArrayList<BarEntry> valueSet1 = new ArrayList<BarEntry>();
-
-        ArrayList<String> ylabels = new ArrayList<>();
-        for (int i = 0; i < 6; ++i) {
-            BarEntry entry = new BarEntry(i, (i + 1) * 2);
-            valueSet1.add(entry);
-            ylabels.add(" " + i);
-        }
-
-       // List<IBarDataSet> dataSets = new ArrayList<>();
-        BarDataSet barDataSet = new BarDataSet(valueSet1, " ");
-        barDataSet.setColor(Color.CYAN);
-        barDataSet.setDrawValues(true);
-       // dataSets.add(barDataSet);
-
-
-        BarData data = new BarData(ylabels);
-        //data.setBarWidth(0.4f);
-        data.setValueTextSize(10f);
-        data.setValueTextColor(Color.BLACK);
-        chart.setData(data);
-        //chart.setFitBars(true);
-        chart.invalidate();
+// create BarEntry for Bar Group 1
+        ArrayList<BarEntry> bargroup2 = new ArrayList<>();
+        bargroup2.add(new BarEntry(6f, 0));
+        bargroup2.add(new BarEntry(10f, 1));
+        bargroup2.add(new BarEntry(5f, 2));
+        bargroup2.add(new BarEntry(25f, 3));
+        bargroup2.add(new BarEntry(4f, 4));
 
 
 
+// creating dataset for Bar Group1
+   //     BarDataSet barDataSet1 = new BarDataSet(bargroup1, "Bar Group 1");
+
+//barDataSet1.setColor(Color.rgb(0, 155, 0));
+    //    barDataSet1.setColors(ColorTemplate.COLORFUL_COLORS);
+
+// creating dataset for Bar Group 2
+        BarDataSet barDataSet2 = new BarDataSet(bargroup2, "My Rank");
+        barDataSet2.setColors(Color);
+
+        ArrayList<String> labels = new ArrayList<String>();
+        labels.add("2016");
+        labels.add("2015");
+        labels.add("2014");
+        labels.add("2013");
+        labels.add("2012");
+        labels.add("2011");
+
+
+        BarData data = new BarData(labels,barDataSet2);
+
+        barChart.setData(data); // set the data and list of labels into chart
 
     }
 }

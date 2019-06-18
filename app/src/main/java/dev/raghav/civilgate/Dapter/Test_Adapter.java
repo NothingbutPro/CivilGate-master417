@@ -82,7 +82,8 @@ public class Test_Adapter  extends RecyclerView.Adapter<Test_Adapter.MyViewHolde
             public void onClick(View v) {
              //   new Start_the_test(v, sessionManager.getCoustId(), tests_Name.getSubject_ids());
 
-                StartTheTest(v ,tests_Name.getTest_name(), tests_Name.getTest_id(),sessionManager.getCoustId(),1,tests_Name.getSub_level_cat_id() ,0,tests_Name.getSubject_ids());
+             //   StartTheTest(v ,tests_Name.getTest_name(), tests_Name.getTest_id(),sessionManager.getCoustId(),1,tests_Name.getSub_level_cat_id() ,0,tests_Name.getSubject_ids());
+                StartTheTest(v ,tests_Name.getTest_name(), tests_Name.getTest_id(),sessionManager.getCoustId(),Integer.valueOf(tests_Name.getTest_id()),tests_Name.getSub_level_cat_id() ,0,tests_Name.getSubject_ids());
 
 
 
@@ -97,6 +98,7 @@ public class Test_Adapter  extends RecyclerView.Adapter<Test_Adapter.MyViewHolde
         Log.d("sess const id" , ""+coustId);
         Log.d("test name" , "1");
         Log.d("sub elvel cat" , ""+sub_level_cat_id);
+
         Log.d("i1" , ""+i1);
         Log.d("subject ids" , ""+subject_ids);
         OkHttpClient client = new OkHttpClient.Builder()
@@ -128,9 +130,9 @@ public class Test_Adapter  extends RecyclerView.Adapter<Test_Adapter.MyViewHolde
                     ExamprogressDialog.dismiss();
                     if(response.body().getResponce() == true)
                     {
-                        Log.e("elements" , " are "+response.body().getData().get(0).getQue());
-                        Log.e("id elements" , " are "+response.body().getData().get(0).getId());
-                        Log.e("sub elements" , " are "+response.body().getData().get(0).getSubId());
+//                        Log.e("elements" , " are "+response.body().getData().get(0).getQue());
+//                        Log.e("id elements" , " are "+response.body().getData().get(0).getId());
+//                        Log.e("sub elements" , " are "+response.body().getData().get(0).getSubId());
                         Toast.makeText(v.getContext(), "Test Started", Toast.LENGTH_SHORT).show();
                       //  Toast.makeText(v.getContext(), "ids are " + tests_Name.getSubject_ids(), Toast.LENGTH_SHORT).show();
                         //  Intent getquestionIntent = new Intent(v.getContext() , Main_Test_Activity.class);

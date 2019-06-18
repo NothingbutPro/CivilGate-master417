@@ -111,7 +111,7 @@ public class Multiple_Que_Test extends Fragment {
                     + String.format("%03d", milliseconds)*/);
 //                tvClock.setText(new SimpleDateFormat("HH:mm", Locale.US).format(new Date()));
                // Log.e("time is" ,""+new SimpleDateFormat("HH:mm", Locale.US).format(new Date()));
-                Log.e("secs  is" ,""+secs);
+            //    Log.e("secs  is" ,""+secs);
                 if(secs ==59)
                 {
                     countmin++;
@@ -126,10 +126,10 @@ public class Multiple_Que_Test extends Fragment {
                     if(TimeTaken==0)
                     {
                         ++TimeTaken;
-                        Log.e("at zero" , ""+TimeTaken);
+                    //    Log.e("at zero" , ""+TimeTaken);
                     }else {
                         ++TimeTaken;
-                        Log.e("time taken" , ""+TimeTaken);
+                   //     Log.e("time taken" , ""+TimeTaken);
                     }
 
 //                    if(countmin<1) {
@@ -314,6 +314,10 @@ public class Multiple_Que_Test extends Fragment {
                         Log.e("Time taken" , " is" +TimeTaken);
                         questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(1) , TimeTaken));
                         Log.e("writtebn xfsadf" , "sdf "+questionsJJavaHashMap.get(queposition).getWritten_ans());
+                     //   Log.d("Level id is" , ""+questionsJJavaHashMap.get(queposition).getId());
+                       // Log.d("Level id is" , ""+questionsJJavaHashMap.get(queposition).getSub_id());
+                        Log.d("in link Sub Level id is" , ""+questionsJJavaLinkedList.get(queposition).getSub_id());
+                        Log.d("in link Level id is " , ""+questionsJJavaLinkedList.get(queposition).getId());
                         //  questionsJJavaHashMap.put(queposition , new Questions_jJava(ans1.getText().toString() , ))
                         ans2.setChecked(false);
                         ans3.setChecked(false);
