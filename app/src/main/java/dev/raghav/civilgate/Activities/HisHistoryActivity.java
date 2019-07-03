@@ -42,6 +42,7 @@ public class HisHistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_his_history);
+
         tabLayout = findViewById(R.id.historytably);
         viewPager = findViewById(R.id.history_pager);
         historytoolbar = findViewById(R.id.historytoolbar);

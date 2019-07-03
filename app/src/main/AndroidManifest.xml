@@ -42,7 +42,7 @@
         <activity
             android:name=".Activities.Level_Tab_Activities"
             android:label="@string/title_activity_level__tab__activities"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity android:name=".Activities.About_All" />
 
         <provider
