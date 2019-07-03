@@ -1,7 +1,5 @@
 package dev.raghav.civilgate.Const_Files;
 
-import dev.raghav.civilgate.R;
-
 public class Tests_Name {
 
  public String test_name;
@@ -37,7 +35,7 @@ public class Tests_Name {
 
 
 
-    public Tests_Name(String test_name, float test_len , String subject_ids ,String level_id , String QStatus ,String Sub_level_cat_id) {
+    public Tests_Name(String test_name, int test_len , String subject_ids , String level_id , String QStatus , String Sub_level_cat_id) {
         this.test_name = test_name;
         this.test_len = test_len;
         this.subject_ids = subject_ids;

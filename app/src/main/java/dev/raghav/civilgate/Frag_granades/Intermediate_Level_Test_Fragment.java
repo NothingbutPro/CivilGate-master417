@@ -142,7 +142,7 @@ public class Intermediate_Level_Test_Fragment extends Fragment {
 //                            p[0] =i;
                             String s = response.body().getData().get(i).getTestName();
                             Log.e("elements" , "are"+response.body().getData().get(0).getTestName());
-                            Tests_Name tests_name = new Tests_Name(response.body().getData().get(i).getTestName() , response.body().getData().size() , response.body().getData().get(i).getSubjectIds(),response.body().getData().get(i).getCatId(),response.body().getData().get(i).getQStatus(),response.body().getData().get(i).getId() );
+                            Tests_Name tests_name = new Tests_Name(response.body().getData().get(i).getTestName() , Integer.valueOf(response.body().getData().get(i).getTesttime()) , response.body().getData().get(i).getSubjectIds(),response.body().getData().get(i).getCatId(),response.body().getData().get(i).getQStatus(),response.body().getData().get(i).getId() );
                             tests_recy_internames.add(tests_name);
                         }
 

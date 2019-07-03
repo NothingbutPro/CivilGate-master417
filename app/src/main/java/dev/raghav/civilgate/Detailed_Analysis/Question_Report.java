@@ -50,7 +50,6 @@ public class Question_Report extends Fragment {
     }
 
     private void GetAllSolvedQuestions() {
-
         Retrofit RetroLogin = new Retrofit.Builder()
                 .baseUrl(Retro_Urls.The_Base).addConverterFactory(GsonConverterFactory.create())
                 .build();

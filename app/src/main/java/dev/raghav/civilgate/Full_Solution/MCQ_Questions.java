@@ -1,6 +1,7 @@
 package dev.raghav.civilgate.Full_Solution;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -52,6 +53,11 @@ public class MCQ_Questions extends Fragment {
    int nx,pre;
    Full_Solutions full_solutions;
    TextView next ,previous;
+    int rightans;
+    String rightansstr;
+    private String maanstr;
+    private int maans;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -186,10 +192,13 @@ public class MCQ_Questions extends Fragment {
     }
 
     private void GetTheFullSolution() {
+        
         Retrofit RetroLogin = new Retrofit.Builder()
                 .baseUrl(Retro_Urls.The_Base).addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api RegApi = RetroLogin.create(Api.class);
+        Log.e("levelid is" , ""+lel_id);
+        Log.e("sublel_id is" , ""+sublel_id);
         Call<Full_Solutions> login_responceCall = RegApi.FULL_SOLUTIONS_CALL(sessionManager.getCoustId() ,lel_id ,sublel_id );
         login_responceCall.enqueue(new Callback<Full_Solutions>() {
             @Override
@@ -199,7 +208,8 @@ public class MCQ_Questions extends Fragment {
 //                            Log.d("string" , ""+response.body().getData().getEmail());
                 if(response.body().getResponce())
                 {
-                    if(response.body().getResponce()){
+                    if(response.body().getResponce())
+                    {
                         Log.e("we" , "get some");
                         full_solutions = response.body();
                     //   Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
@@ -208,7 +218,7 @@ public class MCQ_Questions extends Fragment {
                        if(solutioncounter <response.body().getData().size() &&  solutioncounter==k) {
                            if( nx ==1)
                            {
-
+                                Log.e("first" , "Part");
                                if(solutioncounter >=0) {
                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -219,8 +229,13 @@ public class MCQ_Questions extends Fragment {
                                }else {
                                    Toast.makeText(getActivity(), "No forward possible", Toast.LENGTH_SHORT).show();
                                }
-                           }else if(pre ==1)
+                           }
+                           else
+                               if(pre ==1)
                            {
+                               Log.e("first" , "second Part");
+
+
                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                                fragmentTransaction.replace(R.id.solframe, new MCQ_Questions());
@@ -230,78 +245,159 @@ public class MCQ_Questions extends Fragment {
                            }
 
                            webque.loadData(response.body().getData().get(solutioncounter).getQue().toString(), "text/html", null);
-                           int maans = Integer.valueOf(response.body().getData().get(solutioncounter).getAns());
-                           int rightans = Integer.valueOf(response.body().getData().get(solutioncounter).getQueAns());
-                           Log.w("maans" , ""+maans);
-                           Log.w("rightans" , ""+rightans);
-                           ansss1.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns1()));
-                           ansss2.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns2()));
-                           ansss3.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns3()));
-                           ansss4.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns4()));
-                           if(maans ==rightans)
-                           {
-                               if(maans ==1)
+                           
+                           try {
+                               Log.e("first" , "try Part");
+                                maans = Integer.valueOf(response.body().getData().get(solutioncounter).getAns());
+                                rightans = Integer.valueOf(response.body().getData().get(solutioncounter).getQueAns());
+                               Log.w("maans" , ""+maans);
+                               Log.w("rightans" , ""+rightans);
+                               ansss1.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns1()));
+                               ansss2.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns2()));
+                               ansss3.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns3()));
+                               ansss4.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns4()));
+                               if(maans==rightans)
                                {
-                                   optxt1.setText("Your Answer");
-                                   opt1.setImageResource(R.drawable.ic_correct);
-                               }
-                               if(maans ==2)
-                               {
-                                   optxt2.setText("Your Answer");
-                                   opt2.setImageResource(R.drawable.ic_correct);
-                               }
-                               if(maans ==3)
-                               {
-                                   optxt3.setText("Your Answer");
-                                   opt3.setImageResource(R.drawable.ic_correct);
-                               }
-                               if(maans ==4)
-                               {
-                                   optxt4.setText("Your Answer");
-                                   opt4.setImageResource(R.drawable.ic_correct);
-                               }
-                               if(maans ==0)
-                               {
+                                   if(maans ==1)
+                                   {
+                                       optxt1.setText("Your Answer");
+                                       opt1.setImageResource(R.drawable.ic_correct);
+                                   }
+                                   if(maans ==2)
+                                   {
+                                       optxt2.setText("Your Answer");
+                                       opt2.setImageResource(R.drawable.ic_correct);
+                                   }
+                                   if(maans ==3)
+                                   {
+                                       optxt3.setText("Your Answer");
+                                       opt3.setImageResource(R.drawable.ic_correct);
+                                   }
+                                   if(maans ==4)
+                                   {
+                                       optxt4.setText("Your Answer");
+                                       opt4.setImageResource(R.drawable.ic_correct);
+                                   }
+                                   if(maans ==0)
+                                   {
 
 
 //                                   opt1.setImageResource(R.drawable.ic_correct);
-                               }
-                           }else {
-                               if(rightans ==1)
-                               {
-                                   optxt1.setText("Actual Ans");
-                                   opt1.setImageResource(R.drawable.ic_correct);
-                               }
-                               if(rightans ==2)
-                               {
-                                   optxt2.setText("Actual Ans");
-                                   opt3.setImageResource(R.drawable.ic_correct);
-                               }
-                               if(rightans ==3)
-                               {
-                                   optxt3.setText("Actual Ans");
-                                   opt3.setImageResource(R.drawable.ic_correct);
-                               }
-                               if(rightans ==4)
-                               {
-                                   optxt4.setText("Actual Ans");
-                                   opt4.setImageResource(R.drawable.ic_correct);
-                               }
-                               if(rightans ==0)
-                               {
+                                   }
+                               }else {
+                                   if(rightans ==1)
+                                   {
+                                       optxt1.setText("Actual Ans");
+                                       opt1.setImageResource(R.drawable.ic_correct);
+                                   }
+                                   if(rightans ==2)
+                                   {
+                                       optxt2.setText("Actual Ans");
+                                       opt3.setImageResource(R.drawable.ic_correct);
+                                   }
+                                   if(rightans ==3)
+                                   {
+                                       optxt3.setText("Actual Ans");
+                                       opt3.setImageResource(R.drawable.ic_correct);
+                                   }
+                                   if(rightans ==4)
+                                   {
+                                       optxt4.setText("Actual Ans");
+                                       opt4.setImageResource(R.drawable.ic_correct);
+                                   }
+                                   if(rightans ==0)
+                                   {
 
 //                                   opt1.setImageResource(R.drawable.ic_correct);
+                                   }
                                }
+                               Log.e("solution  is", "" + solutioncounter);
+                               String soul = Html.escapeHtml(response.body().getData().get(solutioncounter).getSolution());
+                               soledit.setText(String.valueOf(soul));
                            }
-                           Log.e("solution  is", "" + solutioncounter);
-                           String soul = Html.escapeHtml(response.body().getData().get(solutioncounter).getSolution());
-                           soledit.setText(String.valueOf(soul));
+                           catch (Exception e)
+                           {
+                               Log.e("log catch first" , "Part");
+                               maanstr = response.body().getData().get(solutioncounter).getAns();
+                               rightansstr = response.body().getData().get(solutioncounter).getQueAns();
+                               ansss1.setVisibility(View.GONE);
+                               ansss2.setVisibility(View.GONE);
+                               ansss3.setVisibility(View.GONE);
+                               ansss4.setVisibility(View.GONE);
+                               if(maanstr.equals(rightansstr) )
+                               {
+                                   String soul = Html.escapeHtml(response.body().getData().get(solutioncounter).getSolution());
+                                   soledit.setText(String.valueOf(soul));
+                                   soledit.setTextColor(Color.GREEN);
+//                                   if(maanstr.equals("1"))
+//                                   {
+//                                       optxt1.setText("Your Answer");
+//                                       opt1.setImageResource(R.drawable.ic_correct);
+//                                   }
+//                                   if(maanstr ==2)
+//                                   {
+//                                       optxt2.setText("Your Answer");
+//                                       opt2.setImageResource(R.drawable.ic_correct);
+//                                   }
+//                                   if(maans ==3)
+//                                   {
+//                                       optxt3.setText("Your Answer");
+//                                       opt3.setImageResource(R.drawable.ic_correct);
+//                                   }
+//                                   if(maanstr ==4)
+//                                   {
+//                                       optxt4.setText("Your Answer");
+//                                       opt4.setImageResource(R.drawable.ic_correct);
+//                                   }
+//                                   if(maanstr ==0)
+//                                   {
+//
+//
+////                                   opt1.setImageResource(R.drawable.ic_correct);
+//                                   }
+                               }else {
+                                   String soul = Html.escapeHtml(response.body().getData().get(solutioncounter).getSolution());
+                                   soledit.setText(String.valueOf(soul));
+                                   soledit.setTextColor(Color.RED);
+                                   if(rightans ==1)
+                                   {
+                                       optxt1.setText("Actual Ans");
+                                       opt1.setImageResource(R.drawable.ic_correct);
+                                   }
+                                   if(rightans ==2)
+                                   {
+                                       optxt2.setText("Actual Ans");
+                                       opt3.setImageResource(R.drawable.ic_correct);
+                                   }
+                                   if(rightans ==3)
+                                   {
+                                       optxt3.setText("Actual Ans");
+                                       opt3.setImageResource(R.drawable.ic_correct);
+                                   }
+                                   if(rightans ==4)
+                                   {
+                                       optxt4.setText("Actual Ans");
+                                       opt4.setImageResource(R.drawable.ic_correct);
+                                   }
+                                   if(rightans ==0)
+                                   {
 
+//                                   opt1.setImageResource(R.drawable.ic_correct);
+                                   }
+                               }
+                               Log.e("solution  is", "" + solutioncounter);
+
+                              e.printStackTrace();
+                           }
+                         //  int rightans = String.valueOf()Integer.valueOf(response.body().getData().get(solutioncounter).getQueAns());
                            // soledit.loadData(response.body().getData().get(solutioncounter).getSolution() , "text/html" , null);
-                       }else {
+                       }
+                       else {
+                           Log.e("we " , "are Part");
                            if(solutioncounter +1 >response.body().getData().size())
                            {
                                solutioncounter = response.body().getData().size()-1;
+                               Toast.makeText(getActivity(), "No forward possible ", Toast.LENGTH_SHORT).show();
                                Log.e("dfsd" , "dxdxdx");
                            }
 

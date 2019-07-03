@@ -72,9 +72,10 @@ public class Test_Adapter  extends RecyclerView.Adapter<Test_Adapter.MyViewHolde
         Tests_Name tests_Name = levelAdapterList.get(i);
 //        myViewHolder.id.setText(String.valueOf(tests_Name.getTest_start_date()) );
         Log.e("test at adapter", "name at" + tests_Name.getTest_name());
+        Log.e("test at adapter", "time at" + tests_Name.getTest_len());
         myViewHolder.Test_name.setText(tests_Name.getTest_name());
+     //   myViewHolder.Test_name.setText("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp");
         myViewHolder.Test_len.setText(String.valueOf(tests_Name.getTest_len()));
-
         myViewHolder.Test_start.setText(tests_Name.test_start_date);
         myViewHolder.Test_finishes.setText(tests_Name.test_end_date);
         myViewHolder.test_mat.setOnClickListener(new View.OnClickListener() {

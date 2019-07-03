@@ -98,7 +98,52 @@
                 android:layout_height="wrap_content" />
             </android.support.v7.widget.CardView>
         </RadioGroup>
+
+
+
+        <LinearLayout
+            android:id="@+id/textnas"
+            android:padding="5dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.design.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/fillque"
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </TextView>
+
+
+            </android.support.design.card.MaterialCardView>
+            <android.support.design.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <AutoCompleteTextView
+                    android:id="@+id/ansinput"
+                    android:digits="0123456789.-"
+
+                    android:hint="Type your answer here"
+                    android:padding="10dp"
+                    android:background="#fff"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+
+                </AutoCompleteTextView>
+            </android.support.design.card.MaterialCardView>
+
+
+        </LinearLayout>
     </LinearLayout>
+
 
 
     <LinearLayout

@@ -7,13 +7,18 @@ import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
+import android.text.Editable;
 import android.text.Html;
 import android.text.SpannableString;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -41,7 +46,10 @@ public class Multiple_Que_Test extends Fragment {
     RadioButton ans1, ans2, ans3, ans4;
     SpannableString spannableStringque;
     View Itemview;
+    LinearLayout textnas;
+    CardView card1;
     TextView clock;
+    AutoCompleteTextView ansinput;
     private long startTime = 0L;
     private Handler customHandler = new Handler();
     long timeInMilliseconds = 0L;
@@ -66,7 +74,7 @@ public class Multiple_Que_Test extends Fragment {
         que_txt = MultipleView.findViewById(R.id.que_txtview);
         radio_grp = MultipleView.findViewById(R.id.radio_grp);
         clear_all = MultipleView.findViewById(R.id.clear_all);
-
+        ansinput = MultipleView.findViewById(R.id.ansinput);
         ans1 = MultipleView.findViewById(R.id.ans1);
         ans2 = MultipleView.findViewById(R.id.ans2);
         ans3 = MultipleView.findViewById(R.id.ans3);
@@ -86,8 +94,18 @@ public class Multiple_Que_Test extends Fragment {
             ans2.setText(questionsJJavaLinkedList.get(queposition).getAns_2());
             ans3.setText(questionsJJavaLinkedList.get(queposition).getAns_3());
             ans4.setText(questionsJJavaLinkedList.get(queposition).getAns_4());
+            if(questionsJJavaLinkedList.get(queposition).getAns_1().length() !=0)
+            {
+
+                ansinput.setVisibility(View.GONE);
+            }else {
+
+            }
+
+
         }catch (Exception e)
         {
+            radio_grp.setVisibility(View.GONE);
             Toast.makeText(getActivity(), "screwed ", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
@@ -215,6 +233,7 @@ public class Multiple_Que_Test extends Fragment {
 
                     if(isChecked ==true)
                     {
+
 //                    TimeTaken =  (new Timestamp( (System.currentTimeMillis())/1000).getSeconds()) -( tsTemp.getSeconds()) ;
 //                    TimeTaken = new Timestamp( (System.currentTimeMillis())/1000).getSeconds();
 //                        SimpleDateFormat s = new SimpleDateFormat("ddMMyyyyhhmmss");
@@ -334,7 +353,30 @@ public class Multiple_Que_Test extends Fragment {
                 }
 
 
-        });   ans2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        });
+
+        ansinput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                questionsJJavaHashMap.remove(queposition);
+                questionsJJavaHashMap.put(queposition , new Questions_jJava(s.toString(), TimeTaken));
+                Log.d("writtebn xfsadf" , "sdf "+questionsJJavaHashMap.get(queposition).getWritten_ans());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+
+        ans2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked ==true)

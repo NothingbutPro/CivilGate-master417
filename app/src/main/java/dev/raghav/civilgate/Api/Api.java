@@ -53,7 +53,7 @@ public interface Api {
 
     );
     @FormUrlEncoded
-    @POST("Gettestrecord")
+    @POST(Retro_Urls.Gettestrecord)
     Call<Full_Solutions> FULL_SOLUTIONS_CALL(
             @Field("student_id") int  student_id,
             @Field("level_id") String level_id,
@@ -61,20 +61,20 @@ public interface Api {
 
     );
     @FormUrlEncoded
-    @POST("addbookmark")
+    @POST(Retro_Urls.addbookmark)
     Call<PostBookMarks> PostBookMarks(
             @Field("student_id") int  student_id,
             @Field("que_id") String que_id
 
     );
     @FormUrlEncoded
-    @POST("forgetpassword")
+    @POST(Retro_Urls.forgetpassword)
     Call<Forgotten_Passowrd> Forgetpassword(
             @Field("email") String email
 
     );
     @FormUrlEncoded
-    @POST("StudentQue")
+    @POST(Retro_Urls.StudentQue)
     Call<Brain_Questions> StudentQue(
             @Field("student_id") int student_id,
             @Field("question") String question,

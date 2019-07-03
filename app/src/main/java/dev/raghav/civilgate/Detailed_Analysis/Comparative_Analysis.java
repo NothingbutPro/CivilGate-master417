@@ -68,83 +68,8 @@ public class Comparative_Analysis extends Fragment {
 //        toppercahrt = view.findViewById(R.id.toppercahrt);
         sessionManager = new SessionManager(getActivity());
         barChart = (BarChart) view.findViewById(R.id.comp_chart);
-        Retrofit RetroLogin = new Retrofit.Builder()
-                .baseUrl(Retro_Urls.The_Base).addConverterFactory(GsonConverterFactory.create())
-                .build();
-        Api RegApi = RetroLogin.create(Api.class);
-        Call<CompareGraph> login_responceCall = RegApi.Toppers_list(levelid,String.valueOf(sessionManager.getCoustId()));
-        login_responceCall.enqueue(new Callback<CompareGraph>() {
-            @Override
-            public void onResponse(Call<CompareGraph> call, Response<CompareGraph> response) {
-                Log.d("string" , ""+response.body().getResponce());
-//                            Log.d("string" , ""+response.body().getData().getEmail());
-                if(response.body().getResponce() ==true)
-                {
-
-                    ArrayList<BarEntry> bargroup2 = new ArrayList<>();
-                    for(int i=0;i<response.body().getData().size();i++)
-                    {
-                        for(int j=0;j<response.body().getData().size();j++)
-                        {
-                            if(response.body().getData().get(i).getRank() > response.body().getData().get(j).getRank())
-                            {
-                                bargroup2.add(new BarEntry(Integer.valueOf(response.body().getData().get(i).getTotalmark()), 0));
-                            }
-
-                        }
-
-//                        bargroup2.add(new BarEntry(10f, 1));
-//                        bargroup2.add(new BarEntry(5f, 2));
-//                        bargroup2.add(new BarEntry(25f, 3));
-//                        bargroup2.add(new BarEntry(4f, 4));
-
-                    }
-
-
-
-// creating dataset for Bar Group1
-                    //     BarDataSet barDataSet1 = new BarDataSet(bargroup1, "Bar Group 1");
-
-//barDataSet1.setColor(Color.rgb(0, 155, 0));
-                    //    barDataSet1.setColors(ColorTemplate.COLORFUL_COLORS);
-
-// creating dataset for Bar Group 2
-                    BarDataSet barDataSet2 = new BarDataSet(bargroup2, "My Rank");
-                    barDataSet2.setColors(Color);
-
-                    ArrayList<String> labels = new ArrayList<String>();
-                    labels.add("2016");
-                    labels.add("2015");
-                    labels.add("2014");
-                    labels.add("2013");
-                    labels.add("2012");
-                    labels.add("2011");
-
-
-                    BarData data = new BarData(labels,barDataSet2);
-
-                    barChart.setData(data); // set the data and list of labels into chart
-
-//                    Intent intent=new Intent(ShowAllPakages.this,MainActivity.class);
-//                    //manager.serverLogin(response.body().getData().getId() , response.body().getData().getName(),response.body().getData().getStatus());
-//                    intent.putExtra("respoce", ""+response);
-//                    startActivity(intent);
-//                    finish();
-                }else{
-                    Toast.makeText(getActivity(), "Either Email is wrong or Password", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<CompareGraph> call, Throwable t) {
-
-                Log.d("cause" , ""+t.getMessage());
-                Log.d("cause" , ""+t.getLocalizedMessage());
-                Toast.makeText(getActivity(), "Network problem", Toast.LENGTH_SHORT).show();
-
-            }
-        });
+        Toast.makeText(getActivity(), "make a chart iof", Toast.LENGTH_SHORT).show();
+            Makeachart();
 
         // create BarEntry for Bar Group 1
 //        ArrayList<BarEntry> bargroup1 = new ArrayList<>();
@@ -233,5 +158,90 @@ public class Comparative_Analysis extends Fragment {
 //        toppercahrt.setData(data);
         return view;
 //        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    private void Makeachart() {
+        Toast.makeText(getActivity(), "make a chart iof", Toast.LENGTH_SHORT).show();
+        Retrofit RetroLogin = new Retrofit.Builder()
+                .baseUrl(Retro_Urls.The_Base).addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api RegApi = RetroLogin.create(Api.class);
+        Call<CompareGraph> login_responceCall = RegApi.Toppers_list(levelid,String.valueOf(sessionManager.getCoustId()));
+        login_responceCall.enqueue(new Callback<CompareGraph>() {
+            @Override
+            public void onResponse(Call<CompareGraph> call, Response<CompareGraph> response) {
+                Log.d("string" , ""+response.body().getResponce());
+//                            Log.d("string" , ""+response.body().getData().getEmail());
+                if(response.body().getResponce() ==true)
+                {
+
+                    ArrayList<BarEntry> bargroup2 = new ArrayList<>();
+                    for(int i=0;i<response.body().getData().size();i++)
+                    {
+                        for(int j=0;j<response.body().getData().size();j++)
+                        {
+                            if(response.body().getData().get(i).getRank() > response.body().getData().get(j).getRank())
+                            {
+                                Toast.makeText(getActivity(), "ranking "+response.body().getData().get(i).getRank(), Toast.LENGTH_SHORT).show();
+                                bargroup2.add(new BarEntry(Integer.valueOf(response.body().getData().get(i).getTotalmark()), 0));
+                            }
+
+                        }
+
+//                        bargroup2.add(new BarEntry(10f, 1));
+//                        bargroup2.add(new BarEntry(5f, 2));
+//                        bargroup2.add(new BarEntry(25f, 3));
+//                        bargroup2.add(new BarEntry(4f, 4));
+
+                    }
+
+
+
+// creating dataset for Bar Group1
+                    //     BarDataSet barDataSet1 = new BarDataSet(bargroup1, "Bar Group 1");
+
+//barDataSet1.setColor(Color.rgb(0, 155, 0));
+                    //    barDataSet1.setColors(ColorTemplate.COLORFUL_COLORS);
+
+// creating dataset for Bar Group 2
+                    BarDataSet barDataSet2 = new BarDataSet(bargroup2, "My Rank");
+                    barDataSet2.setColors(Color);
+
+                    ArrayList<String> labels = new ArrayList<String>();
+                    labels.add("2016");
+                    labels.add("2015");
+                    labels.add("2014");
+                    labels.add("2013");
+                    labels.add("2012");
+                    labels.add("2011");
+
+
+                    BarData data = new BarData(labels,barDataSet2);
+
+                    barChart.setData(data); // set the data and list of labels into chart
+
+//                    Intent intent=new Intent(ShowAllPakages.this,MainActivity.class);
+//                    //manager.serverLogin(response.body().getData().getId() , response.body().getData().getName(),response.body().getData().getStatus());
+//                    intent.putExtra("respoce", ""+response);
+//                    startActivity(intent);
+//                    finish();
+                }else{
+                    Toast.makeText(getActivity(), "Either Email is wrong or Password", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<CompareGraph> call, Throwable t) {
+
+                Log.d("cause" , ""+t.getMessage());
+                Log.d("cause" , ""+t.getLocalizedMessage());
+                Toast.makeText(getActivity(), "Network problem", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
     }
 }

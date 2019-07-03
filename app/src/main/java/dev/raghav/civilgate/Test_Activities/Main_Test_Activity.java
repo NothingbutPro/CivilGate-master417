@@ -134,7 +134,8 @@ public class Main_Test_Activity extends AppCompatActivity {
                                             } else {
                                                 FragmentManager fragmentManager = getSupportFragmentManager();
                                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                                fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
+                                              //  fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
+                                                fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
                                             }
                                         } catch (Exception e) {
                                             queposition--;
@@ -311,7 +312,8 @@ public class Main_Test_Activity extends AppCompatActivity {
 
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
+                   // fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
+                    fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
 
                 }
                 //quelinrecy.setAdapter(questions_adapter);
@@ -373,7 +375,8 @@ public class Main_Test_Activity extends AppCompatActivity {
                             }
                             FragmentManager fragmentManager = getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
+                           // fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
+                            fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
                         }
                     } catch (Exception e) {
                         queposition--;
@@ -448,7 +451,8 @@ public class Main_Test_Activity extends AppCompatActivity {
                                 Log.d("else ans is" , ""+questionsJJavaHashMap.get(frontback).getWritten_ans());
                                 FragmentManager fragmentManager = getSupportFragmentManager();
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
+                             //   fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
+                                fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
                             }
 //                            FragmentManager fragmentManager = getSupportFragmentManager();
 //                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -540,7 +544,8 @@ public class Main_Test_Activity extends AppCompatActivity {
                             }
                             FragmentManager fragmentManager = getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
+                           // fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
+                            fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
                         }
                     } catch (Exception e) {
                         queposition--;
@@ -600,6 +605,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                                 Log.d("ans is", "" + questionsJJavaHashMap.get(yessave).getWritten_ans());
                                 FragmentManager fragmentManager = getSupportFragmentManager();
                                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                           //     fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
                                 fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
 
                             }
@@ -710,7 +716,8 @@ public class Main_Test_Activity extends AppCompatActivity {
                             Submit_The_Query(questions_jJavaList.get(queposition).getId(), sessionManager.getCoustId(), questionsJJavaHashMap.get(queposition).getTIme_taken(), 2, questionsJJavaHashMap.get(queposition).getWritten_ans());
                             FragmentManager fragmentManager = getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
+                       //     fragmentTransaction.replace(R.id.container_dik, new Fill_In_Que_Test()).commit();
+                            fragmentTransaction.replace(R.id.container_dik, new Multiple_Que_Test()).commit();
                         }
                     } catch (Exception e) {
                         ++queposition;

@@ -140,42 +140,43 @@ public class Level_Tab_Activities extends AppCompatActivity {
 //                        for(int p=0;p<n;p++) {
 //                            int id = level_javas.get(0).getId();
 //                            int levid =getLevel.getData().get(i).getId();
-                            if (getLevel.getData().get(2).getId() == 7 && level_javas.get(2).getId() == 7) {
+//                            if (getLevel.getData().get(2).getId() == 7 && level_javas.get(2).getId() == 7) {
 
                                // level_javas.remove(0, new Level_Java(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
                                 serviceGeneratoradapter.addFragment(new Daily_Level_Test_Fragment(),"Daily Tests");
                               level_javas.add(2 , new Level_Java(100 , "Intermediate Test"));
-
-                            }  if (getLevel.getData().get(1).getId() == 2 && level_javas.get(1).getId() == 2) {
+//
+//                            }  if (getLevel.getData().get(1).getId() == 2 && level_javas.get(1).getId() == 2) {
 
                               //  level_javas.add(1, new Level_Java(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
                               //  serviceGeneratoradapter.addFragment(new Basic_Level_Test_Fragment(), level_javas.get(1).getLevel());
                                 serviceGeneratoradapter.addFragment(new Basic_Level_Test_Fragment(), "Basic Tests");
                                 level_javas.add(1 , new Level_Java(100 , "cccccccc"));
 
-                            }  if (getLevel.getData().get(5).getId() == 6 && level_javas.get(5).getId() != 6) {
+//                            }
+//                if (getLevel.getData().get(5).getId() == 6 && level_javas.get(5).getId() != 6) {
 
                               //  level_javas.add(2, new Level_Java(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
                                 serviceGeneratoradapter.addFragment(new Subject_Wise_Level_Test_Fragment(), "Subjectwise Tests");
                                 level_javas.add(5 , new Level_Java(100 , "ppppppp"));
 
-                            }  if (getLevel.getData().get(3).getId() == 3 && level_javas.get(3).getId() != 3) {
+//                            }  if (getLevel.getData().get(3).getId() == 3 && level_javas.get(3).getId() != 3) {
                               //  level_javas.add(3, new Level_Java(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
                                 serviceGeneratoradapter.addFragment(new Intermediate_Level_Test_Fragment(), "Intermediate Tests");
                                 level_javas.add(3 , new Level_Java(100 , "kkkkkkk"));
 
-                            }  if (getLevel.getData().get(0).getId() == 4 && level_javas.get(0).getId() != 100) {
+//                            }  if (getLevel.getData().get(0).getId() == 4 && level_javas.get(0).getId() != 100) {
                               //  level_javas.add(4, new Level_Java(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
                                 serviceGeneratoradapter.addFragment(new Advanced_Level_Test_Fragment(), "Advanced Tests");
                                 level_javas.add(0 , new Level_Java(100 , "lllllllllll"));
 
-                            }   if (getLevel.getData().get(4).getId() == 5 && level_javas.get(4).getId() != 5) {
+//                            }   if (getLevel.getData().get(4).getId() == 5 && level_javas.get(4).getId() != 5) {
                               //  level_javas.add(4, new Level_Java(getLevel.getData().get(i).getId(), getLevel.getData().get(i).getLevel()));
                                 serviceGeneratoradapter.addFragment(new Mock_Level_Test_Fragment(), "Mock Test");
 //                                level_javas.remove(4);
                                 level_javas.add(4 , new Level_Java(100 , "xxxxxxxxxxx"));
 
-                            }
+//                            }
 
                     viewPager.setAdapter(serviceGeneratoradapter);
                     tabLayout.setupWithViewPager(viewPager);

@@ -9,6 +9,10 @@ public interface Retro_Urls {
   public String Get_level = "Get_level";
   public String Get_GetExam = "GetExam";
   public String GetQuestion = "GetQuestion";
+  public String Gettestrecord = "Gettestrecord";
+  public String addbookmark = "addbookmark";
+  public String forgetpassword = "forgetpassword";
+  public String StudentQue = "StudentQue";
   public String Toppers_list = "toppers_list";
   public String Srarttest = "starttest";
   public String About_us = "aboutus";

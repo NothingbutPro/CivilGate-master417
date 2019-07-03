@@ -81,7 +81,8 @@ public class Questions_Adapter extends RecyclerView.Adapter<Questions_Adapter.My
                             queposition = p;
                             FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.container_dik , new Fill_In_Que_Test()).commit();
+                          //  fragmentTransaction.replace(R.id.container_dik , new Fill_In_Que_Test()).commit();
+                            fragmentTransaction.replace(R.id.container_dik , new Multiple_Que_Test()).commit();
                         }
                     }
                     p++;

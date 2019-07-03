@@ -49,9 +49,12 @@ public class All_Reviews_Questions extends AppCompatActivity {
     }
 
     private void GetAllinGRid(String maque) {
+        Log.e("levelid is" , ""+lel_id);
+        Log.e("sublel_id is" , ""+sublel_id);
         Retrofit RetroLogin = new Retrofit.Builder()
                 .baseUrl(Retro_Urls.The_Base).addConverterFactory(GsonConverterFactory.create())
                 .build();
+
         Api RegApi = RetroLogin.create(Api.class);
         Call<Full_Solutions> login_responceCall = RegApi.FULL_SOLUTIONS_CALL(sessionManager.getCoustId() ,lel_id ,sublel_id );
         login_responceCall.enqueue(new Callback<Full_Solutions>() {

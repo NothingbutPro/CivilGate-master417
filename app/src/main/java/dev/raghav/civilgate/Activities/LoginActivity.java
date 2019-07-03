@@ -65,9 +65,9 @@ public class LoginActivity  extends AppCompatActivity {
         });
 
         Btn_Signin.setOnClickListener(v -> {
-            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
+//            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+//            startActivity(intent);
+//            finish();
             if (checkvalidem()) {
                // new Do_Login(emailfx.getText().toString(), passwordtxt.getText().toString()).execute();
 //               Api loginService =

@@ -183,7 +183,7 @@ public class Fill_In_Que_Test extends Fragment {
 //            }
 //
 //        };
-      //  startTime = SystemClock.uptimeMillis();
+        //  startTime = SystemClock.uptimeMillis();
         //customHandler.postDelayed(updateTimerThread, 0);
         ansinput.addTextChangedListener(new TextWatcher() {
             @Override
