@@ -16,7 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import dev.raghav.civilgate.BookmarkActivity;
 import dev.raghav.civilgate.Frag_granades.Home;
 import dev.raghav.civilgate.Parsingfiles.LoginReg.Login_Responce;
 import dev.raghav.civilgate.R;
@@ -131,8 +130,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_group) {
 
         } else if (id == R.id.nav_bookmark) {
-            Intent intent = new Intent(MainActivity.this , BookmarkActivity.class);
+            Intent intent = new Intent(MainActivity.this , MaBookmarks.class);
             startActivity(intent);
+//            Intent intent = new Intent(MainActivity.this , BookmarkActivity.class);
+//            startActivity(intent);
 
         } else if (id == R.id.nav_news) {
 
@@ -145,6 +146,8 @@ public class MainActivity extends AppCompatActivity
 //
 //        }
         else if (id == R.id.nav_ask_expert) {
+//            Intent intent =new Intent(this , KYCACTIVTy.class);
+//            startActivity(intent);
 
         } else if (id == R.id.nav_rate_us) {
 

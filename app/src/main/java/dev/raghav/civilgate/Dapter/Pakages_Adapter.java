@@ -1,12 +1,14 @@
 package dev.raghav.civilgate.Dapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +25,7 @@ public class Pakages_Adapter extends RecyclerView.Adapter<Pakages_Adapter.MyView
     private List<Package_Const> packageList;
     SessionManager sessionManager;
     Context context;
-    String package_url = "http://ihisaab.in/lms/uploads/";
+    String package_url = "https://gogateexam.com/uploads/package/";
 
     public Pakages_Adapter(List<Package_Const> packages) {
         this.packageList = packages;
@@ -32,6 +34,7 @@ public class Pakages_Adapter extends RecyclerView.Adapter<Pakages_Adapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView pakage_name,package_mrp,pkgtype;
         ImageView pkgimg;
+        Button buybtn;
 
         public MyViewHolder(View view) {
             super(view);
@@ -39,7 +42,7 @@ public class Pakages_Adapter extends RecyclerView.Adapter<Pakages_Adapter.MyView
             package_mrp = view.findViewById(R.id.package_mrp);
             pkgtype = view.findViewById(R.id.pkgtype);
             pkgimg = view.findViewById(R.id.pkgimg);
-
+            buybtn = view.findViewById(R.id.buybtn);
 //            id = (TextView) view.findViewById(R.id.level_id);
 
             sessionManager = new SessionManager(view.getContext());
@@ -70,6 +73,12 @@ public class Pakages_Adapter extends RecyclerView.Adapter<Pakages_Adapter.MyView
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(myViewHolder.pkgimg);
+        myViewHolder.buybtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new
+            }
+        });
 //        myViewHolder.id.setText(String.valueOf(tests_Name.getTest_start_date()) );
 //        Log.e("test at adapter", "name at" + tests_Name.getTest_name());
 //        myViewHolder.Test_name.setText(tests_Name.getTest_name());

@@ -15,11 +15,11 @@ public class Full_Solution_Act extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_full__solution_);
-        solframe = findViewById(R.id.solframe);
-        lel_id   = getIntent().getStringExtra("levelid");
-        sublel_id = getIntent().getStringExtra("sublevelid");
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.solframe , new MCQ_Questions()).commit();
+//        solframe = findViewById(R.id.solframeboo);
+//        lel_id   = getIntent().getStringExtra("levelid");
+//        sublel_id = getIntent().getStringExtra("sublevelid");
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+       // fragmentTransaction.replace(R.id.solframe , new MCQ_Questions()).commit();
     }
 }

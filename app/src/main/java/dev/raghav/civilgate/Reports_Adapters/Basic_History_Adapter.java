@@ -75,6 +75,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 Intent intent= new Intent(v.getContext() , Full_Solution_Act.class);
                 intent.putExtra("levelid" , basic_history.getLevelId());
+                intent.putExtra("levelid" , basic_history.getLevelId());
                 intent.putExtra("sublevelid" , basic_history.getLevelSubId());
                 v.getContext().startActivity(intent);
             }

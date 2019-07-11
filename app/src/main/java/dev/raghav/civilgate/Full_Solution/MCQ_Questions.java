@@ -38,6 +38,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static dev.raghav.civilgate.Activities.Direct_History.levelid;
+import static dev.raghav.civilgate.Activities.Direct_History.sublevelid;
 import static dev.raghav.civilgate.Full_Solution.Full_Solution_Act.lel_id;
 import static dev.raghav.civilgate.Full_Solution.Full_Solution_Act.sublel_id;
 
@@ -113,7 +115,7 @@ public class MCQ_Questions extends Fragment {
         bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HaveABookMArk(full_solutions.getData().get(solutioncounter).getQueid());
+                HaveABookMArk(full_solutions.getData().get(solutioncounter).getQueid() , full_solutions.getData().get(solutioncounter).getTestId() , full_solutions.getData().get(solutioncounter).getSId());
              //   Toast.makeText(getActivity(), " Book Mark Added "+full_solutions.getData().get(solutioncounter).getQueid(), Toast.LENGTH_SHORT).show();
 //                for(int p=0;p<full_solutions.getData().size();p++)
 //                {
@@ -150,13 +152,13 @@ public class MCQ_Questions extends Fragment {
 //        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    private void HaveABookMArk(String queid) {
+    private void HaveABookMArk(String queid, String testId, String sId) {
         Retrofit RetroLogin = new Retrofit.Builder()
                 .baseUrl(Retro_Urls.The_Base).addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api RegApi = RetroLogin.create(Api.class);
         Log.w("book markid is" , ""+queid);
-        Call<PostBookMarks> login_responceCall = RegApi.PostBookMarks(sessionManager.getCoustId() ,queid );
+        Call<PostBookMarks> login_responceCall = RegApi.PostBookMarks(sessionManager.getCoustId() ,queid ,testId,sId  );
         login_responceCall.enqueue(new Callback<PostBookMarks>() {
             @Override
             public void onResponse(Call<PostBookMarks> call, Response<PostBookMarks> response) {
@@ -166,6 +168,8 @@ public class MCQ_Questions extends Fragment {
                     if(response.body().getResponce() == true)
                     {
                         Toast.makeText(getActivity(), "Book Mark added successfully", Toast.LENGTH_SHORT).show();
+
+
 
                     }
                     else{
@@ -197,9 +201,9 @@ public class MCQ_Questions extends Fragment {
                 .baseUrl(Retro_Urls.The_Base).addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api RegApi = RetroLogin.create(Api.class);
-        Log.e("levelid is" , ""+lel_id);
-        Log.e("sublel_id is" , ""+sublel_id);
-        Call<Full_Solutions> login_responceCall = RegApi.FULL_SOLUTIONS_CALL(sessionManager.getCoustId() ,lel_id ,sublel_id );
+        Log.e("levelid is" , ""+levelid);
+        Log.e("sublel_id is" , ""+sublevelid);
+        Call<Full_Solutions> login_responceCall = RegApi.FULL_SOLUTIONS_CALL(sessionManager.getCoustId() ,levelid ,sublevelid );
         login_responceCall.enqueue(new Callback<Full_Solutions>() {
             @Override
             public void onResponse(Call<Full_Solutions> call, Response<Full_Solutions> response) {
@@ -215,6 +219,8 @@ public class MCQ_Questions extends Fragment {
                     //   Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
                     for(int k=0;k< response.body().getData().size() ;k++) {
                        Log.w("whtas" , ""+response.body().getData().get(k).getQue());
+                       Log.e("has sid" , ""+response.body().getData().get(k).getSId());
+                       Log.e("has stid" , ""+response.body().getData().get(k).getTestId());
                        if(solutioncounter <response.body().getData().size() &&  solutioncounter==k) {
                            if( nx ==1)
                            {
@@ -222,11 +228,13 @@ public class MCQ_Questions extends Fragment {
                                if(solutioncounter >=0) {
                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                   fragmentTransaction.replace(R.id.solframe, new MCQ_Questions());
+                                   fragmentTransaction.replace(R.id.solfr, new MCQ_Questions());
                                    fragmentTransaction.commit();
                                    fragmentTransaction.addToBackStack(null);
 
-                               }else {
+                               }
+                               else
+                                   {
                                    Toast.makeText(getActivity(), "No forward possible", Toast.LENGTH_SHORT).show();
                                }
                            }
@@ -238,7 +246,7 @@ public class MCQ_Questions extends Fragment {
 
                                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                               fragmentTransaction.replace(R.id.solframe, new MCQ_Questions());
+                               fragmentTransaction.replace(R.id.solfr, new MCQ_Questions());
                                fragmentTransaction.commit();
                                fragmentTransaction.addToBackStack(null);
 

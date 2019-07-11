@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Detailed_Analysis.Detailed_Analysis"
+    tools:context=".Activities.Direct_History"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -15,10 +15,11 @@
         android:background="@color/colorPrimary">
 
         <TextView
+            android:id="@+id/tootxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start|center"
-            android:text="Level"
+            android:text="Reports"
             android:textColor="#fff"
             android:textSize="18dp"
             android:typeface="serif" />
@@ -46,7 +47,7 @@
                 android:layout_gravity="top"
                 app:tabGravity="fill"
                 android:background="#D4DAFA"
-                app:tabMode="scrollable" />
+                app:tabMode="fixed" />
             <!--</HorizontalScrollView>-->
         </android.support.v4.view.ViewPager>
 

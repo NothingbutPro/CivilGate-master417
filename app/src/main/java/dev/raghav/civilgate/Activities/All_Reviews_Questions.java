@@ -29,6 +29,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static dev.raghav.civilgate.Activities.Direct_History.levelid;
+import static dev.raghav.civilgate.Activities.Direct_History.sublevelid;
 import static dev.raghav.civilgate.Full_Solution.Full_Solution_Act.lel_id;
 import static dev.raghav.civilgate.Full_Solution.Full_Solution_Act.sublel_id;
 
@@ -56,7 +58,7 @@ public class All_Reviews_Questions extends AppCompatActivity {
                 .build();
 
         Api RegApi = RetroLogin.create(Api.class);
-        Call<Full_Solutions> login_responceCall = RegApi.FULL_SOLUTIONS_CALL(sessionManager.getCoustId() ,lel_id ,sublel_id );
+        Call<Full_Solutions> login_responceCall = RegApi.FULL_SOLUTIONS_CALL(sessionManager.getCoustId() ,levelid ,sublevelid );
         login_responceCall.enqueue(new Callback<Full_Solutions>() {
             @Override
             public void onResponse(Call<Full_Solutions> call, Response<Full_Solutions> response) {
@@ -64,7 +66,7 @@ public class All_Reviews_Questions extends AppCompatActivity {
 
                 for(int x=0;x<response.body().getData().size(); x++)
                 {
-                    full_solutionsArrayList.add(new Full_Solution_Data(Integer.toString(x) , response.body().getData().get(x).getQueAns() , response.body().getData().get(x).getAns()));
+                    full_solutionsArrayList.add(new Full_Solution_Data(Integer.toString(x) , response.body().getData().get(x).getQueAns() , response.body().getData().get(x).getAns() ,response.body().getData().get(x).getSId() , response.body().getData().get(x).getTestId()));
 
                 }
 

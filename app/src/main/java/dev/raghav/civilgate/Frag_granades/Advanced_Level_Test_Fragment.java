@@ -46,7 +46,7 @@ public class Advanced_Level_Test_Fragment extends Fragment {
     SessionManager manager;
     Test_Adapter testAdapter;
     RecyclerView tests_recy_advance;
-
+    SessionManager sessionManager;
     Thread thread;
     int  px =0;
     int[] p = new  int[20];
@@ -58,6 +58,7 @@ public class Advanced_Level_Test_Fragment extends Fragment {
         tests_recy_advance = AdvanceView.findViewById(R.id.tests_recy_advance);
         cred_mie = AdvanceView.findViewById(R.id.cred_mie);
         manager = new SessionManager(getActivity());
+        sessionManager = new SessionManager(getActivity());
         getAllLowerLevels();
         Get_Percentage();
 //        pieChart = AdvanceView.findViewById(R.id.piechart);
@@ -138,7 +139,7 @@ public class Advanced_Level_Test_Fragment extends Fragment {
                 .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api EmamApi = RetroGEtExam.create(Api.class);
-        Call<Exam_Test> exam_testCall = EmamApi.Get_GetExam(3);
+        Call<Exam_Test> exam_testCall = EmamApi.Get_GetExam(3,sessionManager.getCoustId());
         exam_testCall.enqueue(new Callback<Exam_Test>() {
             @Override
             public void onResponse(Call<Exam_Test> call, Response<Exam_Test> response) {

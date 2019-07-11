@@ -37,7 +37,7 @@ public class Basic_Level_Test_Fragment  extends Fragment {
     SessionManager manager;
     Test_Adapter testAdapter;
     RecyclerView tests_recy;
-
+    SessionManager sessionManager;
     Thread thread;
      int  px =0;
     int[] p = new  int[20];
@@ -53,6 +53,7 @@ public class Basic_Level_Test_Fragment  extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View BasicView  = inflater.inflate(R.layout.basic_level_layout , container , false);
         tests_recy = BasicView.findViewById(R.id.tests_recy);
+        sessionManager = new SessionManager(getActivity());
        // lowerServiceGenerator = new LowerServiceGenerator(getActivity().getSupportFragmentManager() , getActivity());
       //  ExamprogressDialog = new ProgressDialog(getActivity());
         manager = new SessionManager(getActivity());
@@ -82,7 +83,7 @@ public class Basic_Level_Test_Fragment  extends Fragment {
                 .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api EmamApi = RetroGEtExam.create(Api.class);
-        Call<Exam_Test> exam_testCall = EmamApi.Get_GetExam(1);
+        Call<Exam_Test> exam_testCall = EmamApi.Get_GetExam(1 , sessionManager.getCoustId());
         exam_testCall.enqueue(new Callback<Exam_Test>() {
             @Override
             public void onResponse(Call<Exam_Test> call, Response<Exam_Test> response) {

@@ -6,11 +6,14 @@ public interface Retro_Urls {
   public   String Registration = "Ragistration";
   public   String Teststatus = "teststatus";
   public String Login = "login";
+  public String Gettimelinetest = "gettimelinetest";
   public String Get_level = "Get_level";
   public String Get_GetExam = "GetExam";
   public String GetQuestion = "GetQuestion";
   public String Gettestrecord = "Gettestrecord";
+  public String Getbasicinfo = "getbasicinfo";
   public String addbookmark = "addbookmark";
+  public String Getbookmark = "Getbookmark";
   public String forgetpassword = "forgetpassword";
   public String StudentQue = "StudentQue";
   public String Toppers_list = "toppers_list";

@@ -2,11 +2,13 @@ package dev.raghav.civilgate.Api;
 
 import java.io.File;
 
+import dev.raghav.civilgate.Const_Files.BooktheMarks;
 import dev.raghav.civilgate.Const_Files.Brain_Questions;
 import dev.raghav.civilgate.Const_Files.CompareGraph;
 import dev.raghav.civilgate.Const_Files.Detailed_Analysis_const;
 import dev.raghav.civilgate.Const_Files.Forgotten_Passowrd;
 import dev.raghav.civilgate.Const_Files.Full_Solutions;
+import dev.raghav.civilgate.Const_Files.Myoverall;
 import dev.raghav.civilgate.Const_Files.Package;
 import dev.raghav.civilgate.Const_Files.Percentage;
 import dev.raghav.civilgate.Const_Files.PostBookMarks;
@@ -64,8 +66,17 @@ public interface Api {
     @POST(Retro_Urls.addbookmark)
     Call<PostBookMarks> PostBookMarks(
             @Field("student_id") int  student_id,
-            @Field("que_id") String que_id
+            @Field("que_id") String que_id,
+              @Field("test_id") String test_id,
+            @Field("solve_id") String solve_id
 
+    );
+
+    @FormUrlEncoded
+    @POST(Retro_Urls.Getbookmark)
+    Call<BooktheMarks> BOOKTHE_MARKS_CALL(
+            @Field("student_id") int  student_id,
+            @Field("test_id") String  test_id
     );
     @FormUrlEncoded
     @POST(Retro_Urls.forgetpassword)
@@ -139,7 +150,7 @@ Call<Get_Level> GetLevels();
 //@Headers("Content-Type: text/json;charset=UTF-8")
 @GET(Retro_Urls.Get_GetExam)
 //@FormUrlEncoded
-Call<Exam_Test> Get_GetExam(@Query("level_id") int level_id);
+Call<Exam_Test> Get_GetExam(@Query("level_id") int level_id ,@Query("student_id") int student_id );
 @Headers("Content-Type: application/x-www-form-urlencoded")
 @FormUrlEncoded
 @POST(Retro_Urls.GetQuestion)
@@ -147,6 +158,11 @@ Call<Test_Question> GetQuestion(@Field("subject_id") String subject_id);
     @FormUrlEncoded
     @POST(Retro_Urls.Toppers_list)
     Call<CompareGraph> Toppers_list(@Field("test_id") String test_id , @Field("user_id") String user_id);
+
+
+    @FormUrlEncoded
+    @POST(Retro_Urls.Getbasicinfo)
+    Call<Myoverall> MYOVERALL_DATA_CALL(@Field("student_id") int user_id);
 //@POST(Retro_Urls.Teststatus)
 //Call<Submit_Question> SubmitQuery(@Field("que_id") int que_id,@Field("student_id") int student_id,@Field("time") String time,@Field("q_status") int q_status,@Field("que_ans") String que_an);
 @FormUrlEncoded
@@ -158,5 +174,8 @@ Call<TestStart> GetTestQuestionCall(
         @Field("student_id") int student_id,
         @Field("level_id") int level_id,
         @Field("level_sub_id") String level_sub_id, @Field("subject_id") String subject_id );
+
+
+
 
 }

@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,17 +27,26 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator extends FragmentStatePagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
+    ServiceGenerator serviceGenerator ;
+    int defaultposition;
     Context context;
     public ServiceGenerator(FragmentManager fm , Context c) {
         super(fm);
+//        serviceGenerator = new ServiceGenerator(fm ,c);
+
         this.context = c;
     }
+
     @Override
     public Fragment getItem(int position) {
+        Log.e("item got" , "item1");
+        this.defaultposition = position;
+        //Toast.makeText(context, "item got", Toast.LENGTH_SHORT).show();
         return mFragmentList.get(position);
     }
     public void addFragment(Fragment fragment, String title) {
-        Toast.makeText(context, ""+title, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, ""+title, Toast.LENGTH_SHORT).show();
+        Log.e("item got" , "item2");
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
     }
@@ -46,6 +56,13 @@ public class ServiceGenerator extends FragmentStatePagerAdapter {
      //   Toast.makeText(context, "positiobn is"+position, Toast.LENGTH_SHORT).show();
         return mFragmentTitleList.get(position);
     }
+    public int getPageTitleforchange(){
+        if(defaultposition !=0) {
+            return defaultposition;
+        }else {
+            return  0;
+        }
+    }
     @Override
     public int getCount() {
         return mFragmentList.size();
@@ -53,14 +70,18 @@ public class ServiceGenerator extends FragmentStatePagerAdapter {
 
     @Override
     public int getItemPosition(@NonNull Object object) {
-      //  Toast.makeText(context, "object is"+object.toString(), Toast.LENGTH_SHORT).show();
+       Log.e("item got" , "item3");
+       // Toast.makeText(context, "object is"+object.toString(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context, "object is"+object.toString(), Toast.LENGTH_SHORT).show();
         return super.getItemPosition(object);
     }
 
     @Override
     public void notifyDataSetChanged() {
+
         super.notifyDataSetChanged();
     }
+
 //    private Context mContext;
 //
 //    public ServiceGenerator(Context context) {

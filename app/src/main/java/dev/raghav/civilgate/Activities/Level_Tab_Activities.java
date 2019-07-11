@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -42,6 +43,7 @@ public class Level_Tab_Activities extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
      ProgressDialog progressDialog;
+     TextView lechng;
      Toolbar toolbar_level;
 
      //public List<Level_Java> level_javaList = new ArrayList<>();
@@ -65,7 +67,7 @@ public class Level_Tab_Activities extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level__tab__activities);
 //        level_resicler = findViewById(R.id.level_resid);
-
+        lechng = findViewById(R.id.lechng);
         toolbar_level = (Toolbar) findViewById(R.id.toolbar_level);
         toolbar_level.setNavigationIcon(R.drawable.arrow);
         toolbar_level.setNavigationOnClickListener(new View.OnClickListener() {
@@ -78,6 +80,24 @@ public class Level_Tab_Activities extends AppCompatActivity {
 
         tabLayout = findViewById(R.id.tably);
         serviceGeneratoradapter = new ServiceGenerator(getSupportFragmentManager() , Level_Tab_Activities.this);
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+          //      lechng.setText(serviceGeneratoradapter.getPageTitle(serviceGeneratoradapter.getPageTitleforchange()));
+                lechng.setText(tab.getText());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
         viewPager = (ViewPager) findViewById(R.id.level_pager);
        if (getAllLevels())
        {
@@ -102,6 +122,7 @@ public class Level_Tab_Activities extends AppCompatActivity {
            }
        }
 
+//        serviceGeneratoradapter.getPageTitle(serviceGeneratoradapter.)
 
     }
 

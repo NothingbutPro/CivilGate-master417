@@ -25,6 +25,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static dev.raghav.civilgate.Activities.MaBookmarks.ixp;
+
 public class Profile_Activity extends AppCompatActivity   {
 TextView pronamemn ,credit,email , mobilenumber,addresspx, passout_year;
 SessionManager sessionManager;
@@ -51,7 +53,10 @@ SessionManager sessionManager;
         progressBar.setUnreachedBarHeight(Color.BLUE);
         progressBar.setReachedBarHeight(5);
         progressBar.setUnreachedBarHeight(5);
+        Toast.makeText(this, "value of i is"+ixp, Toast.LENGTH_SHORT).show();
         i = 0;
+        ixp =50;
+        Toast.makeText(this, "value after i"+ixp, Toast.LENGTH_SHORT).show();
       //  progressBar.incrementProgressBy(33);
         // Start the lengthy operation in a background thread
 //        timer = new Timer();

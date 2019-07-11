@@ -4,6 +4,12 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Full_Solution_Data {
+    @SerializedName("s_id")
+    @Expose
+    private String sId;
+    @SerializedName("test_id")
+    @Expose
+    private String testId;
     @SerializedName("queid")
     @Expose
     private String queid;
@@ -44,11 +50,28 @@ public class Full_Solution_Data {
     @Expose
     private String time;
 
-    public Full_Solution_Data(String queid ,String  queAns , String ans ) {
-        this.queid = queid;
-        this.queAns =  queAns;
-        this.ans = ans;
+    public Full_Solution_Data(String toString, String queAns, String ans, String sId, String testId) {
+        this.queAns = queAns;
+        this.ans =ans;
+        this.sId = sId;
+        this.sId =sId;
+        this.testId=testId;
+    }
 
+    public String getSId() {
+        return sId;
+    }
+
+    public void setSId(String sId) {
+        this.sId = sId;
+    }
+
+    public String getTestId() {
+        return testId;
+    }
+
+    public void setTestId(String testId) {
+        this.testId = testId;
     }
 
     public String getQueid() {

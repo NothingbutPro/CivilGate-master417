@@ -122,7 +122,7 @@ public class Intermediate_Level_Test_Fragment extends Fragment {
                 .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api EmamApi = RetroGEtExam.create(Api.class);
-        Call<Exam_Test> exam_testCall = EmamApi.Get_GetExam(2);
+        Call<Exam_Test> exam_testCall = EmamApi.Get_GetExam(2 ,manager.getCoustId());
         exam_testCall.enqueue(new Callback<Exam_Test>() {
             @Override
             public void onResponse(Call<Exam_Test> call, Response<Exam_Test> response) {

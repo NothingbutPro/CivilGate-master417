@@ -46,8 +46,8 @@ public class Report_Dapter  extends RecyclerView.Adapter<Report_Dapter.MyViewHol
             super(view);
 //            id = (TextView) view.findViewById(R.id.level_id);
             Test_name = view.findViewById(R.id.testname);
-            Test_len = view.findViewById(R.id.testlenth);
-            Test_status = view.findViewById(R.id.teststat);
+//            Test_len = view.findViewById(R.id.testlenth);
+         //   Test_status = view.findViewById(R.id.teststat);
             Test_start = view.findViewById(R.id.test_start_date);
             Test_finishes = view.findViewById(R.id.test_end_date);
             test_mat = view.findViewById(R.id.test_mat);

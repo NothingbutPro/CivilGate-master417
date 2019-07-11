@@ -126,7 +126,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="3dp"
-                                android:text="Level"
+                                android:text="Tests"
                                 android:textAlignment="center"
                                 android:textSize="@dimen/mainpage_cardview_textsize" />
                         </LinearLayout>
@@ -208,9 +208,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/reel1"
                     android:orientation="horizontal"
-                    android:weightSum="1">
+                    android:weightSum="0.50">
 
                     <android.support.v7.widget.CardView
+                        android:visibility="gone"
                         android:id="@+id/mythink"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -247,6 +248,7 @@
                     </android.support.v7.widget.CardView>
 
                     <android.support.v7.widget.CardView
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/mainmenu_cardview_margin"
@@ -254,6 +256,7 @@
                         android:padding="@dimen/mainmenu_cardview_paddin">
 
                         <LinearLayout
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/reel1"
@@ -366,27 +369,32 @@
                     android:gravity="center"
                     android:textStyle="normal"
                     android:typeface="normal"
-                    android:text="Top Package"
+                    android:text="OverAll Performace"
                     android:textColor="#fff"
                     android:textSize="16dp" />
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/reel1"
-                android:orientation="vertical"
-                android:weightSum="1">
+                android:orientation="vertical">
 
-                <android.support.v7.widget.CardView
+                <!--<android.support.v7.widget.CardView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_margin="@dimen/mainmenu_cardview_margin"-->
+                    <!--android:padding="@dimen/mainmenu_cardview_paddin">-->
+
+                <LinearLayout
+                    android:weightSum="2"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="@dimen/mainmenu_cardview_margin"
-                    android:padding="@dimen/mainmenu_cardview_paddin">
-
+                    android:layout_height="wrap_content">
                     <android.support.v7.widget.CardView
-                        android:layout_width="wrap_content"
+
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:padding="@dimen/mainmenu_cardview_paddin"
@@ -397,29 +405,208 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/reel1"
                             android:orientation="vertical"
-                            android:weightSum="1">
+                            android:weightSum="3">
 
-                            <ImageView
+                            <!--<ImageView-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_gravity="center"-->
+                                <!--app:srcCompat="@drawable/face_clip" />-->
+
+                            <TextView
+                                android:textAllCaps="true"
+                                android:id="@+id/totaltes"
+                                android:layout_weight="1"
+                                android:textColor="#02bbca"
+                                android:padding="10dp"
+                                android:textAlignment="center"
+                                android:text="Total Test"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                app:srcCompat="@drawable/face_clip" />
+                                android:layout_height="wrap_content" />
 
 
                             <TextView
+                                android:id="@+id/totalnu"
+                                android:layout_weight="1"
+                                android:textColor="#02bbca"
+                                android:padding="10dp"
+                                android:textAlignment="center"
+                                android:text="Test"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/login_page_margin1"
-                                android:layout_marginBottom="@dimen/login_page_margin1"
-                                android:text="@string/home_page_cardview_offer"
-                                android:textAlignment="textStart" />
+                                android:layout_height="wrap_content" />
+                            <ProgressBar
+                                android:id="@+id/pro1"
+                                style="?android:attr/progressBarStyleHorizontal"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
 
+                <!--</android.support.v7.widget.CardView>-->
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="@dimen/mainmenu_cardview_paddin"
+                    android:paddingBottom="@dimen/login_page_margin1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/reel1"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <!--<ImageView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--app:srcCompat="@drawable/face_clip" />-->
+
+                        <TextView
+                            android:textAllCaps="true"
+
+                            android:layout_weight="1"
+                            android:textColor="#02bbca"
+                            android:padding="10dp"
+                            android:textAlignment="center"
+                            android:text="Solved"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                        <TextView
+                            android:id="@+id/solvetest"
+                            android:layout_weight="1"
+                            android:textColor="#02bbca"
+                            android:padding="10dp"
+                            android:textAlignment="center"
+                            android:text="Test"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                        <ProgressBar
+                            android:id="@+id/pro2"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <android.support.v7.widget.CardView
+
+                    android:layout_weight="1"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="@dimen/mainmenu_cardview_paddin"
+                    android:paddingBottom="@dimen/login_page_margin1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/reel1"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <!--<ImageView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--app:srcCompat="@drawable/face_clip" />-->
+
+                        <TextView
+
+                            android:layout_weight="1"
+                            android:textColor="#02bbca"
+                            android:padding="10dp"
+                            android:textAlignment="center"
+                            android:text="Score"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                        <TextView
+                            android:id="@+id/tesnscore"
+                            android:layout_weight="1"
+                            android:textColor="#02bbca"
+                            android:padding="10dp"
+                            android:textAlignment="center"
+                            android:text="Test Name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                        <ProgressBar
+                            android:id="@+id/pro3"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            />
+                    </LinearLayout>
                 </android.support.v7.widget.CardView>
 
-            </LinearLayout>
+                <android.support.v7.widget.CardView
+                    android:layout_weight="1"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:padding="@dimen/mainmenu_cardview_paddin"
+                    android:paddingBottom="@dimen/login_page_margin1">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/reel1"
+                        android:orientation="vertical"
+                        android:weightSum="3">
+
+                        <!--<ImageView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--app:srcCompat="@drawable/face_clip" />-->
+
+                        <TextView
+
+                            android:layout_weight="1"
+                            android:textColor="#02bbca"
+                            android:padding="10dp"
+                            android:textAlignment="center"
+                            android:text="Credit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                        <TextView
+                            android:id="@+id/cedittxt"
+                            android:layout_weight="1"
+                            android:textColor="#02bbca"
+                            android:padding="10dp"
+                            android:textAlignment="center"
+                            android:text="Test Name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                        <ProgressBar
+                            android:id="@+id/pro4"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

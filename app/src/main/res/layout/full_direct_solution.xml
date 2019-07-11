@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
- >
 
+>
 
     <FrameLayout
-        android:id="@+id/solframeboo"
+        android:id="@+id/solfr"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
