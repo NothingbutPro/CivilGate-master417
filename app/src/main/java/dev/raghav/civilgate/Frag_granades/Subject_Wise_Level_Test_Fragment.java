@@ -43,6 +43,8 @@ public class Subject_Wise_Level_Test_Fragment extends Fragment {
     int  px =0;
     int[] p = new  int[20];
     private List<Tests_Name> tests_namessub = new ArrayList<>();
+    private TextView questions,groupmarks,grouptesttime,groupexpiry;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -50,6 +52,10 @@ public class Subject_Wise_Level_Test_Fragment extends Fragment {
         manager = new SessionManager(getActivity());
         cred_mie = Subjec_wiseView.findViewById(R.id.cred_mie);
         tests_recy_sub = Subjec_wiseView.findViewById(R.id.tests_recy_sub);
+        questions = Subjec_wiseView.findViewById(R.id.questions);
+        groupmarks = Subjec_wiseView.findViewById(R.id.groupmarks);
+        grouptesttime = Subjec_wiseView.findViewById(R.id.grouptesttime);
+        groupexpiry = Subjec_wiseView.findViewById(R.id.groupexpiry);
         getAllLowerLevels();
         Get_Percentage();
             return Subjec_wiseView;
@@ -122,6 +128,10 @@ public class Subject_Wise_Level_Test_Fragment extends Fragment {
                     {
                         Log.e("elements" , " are "+response.body().getData());
                         p =new int[response.body().getData().size()];
+                        questions.setText(questions.getText().toString().concat(" "+response.body().getData().get(0).getTotalQue()));
+                        groupmarks.setText(groupmarks.getText().toString().concat(" "+response.body().getData().get(0).getTotalMark()));
+                        grouptesttime.setText(grouptesttime.getText().toString().concat(" "+response.body().getData().get(0).getTesttime()));
+                        groupexpiry.setText(groupexpiry.getText().toString().concat(" "+response.body().getData().get(0).getTestEndDate()));
                         for(int i=0;i<response.body().getData().size();i++)
                         {
                             Log.e("id" , ""+response.body().getData().get(i).getId());

@@ -76,6 +76,7 @@ dependencies {
     implementation 'org.apache.httpcomponents:httpclient-android:4.3.5'
     implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'com.budiyev.android:circular-progress-bar:1.2.2'
 //    implementation 'com.github.PhilJay:MPAndroidChart:v2.2.4'
 //    implementation project(':mpchartlib')
 //    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'

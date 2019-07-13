@@ -154,249 +154,249 @@ public class Boomarks_Fragment extends Fragment {
 
     private void GetTheFullSolution() {
 
-        Retrofit RetroLogin = new Retrofit.Builder()
-                .baseUrl(Retro_Urls.The_Base).addConverterFactory(GsonConverterFactory.create())
-                .build();
-        Api RegApi = RetroLogin.create(Api.class);
-        Log.e("levelid is" , ""+levelid);
-        Log.e("sublel_id is" , ""+sublevelid);
-        Call<Full_Solutions> login_responceCall = RegApi.FULL_SOLUTIONS_CALL(sessionManager.getCoustId() ,levelid ,sublevelid );
-        login_responceCall.enqueue(new Callback<Full_Solutions>() {
-            @Override
-            public void onResponse(Call<Full_Solutions> call, Response<Full_Solutions> response) {
-                Log.d("string" , ""+response.body().getResponce());
-
-//                            Log.d("string" , ""+response.body().getData().getEmail());
-                if(response.body().getResponce())
-                {
-                    if(response.body().getResponce())
-                    {
-                        Log.e("we" , "get some");
-                        full_solutions = response.body();
-                        //   Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
-                        for(int k=0;k< response.body().getData().size() ;k++) {
-                            Log.w("whtas" , ""+response.body().getData().get(k).getQue());
-                            Log.e("has sid" , ""+response.body().getData().get(k).getSId());
-                            Log.e("has stid" , ""+response.body().getData().get(k).getTestId());
-                            if(solutioncounter <response.body().getData().size() &&  solutioncounter==k) {
-                                if( nx ==1)
-                                {
-                                    Log.e("first" , "Part");
-                                    if(solutioncounter >=0) {
-                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                        fragmentTransaction.replace(R.id.solfr, new MCQ_Questions());
-                                        fragmentTransaction.commit();
-                                        fragmentTransaction.addToBackStack(null);
-
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(getActivity(), "No forward possible", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                                else
-                                if(pre ==1)
-                                {
-                                    Log.e("first" , "second Part");
-
-
-                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    fragmentTransaction.replace(R.id.solfr, new MCQ_Questions());
-                                    fragmentTransaction.commit();
-                                    fragmentTransaction.addToBackStack(null);
-
-                                }
-
-                                webque.loadData(response.body().getData().get(solutioncounter).getQue().toString(), "text/html", null);
-
-                                try {
-                                    Log.e("first" , "try Part");
-                                    maans = Integer.valueOf(response.body().getData().get(solutioncounter).getAns());
-                                    rightans = Integer.valueOf(response.body().getData().get(solutioncounter).getQueAns());
-                                    Log.w("maans" , ""+maans);
-                                    Log.w("rightans" , ""+rightans);
-                                    ansss1.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns1()));
-                                    ansss2.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns2()));
-                                    ansss3.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns3()));
-                                    ansss4.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns4()));
-                                    if(maans==rightans)
-                                    {
-                                        if(maans ==1)
-                                        {
-                                            optxt1.setText("Your Answer");
-                                            opt1.setImageResource(R.drawable.ic_correct);
-                                        }
-                                        if(maans ==2)
-                                        {
-                                            optxt2.setText("Your Answer");
-                                            opt2.setImageResource(R.drawable.ic_correct);
-                                        }
-                                        if(maans ==3)
-                                        {
-                                            optxt3.setText("Your Answer");
-                                            opt3.setImageResource(R.drawable.ic_correct);
-                                        }
-                                        if(maans ==4)
-                                        {
-                                            optxt4.setText("Your Answer");
-                                            opt4.setImageResource(R.drawable.ic_correct);
-                                        }
-                                        if(maans ==0)
-                                        {
-
-
-//                                   opt1.setImageResource(R.drawable.ic_correct);
-                                        }
-                                    }else {
-                                        if(rightans ==1)
-                                        {
-                                            optxt1.setText("Actual Ans");
-                                            opt1.setImageResource(R.drawable.ic_correct);
-                                        }
-                                        if(rightans ==2)
-                                        {
-                                            optxt2.setText("Actual Ans");
-                                            opt3.setImageResource(R.drawable.ic_correct);
-                                        }
-                                        if(rightans ==3)
-                                        {
-                                            optxt3.setText("Actual Ans");
-                                            opt3.setImageResource(R.drawable.ic_correct);
-                                        }
-                                        if(rightans ==4)
-                                        {
-                                            optxt4.setText("Actual Ans");
-                                            opt4.setImageResource(R.drawable.ic_correct);
-                                        }
-                                        if(rightans ==0)
-                                        {
-
-//                                   opt1.setImageResource(R.drawable.ic_correct);
-                                        }
-                                    }
-                                    Log.e("solution  is", "" + solutioncounter);
-                                    String soul = Html.escapeHtml(response.body().getData().get(solutioncounter).getSolution());
-                                    soledit.setText(String.valueOf(soul));
-                                }
-                                catch (Exception e)
-                                {
-                                    Log.e("log catch first" , "Part");
-                                    maanstr = response.body().getData().get(solutioncounter).getAns();
-                                    rightansstr = response.body().getData().get(solutioncounter).getQueAns();
-                                    ansss1.setVisibility(View.GONE);
-                                    ansss2.setVisibility(View.GONE);
-                                    ansss3.setVisibility(View.GONE);
-                                    ansss4.setVisibility(View.GONE);
-                                    if(maanstr.equals(rightansstr) )
-                                    {
-                                        String soul = Html.escapeHtml(response.body().getData().get(solutioncounter).getSolution());
-                                        soledit.setText(String.valueOf(soul));
-                                        soledit.setTextColor(Color.GREEN);
-//                                   if(maanstr.equals("1"))
-//                                   {
-//                                       optxt1.setText("Your Answer");
-//                                       opt1.setImageResource(R.drawable.ic_correct);
-//                                   }
-//                                   if(maanstr ==2)
-//                                   {
-//                                       optxt2.setText("Your Answer");
-//                                       opt2.setImageResource(R.drawable.ic_correct);
-//                                   }
-//                                   if(maans ==3)
-//                                   {
-//                                       optxt3.setText("Your Answer");
-//                                       opt3.setImageResource(R.drawable.ic_correct);
-//                                   }
-//                                   if(maanstr ==4)
-//                                   {
-//                                       optxt4.setText("Your Answer");
-//                                       opt4.setImageResource(R.drawable.ic_correct);
-//                                   }
-//                                   if(maanstr ==0)
-//                                   {
+//        Retrofit RetroLogin = new Retrofit.Builder()
+//                .baseUrl(Retro_Urls.The_Base).addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        Api RegApi = RetroLogin.create(Api.class);
+//        Log.e("levelid is" , ""+levelid);
+//        Log.e("sublel_id is" , ""+sublevelid);
+//        Call<Full_Solutions> login_responceCall = RegApi.BOOKTHE_MARKS_CALL(sessionManager.getCoustId() ,levelid );
+//        login_responceCall.enqueue(new Callback<Full_Solutions>() {
+//            @Override
+//            public void onResponse(Call<Full_Solutions> call, Response<Full_Solutions> response) {
+//                Log.d("string" , ""+response.body().getResponce());
+//
+////                            Log.d("string" , ""+response.body().getData().getEmail());
+//                if(response.body().getResponce())
+//                {
+//                    if(response.body().getResponce())
+//                    {
+//                        Log.e("we" , "get some");
+//                        full_solutions = response.body();
+//                        //   Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
+//                        for(int k=0;k< response.body().getData().size() ;k++) {
+//                            Log.w("whtas" , ""+response.body().getData().get(k).getQue());
+//                            Log.e("has sid" , ""+response.body().getData().get(k).getSId());
+//                            Log.e("has stid" , ""+response.body().getData().get(k).getTestId());
+//                            if(solutioncounter <response.body().getData().size() &&  solutioncounter==k) {
+//                                if( nx ==1)
+//                                {
+//                                    Log.e("first" , "Part");
+//                                    if(solutioncounter >=0) {
+//                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                                        fragmentTransaction.replace(R.id.solfr, new MCQ_Questions());
+//                                        fragmentTransaction.commit();
+//                                        fragmentTransaction.addToBackStack(null);
+//
+//                                    }
+//                                    else
+//                                    {
+//                                        Toast.makeText(getActivity(), "No forward possible", Toast.LENGTH_SHORT).show();
+//                                    }
+//                                }
+//                                else
+//                                if(pre ==1)
+//                                {
+//                                    Log.e("first" , "second Part");
+//
+//
+//                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                                    fragmentTransaction.replace(R.id.solfr, new MCQ_Questions());
+//                                    fragmentTransaction.commit();
+//                                    fragmentTransaction.addToBackStack(null);
+//
+//                                }
+//
+//                                webque.loadData(response.body().getData().get(solutioncounter).getQue().toString(), "text/html", null);
+//
+//                                try {
+//                                    Log.e("first" , "try Part");
+//                                    maans = Integer.valueOf(response.body().getData().get(solutioncounter).getAns());
+//                                    rightans = Integer.valueOf(response.body().getData().get(solutioncounter).getQueAns());
+//                                    Log.w("maans" , ""+maans);
+//                                    Log.w("rightans" , ""+rightans);
+//                                    ansss1.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns1()));
+//                                    ansss2.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns2()));
+//                                    ansss3.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns3()));
+//                                    ansss4.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns4()));
+//                                    if(maans==rightans)
+//                                    {
+//                                        if(maans ==1)
+//                                        {
+//                                            optxt1.setText("Your Answer");
+//                                            opt1.setImageResource(R.drawable.ic_correct);
+//                                        }
+//                                        if(maans ==2)
+//                                        {
+//                                            optxt2.setText("Your Answer");
+//                                            opt2.setImageResource(R.drawable.ic_correct);
+//                                        }
+//                                        if(maans ==3)
+//                                        {
+//                                            optxt3.setText("Your Answer");
+//                                            opt3.setImageResource(R.drawable.ic_correct);
+//                                        }
+//                                        if(maans ==4)
+//                                        {
+//                                            optxt4.setText("Your Answer");
+//                                            opt4.setImageResource(R.drawable.ic_correct);
+//                                        }
+//                                        if(maans ==0)
+//                                        {
 //
 //
 ////                                   opt1.setImageResource(R.drawable.ic_correct);
-//                                   }
-                                    }else {
-                                        String soul = Html.escapeHtml(response.body().getData().get(solutioncounter).getSolution());
-                                        soledit.setText(String.valueOf(soul));
-                                        soledit.setTextColor(Color.RED);
-                                        if(rightans ==1)
-                                        {
-                                            optxt1.setText("Actual Ans");
-                                            opt1.setImageResource(R.drawable.ic_correct);
-                                        }
-                                        if(rightans ==2)
-                                        {
-                                            optxt2.setText("Actual Ans");
-                                            opt3.setImageResource(R.drawable.ic_correct);
-                                        }
-                                        if(rightans ==3)
-                                        {
-                                            optxt3.setText("Actual Ans");
-                                            opt3.setImageResource(R.drawable.ic_correct);
-                                        }
-                                        if(rightans ==4)
-                                        {
-                                            optxt4.setText("Actual Ans");
-                                            opt4.setImageResource(R.drawable.ic_correct);
-                                        }
-                                        if(rightans ==0)
-                                        {
-
-//                                   opt1.setImageResource(R.drawable.ic_correct);
-                                        }
-                                    }
-                                    Log.e("solution  is", "" + solutioncounter);
-
-                                    e.printStackTrace();
-                                }
-                                //  int rightans = String.valueOf()Integer.valueOf(response.body().getData().get(solutioncounter).getQueAns());
-                                // soledit.loadData(response.body().getData().get(solutioncounter).getSolution() , "text/html" , null);
-                            }
-                            else {
-                                Log.e("we " , "are Part");
-                                if(solutioncounter +1 >response.body().getData().size())
-                                {
-                                    solutioncounter = response.body().getData().size()-1;
-                                    Toast.makeText(getActivity(), "No forward possible ", Toast.LENGTH_SHORT).show();
-                                    Log.e("dfsd" , "dxdxdx");
-                                }
-
-                            }
-                        }
-
-                        //      Log.e("image" , "url"+ response.body().getData().get(k).getPackageImage());
-                    }
-
-//                    Intent intent=new Intent(ShowAllPakages.this,MainActivity.class);
-//                    //manager.serverLogin(response.body().getData().getId() , response.body().getData().getName(),response.body().getData().getStatus());
-//                    intent.putExtra("respoce", ""+response);
-//                    startActivity(intent);
-//                    finish();
-                }
-
-                else
-
-                {
-                    //    Toast.makeText(ShowAllPakages.this, "Either Email is wrong or Password", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Full_Solutions> call, Throwable t) {
-
-                Log.d("cause" , ""+t.getCause());
-                Log.d("main cause" , ""+t.getLocalizedMessage());
-                Log.d("cause" , ""+t.getMessage());
-                Toast.makeText(getActivity(), "Network problem", Toast.LENGTH_SHORT).show();
-
-            }
-        });
+//                                        }
+//                                    }else {
+//                                        if(rightans ==1)
+//                                        {
+//                                            optxt1.setText("Actual Ans");
+//                                            opt1.setImageResource(R.drawable.ic_correct);
+//                                        }
+//                                        if(rightans ==2)
+//                                        {
+//                                            optxt2.setText("Actual Ans");
+//                                            opt3.setImageResource(R.drawable.ic_correct);
+//                                        }
+//                                        if(rightans ==3)
+//                                        {
+//                                            optxt3.setText("Actual Ans");
+//                                            opt3.setImageResource(R.drawable.ic_correct);
+//                                        }
+//                                        if(rightans ==4)
+//                                        {
+//                                            optxt4.setText("Actual Ans");
+//                                            opt4.setImageResource(R.drawable.ic_correct);
+//                                        }
+//                                        if(rightans ==0)
+//                                        {
+//
+////                                   opt1.setImageResource(R.drawable.ic_correct);
+//                                        }
+//                                    }
+//                                    Log.e("solution  is", "" + solutioncounter);
+//                                    String soul = Html.escapeHtml(response.body().getData().get(solutioncounter).getSolution());
+//                                    soledit.setText(String.valueOf(soul));
+//                                }
+//                                catch (Exception e)
+//                                {
+//                                    Log.e("log catch first" , "Part");
+//                                    maanstr = response.body().getData().get(solutioncounter).getAns();
+//                                    rightansstr = response.body().getData().get(solutioncounter).getQueAns();
+//                                    ansss1.setVisibility(View.GONE);
+//                                    ansss2.setVisibility(View.GONE);
+//                                    ansss3.setVisibility(View.GONE);
+//                                    ansss4.setVisibility(View.GONE);
+//                                    if(maanstr.equals(rightansstr) )
+//                                    {
+//                                        String soul = Html.escapeHtml(response.body().getData().get(solutioncounter).getSolution());
+//                                        soledit.setText(String.valueOf(soul));
+//                                        soledit.setTextColor(Color.GREEN);
+////                                   if(maanstr.equals("1"))
+////                                   {
+////                                       optxt1.setText("Your Answer");
+////                                       opt1.setImageResource(R.drawable.ic_correct);
+////                                   }
+////                                   if(maanstr ==2)
+////                                   {
+////                                       optxt2.setText("Your Answer");
+////                                       opt2.setImageResource(R.drawable.ic_correct);
+////                                   }
+////                                   if(maans ==3)
+////                                   {
+////                                       optxt3.setText("Your Answer");
+////                                       opt3.setImageResource(R.drawable.ic_correct);
+////                                   }
+////                                   if(maanstr ==4)
+////                                   {
+////                                       optxt4.setText("Your Answer");
+////                                       opt4.setImageResource(R.drawable.ic_correct);
+////                                   }
+////                                   if(maanstr ==0)
+////                                   {
+////
+////
+//////                                   opt1.setImageResource(R.drawable.ic_correct);
+////                                   }
+//                                    }else {
+//                                        String soul = Html.escapeHtml(response.body().getData().get(solutioncounter).getSolution());
+//                                        soledit.setText(String.valueOf(soul));
+//                                        soledit.setTextColor(Color.RED);
+//                                        if(rightans ==1)
+//                                        {
+//                                            optxt1.setText("Actual Ans");
+//                                            opt1.setImageResource(R.drawable.ic_correct);
+//                                        }
+//                                        if(rightans ==2)
+//                                        {
+//                                            optxt2.setText("Actual Ans");
+//                                            opt3.setImageResource(R.drawable.ic_correct);
+//                                        }
+//                                        if(rightans ==3)
+//                                        {
+//                                            optxt3.setText("Actual Ans");
+//                                            opt3.setImageResource(R.drawable.ic_correct);
+//                                        }
+//                                        if(rightans ==4)
+//                                        {
+//                                            optxt4.setText("Actual Ans");
+//                                            opt4.setImageResource(R.drawable.ic_correct);
+//                                        }
+//                                        if(rightans ==0)
+//                                        {
+//
+////                                   opt1.setImageResource(R.drawable.ic_correct);
+//                                        }
+//                                    }
+//                                    Log.e("solution  is", "" + solutioncounter);
+//
+//                                    e.printStackTrace();
+//                                }
+//                                //  int rightans = String.valueOf()Integer.valueOf(response.body().getData().get(solutioncounter).getQueAns());
+//                                // soledit.loadData(response.body().getData().get(solutioncounter).getSolution() , "text/html" , null);
+//                            }
+//                            else {
+//                                Log.e("we " , "are Part");
+//                                if(solutioncounter +1 >response.body().getData().size())
+//                                {
+//                                    solutioncounter = response.body().getData().size()-1;
+//                                    Toast.makeText(getActivity(), "No forward possible ", Toast.LENGTH_SHORT).show();
+//                                    Log.e("dfsd" , "dxdxdx");
+//                                }
+//
+//                            }
+//                        }
+//
+//                        //      Log.e("image" , "url"+ response.body().getData().get(k).getPackageImage());
+//                    }
+//
+////                    Intent intent=new Intent(ShowAllPakages.this,MainActivity.class);
+////                    //manager.serverLogin(response.body().getData().getId() , response.body().getData().getName(),response.body().getData().getStatus());
+////                    intent.putExtra("respoce", ""+response);
+////                    startActivity(intent);
+////                    finish();
+//                }
+//
+//                else
+//
+//                {
+//                    //    Toast.makeText(ShowAllPakages.this, "Either Email is wrong or Password", Toast.LENGTH_SHORT).show();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Full_Solutions> call, Throwable t) {
+//
+//                Log.d("cause" , ""+t.getCause());
+//                Log.d("main cause" , ""+t.getLocalizedMessage());
+//                Log.d("cause" , ""+t.getMessage());
+//                Toast.makeText(getActivity(), "Network problem", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
 
     }
 

@@ -12,11 +12,13 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardElevation="10dp">
@@ -41,6 +43,7 @@
                         <!--android:src="@drawable/screen" />-->
 
                         <ImageView
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:src="@drawable/mmmmm" />
@@ -208,7 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/reel1"
                     android:orientation="horizontal"
-                    android:weightSum="0.50">
+                    android:weightSum="0.75">
 
                     <android.support.v7.widget.CardView
                         android:visibility="gone"
@@ -248,7 +251,7 @@
                     </android.support.v7.widget.CardView>
 
                     <android.support.v7.widget.CardView
-                        android:visibility="gone"
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="@dimen/mainmenu_cardview_margin"
@@ -618,6 +621,7 @@
                 android:weightSum="1">
 
                 <TextView
+                    android:id="@+id/latestname"
                     android:textStyle="normal"
                     android:typeface="normal"
                     android:layout_width="match_parent"
@@ -629,13 +633,12 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/reel1"
-                android:orientation="horizontal"
-                android:weightSum="1">
 
+                <LinearLayout
+                    android:padding="20dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -643,16 +646,211 @@
                     android:padding="@dimen/mainmenu_cardview_paddin"
                     android:paddingBottom="@dimen/login_page_margin1">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/givenrecyl"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"></android.support.v7.widget.RecyclerView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/reel1"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <!--<ImageView-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_gravity="center"-->
+                            <!--app:srcCompat="@drawable/face_clip" />-->
+
+                            <TextView
+                                android:textAllCaps="true"
+                                android:id="@+id/latestque"
+                                android:layout_weight="1.9"
+                                android:textColor="#02bbca"
+                                android:padding="5dp"
+                                android:textAlignment="center"
+                                android:text="Total Question :"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+
+                            <TextView
+                                android:id="@+id/totmark"
+                                android:layout_weight="1"
+                                android:textColor="#02bbca"
+                                android:padding="5dp"
+                                android:textAlignment="center"
+                                android:text="Total Marks :"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+
+
+                    <!--<android.support.v7.widget.RecyclerView-->
+                        <!--android:visibility="gone"-->
+                        <!--android:id="@+id/givenrecyl"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:orientation="horizontal"-->
+                        <!--app:layoutManager="android.support.v7.widget.LinearLayoutManager"></android.support.v7.widget.RecyclerView>-->
 
                 </android.support.v7.widget.CardView>
-            </LinearLayout>
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:weightSum="3"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <android.support.v7.widget.CardView
+                            app:cardElevation="10dp"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:weightSum="1"
+                            android:elevation="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" >
+                            <com.budiyev.android.circularprogressbar.CircularProgressBar
 
+                                android:id="@+id/unprogress_bar"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:animateProgress="true"
+                                app:backgroundStrokeColor="#FFEB3B"
+                                app:backgroundStrokeWidth="2dp"
+                                app:drawBackgroundStroke="false"
+                                app:foregroundStrokeCap="butt"
+                                app:foregroundStrokeColor="#FFEB3B"
+                                app:foregroundStrokeWidth="3dp"
+                                app:indeterminate="false"
+                                app:indeterminateRotationAnimationDuration="1200"
+                                app:indeterminateSweepAnimationDuration="600"
+                                app:indeterminateMinimumAngle="45"
+                                app:maximum="100"
+                                app:progress="0"
+                                app:progressAnimationDuration="100"
+                                app:startAngle="270">
+
+
+                            </com.budiyev.android.circularprogressbar.CircularProgressBar>
+
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:textColor="#02bbca"
+                                android:padding="10dp"
+                                android:textAlignment="center"
+                                android:text="Unattempted"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+
+                        </LinearLayout>
+                        </android.support.v7.widget.CardView>
+                        <android.support.v7.widget.CardView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:weightSum="1"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" >
+
+                            <com.budiyev.android.circularprogressbar.CircularProgressBar
+                                android:id="@+id/attprogress"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:animateProgress="true"
+                                app:backgroundStrokeColor="#ff3f51b5"
+                                app:backgroundStrokeWidth="2dp"
+                                app:drawBackgroundStroke="false"
+                                app:foregroundStrokeCap="butt"
+                                app:foregroundStrokeColor="#04F370"
+                                app:foregroundStrokeWidth="3dp"
+                                app:indeterminate="false"
+                                app:indeterminateRotationAnimationDuration="1200"
+                                app:indeterminateSweepAnimationDuration="600"
+                                app:indeterminateMinimumAngle="45"
+                                app:maximum="100"
+                                app:progress="0"
+                                app:progressAnimationDuration="100"
+                                app:startAngle="270"
+
+
+                                />
+
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:textColor="#02bbca"
+                                android:padding="10dp"
+                                android:textAlignment="center"
+                                android:text="Attempted"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+
+                        </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+                        <android.support.v7.widget.CardView
+                            app:cardElevation="10dp"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:weightSum="1"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" >
+
+                            <com.budiyev.android.circularprogressbar.CircularProgressBar
+                                android:id="@+id/wrongprogress"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:animateProgress="true"
+                                app:backgroundStrokeColor="#ff3f51b5"
+                                app:backgroundStrokeWidth="2dp"
+                                app:drawBackgroundStroke="false"
+                                app:foregroundStrokeCap="butt"
+                                app:foregroundStrokeColor="#ffff4081"
+                                app:foregroundStrokeWidth="3dp"
+                                app:indeterminate="false"
+                                app:indeterminateRotationAnimationDuration="1200"
+                                app:indeterminateSweepAnimationDuration="600"
+                                app:indeterminateMinimumAngle="45"
+                                app:maximum="100"
+                                app:progress="0"
+                                app:progressAnimationDuration="100"
+                                app:startAngle="270"
+
+                                />
+
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:textColor="#02bbca"
+                                android:padding="10dp"
+                                android:textAlignment="center"
+                                android:text="Wrong"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+
+                        </LinearLayout>
+                        </android.support.v7.widget.CardView>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+        </LinearLayout>
         </LinearLayout>
     </FrameLayout>
 </ScrollView>

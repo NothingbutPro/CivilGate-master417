@@ -38,6 +38,7 @@ public class Mock_Level_Test_Fragment extends Fragment {
     SessionManager manager;
     Test_Adapter testAdapter;
     RecyclerView tests_recy_moc;
+    TextView questions,groupmarks,grouptesttime,groupexpiry;
 TextView cred_mie;
     Thread thread;
     int  px =0;
@@ -52,6 +53,11 @@ TextView cred_mie;
         View MocklevelView = inflater.inflate(R.layout.mock_level_layout, container, false);
         tests_recy_moc = MocklevelView.findViewById(R.id.tests_recy_moc);
         cred_mie = MocklevelView.findViewById(R.id.cred_mie);
+        questions = MocklevelView.findViewById(R.id.questions);
+        groupmarks = MocklevelView.findViewById(R.id.groupmarks);
+        grouptesttime = MocklevelView.findViewById(R.id.grouptesttime);
+        groupexpiry = MocklevelView.findViewById(R.id.groupexpiry);
+        manager = new SessionManager(getActivity());
         getAllLowerLevels();
 //        detail = (LinearLayout) MocklevelView.findViewById(R.id.detail);
 //        viewTopic = (TextView) MocklevelView.findViewById(R.id.viewTopic);
@@ -76,7 +82,7 @@ TextView cred_mie;
 //            }
 //        });
 
-
+        Get_Percentage();
         return MocklevelView;
     }
     private void Get_Percentage() {
@@ -147,6 +153,10 @@ TextView cred_mie;
                     {
                         Log.e("elements" , " are "+response.body().getData());
                         p =new int[response.body().getData().size()];
+                        questions.setText(questions.getText().toString().concat(" "+response.body().getData().get(0).getTotalQue()));
+                        groupmarks.setText(groupmarks.getText().toString().concat(" "+response.body().getData().get(0).getTotalMark()));
+                        grouptesttime.setText(grouptesttime.getText().toString().concat(" "+response.body().getData().get(0).getTesttime()));
+                        groupexpiry.setText(groupexpiry.getText().toString().concat(" "+response.body().getData().get(0).getTestEndDate()));
                         for(int i=0;i<response.body().getData().size();i++)
                         {
                             Log.e("id" , ""+response.body().getData().get(i).getId());

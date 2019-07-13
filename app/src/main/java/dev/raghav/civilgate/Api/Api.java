@@ -13,6 +13,7 @@ import dev.raghav.civilgate.Const_Files.Package;
 import dev.raghav.civilgate.Const_Files.Percentage;
 import dev.raghav.civilgate.Const_Files.PostBookMarks;
 import dev.raghav.civilgate.Other_Parsing_Files.Credit;
+import dev.raghav.civilgate.Other_Parsing_Files.Dashboard_Latest_Test;
 import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_About;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_Level;
@@ -72,6 +73,7 @@ public interface Api {
 
     );
 
+
     @FormUrlEncoded
     @POST(Retro_Urls.Getbookmark)
     Call<BooktheMarks> BOOKTHE_MARKS_CALL(
@@ -129,6 +131,11 @@ Call<Instant_Report> EndTest(
 @FormUrlEncoded
 @POST("Gethistory")
 Call<HisHistory> Gethistory(
+        @Field("student_id") int student_id
+);
+@FormUrlEncoded
+@POST("getlastest")
+Call<Dashboard_Latest_Test> DASHBOARD_LATEST_TEST_CALL(
         @Field("student_id") int student_id
 );
 @Headers("Content-Type: application/x-www-form-urlencoded")

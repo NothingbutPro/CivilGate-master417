@@ -37,6 +37,7 @@ public class Intermediate_Level_Test_Fragment extends Fragment {
     SessionManager manager;
     Test_Adapter testAdapter;
     RecyclerView tests_recy_inter;
+    TextView questions,groupmarks,grouptesttime,groupexpiry;
     TextView  cred_mie;
     Thread thread;
     int  px =0;
@@ -48,6 +49,10 @@ public class Intermediate_Level_Test_Fragment extends Fragment {
         View IntermediateView  = inflater.inflate(R.layout.intermediate_level_layout , container , false);
         tests_recy_inter = IntermediateView.findViewById(R.id.tests_recy_inter);
         cred_mie = IntermediateView.findViewById(R.id.cred_mie);
+        questions = IntermediateView.findViewById(R.id.questions);
+        groupmarks = IntermediateView.findViewById(R.id.groupmarks);
+        grouptesttime = IntermediateView.findViewById(R.id.grouptesttime);
+        groupexpiry = IntermediateView.findViewById(R.id.groupexpiry);
         manager = new SessionManager(getActivity());
         getAllLowerLevels();
         Get_Percentage();
@@ -131,10 +136,15 @@ public class Intermediate_Level_Test_Fragment extends Fragment {
                 if(response.isSuccessful())
                 {
                     ExamprogressDialog.dismiss();
+
                     if(response.body().getResponce() == true)
                     {
                         Log.e("elements" , " are "+response.body().getData());
                         p =new int[response.body().getData().size()];
+                        questions.setText(questions.getText().toString().concat(" "+response.body().getData().get(0).getTotalQue()));
+                        groupmarks.setText(groupmarks.getText().toString().concat(" "+response.body().getData().get(0).getTotalMark()));
+                        grouptesttime.setText(grouptesttime.getText().toString().concat(" "+response.body().getData().get(0).getTesttime()));
+                        groupexpiry.setText(groupexpiry.getText().toString().concat(" "+response.body().getData().get(0).getTestEndDate()));
                         for(int i=0;i<response.body().getData().size();i++)
                         {
                             Log.e("id" , ""+response.body().getData().get(i).getCatId());

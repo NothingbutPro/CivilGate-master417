@@ -25,6 +25,7 @@ import dev.raghav.civilgate.Api.Api;
 import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Const_Files.Myoverall;
 import dev.raghav.civilgate.Const_Files.MyoverallData;
+import dev.raghav.civilgate.Const_Files.Percentage;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_About;
 import dev.raghav.civilgate.R;
 import dev.raghav.civilgate.SessionManage.SessionManager;
@@ -38,6 +39,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Home extends Fragment {
     ImageView leve_id;
     CardView procard;
+    TextView latestnam,latestque,latestmarks;
+    com.budiyev.android.circularprogressbar.CircularProgressBar unprogress,attprogress,wrongprogress;
     ProgressBar pro1,pro2,pro3,pro4;
     TextView totaltes , solvet,tesnscore,cedittxt;
     CardView buy_package_icon ,mythink;
@@ -49,6 +52,12 @@ public class Home extends Fragment {
         leve_id = v.findViewById(R.id.leve_id);
         procard = v.findViewById(R.id.procard);
         totaltes = v.findViewById(R.id.totalnu);
+        unprogress = v.findViewById(R.id.unprogress_bar);
+        attprogress = v.findViewById(R.id.attprogress);
+        wrongprogress = v.findViewById(R.id.wrongprogress);
+        latestnam = v.findViewById(R.id.latestname);
+        latestque = v.findViewById(R.id.latestque);
+        latestmarks = v.findViewById(R.id.totmark);
         pro1 = v.findViewById(R.id.pro1);
         pro2 = v.findViewById(R.id.pro2);
         pro3 = v.findViewById(R.id.pro3);
@@ -90,8 +99,51 @@ public class Home extends Fragment {
             }
         });
         GetallTest();
+        GetTheLatestOne();
         return  v;
 //        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    private void GetTheLatestOne() {
+        Retrofit RetroLogin = new Retrofit.Builder()
+                .baseUrl(Retro_Urls.The_Base).addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api RegApi = RetroLogin.create(Api.class);
+        Call<Percentage> login_responceCall = RegApi.PERCENTAGE_CALL(sessionManagerl.getCoustId());
+        login_responceCall.enqueue(new Callback<Percentage>() {
+            @Override
+            public void onResponse(Call<Percentage> call, Response<Percentage> response) {
+                Log.d("string" , ""+response.body().getResponce());
+//                            Log.d("string" , ""+response.body().getData().getEmail());
+                if(response.body().getResponce())
+                {
+                    Toast.makeText(getActivity(), "percentage is"+response.body().getData(), Toast.LENGTH_SHORT).show();
+                    Log.e("per" , "percentage is"+response.body().getData());
+              //      cred_mie.setText(cred_mie.getText().toString().concat(" "+response.body().getData()));
+//                    Toast.makeText(ShowAllPakages.this, "Login successful", Toast.LENGTH_SHORT).show();
+
+
+//                    Intent intent=new Intent(ShowAllPakages.this,MainActivity.class);
+//                    //manager.serverLogin(response.body().getData().getId() , response.body().getData().getName(),response.body().getData().getStatus());
+//                    intent.putExtra("respoce", ""+response);
+//                    startActivity(intent);
+//                    finish();
+                }else{
+                    Toast.makeText(getActivity(), "Either Email is wrong or Password", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Percentage> call, Throwable t) {
+
+                Log.d("cause" , ""+t.getMessage());
+                Toast.makeText(getActivity(), "Network problem", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
     }
 
     private void GetallTest() {
@@ -113,12 +165,36 @@ public class Home extends Fragment {
                 Log.e("total 4" , ""+response.body().getData().getCredit());
                 totaltes.setText(String.valueOf(response.body().getData().getTotaltest()));
                 solvet.setText(String.valueOf(response.body().getData().getSolved()));
-                tesnscore.setText(String.valueOf(response.body().getData().getScore()));
-                cedittxt.setText(String.valueOf(response.body().getData().getCredit()));
+                if(!String.valueOf(response.body().getData().getScore()).equals("null")) {
+                    tesnscore.setText(String.valueOf(response.body().getData().getScore()));
+                }else {
+                    tesnscore.setText("0");
+                }
+                if(!String.valueOf(response.body().getData().getCredit()).equals("null"))
+                {
+                    cedittxt.setText(String.valueOf(response.body().getData().getCredit()));
+                }else {
+                    cedittxt.setText("0");
+                }
+
+
                 pro1.setProgress(Math.round(Float.parseFloat(response.body().getData().getTotaltest())));
                 pro2.setProgress(Math.round(Float.parseFloat(response.body().getData().getSolved())));
-                pro3.setProgress(Math.round(Float.parseFloat(response.body().getData().getScore())));
-                pro4.setProgress(Math.round(Float.parseFloat(response.body().getData().getCredit())));
+                try {
+                    pro3.setProgress(Math.round(Float.parseFloat(response.body().getData().getScore())));
+                }
+                catch (Exception e)
+                {
+                    pro3.setProgress(0);
+                    e.printStackTrace();
+                }
+                try {
+                    pro4.setProgress(Math.round(Float.parseFloat(response.body().getData().getCredit())));
+                }catch (Exception e)
+                {
+                    pro4.setProgress(0);
+                    e.printStackTrace();
+                }
              //   Toast.makeText(getActivity(), ""+response.body().getData().getDescription(), Toast.LENGTH_SHORT).show();
             }
 

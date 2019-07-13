@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Basic_Level_Test_Fragment  extends Fragment {
     private static  long Progess_time_out = 0;
+    TextView questions,groupmarks,grouptesttime,groupexpiry;
     SessionManager manager;
     Test_Adapter testAdapter;
     RecyclerView tests_recy;
@@ -53,6 +55,10 @@ public class Basic_Level_Test_Fragment  extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View BasicView  = inflater.inflate(R.layout.basic_level_layout , container , false);
         tests_recy = BasicView.findViewById(R.id.tests_recy);
+        questions = BasicView.findViewById(R.id.questions);
+        groupmarks = BasicView.findViewById(R.id.groupmarks);
+        grouptesttime = BasicView.findViewById(R.id.grouptesttime);
+        groupexpiry = BasicView.findViewById(R.id.groupexpiry);
         sessionManager = new SessionManager(getActivity());
        // lowerServiceGenerator = new LowerServiceGenerator(getActivity().getSupportFragmentManager() , getActivity());
       //  ExamprogressDialog = new ProgressDialog(getActivity());
@@ -96,6 +102,10 @@ public class Basic_Level_Test_Fragment  extends Fragment {
                     {
                         Log.e("elements" , " are "+response.body().getData());
                         p =new int[response.body().getData().size()];
+                        questions.setText(questions.getText().toString().concat(" "+response.body().getData().get(0).getTotalQue()));
+                        groupmarks.setText(groupmarks.getText().toString().concat(" "+response.body().getData().get(0).getTotalMark()));
+                        grouptesttime.setText(grouptesttime.getText().toString().concat(" "+response.body().getData().get(0).getTesttime()));
+                        groupexpiry.setText(groupexpiry.getText().toString().concat(" "+response.body().getData().get(0).getTestEndDate()));
                         for(int i=0;i<response.body().getData().size();i++)
                         {
                             Log.e("id" , ""+response.body().getData().get(i).getId());

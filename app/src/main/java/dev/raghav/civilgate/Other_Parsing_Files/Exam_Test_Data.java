@@ -19,6 +19,15 @@ public class Exam_Test_Data{
     @SerializedName("subject_ids")
     @Expose
     private String subjectIds;
+    @SerializedName("test_end_date")
+    @Expose
+    private String testEndDate;
+    @SerializedName("total_mark")
+    @Expose
+    private String totalMark;
+    @SerializedName("total_que")
+    @Expose
+    private String totalQue;
     @SerializedName("QStatus")
     @Expose
     private String qStatus;
@@ -61,6 +70,30 @@ public class Exam_Test_Data{
 
     public void setSubjectIds(String subjectIds) {
         this.subjectIds = subjectIds;
+    }
+
+    public String getTestEndDate() {
+        return testEndDate;
+    }
+
+    public void setTestEndDate(String testEndDate) {
+        this.testEndDate = testEndDate;
+    }
+
+    public String getTotalMark() {
+        return totalMark;
+    }
+
+    public void setTotalMark(String totalMark) {
+        this.totalMark = totalMark;
+    }
+
+    public String getTotalQue() {
+        return totalQue;
+    }
+
+    public void setTotalQue(String totalQue) {
+        this.totalQue = totalQue;
     }
 
     public String getQStatus() {

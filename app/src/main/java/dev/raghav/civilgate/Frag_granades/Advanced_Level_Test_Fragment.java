@@ -46,6 +46,7 @@ public class Advanced_Level_Test_Fragment extends Fragment {
     SessionManager manager;
     Test_Adapter testAdapter;
     RecyclerView tests_recy_advance;
+    TextView questions,groupmarks,grouptesttime,groupexpiry;
     SessionManager sessionManager;
     Thread thread;
     int  px =0;
@@ -57,6 +58,10 @@ public class Advanced_Level_Test_Fragment extends Fragment {
         View AdvanceView  = inflater.inflate(R.layout.advance_level_layout , container , false);
         tests_recy_advance = AdvanceView.findViewById(R.id.tests_recy_advance);
         cred_mie = AdvanceView.findViewById(R.id.cred_mie);
+        questions = AdvanceView.findViewById(R.id.questions);
+        groupmarks = AdvanceView.findViewById(R.id.groupmarks);
+        grouptesttime = AdvanceView.findViewById(R.id.grouptesttime);
+        groupexpiry = AdvanceView.findViewById(R.id.groupexpiry);
         manager = new SessionManager(getActivity());
         sessionManager = new SessionManager(getActivity());
         getAllLowerLevels();
@@ -152,6 +157,10 @@ public class Advanced_Level_Test_Fragment extends Fragment {
                     {
                         Log.e("elements" , " are "+response.body().getData());
                         p =new int[response.body().getData().size()];
+                        questions.setText(questions.getText().toString().concat(" "+response.body().getData().get(0).getTotalQue()));
+                        groupmarks.setText(groupmarks.getText().toString().concat(" "+response.body().getData().get(0).getTotalMark()));
+                        grouptesttime.setText(grouptesttime.getText().toString().concat(" "+response.body().getData().get(0).getTesttime()));
+                        groupexpiry.setText(groupexpiry.getText().toString().concat(" "+response.body().getData().get(0).getTestEndDate()));
                         for(int i=0;i<response.body().getData().size();i++)
                         {
                             Log.e("id" , ""+response.body().getData().get(i).getId());

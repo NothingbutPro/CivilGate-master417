@@ -5,20 +5,21 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Exam_Test{
+public class Dashboard_Latest_Test {
+
 
     @SerializedName("data")
     @Expose
-    private List<Exam_Test_Data> data;
+    private List<Dashboard_Latest_Test_Data> data = null;
     @SerializedName("responce")
     @Expose
     private Boolean responce;
 
-    public List<Exam_Test_Data> getData() {
+    public List<Dashboard_Latest_Test_Data> getData() {
         return data;
     }
 
-    public void setData(List<Exam_Test_Data> data) {
+    public void setData(List<Dashboard_Latest_Test_Data> data) {
         this.data = data;
     }
 
@@ -29,4 +30,5 @@ public class Exam_Test{
     public void setResponce(Boolean responce) {
         this.responce = responce;
     }
+
 }
