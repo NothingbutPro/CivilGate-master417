@@ -26,6 +26,7 @@ import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Const_Files.Myoverall;
 import dev.raghav.civilgate.Const_Files.MyoverallData;
 import dev.raghav.civilgate.Const_Files.Percentage;
+import dev.raghav.civilgate.Other_Parsing_Files.Dashboard_Latest_Test;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_About;
 import dev.raghav.civilgate.R;
 import dev.raghav.civilgate.SessionManage.SessionManager;
@@ -108,20 +109,35 @@ public class Home extends Fragment {
         Retrofit RetroLogin = new Retrofit.Builder()
                 .baseUrl(Retro_Urls.The_Base).addConverterFactory(GsonConverterFactory.create())
                 .build();
+        Log.e("session is" , ""+sessionManagerl.getCoustId());
         Api RegApi = RetroLogin.create(Api.class);
-        Call<Percentage> login_responceCall = RegApi.PERCENTAGE_CALL(sessionManagerl.getCoustId());
-        login_responceCall.enqueue(new Callback<Percentage>() {
+        Call<Dashboard_Latest_Test> login_responceCall = RegApi.DASHBOARD_LATEST_TEST_CALL(sessionManagerl.getCoustId());
+        login_responceCall.enqueue(new Callback<Dashboard_Latest_Test>() {
             @Override
-            public void onResponse(Call<Percentage> call, Response<Percentage> response) {
+            public void onResponse(Call<Dashboard_Latest_Test> call, Response<Dashboard_Latest_Test> response) {
                 Log.d("string" , ""+response.body().getResponce());
 //                            Log.d("string" , ""+response.body().getData().getEmail());
                 if(response.body().getResponce())
                 {
                     Toast.makeText(getActivity(), "percentage is"+response.body().getData(), Toast.LENGTH_SHORT).show();
-                    Log.e("per" , "percentage is"+response.body().getData());
+                    Float correct = Float.valueOf(response.body().getData().get(0).getCorrect());
+                    Float wrong = Float.valueOf(response.body().getData().get(0).getIncorrect());
+                 //   int attempted = Integer.parseInt(response.body().getData().get(0).getCorrect() + Integer.parseInt(response.body().getData().get(0).getIncorrect()));
+                    Float attempted = correct +wrong;
+                    Log.e("per" , "percentage is"+attempted);
+                    Log.e("per" , "percentage is"+response.body().getData().get(0).getCorrect());
+                    Log.e("per" , "percentage is"+response.body().getData().get(0).getIncorrect());
+                    Log.e("per" , "percentage is"+response.body().getData().get(0).getTotalQue());
+                    unprogress.setProgress(Float.parseFloat(response.body().getData().get(0).getLeft()));
+                 //   attprogress.setProgress(100);
+                    attprogress.setProgress(attempted);
+
+                     wrongprogress.setProgress(Float.parseFloat(response.body().getData().get(0).getIncorrect()));
+                     latestnam.setText("Latest Test Report: "+response.body().getData().get(0).getTestName());
+                    latestque.setText("Total Question: "+response.body().getData().get(0).getTotalQue());
+                     latestmarks.setText("Total Mark: "+response.body().getData().get(0).getTotalmark());
               //      cred_mie.setText(cred_mie.getText().toString().concat(" "+response.body().getData()));
 //                    Toast.makeText(ShowAllPakages.this, "Login successful", Toast.LENGTH_SHORT).show();
-
 
 //                    Intent intent=new Intent(ShowAllPakages.this,MainActivity.class);
 //                    //manager.serverLogin(response.body().getData().getId() , response.body().getData().getName(),response.body().getData().getStatus());
@@ -135,9 +151,10 @@ public class Home extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<Percentage> call, Throwable t) {
+            public void onFailure(Call<Dashboard_Latest_Test> call, Throwable t) {
 
                 Log.d("cause" , ""+t.getMessage());
+                Log.d("cause" , ""+t.getCause());
                 Toast.makeText(getActivity(), "Network problem", Toast.LENGTH_SHORT).show();
 
             }

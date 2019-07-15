@@ -1,77 +1,78 @@
 package dev.raghav.civilgate.Frag_granades;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 
 import dev.raghav.civilgate.Activities.All_Reviews_Questions;
 import dev.raghav.civilgate.Api.Api;
 import dev.raghav.civilgate.Api.Retro_Urls;
+import dev.raghav.civilgate.Const_Files.Bookmark_ids;
+import dev.raghav.civilgate.Const_Files.BooktheMarks;
 import dev.raghav.civilgate.Const_Files.Full_Solutions;
-import dev.raghav.civilgate.Const_Files.PostBookMarks;
-import dev.raghav.civilgate.Full_Solution.MCQ_Questions;
 import dev.raghav.civilgate.R;
 import dev.raghav.civilgate.SessionManage.SessionManager;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static dev.raghav.civilgate.Activities.Direct_History.levelid;
-import static dev.raghav.civilgate.Activities.Direct_History.sublevelid;
-
 public class Boomarks_Fragment extends Fragment {
 
     SessionManager sessionManager;
-    WebView webque;
+    WebView webquebk;
     ImageView opt1 ,opt2 ,opt3,opt4;
     TextView optxt1 ,optxt2 ,optxt3 ,optxt4 ;
     TextView allques;
-    TextView soledit, ansss1,ansss2,ansss3,ansss4;
+    TextView soleditbk, ansss1bk,ansss2bk,ansss3bk,ansss4bk;
     static public int solutioncounter =0;
     ImageView bookmark;
     int nx,pre;
+    Call<BooktheMarks> get_aboutCall;
+    int checklst =0;
+    ArrayAdapter<String> BookaArrayAdapter;
     Full_Solutions full_solutions;
     TextView next ,previous;
-    int rightans;
-    String rightansstr;
-    private String maanstr;
-    private int maans;
+    ArrayList<Bookmark_ids> integerstest_ids = new ArrayList<>();
+    ArrayList<String> integidsonly = new ArrayList<>();
+    Spinner bookmarksid;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-
     {
-
        // View view = inflater.inflate(R.layout.mcq_questions , container , false);
         View view = inflater.inflate(R.layout.bookfragslayout , container , false);
         sessionManager = new SessionManager(getActivity());
-        webque = view.findViewById(R.id.webque);
-        next = view.findViewById(R.id.next);
-        previous = view.findViewById(R.id.previous);
+        webquebk = view.findViewById(R.id.webquebk);
+        next = view.findViewById(R.id.nextbx);
+        previous = view.findViewById(R.id.previousbx);
+        bookmarksid = view.findViewById(R.id.bookmarksid);
         bookmark = view.findViewById(R.id.bookmark);
-        ansss1 = view.findViewById(R.id.ansss1);
-        ansss2 = view.findViewById(R.id.ansss2);
-        ansss3 = view.findViewById(R.id.ansss3);
-        ansss4 = view.findViewById(R.id.ansss4);
-        soledit = view.findViewById(R.id.soledit);
+        ansss1bk = view.findViewById(R.id.ansss1bk);
+        ansss2bk = view.findViewById(R.id.ansss2bk);
+        ansss3bk = view.findViewById(R.id.ansss3bk);
+        ansss4bk = view.findViewById(R.id.ansss4bk);
+        soleditbk = view.findViewById(R.id.soleditbk);
         allques = view.findViewById(R.id.allques);
         optxt1 = view.findViewById(R.id.optxt1);
         optxt2 = view.findViewById(R.id.optxt2);
@@ -81,8 +82,38 @@ public class Boomarks_Fragment extends Fragment {
         opt2 = view.findViewById(R.id.opt2);
         opt3 = view.findViewById(R.id.opt3);
         opt4 = view.findViewById(R.id.opt4);
+   //     Toast.makeText(getActivity(), "hiiiiiiiiiii", Toast.LENGTH_SHORT).show();
+        GetTheFullSolution(0);
+        bookmarksid.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position!=0) {
+                    solutioncounter =0;
+                    ansss1bk.setText("");
+                    ansss2bk.setText("");
+                    ansss3bk.setText("");
+                    ansss4bk.setText("");
+                    soleditbk.setText("");
+                    optxt1.setText("");
+                    optxt2.setText("");
+                    optxt3.setText("");
+                    optxt4.setText("");
+                    opt1.setImageDrawable(null);
+                    opt2.setImageDrawable(null);
+                    opt3.setImageDrawable(null);
+                    opt4.setImageDrawable(null);
+                    GetTheFullSolution(integerstest_ids.get(position).getTestid());
+                 //   GetTheFullSolution(0);
+                }
 
-        GetTheFullSolution();
+         //       GetTheFullSolution(0);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         allques.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +125,13 @@ public class Boomarks_Fragment extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        integidsonly.clear();
+                                        integerstest_ids.clear();
+                                        ansss1bk.setText("");
+                                        ansss2bk.setText("");
+                                        ansss3bk.setText("");
+                                        ansss4bk.setText("");
+                                        soleditbk.setText("");
                                         optxt1.setText("");
                                         optxt2.setText("");
                                         optxt3.setText("");
@@ -104,31 +142,38 @@ public class Boomarks_Fragment extends Fragment {
                                         opt4.setImageDrawable(null);
                                         nx =1;
                                         solutioncounter++;
-                                        GetTheFullSolution();
+                                        GetTheFullSolution(0);
                                         nx =0;
 
                                     }
                                 }
         );
-        bookmark.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-             //   HaveABookMArk(full_solutions.getData().get(solutioncounter).getQueid() , full_solutions.getData().get(solutioncounter).getTestId() , full_solutions.getData().get(solutioncounter).getSId());
-                //   Toast.makeText(getActivity(), " Book Mark Added "+full_solutions.getData().get(solutioncounter).getQueid(), Toast.LENGTH_SHORT).show();
-//                for(int p=0;p<full_solutions.getData().size();p++)
-//                {
-//                 if(full_solutions.getData().get(p).equals(full_solutions.getData().get(solutioncounter).getQue()))
-//                 {
+//        bookmark.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//             //   HaveABookMArk(full_solutions.getData().get(solutioncounter).getQueid() , full_solutions.getData().get(solutioncounter).getTestId() , full_solutions.getData().get(solutioncounter).getSId());
+//                //   Toast.makeText(getActivity(), " Book Mark Added "+full_solutions.getData().get(solutioncounter).getQueid(), Toast.LENGTH_SHORT).show();
+////                for(int p=0;p<full_solutions.getData().size();p++)
+////                {
+////                 if(full_solutions.getData().get(p).equals(full_solutions.getData().get(solutioncounter).getQue()))
+////                 {
+////
+////                 }
+////                }
 //
-//                 }
-//                }
-
-            }
-        });
+//            }
+//        });
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!(solutioncounter <=0 )) {
+                    integidsonly.clear();
+                    integerstest_ids.clear();
+                    ansss1bk.setText("");
+                    ansss2bk.setText("");
+                    ansss3bk.setText("");
+                    ansss4bk.setText("");
+                    soleditbk.setText("");
                     optxt1.setText("");
                     optxt2.setText("");
                     optxt3.setText("");
@@ -139,7 +184,7 @@ public class Boomarks_Fragment extends Fragment {
                     opt4.setImageDrawable(null);
                     pre =1;
                     --solutioncounter;
-                    GetTheFullSolution();
+                    GetTheFullSolution(0);
                     pre =0;
                 }else {
                     Toast.makeText(getActivity(), "No Backward possible", Toast.LENGTH_SHORT).show();
@@ -152,252 +197,109 @@ public class Boomarks_Fragment extends Fragment {
 
 
 
-    private void GetTheFullSolution() {
+    private void GetTheFullSolution(int testid) {
 
-//        Retrofit RetroLogin = new Retrofit.Builder()
-//                .baseUrl(Retro_Urls.The_Base).addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//        Api RegApi = RetroLogin.create(Api.class);
-//        Log.e("levelid is" , ""+levelid);
-//        Log.e("sublel_id is" , ""+sublevelid);
-//        Call<Full_Solutions> login_responceCall = RegApi.BOOKTHE_MARKS_CALL(sessionManager.getCoustId() ,levelid );
-//        login_responceCall.enqueue(new Callback<Full_Solutions>() {
-//            @Override
-//            public void onResponse(Call<Full_Solutions> call, Response<Full_Solutions> response) {
-//                Log.d("string" , ""+response.body().getResponce());
-//
-////                            Log.d("string" , ""+response.body().getData().getEmail());
-//                if(response.body().getResponce())
-//                {
-//                    if(response.body().getResponce())
-//                    {
-//                        Log.e("we" , "get some");
-//                        full_solutions = response.body();
-//                        //   Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
-//                        for(int k=0;k< response.body().getData().size() ;k++) {
-//                            Log.w("whtas" , ""+response.body().getData().get(k).getQue());
-//                            Log.e("has sid" , ""+response.body().getData().get(k).getSId());
-//                            Log.e("has stid" , ""+response.body().getData().get(k).getTestId());
-//                            if(solutioncounter <response.body().getData().size() &&  solutioncounter==k) {
-//                                if( nx ==1)
-//                                {
-//                                    Log.e("first" , "Part");
-//                                    if(solutioncounter >=0) {
-//                                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                                        fragmentTransaction.replace(R.id.solfr, new MCQ_Questions());
-//                                        fragmentTransaction.commit();
-//                                        fragmentTransaction.addToBackStack(null);
-//
-//                                    }
-//                                    else
-//                                    {
-//                                        Toast.makeText(getActivity(), "No forward possible", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                }
-//                                else
-//                                if(pre ==1)
-//                                {
-//                                    Log.e("first" , "second Part");
-//
-//
-//                                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                                    fragmentTransaction.replace(R.id.solfr, new MCQ_Questions());
-//                                    fragmentTransaction.commit();
-//                                    fragmentTransaction.addToBackStack(null);
-//
-//                                }
-//
-//                                webque.loadData(response.body().getData().get(solutioncounter).getQue().toString(), "text/html", null);
-//
-//                                try {
-//                                    Log.e("first" , "try Part");
-//                                    maans = Integer.valueOf(response.body().getData().get(solutioncounter).getAns());
-//                                    rightans = Integer.valueOf(response.body().getData().get(solutioncounter).getQueAns());
-//                                    Log.w("maans" , ""+maans);
-//                                    Log.w("rightans" , ""+rightans);
-//                                    ansss1.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns1()));
-//                                    ansss2.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns2()));
-//                                    ansss3.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns3()));
-//                                    ansss4.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns4()));
-//                                    if(maans==rightans)
-//                                    {
-//                                        if(maans ==1)
-//                                        {
-//                                            optxt1.setText("Your Answer");
-//                                            opt1.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                        if(maans ==2)
-//                                        {
-//                                            optxt2.setText("Your Answer");
-//                                            opt2.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                        if(maans ==3)
-//                                        {
-//                                            optxt3.setText("Your Answer");
-//                                            opt3.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                        if(maans ==4)
-//                                        {
-//                                            optxt4.setText("Your Answer");
-//                                            opt4.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                        if(maans ==0)
-//                                        {
-//
-//
-////                                   opt1.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                    }else {
-//                                        if(rightans ==1)
-//                                        {
-//                                            optxt1.setText("Actual Ans");
-//                                            opt1.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                        if(rightans ==2)
-//                                        {
-//                                            optxt2.setText("Actual Ans");
-//                                            opt3.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                        if(rightans ==3)
-//                                        {
-//                                            optxt3.setText("Actual Ans");
-//                                            opt3.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                        if(rightans ==4)
-//                                        {
-//                                            optxt4.setText("Actual Ans");
-//                                            opt4.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                        if(rightans ==0)
-//                                        {
-//
-////                                   opt1.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                    }
-//                                    Log.e("solution  is", "" + solutioncounter);
-//                                    String soul = Html.escapeHtml(response.body().getData().get(solutioncounter).getSolution());
-//                                    soledit.setText(String.valueOf(soul));
-//                                }
-//                                catch (Exception e)
-//                                {
-//                                    Log.e("log catch first" , "Part");
-//                                    maanstr = response.body().getData().get(solutioncounter).getAns();
-//                                    rightansstr = response.body().getData().get(solutioncounter).getQueAns();
-//                                    ansss1.setVisibility(View.GONE);
-//                                    ansss2.setVisibility(View.GONE);
-//                                    ansss3.setVisibility(View.GONE);
-//                                    ansss4.setVisibility(View.GONE);
-//                                    if(maanstr.equals(rightansstr) )
-//                                    {
-//                                        String soul = Html.escapeHtml(response.body().getData().get(solutioncounter).getSolution());
-//                                        soledit.setText(String.valueOf(soul));
-//                                        soledit.setTextColor(Color.GREEN);
-////                                   if(maanstr.equals("1"))
-////                                   {
-////                                       optxt1.setText("Your Answer");
-////                                       opt1.setImageResource(R.drawable.ic_correct);
-////                                   }
-////                                   if(maanstr ==2)
-////                                   {
-////                                       optxt2.setText("Your Answer");
-////                                       opt2.setImageResource(R.drawable.ic_correct);
-////                                   }
-////                                   if(maans ==3)
-////                                   {
-////                                       optxt3.setText("Your Answer");
-////                                       opt3.setImageResource(R.drawable.ic_correct);
-////                                   }
-////                                   if(maanstr ==4)
-////                                   {
-////                                       optxt4.setText("Your Answer");
-////                                       opt4.setImageResource(R.drawable.ic_correct);
-////                                   }
-////                                   if(maanstr ==0)
-////                                   {
-////
-////
-//////                                   opt1.setImageResource(R.drawable.ic_correct);
-////                                   }
-//                                    }else {
-//                                        String soul = Html.escapeHtml(response.body().getData().get(solutioncounter).getSolution());
-//                                        soledit.setText(String.valueOf(soul));
-//                                        soledit.setTextColor(Color.RED);
-//                                        if(rightans ==1)
-//                                        {
-//                                            optxt1.setText("Actual Ans");
-//                                            opt1.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                        if(rightans ==2)
-//                                        {
-//                                            optxt2.setText("Actual Ans");
-//                                            opt3.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                        if(rightans ==3)
-//                                        {
-//                                            optxt3.setText("Actual Ans");
-//                                            opt3.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                        if(rightans ==4)
-//                                        {
-//                                            optxt4.setText("Actual Ans");
-//                                            opt4.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                        if(rightans ==0)
-//                                        {
-//
-////                                   opt1.setImageResource(R.drawable.ic_correct);
-//                                        }
-//                                    }
-//                                    Log.e("solution  is", "" + solutioncounter);
-//
-//                                    e.printStackTrace();
-//                                }
-//                                //  int rightans = String.valueOf()Integer.valueOf(response.body().getData().get(solutioncounter).getQueAns());
-//                                // soledit.loadData(response.body().getData().get(solutioncounter).getSolution() , "text/html" , null);
-//                            }
-//                            else {
-//                                Log.e("we " , "are Part");
-//                                if(solutioncounter +1 >response.body().getData().size())
-//                                {
-//                                    solutioncounter = response.body().getData().size()-1;
-//                                    Toast.makeText(getActivity(), "No forward possible ", Toast.LENGTH_SHORT).show();
-//                                    Log.e("dfsd" , "dxdxdx");
-//                                }
-//
-//                            }
-//                        }
-//
-//                        //      Log.e("image" , "url"+ response.body().getData().get(k).getPackageImage());
-//                    }
-//
-////                    Intent intent=new Intent(ShowAllPakages.this,MainActivity.class);
-////                    //manager.serverLogin(response.body().getData().getId() , response.body().getData().getName(),response.body().getData().getStatus());
-////                    intent.putExtra("respoce", ""+response);
-////                    startActivity(intent);
-////                    finish();
-//                }
-//
-//                else
-//
-//                {
-//                    //    Toast.makeText(ShowAllPakages.this, "Either Email is wrong or Password", Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Full_Solutions> call, Throwable t) {
-//
-//                Log.d("cause" , ""+t.getCause());
-//                Log.d("main cause" , ""+t.getLocalizedMessage());
-//                Log.d("cause" , ""+t.getMessage());
-//                Toast.makeText(getActivity(), "Network problem", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
+//        integerstest_ids.clear();
 
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(100, TimeUnit.SECONDS)
+                .readTimeout(100,TimeUnit.SECONDS).build();
+        Retrofit RetroLogin = new Retrofit.Builder()
+                .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api AbloutApi = RetroLogin.create(Api.class);
+        if(testid ==0) {
+       get_aboutCall = AbloutApi.BOOKTHE_MARKS_CALL(sessionManager.getCoustId());
+        }else {
+            get_aboutCall = AbloutApi.BOOKTHE_MARKS_CALL(sessionManager.getCoustId() ,String.valueOf(testid));
+        }
+        get_aboutCall.enqueue(new Callback<BooktheMarks>() {
+            @Override
+            public void onResponse(Call<BooktheMarks> call, Response<BooktheMarks> response) {
+                for(int i=0;i<response.body().getData().size(); i++){
+                    if(testid ==0) {
+                        integerstest_ids.add(new Bookmark_ids(Integer.parseInt(response.body().getData().get(i).getTest_id()), response.body().getData().get(i).getTestName()));
+                    }
+                    if(solutioncounter>=0 ){
+//                    Log.e("hi" , "bookamr"+response.body().getData().get(solutioncounter).getQue());
+             //       Log.e("hi" , "bookamr"+response.body().getData().get(solutioncounter).getTest_id());
+
+                    if(response.body().getData().get(i).getType().equals("1")) {
+
+                       // integerstest_ids.add(Integer.parseInt(response.body().getData().get(i).getTest_id()));
+                        if(solutioncounter <response.body().getData().size() &&  solutioncounter==i) {
+                                webquebk.loadData(response.body().getData().get(solutioncounter).getQue().toString(), "text/html", null);
+                                ansss1bk.setText(ansss1bk.getText().toString().concat("" + response.body().getData().get(solutioncounter).getAns1()));
+                                ansss2bk.setText(ansss2bk.getText().toString().concat("" + response.body().getData().get(solutioncounter).getAns2()));
+                                ansss3bk.setText(ansss3bk.getText().toString().concat("" + response.body().getData().get(solutioncounter).getAns3()));
+                                ansss4bk.setText(ansss4bk.getText().toString().concat("" + response.body().getData().get(solutioncounter).getAns4()));
+                                soleditbk.setText(response.body().getData().get(solutioncounter).getSolution());
+                            int maans = Integer.valueOf(response.body().getData().get(solutioncounter).getAns());
+                            if(maans ==1)
+                            {
+
+                                opt1.setImageResource(R.drawable.ic_correct);
+                            }
+                            if(maans ==2)
+                            {
+
+                                opt2.setImageResource(R.drawable.ic_correct);
+                            }
+                            if(maans ==3)
+                            {
+
+                                opt3.setImageResource(R.drawable.ic_correct);
+                            }
+                            if(maans ==4)
+                            {
+                                opt4.setImageResource(R.drawable.ic_correct);
+                            }
+
+                        }else {
+                            if(solutioncounter <=0) {
+                                Toast.makeText(getActivity(), "No Backward possible", Toast.LENGTH_SHORT).show();
+                            }else if(solutioncounter == response.body().getData().size()){
+                                Toast.makeText(getActivity(), "No Forward possible", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                    }
+//                    marksArrayList.add(new BooktheMarksData(response.body().getData().get(i).getId(),response.body().getData().get(i).getSubId(),
+//                            response.body().getData().get(i).getQue(),response.body().getData().get(i).getAns1(),response.body().getData().get(i).getAns2(),
+//                            response.body().getData().get(i).getAns3(),response.body().getData().get(i).getAns4(),response.body().getData().get(i).getAns3(),response.body().getData().get(i).getQue(),
+//                            response.body().getData().get(i).getAns3(),response.body().getData().get(i).getFromAns(), response.body().getData().get(i).getToAns(),response.body().getData().get(i).getSolution(),response.body().getData().get(i).getStatus(),response.body().getData().get(i).getVideo(),response.body().getData().get(i).getVideoUrl(),response.body().getData().get(i).getCreatedate(),response.body().getData().get(i).getType()
+//                            ,response.body().getData().get(i).getTestName()
+//                    ));
+
+                }
+                if(testid ==0) {
+                    for(int k=0;k<response.body().getData().size(); k++) {
+                        integidsonly.add(response.body().getData().get(k).getTestName());
+
+                    }
+                    BookaArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, integidsonly );
+                    bookmarksid.setAdapter(BookaArrayAdapter);
+                }
+                //bookmarksid.setDr(android.R.layout.simple_spinner_dropdown_item);
+
+//                if(solutioncounter>=0) {
+//                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                   // FragmentManager fragmentManager = getFragmentManager();
+//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                    fragmentTransaction.replace(R.id.solframeboo, new Boomarks_Fragment()).commit();
+//                }
+//                bookrecy.setLayoutManager(llm);
+//                bookrecy.setAdapter( new dev.raghav.civilgate.Dapter.BooktheMarks(marksArrayList));
+
+                //     Toast.makeText(MaBookmarks.this, ""+response.body().getData().getDescription(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<BooktheMarks> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

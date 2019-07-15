@@ -9,6 +9,18 @@ public class BooktheMarksData {
     @SerializedName("id")
     @Expose
     private String id;
+
+    public String getTest_id() {
+        return test_id;
+    }
+
+    public void setTest_id(String test_id) {
+        this.test_id = test_id;
+    }
+
+    @SerializedName("test_id")
+    @Expose
+    private String test_id;
     @SerializedName("sub_id")
     @Expose
     private String subId;
@@ -67,7 +79,8 @@ public class BooktheMarksData {
     @Expose
     private String testName;
 
-    public BooktheMarksData(String id, String subId, String que, String ans1, String ans2, String ans3, String ans4, String ans, String minusmark, String marks, String fromAns, String toAns, String solution, String multipleAns, String status, String video, String videoUrl, String createdate, String type) {
+    public BooktheMarksData(String test_id,String id, String subId, String que, String ans1, String ans2, String ans3, String ans4, String ans, String minusmark, String marks, String fromAns, String toAns, String solution, String multipleAns, String status, String video, String videoUrl, String createdate, String type) {
+        this.test_id = test_id;
         this.id = id;
         this.subId = subId;
         this.que = que;

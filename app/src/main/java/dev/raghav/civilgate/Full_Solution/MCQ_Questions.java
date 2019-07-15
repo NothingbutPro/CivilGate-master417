@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Html;
 import android.util.Log;
@@ -53,11 +54,14 @@ public class MCQ_Questions extends Fragment {
    static public int solutioncounter =0;
    ImageView bookmark;
    int nx,pre;
+   TextView iwrote,actualwrote;
    Full_Solutions full_solutions;
    TextView next ,previous;
     int rightans;
     String rightansstr;
+    CardView multiqueli , fillinwque;
     private String maanstr;
+
     private int maans;
 
     @Nullable
@@ -69,6 +73,10 @@ public class MCQ_Questions extends Fragment {
         next = view.findViewById(R.id.next);
         previous = view.findViewById(R.id.previous);
         bookmark = view.findViewById(R.id.bookmark);
+        multiqueli = view.findViewById(R.id.multisolve);
+        fillinwque = view.findViewById(R.id.fillcard);
+        actualwrote = view.findViewById(R.id.shouldwrote);
+        iwrote = view.findViewById(R.id.iwrote);
         ansss1 = view.findViewById(R.id.ansss1);
         ansss2 = view.findViewById(R.id.ansss2);
         ansss3 = view.findViewById(R.id.ansss3);
@@ -96,6 +104,8 @@ public class MCQ_Questions extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                iwrote.setText("");
+                actualwrote.setText("");
                 optxt1.setText("");
                 optxt2.setText("");
                 optxt3.setText("");
@@ -256,14 +266,31 @@ public class MCQ_Questions extends Fragment {
                            
                            try {
                                Log.e("first" , "try Part");
-                                maans = Integer.valueOf(response.body().getData().get(solutioncounter).getAns());
-                                rightans = Integer.valueOf(response.body().getData().get(solutioncounter).getQueAns());
+
+                                try {
+                                    maans = Integer.valueOf(response.body().getData().get(solutioncounter).getAns());
+                                    rightans = Integer.valueOf(response.body().getData().get(solutioncounter).getQueAns());
+                                }catch (Exception e)
+                                {
+                                    e.printStackTrace();
+                                }
                                Log.w("maans" , ""+maans);
                                Log.w("rightans" , ""+rightans);
-                               ansss1.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns1()));
-                               ansss2.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns2()));
-                               ansss3.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns3()));
-                               ansss4.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns4()));
+                               if(response.body().getData().get(k).getType().equals("2"))
+                               {
+                                   fillinwque.setVisibility(View.VISIBLE);
+                                   multiqueli.setVisibility(View.GONE);
+                                   iwrote.setText(iwrote.getText().toString().concat(" "+response.body().getData().get(k).getQueAns()));
+                                   actualwrote.setText(actualwrote.getText().toString().concat(" "+response.body().getData().get(k).getAns()));
+
+                               }else {
+                                   multiqueli.setVisibility(View.VISIBLE);
+                                   fillinwque.setVisibility(View.GONE);
+                                   ansss1.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns1()));
+                                   ansss2.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns2()));
+                                   ansss3.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns3()));
+                                   ansss4.setText(String.valueOf(response.body().getData().get(solutioncounter).getAns4()));
+                               }
                                if(maans==rightans)
                                {
                                    if(maans ==1)
@@ -292,7 +319,8 @@ public class MCQ_Questions extends Fragment {
 
 //                                   opt1.setImageResource(R.drawable.ic_correct);
                                    }
-                               }else {
+                               }
+                               else {
                                    if(rightans ==1)
                                    {
                                        optxt1.setText("Actual Ans");

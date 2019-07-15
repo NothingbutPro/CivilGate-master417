@@ -81,6 +81,11 @@ public interface Api {
             @Field("test_id") String  test_id
     );
     @FormUrlEncoded
+    @POST(Retro_Urls.Getbookmark)
+    Call<BooktheMarks> BOOKTHE_MARKS_CALL(
+            @Field("student_id") int  student_id
+    );
+    @FormUrlEncoded
     @POST(Retro_Urls.forgetpassword)
     Call<Forgotten_Passowrd> Forgetpassword(
             @Field("email") String email
@@ -181,7 +186,6 @@ Call<TestStart> GetTestQuestionCall(
         @Field("student_id") int student_id,
         @Field("level_id") int level_id,
         @Field("level_sub_id") String level_sub_id, @Field("subject_id") String subject_id );
-
 
 
 

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#9FDDA2"
     android:weightSum="1"
+
     >
 
 
@@ -39,6 +40,8 @@
                         android:layout_height="match_parent">
 
                         <Spinner
+                            android:entries="@array/bookmark"
+                            android:id="@+id/bookmarksid"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             >
@@ -160,8 +163,7 @@
                         android:layout_height="match_parent">
 
                         <WebView
-
-                            android:id="@+id/webque"
+                            android:id="@+id/webquebk"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="#000"
@@ -181,6 +183,7 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/multique"
                 android:layout_margin="10dp"
                 android:padding="5dp"
                 android:background="@drawable/btn_bg_style"
@@ -204,7 +207,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <TextView
-                                android:id="@+id/ansss1"
+                                android:id="@+id/ansss1bk"
                                 android:text="A)"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -240,7 +243,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <TextView
-                                android:id="@+id/ansss2"
+                                android:id="@+id/ansss2bk"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="B)"
@@ -278,7 +281,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                             <TextView
-                                android:id="@+id/ansss3"
+                                android:id="@+id/ansss3bk"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="C)"
@@ -302,7 +305,6 @@
                         </RelativeLayout>
                     </LinearLayout>
                     <LinearLayout
-
                         android:background="@drawable/btn_bg_style"
                         android:layout_gravity="center"
                         android:gravity="center"
@@ -315,7 +317,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="D) "
-                                android:id="@+id/ansss4"
+                                android:id="@+id/ansss4bk"
                                 android:textColor="#000"
                                 />
                             <LinearLayout
@@ -397,6 +399,7 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 android:layout_margin="10dp"
                 android:padding="5dp"
@@ -437,7 +440,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/soledit"
+                            android:id="@+id/soleditbk"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textSize="25dp"
@@ -472,7 +475,7 @@
 
             <TextView
 
-                android:id="@+id/previous"
+                android:id="@+id/previousbx"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -509,7 +512,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/next"
+                android:id="@+id/nextbx"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_width="match_parent"

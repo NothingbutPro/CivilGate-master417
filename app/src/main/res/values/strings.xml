@@ -24,6 +24,14 @@
         <item>GATE/IES</item>
         <item>GATE/PSU</item>
     </string-array>
+    <string-array name="bookmark">
+        <item>All</item>
+        <item>Basic</item>
+        <item>Daily</item>
+        <item>Intermediate</item>
+        <item>Advance</item>
+        <item>Mock</item>
+    </string-array>
 
     <string-array name="stream_type_spinner">
         <item>Select stream</item>

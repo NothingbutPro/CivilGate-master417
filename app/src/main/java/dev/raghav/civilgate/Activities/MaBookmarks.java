@@ -44,6 +44,7 @@ public class MaBookmarks extends AppCompatActivity {
      //   bookrecy = findViewById(R.id.bookrecy);
         soleedty = findViewById(R.id.solframeboo);
         sessionManager = new SessionManager(this);
+        Toast.makeText(this, "booojk", Toast.LENGTH_SHORT).show();
         GetAllBookmarks();
     }
 
@@ -64,7 +65,7 @@ public class MaBookmarks extends AppCompatActivity {
             public void onResponse(Call<BooktheMarks> call, Response<BooktheMarks> response) {
                 for(int i=0;i<response.body().getData().size(); i++){
                     Log.e("hi" , "bookamr"+response.body().getData().get(i).getQue());
-                    marksArrayList.add(new BooktheMarksData(response.body().getData().get(i).getId(),response.body().getData().get(i).getSubId(),
+                    marksArrayList.add(new BooktheMarksData(response.body().getData().get(0).getTest_id(),response.body().getData().get(i).getId(),response.body().getData().get(i).getSubId(),
                             response.body().getData().get(i).getQue(),response.body().getData().get(i).getAns1(),response.body().getData().get(i).getAns2(),
                             response.body().getData().get(i).getAns3(),response.body().getData().get(i).getAns4(),response.body().getData().get(i).getAns3(),response.body().getData().get(i).getQue(),
                             response.body().getData().get(i).getAns3(),response.body().getData().get(i).getFromAns(), response.body().getData().get(i).getToAns(),response.body().getData().get(i).getSolution(),response.body().getData().get(i).getStatus(),response.body().getData().get(i).getVideo(),response.body().getData().get(i).getVideoUrl(),response.body().getData().get(i).getCreatedate(),response.body().getData().get(i).getType()

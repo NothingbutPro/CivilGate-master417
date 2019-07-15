@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Dashboard_Latest_Test {
 
-
     @SerializedName("data")
     @Expose
     private List<Dashboard_Latest_Test_Data> data = null;

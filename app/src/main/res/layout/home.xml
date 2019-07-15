@@ -438,6 +438,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
                             <ProgressBar
+                                android:maxWidth="50dp"
                                 android:id="@+id/pro1"
                                 style="?android:attr/progressBarStyleHorizontal"
                                 android:layout_weight="1"
@@ -635,7 +636,8 @@
 
 
                 <LinearLayout
-                    android:padding="20dp"
+
+                    android:padding="0dp"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -659,29 +661,44 @@
                             <!--android:layout_height="wrap_content"-->
                             <!--android:layout_gravity="center"-->
                             <!--app:srcCompat="@drawable/face_clip" />-->
-
+                            <android.support.v7.widget.CardView
+                                android:layout_margin="5dp"
+                                app:cardMaxElevation="5dp"
+                                app:cardElevation="5dp"
+                                android:elevation="5dp"
+                                android:layout_weight="1.6"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
                             <TextView
+
                                 android:textAllCaps="true"
                                 android:id="@+id/latestque"
-                                android:layout_weight="1.9"
+
                                 android:textColor="#02bbca"
                                 android:padding="5dp"
                                 android:textAlignment="center"
                                 android:text="Total Question :"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
-
-
+                            </android.support.v7.widget.CardView>
+                            <android.support.v7.widget.CardView
+                                android:layout_margin="5dp"
+                                app:cardElevation="5dp"
+                                app:cardMaxElevation="5dp"
+                                android:elevation="5dp"
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
                             <TextView
                                 android:id="@+id/totmark"
-                                android:layout_weight="1"
+
                                 android:textColor="#02bbca"
                                 android:padding="5dp"
                                 android:textAlignment="center"
                                 android:text="Total Marks :"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
-
+                            </android.support.v7.widget.CardView>
                         </LinearLayout>
 
 
@@ -695,17 +712,19 @@
                         <!--app:layoutManager="android.support.v7.widget.LinearLayoutManager"></android.support.v7.widget.RecyclerView>-->
 
                 </android.support.v7.widget.CardView>
+
                 <android.support.v7.widget.CardView
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
-                        android:weightSum="3"
+                        android:weightSum="1"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <android.support.v7.widget.CardView
                             app:cardElevation="10dp"
-                            android:layout_weight="1"
+                            android:layout_weight="0.35"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                         <LinearLayout
@@ -715,7 +734,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" >
                             <com.budiyev.android.circularprogressbar.CircularProgressBar
-
+                                android:padding="10dp"
                                 android:id="@+id/unprogress_bar"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -752,7 +771,7 @@
                         </LinearLayout>
                         </android.support.v7.widget.CardView>
                         <android.support.v7.widget.CardView
-                            android:layout_weight="1"
+                            android:layout_weight="0.35"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                         <LinearLayout
@@ -763,6 +782,7 @@
                             android:layout_height="wrap_content" >
 
                             <com.budiyev.android.circularprogressbar.CircularProgressBar
+                                android:padding="10dp"
                                 android:id="@+id/attprogress"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
@@ -782,8 +802,6 @@
                                 app:progress="0"
                                 app:progressAnimationDuration="100"
                                 app:startAngle="270"
-
-
                                 />
 
 
@@ -802,7 +820,7 @@
 
                         <android.support.v7.widget.CardView
                             app:cardElevation="10dp"
-                            android:layout_weight="1"
+                            android:layout_weight="0.24"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
                         <LinearLayout
@@ -813,6 +831,7 @@
                             android:layout_height="wrap_content" >
 
                             <com.budiyev.android.circularprogressbar.CircularProgressBar
+                                android:padding="10dp"
                                 android:id="@+id/wrongprogress"
                                 android:layout_weight="1"
                                 android:layout_width="match_parent"
@@ -837,12 +856,14 @@
 
 
                             <TextView
+                                android:layout_marginRight="30dp"
+                            android:layout_gravity="center"
                                 android:layout_weight="1"
                                 android:textColor="#02bbca"
                                 android:padding="10dp"
                                 android:textAlignment="center"
                                 android:text="Wrong"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
 
 
