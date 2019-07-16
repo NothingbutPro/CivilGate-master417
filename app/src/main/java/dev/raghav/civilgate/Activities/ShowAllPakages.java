@@ -49,7 +49,7 @@ public class ShowAllPakages extends AppCompatActivity {
                 {
                     Toast.makeText(ShowAllPakages.this, "Login successful", Toast.LENGTH_SHORT).show();
                     for(int k=0;k< response.body().getData().size() ;k++) {
-                        packages.add(new Package_Const(response.body().getData().get(k).getId() , response.body().getData().get(k).getLevelId() ,response.body().getData().get(k).getStatus(),response.body().getData().get(k).getPackageName(),response.body().getData().get(k).getPackageMrp() , response.body().getData().get(k).getPackageType() , response.body().getData().get(k).getPackageImage()));
+                     //   packages.add(new Package_Const(Integer.valueOf(response.body().getData().get(k).getStatus()),(Integer.valueOf(response.body().getData().get(k).getLevelId())),response.body().getData().get(k).getId() , response.body().getData().get(k).getLevelId() ,response.body().getData().get(k).getStatus(),response.body().getData().get(k).getPackageName(),response.body().getData().get(k).getPackageMrp() , response.body().getData().get(k).getPackageType() , response.body().getData().get(k).getPackageImage() ,response.body().getData().get(k).getDescription()));
                         Log.e("image" , "url"+ response.body().getData().get(k).getPackageImage());
                     }
                     pakages_adapter = new Pakages_Adapter(packages);

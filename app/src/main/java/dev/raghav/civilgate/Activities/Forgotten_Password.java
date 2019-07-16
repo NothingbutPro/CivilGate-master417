@@ -1,5 +1,6 @@
 package dev.raghav.civilgate.Activities;
 
+import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import dev.raghav.civilgate.Api.Api;
@@ -25,12 +27,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Forgotten_Password extends AppCompatActivity {
   EditText Forgotemail;
-  Button Retrivemail;
+  TextView Retrivemail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgotten__password);
-        Forgotemail =findViewById(R.id.forgotemail);
+        Forgotemail =findViewById(R.id.txtemail);
         Retrivemail = findViewById(R.id.retrivmail);
         if (android.os.Build.VERSION.SDK_INT > 9)
         {
@@ -72,6 +74,8 @@ public class Forgotten_Password extends AppCompatActivity {
             if(response.isSuccessful())
             {
                 Toast.makeText(Forgotten_Password.this, ""+response.body().getMassage(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Forgotten_Password.this , LoginActivity.class);
+                startActivity(intent);
             }
 
             }

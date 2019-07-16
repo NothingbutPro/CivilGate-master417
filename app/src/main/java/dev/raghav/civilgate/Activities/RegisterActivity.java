@@ -58,12 +58,13 @@ public class RegisterActivity extends AppCompatActivity {
     CollapsingToolbarLayout toolbar_post;
     // private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = ;
     EditText email , password , passing_year , ful_name , mobile,address,collage_name;
-     ImageView  gate_photo , gate_sign;
-     File gate_photo_file , gate_sign_file;
+     ImageView  gate_degree_photo , gate_sign ,blankpro;
+     File gate_degree_file , gate_sign_file ,profile_phote ;
      Button reg_btn;
      View gv;
      Api  apiInterface;
      int a = 0;
+     int px =0;
     private static final int MY_PERMISSIONS_REQUESTS = 101;
     private ProgressDialog dialog;
 
@@ -79,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
         apiInterface = RetrofitClientApi.getClient().create(Api.class);
         checkforpermission();
 
-        gate_photo.setOnClickListener(v -> {
+        blankpro.setOnClickListener(v -> {
             if(checkforpermission())
             {
                 Toast.makeText(RegisterActivity.this, "all set", Toast.LENGTH_SHORT).show();
@@ -105,9 +106,9 @@ public class RegisterActivity extends AppCompatActivity {
         reg_btn.setOnClickListener(v -> {
             if(seeifallvaliD())
             {
-                if(gate_photo_file !=null && gate_sign_file !=null)
+                if(gate_degree_file !=null && gate_sign_file !=null && profile_phote !=null)
                 {
-                    registerthestupiduser(gate_photo_file , gate_sign_file , gate_photo_file.getAbsolutePath() , gate_sign_file.getAbsolutePath());
+                    registerthestupiduser(gate_degree_file , gate_sign_file , profile_phote , gate_sign_file.getAbsolutePath() ,profile_phote.getAbsolutePath());
                     Toast.makeText(RegisterActivity.this, "ok now you can upload", Toast.LENGTH_SHORT).show();
                 }else{
 
@@ -116,11 +117,25 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
         });
+        gate_degree_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkforpermission())
+                {
+                    Toast.makeText(RegisterActivity.this, "all set", Toast.LENGTH_SHORT).show();
+                    px=1;
+                    opengoddamngallery();
+
+                }else {
+                    requestitback();
+                }
+            }
+        });
         //
 
     }
 
-    private void registerthestupiduser(File gate_photo_file, File gate_sign_file, String pabsolutePath, String spath) {
+    private void registerthestupiduser(File gate_photo_file, File gate_sign_file, File profileabsolute, String pabsolutePath, String spath) {
 //        RequestBody gate_fulname  = RequestBody.create(MediaType.get("text/plain") , ful_name.getText().toString());
 //        RequestBody gate_email  = RequestBody.create(MediaType.get("text/plain") , email.getText().toString());
 //        RequestBody gate_password  = RequestBody.create(MediaType.get("text/plain") , password.getText().toString());
@@ -171,7 +186,7 @@ public class RegisterActivity extends AppCompatActivity {
 //            }
 //
 //        }
-        new Final_Image_upload(gate_photo_file , gate_sign_file).execute();
+        new Final_Image_upload(gate_photo_file , gate_sign_file , profileabsolute).execute();
 
     }
 
@@ -184,7 +199,8 @@ public class RegisterActivity extends AppCompatActivity {
         ful_name = findViewById(R.id.ful_nam);
         mobile = findViewById(R.id.mobile);
         gate_sign = findViewById(R.id.gate_sign);
-        gate_photo = findViewById(R.id.gate_photo);
+        blankpro = findViewById(R.id.gate_photo);
+        gate_degree_photo = findViewById(R.id.degreesign);
         reg_btn = findViewById(R.id.reg_btn);
         toolbar_post = findViewById(R.id.toolbar_post);
         address = findViewById(R.id.address);
@@ -358,12 +374,12 @@ public class RegisterActivity extends AppCompatActivity {
 //        OutputStream = new
         if (a == 1) {
             File filesDir = getApplicationContext().getFilesDir();
-           gate_photo_file = new File(filesDir, "photo" + ".jpg");
+            profile_phote = new File(filesDir, "photo" + ".jpg");
 
             OutputStream os;
             try {
-                os = new FileOutputStream(gate_photo_file);
-                Log.e("file is", ""+gate_photo_file.getName());
+                os = new FileOutputStream(profile_phote);
+                Log.e("file is", ""+profile_phote.getName());
                 image.compress(Bitmap.CompressFormat.JPEG, 100, os);
                 os.flush();
                 os.close();
@@ -372,10 +388,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
 //            }
-            gate_photo.setImageBitmap(image);
+            blankpro.setImageBitmap(image);
 
                 return null;
-            } else
+            } else if(px==0)
                 {
 
             File filesDir = getApplicationContext().getFilesDir();
@@ -393,7 +409,23 @@ public class RegisterActivity extends AppCompatActivity {
             }
             gate_sign.setImageBitmap(image);
 
+            }else {
+            File filesDir = getApplicationContext().getFilesDir();
+            gate_degree_file = new File(filesDir, "Degree" + ".jpg");
+
+            OutputStream os;
+            try {
+                os = new FileOutputStream(gate_degree_file);
+                Log.e("file is", ""+gate_degree_file.getName());
+                image.compress(Bitmap.CompressFormat.JPEG, 100, os);
+                os.flush();
+                os.close();
+            } catch (Exception e) {
+                Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
             }
+            gate_degree_photo.setImageBitmap(image);
+            px =0;
+        }
 
             try {
                 parcelFileDescriptor.close();
@@ -415,7 +447,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private class Final_Image_upload extends AsyncTask<Void , Void , String> {
-        File gate_photo , gate_sign;
+        File gate_photo , gate_sign ,profilepic;
         String result = "";
 
         @Override
@@ -426,9 +458,10 @@ public class RegisterActivity extends AppCompatActivity {
             super.onPreExecute();
         }
 
-        public  Final_Image_upload(File gate_photo_file, File gate_sign_file) {
+        public  Final_Image_upload(File gate_photo_file, File gate_sign_file, File profileabsolute) {
             this.gate_photo = gate_photo_file;
             this.gate_sign = gate_sign_file;
+            this.profilepic = profileabsolute;
         }
 
         @Override
@@ -446,8 +479,9 @@ public class RegisterActivity extends AppCompatActivity {
                 entity.addPart("passout_year", new StringBody("" + passing_year.getText().toString()));
                 entity.addPart("collage_name", new StringBody("" + collage_name.getText().toString()));
                 entity.addPart("address", new StringBody("" + address.getText().toString()));
-                entity.addPart("profile_image", new FileBody(gate_photo));
                 entity.addPart("sign_image", new FileBody(gate_sign));
+                entity.addPart("profile_image", new FileBody(profilepic));
+                entity.addPart("degree_upload", new FileBody(gate_degree_file));
 //                    result = Utilities.postEntityAndFindJson("https://www.spellclasses.co.in/DM/Api/taxreturn", entity);
 //                 //   result = Utilities.postEntityAndFindJson("https://www.spellclasses.co.in/DM/Api/taxreturn", entity);
                // result = Utilities.postEntityAndFindJson("http://ihisaab.in/lms/api/Ragistration/", entity);

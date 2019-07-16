@@ -2,9 +2,9 @@ package dev.raghav.civilgate.Const_Files;
 
 public class Package_Const {
     int id,status;
-    String package_name, level_id,package_mr, package_type ,package_image;
+    String package_name, level_id,package_mr, package_type ,package_image,package_des;
 
-    public Package_Const(int id, String level_id, int status, String package_name, String package_mr, String package_type, String package_image) {
+    public Package_Const(int id, String level_id, int status, String package_name, String package_mr, String package_type, String package_image,String package_des) {
         this.id = id;
         this.level_id = level_id;
         this.status = status;
@@ -12,6 +12,15 @@ public class Package_Const {
         this.package_mr = package_mr;
         this.package_type = package_type;
         this.package_image = package_image;
+        this.package_des = package_des;
+    }
+
+    public String getPackage_des() {
+        return package_des;
+    }
+
+    public void setPackage_des(String package_des) {
+        this.package_des = package_des;
     }
 
     public int getId() {

@@ -13,8 +13,6 @@ public class Package {
     @Expose
     private Boolean responce;
 
-
-
     public List<Package_Data> getData() {
         return data;
     }
