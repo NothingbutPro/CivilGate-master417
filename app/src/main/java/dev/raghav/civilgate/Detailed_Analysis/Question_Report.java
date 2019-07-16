@@ -65,7 +65,7 @@ public class Question_Report extends Fragment {
                  //   Toast.makeText(getActivity(), "Login successful", Toast.LENGTH_SHORT).show();
                     for(int k=0;k< response.body().getData().size() ;k++) {
                         detailed_analysis_consts.add(new Detailed_Analysis_const_data(response.body().getData().get(k).getId() , response.body().getData().get(k).getQueAns() , response.body().getData().get(k).getAns(),response.body().getData().get(k).getMarks(),response.body().getData().get(k).getTime()));
-                  //      Log.e("image" , "url"+ response.body().getData().get(k).getPackageImage());
+                     //   Log.e("image" , "url"+ response.body().getData().get(k).getPackageImage());
                     }
                     analysis_recy_adapter = new Analysis_Recy_Adapter(detailed_analysis_consts);
                     LinearLayoutManager llm = new LinearLayoutManager(getActivity());

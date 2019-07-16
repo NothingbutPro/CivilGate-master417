@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(6).setActionView(R.layout.menu_image);
         navigationView.getMenu().getItem(7).setActionView(R.layout.menu_image);
         navigationView.getMenu().getItem(8).setActionView(R.layout.menu_image);
+        navigationView.getMenu().findItem(R.id.nav_ask_expert).setVisible(false);
         navigationView.getMenu().getItem(9).setActionView(R.layout.menu_image);
        // navigationView.getMenu().getItem(10).setActionView(R.layout.menu_image);
 //        navigationView.getMenu().getItem(11).setActionView(R.layout.menu_image);

@@ -32,7 +32,7 @@ public class Pakages_Adapter extends RecyclerView.Adapter<Pakages_Adapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView pakage_name,package_mrp,pkgtype;
+        TextView pakage_name,package_mrp,pkgdes ,pkgques,pkgtime;
         ImageView pkgimg;
         Button buybtn;
 
@@ -40,8 +40,10 @@ public class Pakages_Adapter extends RecyclerView.Adapter<Pakages_Adapter.MyView
             super(view);
             pakage_name = view.findViewById(R.id.pakage_name);
             package_mrp = view.findViewById(R.id.package_mrp);
-            pkgtype = view.findViewById(R.id.pkgtype);
+            pkgdes = view.findViewById(R.id.pkgdes);
             pkgimg = view.findViewById(R.id.pkgimg);
+            pkgtime = view.findViewById(R.id.packtime);
+            pkgques = view.findViewById(R.id.totquespack);
             buybtn = view.findViewById(R.id.buybtn);
 //            id = (TextView) view.findViewById(R.id.level_id);
 
@@ -66,8 +68,10 @@ public class Pakages_Adapter extends RecyclerView.Adapter<Pakages_Adapter.MyView
         Package_Const aPackage = packageList.get(i);
         myViewHolder.pakage_name.setText(String.valueOf(aPackage.getPackage_name()));
         myViewHolder.package_mrp.setText(String.valueOf(aPackage.getPackage_mr()));
-        myViewHolder.pkgtype.setText(String.valueOf(aPackage.getPackage_type()));
-        Log.e("image url" ,package_url +aPackage.getPackage_image());
+        myViewHolder.pkgdes.setText(String.valueOf(aPackage.getPackage_des()));
+       myViewHolder.pkgtime.setText(myViewHolder.pkgtime.getText().toString().concat(String.valueOf(aPackage.getPackage_time())));
+        myViewHolder.pkgques.setText(myViewHolder.pkgques.getText().toString().concat(String.valueOf(aPackage.getPackage_ques())));
+        Log.e("image url at adapter" ,package_url +aPackage.getPackage_image());
         Glide.with(context).load(package_url +aPackage.getPackage_image())
                 .thumbnail(0.5f)
                 .crossFade()

@@ -178,9 +178,6 @@ public class MCQ_Questions extends Fragment {
                     if(response.body().getResponce() == true)
                     {
                         Toast.makeText(getActivity(), "Book Mark added successfully", Toast.LENGTH_SHORT).show();
-
-
-
                     }
                     else{
 

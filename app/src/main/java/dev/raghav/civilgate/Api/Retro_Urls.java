@@ -15,6 +15,7 @@ public interface Retro_Urls {
   public String addbookmark = "addbookmark";
   public String Getbookmark = "Getbookmark";
   public String forgetpassword = "forgetpassword";
+  public String Updateprofile = "updateprofile";
   public String StudentQue = "StudentQue";
   public String Toppers_list = "toppers_list";
   public String Srarttest = "starttest";

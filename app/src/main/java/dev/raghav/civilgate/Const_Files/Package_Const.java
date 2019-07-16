@@ -1,10 +1,26 @@
 package dev.raghav.civilgate.Const_Files;
 
 public class Package_Const {
-    int id,status;
-    String package_name, level_id,package_mr, package_type ,package_image,package_des;
+    String id,status;
+    String package_name, level_id,package_mr, package_type ,package_image,package_des ,package_time,package_ques;
 
-    public Package_Const(int id, String level_id, int status, String package_name, String package_mr, String package_type, String package_image,String package_des) {
+    public String getPackage_time() {
+        return package_time;
+    }
+
+    public void setPackage_time(String package_time) {
+        this.package_time = package_time;
+    }
+
+    public String getPackage_ques() {
+        return package_ques;
+    }
+
+    public void setPackage_ques(String package_ques) {
+        this.package_ques = package_ques;
+    }
+
+    public Package_Const(String id, String level_id, String status, String package_name, String package_mr, String package_type, String package_image, String package_des, String testtime, String totalQue) {
         this.id = id;
         this.level_id = level_id;
         this.status = status;
@@ -13,6 +29,8 @@ public class Package_Const {
         this.package_type = package_type;
         this.package_image = package_image;
         this.package_des = package_des;
+        this.package_time = testtime;
+        this.package_ques = totalQue;
     }
 
     public String getPackage_des() {
@@ -23,11 +41,11 @@ public class Package_Const {
         this.package_des = package_des;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -39,11 +57,11 @@ public class Package_Const {
         this.level_id = level_id;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

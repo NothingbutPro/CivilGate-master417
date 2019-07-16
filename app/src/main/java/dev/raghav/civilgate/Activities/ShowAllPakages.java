@@ -31,6 +31,9 @@ public class ShowAllPakages extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_pakages);
         pakagerecyler = findViewById(R.id.pakagerecyler);
+        LinearLayoutManager llm = new LinearLayoutManager(ShowAllPakages.this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        pakagerecyler.setLayoutManager(llm);
         ShowAllPakagess();
     }
 
@@ -49,13 +52,11 @@ public class ShowAllPakages extends AppCompatActivity {
                 {
                     Toast.makeText(ShowAllPakages.this, "Login successful", Toast.LENGTH_SHORT).show();
                     for(int k=0;k< response.body().getData().size() ;k++) {
-                     //   packages.add(new Package_Const(Integer.valueOf(response.body().getData().get(k).getStatus()),(Integer.valueOf(response.body().getData().get(k).getLevelId())),response.body().getData().get(k).getId() , response.body().getData().get(k).getLevelId() ,response.body().getData().get(k).getStatus(),response.body().getData().get(k).getPackageName(),response.body().getData().get(k).getPackageMrp() , response.body().getData().get(k).getPackageType() , response.body().getData().get(k).getPackageImage() ,response.body().getData().get(k).getDescription()));
+                        packages.add(new Package_Const(response.body().getData().get(k).getId() ,response.body().getData().get(k).getLevelId(),response.body().getData().get(k).getStatus() ,response.body().getData().get(k).getPackageName() ,response.body().getData().get(k).getPackageMrp() ,response.body().getData().get(k).getPackageType() ,response.body().getData().get(k).getPackageImage() ,response.body().getData().get(k).getDescription() , response.body().getData().get(k).getTesttime() , response.body().getData().get(k).getTotalQue()));
                         Log.e("image" , "url"+ response.body().getData().get(k).getPackageImage());
                     }
+
                     pakages_adapter = new Pakages_Adapter(packages);
-                    LinearLayoutManager llm = new LinearLayoutManager(ShowAllPakages.this);
-                    llm.setOrientation(LinearLayoutManager.VERTICAL);
-                    pakagerecyler.setLayoutManager(llm);
                     pakagerecyler.setAdapter(pakages_adapter);
 //                    Intent intent=new Intent(ShowAllPakages.this,MainActivity.class);
 //                    //manager.serverLogin(response.body().getData().getId() , response.body().getData().getName(),response.body().getData().getStatus());

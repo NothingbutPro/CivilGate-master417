@@ -1,23 +1,24 @@
-package dev.raghav.civilgate.Const_Files;
+package dev.raghav.civilgate.Other_Parsing_Files;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Package {
+public class Score_Result {
+
     @SerializedName("data")
     @Expose
-    private List<Package_Data> data;
+    private List<Score_Result_Data> data = null;
     @SerializedName("responce")
     @Expose
     private Boolean responce;
 
-    public List<Package_Data> getData() {
+    public List<Score_Result_Data> getData() {
         return data;
     }
 
-    public void setData(List<Package_Data> data) {
+    public void setData(List<Score_Result_Data> data) {
         this.data = data;
     }
 

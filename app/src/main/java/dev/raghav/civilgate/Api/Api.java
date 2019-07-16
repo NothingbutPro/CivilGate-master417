@@ -18,6 +18,7 @@ import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_About;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_Level;
 import dev.raghav.civilgate.Other_Parsing_Files.Instant_Report;
+import dev.raghav.civilgate.Other_Parsing_Files.Score_Result;
 import dev.raghav.civilgate.Other_Parsing_Files.Submit_Question;
 import dev.raghav.civilgate.Other_Parsing_Files.Test_Question;
 import dev.raghav.civilgate.Parsingfiles.LoginReg.Login_Responce;
@@ -91,6 +92,7 @@ public interface Api {
             @Field("email") String email
 
     );
+
     @FormUrlEncoded
     @POST(Retro_Urls.StudentQue)
     Call<Brain_Questions> StudentQue(
@@ -127,6 +129,15 @@ Call<Percentage> PERCENTAGE_CALL(
 @FormUrlEncoded
 @POST("endTest")
 Call<Instant_Report> EndTest(
+        @Field("student_id") int student_id,
+        @Field("level_sub_id") String level_sub_id,
+        @Field("level_id") int level_id
+
+
+);
+@FormUrlEncoded
+@POST("GetTestScore")
+Call<Score_Result> SCORE_RESULT_CALL(
         @Field("student_id") int student_id,
         @Field("level_sub_id") String level_sub_id,
         @Field("level_id") int level_id

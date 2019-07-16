@@ -10,15 +10,14 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,11 +38,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import dev.raghav.civilgate.Api.Api;
+import dev.raghav.civilgate.Api.RetrofitClientApi;
 import dev.raghav.civilgate.Parsingfiles.LoginReg.RegisPars_responce;
 import dev.raghav.civilgate.R;
-import dev.raghav.civilgate.Api.Api;
-
-import dev.raghav.civilgate.Api.RetrofitClientApi;
+import dev.raghav.civilgate.SessionManage.SessionManager;
 import dev.raghav.civilgate.Utils.Utilities;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,27 +51,26 @@ import retrofit2.Response;
 import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
-public class RegisterActivity extends AppCompatActivity {
+public class Edit_Profile extends AppCompatActivity {
     private static final int PERMISSION_GATE_READ = 141;
     private static final int READ_REQUEST_CODE = 101;
     CollapsingToolbarLayout toolbar_post;
     // private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = ;
-    EditText email , password , passing_year , ful_name , mobile,address,collage_name;
-     ImageView  gate_degree_photo , gate_sign ,blankpro;
-     File gate_degree_file , gate_sign_file ,profile_phote ;
-     Button reg_btn;
-     View gv;
-     Api  apiInterface;
-     int a = 0;
-     int px =0;
+    EditText email_et , password_et , passing_year_et , ful_name_et , mobile_et,address_et,collage_name_et;
+    ImageView gate_degree_photo_et , gate_sign_et ,profile_et;
+    File gate_degree_file_et , gate_sign_file_et ,profile_phote_file_et ;
+    Button edit_btn;
+    SessionManager sessionManager;
+    View gv;
+    Api apiInterface;
+    int a = 0;
+    int px =0;
     private static final int MY_PERMISSIONS_REQUESTS = 101;
     private ProgressDialog dialog;
-
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-//        gv = RegisterActivity.this.getApplicationContext();
+        setContentView(R.layout.activity_edit__profile);
         init();
 //         a=10;
 //        Toast.makeText(this, "a value at oncreate is"+a, Toast.LENGTH_SHORT).show();
@@ -80,21 +78,25 @@ public class RegisterActivity extends AppCompatActivity {
         apiInterface = RetrofitClientApi.getClient().create(Api.class);
         checkforpermission();
 
-        blankpro.setOnClickListener(v -> {
+        profile_et.setOnClickListener(v -> {
             if(checkforpermission())
             {
-                Toast.makeText(RegisterActivity.this, "all set", Toast.LENGTH_SHORT).show();
+                profile_et.setImageResource(R.drawable.no_photo);
+                profile_phote_file_et =null;
+                Toast.makeText(Edit_Profile.this, "all set", Toast.LENGTH_SHORT).show();
                 a=1;
                 opengoddamngallery();
 
             }else {
-             requestitback();
+                requestitback();
             }
         });
-        gate_sign.setOnClickListener(v -> {
+        gate_sign_et.setOnClickListener(v -> {
             if(checkforpermission())
             {
-                Toast.makeText(RegisterActivity.this, "all set", Toast.LENGTH_SHORT).show();
+                gate_sign_et.setImageResource(R.drawable.nosign);
+                gate_sign_et =null;
+                Toast.makeText(Edit_Profile.this, "all set", Toast.LENGTH_SHORT).show();
                 a=2;
                 opengoddamngallery();
 
@@ -102,27 +104,15 @@ public class RegisterActivity extends AppCompatActivity {
                 requestitback();
             }
         });
-        //calling for registration
-        reg_btn.setOnClickListener(v -> {
-            if(seeifallvaliD())
-            {
-                if(gate_degree_file !=null && gate_sign_file !=null && profile_phote !=null)
-                {
-                    registerthestupiduser(gate_degree_file , gate_sign_file , profile_phote , gate_sign_file.getAbsolutePath() ,profile_phote.getAbsolutePath());
-                    Toast.makeText(RegisterActivity.this, "ok now you can upload", Toast.LENGTH_SHORT).show();
-                }else{
 
-                    Toast.makeText(RegisterActivity.this, "something is wrong", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        });
-        gate_degree_photo.setOnClickListener(new View.OnClickListener() {
+        gate_degree_photo_et.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(checkforpermission())
                 {
-                    Toast.makeText(RegisterActivity.this, "all set", Toast.LENGTH_SHORT).show();
+                    gate_degree_photo_et.setImageResource(R.drawable.no_photo);
+                    gate_degree_file_et =null;
+                    Toast.makeText(Edit_Profile.this, "all set", Toast.LENGTH_SHORT).show();
                     px=1;
                     opengoddamngallery();
 
@@ -131,11 +121,27 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+        //calling for registration
+        edit_btn.setOnClickListener(v -> {
+//            if(seeifallvaliD())
+//            {
+                if(gate_degree_file_et !=null || gate_sign_file_et !=null || profile_phote_file_et  !=null)
+                {
+                    registerthestupiduser();
+                    Toast.makeText(Edit_Profile.this, "ok now you can upload", Toast.LENGTH_SHORT).show();
+                }else{
+
+                    Toast.makeText(Edit_Profile.this, "something is wrong", Toast.LENGTH_SHORT).show();
+                }
+//            }
+
+        });
+
         //
 
     }
 
-    private void registerthestupiduser(File gate_photo_file, File gate_sign_file, File profileabsolute, String pabsolutePath, String spath) {
+    private void registerthestupiduser() {
 //        RequestBody gate_fulname  = RequestBody.create(MediaType.get("text/plain") , ful_name.getText().toString());
 //        RequestBody gate_email  = RequestBody.create(MediaType.get("text/plain") , email.getText().toString());
 //        RequestBody gate_password  = RequestBody.create(MediaType.get("text/plain") , password.getText().toString());
@@ -186,56 +192,57 @@ public class RegisterActivity extends AppCompatActivity {
 //            }
 //
 //        }
-        new Final_Image_upload(gate_photo_file , gate_sign_file , profileabsolute).execute();
+        new Final_Image_upload().execute();
 
     }
 
     private void init() {
 //        this.a = a+10;
 //        Log.d("init" , "works a"+a);
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
-        passing_year = findViewById(R.id.passout_year);
-        ful_name = findViewById(R.id.ful_nam);
-        mobile = findViewById(R.id.mobile);
-        gate_sign = findViewById(R.id.gate_sign);
-        blankpro = findViewById(R.id.gate_photo);
-        gate_degree_photo = findViewById(R.id.degreesign);
-        reg_btn = findViewById(R.id.reg_btn);
+        email_et = findViewById(R.id.email_edt);
+        password_et = findViewById(R.id.password_edt);
+        passing_year_et = findViewById(R.id.passout_year_edt);
+        ful_name_et = findViewById(R.id.ful_nam_edt);
+        mobile_et = findViewById(R.id.mobile_edt);
+        gate_sign_et = findViewById(R.id.gate_sign_edt);
+        profile_et = findViewById(R.id.profile_ed);
+        edit_btn = findViewById(R.id.edit_btn);
+        gate_degree_photo_et = findViewById(R.id.degreesign_edt);
         toolbar_post = findViewById(R.id.toolbar_post);
-        address = findViewById(R.id.address);
-        collage_name = findViewById(R.id.collage_name);
+        address_et = findViewById(R.id.address_edt);
+        collage_name_et = findViewById(R.id.collage_name_edt);
+        sessionManager = new SessionManager(Edit_Profile.this);
 
     }
 
-    private Boolean seeifallvaliD() {
-        Boolean valBoolean = true;
-        if(email.getText().toString().length() ==0)
-        {
-            email.setError("Can not be empty");
-            valBoolean = false;
-        }
-        if( password.getText().toString().length() <=6 )
-        {
-            password.setError("Password is weak");
-           valBoolean = false;
-        } if(ful_name.getText().toString().length() <=2)
-        {
-            ful_name.setError("Name is too short");
-            ful_name.requestFocus();
-//            toolbar_post.requestFocus();
-            valBoolean = false;
-        }
-        if(mobile.getText().toString().length() <=9)
-        {
-            mobile.setError("Number is inValid");
-            valBoolean = false;
-        }
-//        valBoolean = false;
-
-        return valBoolean;
-
-    }
+//    private Boolean seeifallvaliD() {
+//        Boolean valBoolean = true;
+//        if(email_et.getText().toString().length() ==0)
+//        {
+//            email_et.setError("Can not be empty");
+//            valBoolean = false;
+//        }
+//        if( password.getText().toString().length() <=6 )
+//        {
+//            password.setError("Password is weak");
+//            valBoolean = false;
+//        } if(ful_name.getText().toString().length() <=2)
+//        {
+//            ful_name.setError("Name is too short");
+//            ful_name.requestFocus();
+////            toolbar_post.requestFocus();
+//            valBoolean = false;
+//        }
+//        if(mobile.getText().toString().length() <=9)
+//        {
+//            mobile.setError("Number is inValid");
+//            valBoolean = false;
+//        }
+////        valBoolean = false;
+//
+//        return valBoolean;
+//
+//    }
 
     private void opengoddamngallery() {
 
@@ -283,7 +290,7 @@ public class RegisterActivity extends AppCompatActivity {
         regisPars_responceCall.enqueue(new Callback<RegisPars_responce>() {
             @Override
             public void onResponse(Call<RegisPars_responce> call, Response<RegisPars_responce> response) {
-                Toast.makeText(RegisterActivity.this, ""+response.body().getResponce(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Edit_Profile.this, ""+response.body().getResponce(), Toast.LENGTH_SHORT).show();
                 Log.e("hey yory", "responce is"+response.body().getResponce());
             }
 
@@ -374,12 +381,12 @@ public class RegisterActivity extends AppCompatActivity {
 //        OutputStream = new
         if (a == 1) {
             File filesDir = getApplicationContext().getFilesDir();
-            profile_phote = new File(filesDir, "photo" + ".jpg");
+            profile_phote_file_et = new File(filesDir, "photo" + ".jpg");
 
             OutputStream os;
             try {
-                os = new FileOutputStream(profile_phote);
-                Log.e("file is", ""+profile_phote.getName());
+                os = new FileOutputStream(profile_phote_file_et);
+                Log.e("file is", ""+profile_phote_file_et.getName());
                 image.compress(Bitmap.CompressFormat.JPEG, 100, os);
                 os.flush();
                 os.close();
@@ -388,57 +395,57 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
 //            }
-            blankpro.setImageBitmap(image);
+            profile_et.setImageBitmap(image);
 
-                return null;
-            } else if(px==0)
-                {
+            return null;
+        } else if(px==0)
+        {
 
             File filesDir = getApplicationContext().getFilesDir();
-            gate_sign_file = new File(filesDir, "sign" + ".jpg");
+            gate_sign_file_et = new File(filesDir, "sign" + ".jpg");
 
             OutputStream os;
             try {
-                os = new FileOutputStream(gate_sign_file);
-                Log.e("file is", ""+gate_sign_file.getName());
+                os = new FileOutputStream(gate_sign_file_et);
+                Log.e("file is", ""+gate_sign_file_et.getName());
                 image.compress(Bitmap.CompressFormat.JPEG, 100, os);
                 os.flush();
                 os.close();
             } catch (Exception e) {
                 Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
             }
-            gate_sign.setImageBitmap(image);
+            gate_sign_et.setImageBitmap(image);
 
-            }else {
+        }else {
             File filesDir = getApplicationContext().getFilesDir();
-            gate_degree_file = new File(filesDir, "Degree" + ".jpg");
+            gate_degree_file_et = new File(filesDir, "Degree" + ".jpg");
 
             OutputStream os;
             try {
-                os = new FileOutputStream(gate_degree_file);
-                Log.e("file is", ""+gate_degree_file.getName());
+                os = new FileOutputStream(gate_degree_file_et);
+                Log.e("file is", ""+gate_degree_file_et.getName());
                 image.compress(Bitmap.CompressFormat.JPEG, 100, os);
                 os.flush();
                 os.close();
             } catch (Exception e) {
                 Log.e(getClass().getSimpleName(), "Error writing bitmap", e);
             }
-            gate_degree_photo.setImageBitmap(image);
+            gate_degree_photo_et.setImageBitmap(image);
             px =0;
         }
 
-            try {
-                parcelFileDescriptor.close();
-            } catch (IOException e) {
-                Toast.makeText(this, "cant" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(this, "" + gate_sign_file.getName(), Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-            return null;
+        try {
+            parcelFileDescriptor.close();
+        } catch (IOException e) {
+            Toast.makeText(this, "cant" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "" + gate_degree_file_et.getName(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
+        return null;
+    }
 
     private void showMessageOKCancel(String s, DialogInterface.OnClickListener onClickListener) {
-        new AlertDialog.Builder(RegisterActivity.this)
+        new AlertDialog.Builder(Edit_Profile.this)
                 .setMessage(s)
                 .setPositiveButton("OK", onClickListener)
                 .setNegativeButton("Cancel", null)
@@ -452,16 +459,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            dialog = new ProgressDialog(RegisterActivity.this);
+            dialog = new ProgressDialog(Edit_Profile.this);
             dialog.setCancelable(false);
             dialog.show();
             super.onPreExecute();
-        }
-
-        public  Final_Image_upload(File gate_photo_file, File gate_sign_file, File profileabsolute) {
-            this.gate_photo = gate_photo_file;
-            this.gate_sign = gate_sign_file;
-            this.profilepic = profileabsolute;
         }
 
         @Override
@@ -472,20 +473,40 @@ public class RegisterActivity extends AppCompatActivity {
                 MultipartEntity entity = new MultipartEntity(
                         HttpMultipartMode.BROWSER_COMPATIBLE);
 
-                entity.addPart("name", new StringBody(ful_name.getText().toString()));
-                entity.addPart("email", new StringBody("" + email.getText().toString()));
-                entity.addPart("mobile", new StringBody("" + mobile.getText().toString()));
-                entity.addPart("password", new StringBody("" + password.getText().toString()));
-                entity.addPart("passout_year", new StringBody("" + passing_year.getText().toString()));
-                entity.addPart("collage_name", new StringBody("" + collage_name.getText().toString()));
-                entity.addPart("address", new StringBody("" + address.getText().toString()));
-                entity.addPart("sign_image", new FileBody(gate_sign));
-                entity.addPart("profile_image", new FileBody(profilepic));
-                entity.addPart("degree_upload", new FileBody(gate_degree_file));
+                entity.addPart("name", new StringBody(ful_name_et.getText().toString()));
+                entity.addPart("student_id", new StringBody(String.valueOf(sessionManager.getCoustId())));
+                entity.addPart("email", new StringBody("" + email_et.getText().toString()));
+                entity.addPart("mobile", new StringBody("" + mobile_et.getText().toString()));
+                entity.addPart("password", new StringBody("" + password_et.getText().toString()));
+                entity.addPart("passout_year", new StringBody("" + passing_year_et.getText().toString()));
+                entity.addPart("collage_name", new StringBody("" + collage_name_et.getText().toString()));
+                entity.addPart("address", new StringBody("" + address_et.getText().toString()));
+                try {
+
+
+                    entity.addPart("sign_image", new FileBody(gate_sign_file_et));
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+                try {
+
+
+                    entity.addPart("profile_image", new FileBody(profile_phote_file_et));
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+                try {
+                    entity.addPart("degree_upload", new FileBody(gate_degree_file_et));
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
 //                    result = Utilities.postEntityAndFindJson("https://www.spellclasses.co.in/DM/Api/taxreturn", entity);
 //                 //   result = Utilities.postEntityAndFindJson("https://www.spellclasses.co.in/DM/Api/taxreturn", entity);
-               // result = Utilities.postEntityAndFindJson("http://ihisaab.in/lms/api/Ragistration/", entity);
-                result = Utilities.postEntityAndFindJson("https://gogateexam.com/api/Ragistration", entity);
+                // result = Utilities.postEntityAndFindJson("http://ihisaab.in/lms/api/Ragistration/", entity);
+                result = Utilities.postEntityAndFindJson("https://gogateexam.com/api/updateprofile", entity);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -500,7 +521,7 @@ public class RegisterActivity extends AppCompatActivity {
                 dialog.dismiss();
                 Log.e("result1", result1);
 
-                Toast.makeText(RegisterActivity.this, " Successfully Registered", Toast.LENGTH_LONG).show();
+                Toast.makeText(Edit_Profile.this, " Successfully Registered", Toast.LENGTH_LONG).show();
 
                 //   Intent in=new Intent(MainActivity.this,NextActivity.class);
                 //  in.putExtra("doc",doc);
@@ -508,11 +529,11 @@ public class RegisterActivity extends AppCompatActivity {
 
             } else {
                 dialog.dismiss();
-                Toast.makeText(RegisterActivity.this, "Some Problem", Toast.LENGTH_LONG).show();
+                Toast.makeText(Edit_Profile.this, "Some Problem", Toast.LENGTH_LONG).show();
             }
 
         }
-        }
+    }
 
     private int getPostDataString(JSONObject postDataParams) {
 

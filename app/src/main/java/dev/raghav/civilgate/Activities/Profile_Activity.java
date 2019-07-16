@@ -1,10 +1,13 @@
 package dev.raghav.civilgate.Activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,8 +31,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static dev.raghav.civilgate.Activities.MaBookmarks.ixp;
 
 public class Profile_Activity extends AppCompatActivity   {
-TextView pronamemn ,credit,email , mobilenumber,addresspx, passout_year;
-SessionManager sessionManager;
+    TextView pronamemn ,credit,email , mobilenumber,addresspx, passout_year;
+    SessionManager sessionManager;
+    FloatingActionButton moreeditActionButton;
     ProgressBar proprogres;
     private NumberProgressBar progressBar;
     private Timer timer;
@@ -47,6 +51,7 @@ SessionManager sessionManager;
         passout_year = findViewById(R.id.passout_year);
         sessionManager = new SessionManager(Profile_Activity.this);
         mobilenumber = findViewById(R.id.mobilefx);
+        moreeditActionButton = findViewById(R.id.moreedit);
 //        proprogres = findViewById(R.id.proprogres);
         progressBar = findViewById(R.id.progressBar);
         progressBar.setReachedBarColor(Color.BLUE);
@@ -71,6 +76,13 @@ SessionManager sessionManager;
 //                });
 //            }
 //        }, 1000, 100);
+        moreeditActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Profile_Activity.this , Edit_Profile.class);
+                startActivity(intent);
+            }
+        });
         GetTheCredits();
         Get_Percentage();
     }
