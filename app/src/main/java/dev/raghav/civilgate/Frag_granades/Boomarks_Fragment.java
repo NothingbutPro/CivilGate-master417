@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
+import dev.raghav.civilgate.Activities.About_All;
 import dev.raghav.civilgate.Activities.All_Reviews_Questions;
 import dev.raghav.civilgate.Api.Api;
 import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Const_Files.Bookmark_ids;
 import dev.raghav.civilgate.Const_Files.BooktheMarks;
 import dev.raghav.civilgate.Const_Files.Full_Solutions;
+import dev.raghav.civilgate.Other_Parsing_Files.Get_About;
+import dev.raghav.civilgate.Other_Parsing_Files.RemoveBookmarks;
 import dev.raghav.civilgate.R;
 import dev.raghav.civilgate.SessionManage.SessionManager;
 import okhttp3.OkHttpClient;
@@ -44,7 +48,7 @@ public class Boomarks_Fragment extends Fragment {
     TextView allques;
     TextView soleditbk, ansss1bk,ansss2bk,ansss3bk,ansss4bk;
     static public int solutioncounter =0;
-    ImageView bookmark;
+    ImageView unbookmark;
     int nx,pre;
     Call<BooktheMarks> get_aboutCall;
     int checklst =0;
@@ -67,7 +71,7 @@ public class Boomarks_Fragment extends Fragment {
         next = view.findViewById(R.id.nextbx);
         previous = view.findViewById(R.id.previousbx);
         bookmarksid = view.findViewById(R.id.bookmarksid);
-        bookmark = view.findViewById(R.id.bookmark);
+        unbookmark = view.findViewById(R.id.ubbookmark);
         ansss1bk = view.findViewById(R.id.ansss1bk);
         ansss2bk = view.findViewById(R.id.ansss2bk);
         ansss3bk = view.findViewById(R.id.ansss3bk);
@@ -84,6 +88,36 @@ public class Boomarks_Fragment extends Fragment {
         opt4 = view.findViewById(R.id.opt4);
    //     Toast.makeText(getActivity(), "hiiiiiiiiiii", Toast.LENGTH_SHORT).show();
         GetTheFullSolution(0);
+        unbookmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OkHttpClient client = new OkHttpClient.Builder()
+                        .connectTimeout(100, TimeUnit.SECONDS)
+                        .readTimeout(100,TimeUnit.SECONDS).build();
+                Retrofit RetroLogin = new Retrofit.Builder()
+                        .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
+                        .build();
+                Log.e("hi id is" , ""+integerstest_ids.get(solutioncounter).getBookmarks_id());
+                Toast.makeText(getActivity(), "boomark id"+integerstest_ids.get(solutioncounter).getBookmarks_id(), Toast.LENGTH_SHORT).show();
+                Api AbloutApi = RetroLogin.create(Api.class);
+                Call<RemoveBookmarks> get_aboutCall = AbloutApi.REMOVE_BOOKMARKS_CALL(integerstest_ids.get(solutioncounter).getBookmarks_id());
+                get_aboutCall.enqueue(new Callback<RemoveBookmarks>() {
+                    @Override
+                    public void onResponse(Call<RemoveBookmarks> call, Response<RemoveBookmarks> response) {
+                        Toast.makeText(getActivity(), ""+response.body().getData(), Toast.LENGTH_SHORT).show();
+                        if(response.body().getResponce() == true)
+                        {
+                            GetTheFullSolution(integerstest_ids.get(++solutioncounter).getTestid());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RemoveBookmarks> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
         bookmarksid.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -209,7 +243,7 @@ public class Boomarks_Fragment extends Fragment {
                 .build();
         Api AbloutApi = RetroLogin.create(Api.class);
         if(testid ==0) {
-       get_aboutCall = AbloutApi.BOOKTHE_MARKS_CALL(sessionManager.getCoustId());
+       get_aboutCall = AbloutApi.BOOKTHE_MARKS_CALL(sessionManager.getCoustId() , String.valueOf(testid));
         }else {
             get_aboutCall = AbloutApi.BOOKTHE_MARKS_CALL(sessionManager.getCoustId() ,String.valueOf(testid));
         }
@@ -218,7 +252,8 @@ public class Boomarks_Fragment extends Fragment {
             public void onResponse(Call<BooktheMarks> call, Response<BooktheMarks> response) {
                 for(int i=0;i<response.body().getData().size(); i++){
                     if(testid ==0) {
-                        integerstest_ids.add(new Bookmark_ids(Integer.parseInt(response.body().getData().get(i).getTest_id()), response.body().getData().get(i).getTestName()));
+                     //   Toast.makeText(getActivity(), " "+response.body().getData().get(i).getTestName(), Toast.LENGTH_SHORT).show();
+                        integerstest_ids.add(new Bookmark_ids(Integer.parseInt(response.body().getData().get(i).getTest_id()), response.body().getData().get(i).getTestName() ,response.body().getData().get(i).getBookmarkId()));
                     }
                     if(solutioncounter>=0 ){
 //                    Log.e("hi" , "bookamr"+response.body().getData().get(solutioncounter).getQue());
@@ -257,9 +292,9 @@ public class Boomarks_Fragment extends Fragment {
 
                         }else {
                             if(solutioncounter <=0) {
-                                Toast.makeText(getActivity(), "No Backward possible", Toast.LENGTH_SHORT).show();
+                          //      Toast.makeText(getActivity(), "No Backward possible", Toast.LENGTH_SHORT).show();
                             }else if(solutioncounter == response.body().getData().size()){
-                                Toast.makeText(getActivity(), "No Forward possible", Toast.LENGTH_SHORT).show();
+                            //    Toast.makeText(getActivity(), "No Forward possible", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -273,10 +308,41 @@ public class Boomarks_Fragment extends Fragment {
 
                 }
                 if(testid ==0) {
-                    for(int k=0;k<response.body().getData().size(); k++) {
-                        integidsonly.add(response.body().getData().get(k).getTestName());
+                    for(int k=0;k<response.body().getData().size(); ++k) {
+                        for(int j=0;j<k;j++) {
+                            String j1 = response.body().getData().get(j).getTestName();
+                            String k1 = response.body().getData().get(k).getTestName();
+                            if(!k1.equals(j1)) {
+
+                                integidsonly.add(response.body().getData().get(j).getTestName());
+
+                            }else {
+                                try {
+                                    if (integidsonly.get(j).length() != 0) {
+                                        integidsonly.remove(k);
+                                    }
+                                }catch (Exception e)
+                                {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
 
                     }
+//                    if(testid ==0) {
+//                        for(int k=0;k<integidsonly.size(); k++) {
+//                            for(int j=0;j<integidsonly.size(); j++) {
+//
+//                                if(!response.body().getData().get(j).getTestName().equals(response.body().getData().get(k).getTestName())) {
+//
+//                                    integidsonly.add(response.body().getData().get(k).getTestName());
+//                                }else {
+//                                integidsonly.remove(j);
+//                                }
+//                            }
+//                            }
+//
+//                        }
                     BookaArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, integidsonly );
                     bookmarksid.setAdapter(BookaArrayAdapter);
                 }

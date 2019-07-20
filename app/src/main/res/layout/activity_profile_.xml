@@ -199,6 +199,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
 
+
                             <TextView
                                 android:padding="5dp"
                                 android:layout_margin="4dp"
@@ -211,7 +212,7 @@
                             <TextView
                                 android:padding="5dp"
                                 android:layout_margin="4dp"
-                                android:text="Your Pass Out Year:"
+                                android:text=" Pass Out Year:"
                                 android:textStyle="bold"
                                 android:id="@+id/passout_year"
                                 android:layout_width="match_parent"
@@ -223,6 +224,14 @@
                                 android:text="Your Address:"
                                 android:textStyle="bold"
                                 android:id="@+id/addresspx"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:padding="9dp"
+                                android:layout_margin="4dp"
+                                android:text="Collage :"
+                                android:textStyle="bold"
+                                android:id="@+id/collage_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>

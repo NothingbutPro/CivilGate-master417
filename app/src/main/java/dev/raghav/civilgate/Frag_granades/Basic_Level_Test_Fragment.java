@@ -50,6 +50,8 @@ public class Basic_Level_Test_Fragment  extends Fragment {
         super.onAttach(context);
     }
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -89,6 +91,7 @@ public class Basic_Level_Test_Fragment  extends Fragment {
                 .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
                 .build();
         Api EmamApi = RetroGEtExam.create(Api.class);
+        Log.e("your id is" , ""+sessionManager.getCoustId());
         Call<Exam_Test> exam_testCall = EmamApi.Get_GetExam(1 , sessionManager.getCoustId());
         exam_testCall.enqueue(new Callback<Exam_Test>() {
             @Override

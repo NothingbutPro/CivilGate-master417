@@ -494,7 +494,7 @@
 
 
             <ImageView
-                android:id="@+id/bookmark"
+                android:id="@+id/ubbookmark"
                 app:srcCompat="@drawable/ic_bookmark_green_24dp"
                 android:foregroundGravity="center"
                 android:layout_gravity="center"

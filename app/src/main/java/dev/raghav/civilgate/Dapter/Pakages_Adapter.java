@@ -1,13 +1,13 @@
 package dev.raghav.civilgate.Dapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,9 +15,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import dev.raghav.civilgate.Const_Files.Package_Const;
+import dev.raghav.civilgate.Other_Parsing_Files.Schedule_Data;
 import dev.raghav.civilgate.R;
 import dev.raghav.civilgate.SessionManage.SessionManager;
 
@@ -32,7 +34,8 @@ public class Pakages_Adapter extends RecyclerView.Adapter<Pakages_Adapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView pakage_name,package_mrp,pkgdes ,pkgques,pkgtime;
+        TextView pakage_name,package_mrp ,pkgques,pkgtime;
+        WebView pkgdes;
         ImageView pkgimg;
         Button buybtn;
 
@@ -46,7 +49,6 @@ public class Pakages_Adapter extends RecyclerView.Adapter<Pakages_Adapter.MyView
             pkgques = view.findViewById(R.id.totquespack);
             buybtn = view.findViewById(R.id.buybtn);
 //            id = (TextView) view.findViewById(R.id.level_id);
-
             sessionManager = new SessionManager(view.getContext());
             context  = view.getContext();
         }
@@ -68,7 +70,8 @@ public class Pakages_Adapter extends RecyclerView.Adapter<Pakages_Adapter.MyView
         Package_Const aPackage = packageList.get(i);
         myViewHolder.pakage_name.setText(String.valueOf(aPackage.getPackage_name()));
         myViewHolder.package_mrp.setText(String.valueOf(aPackage.getPackage_mr()));
-        myViewHolder.pkgdes.setText(String.valueOf(aPackage.getPackage_des()));
+   //     myViewHolder.pkgdes.setText(String.valueOf(aPackage.getPackage_des()));
+        myViewHolder.pkgdes.loadData(String.valueOf(aPackage.getPackage_des()), "text/html", null);
        myViewHolder.pkgtime.setText(myViewHolder.pkgtime.getText().toString().concat(String.valueOf(aPackage.getPackage_time())));
         myViewHolder.pkgques.setText(myViewHolder.pkgques.getText().toString().concat(String.valueOf(aPackage.getPackage_ques())));
         Log.e("image url at adapter" ,package_url +aPackage.getPackage_image());

@@ -20,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 import dev.raghav.civilgate.Activities.Critical_Thinking;
 import dev.raghav.civilgate.Activities.Level_Tab_Activities;
 import dev.raghav.civilgate.Activities.Profile_Activity;
+import dev.raghav.civilgate.Activities.Schedule_Activity;
 import dev.raghav.civilgate.Activities.ShowAllPakages;
 import dev.raghav.civilgate.Api.Api;
 import dev.raghav.civilgate.Api.Retro_Urls;
@@ -44,7 +45,7 @@ public class Home extends Fragment {
     com.budiyev.android.circularprogressbar.CircularProgressBar unprogress,attprogress,wrongprogress;
     ProgressBar pro1,pro2,pro3,pro4;
     TextView totaltes , solvet,tesnscore,cedittxt;
-    CardView buy_package_icon ,mythink;
+    CardView buy_package_icon ,mythink,schedulbtn;
     SessionManager sessionManagerl;
     @Nullable
     @Override
@@ -59,6 +60,7 @@ public class Home extends Fragment {
         latestnam = v.findViewById(R.id.latestname);
         latestque = v.findViewById(R.id.latestque);
         latestmarks = v.findViewById(R.id.totmark);
+        schedulbtn = v.findViewById(R.id.schedulbtn);
         pro1 = v.findViewById(R.id.pro1);
         pro2 = v.findViewById(R.id.pro2);
         pro3 = v.findViewById(R.id.pro3);
@@ -99,6 +101,13 @@ public class Home extends Fragment {
                 startActivity(to_leveltab);
             }
         });
+        schedulbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity() , Schedule_Activity.class);
+                startActivity(intent);
+            }
+        });
         GetallTest();
         GetTheLatestOne();
         return  v;
@@ -131,7 +140,6 @@ public class Home extends Fragment {
                     unprogress.setProgress(Float.parseFloat(response.body().getData().get(0).getLeft()));
                  //   attprogress.setProgress(100);
                     attprogress.setProgress(attempted);
-
                      wrongprogress.setProgress(Float.parseFloat(response.body().getData().get(0).getIncorrect()));
                      latestnam.setText("Latest Test Report: "+response.body().getData().get(0).getTestName());
                     latestque.setText("Total Question: "+response.body().getData().get(0).getTotalQue());

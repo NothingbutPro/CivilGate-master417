@@ -141,6 +141,8 @@ public class MCQ_Questions extends Fragment {
             @Override
             public void onClick(View v) {
                 if(!(solutioncounter <=0 )) {
+                    iwrote.setText("");
+                    actualwrote.setText("");
                     optxt1.setText("");
                     optxt2.setText("");
                     optxt3.setText("");

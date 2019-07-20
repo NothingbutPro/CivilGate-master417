@@ -18,6 +18,8 @@ import dev.raghav.civilgate.Other_Parsing_Files.Exam_Test;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_About;
 import dev.raghav.civilgate.Other_Parsing_Files.Get_Level;
 import dev.raghav.civilgate.Other_Parsing_Files.Instant_Report;
+import dev.raghav.civilgate.Other_Parsing_Files.RemoveBookmarks;
+import dev.raghav.civilgate.Other_Parsing_Files.Schedule;
 import dev.raghav.civilgate.Other_Parsing_Files.Score_Result;
 import dev.raghav.civilgate.Other_Parsing_Files.Submit_Question;
 import dev.raghav.civilgate.Other_Parsing_Files.Test_Question;
@@ -81,11 +83,11 @@ public interface Api {
             @Field("student_id") int  student_id,
             @Field("test_id") String  test_id
     );
-    @FormUrlEncoded
-    @POST(Retro_Urls.Getbookmark)
-    Call<BooktheMarks> BOOKTHE_MARKS_CALL(
-            @Field("student_id") int  student_id
-    );
+//    @FormUrlEncoded
+//    @POST(Retro_Urls.Getbookmark)
+//    Call<BooktheMarks> BOOKTHE_MARKS_CALL(
+//            @Field("student_id") int  student_id
+//    );
     @FormUrlEncoded
     @POST(Retro_Urls.forgetpassword)
     Call<Forgotten_Passowrd> Forgetpassword(
@@ -166,6 +168,9 @@ Call<Get_About> TellAbout();
 @Headers("Content-Type: application/x-www-form-urlencoded")
 @GET(Retro_Urls.Get_level)
 Call<Get_Level> GetLevels();
+@Headers("Content-Type: application/x-www-form-urlencoded")
+@GET(Retro_Urls.Getschedule)
+Call<Schedule> SCHEDULE_CALL();
 //@Headers("Content-Type: application/x-www-form-urlencoded")
 //@POST(Retro_Urls.Get_GetExam)
 //@POST(Retro_Urls.Get_GetExam+"/{level_id}")
@@ -182,6 +187,10 @@ Call<Test_Question> GetQuestion(@Field("subject_id") String subject_id);
     @POST(Retro_Urls.Toppers_list)
     Call<CompareGraph> Toppers_list(@Field("test_id") String test_id , @Field("user_id") String user_id);
 
+
+    @FormUrlEncoded
+    @POST(Retro_Urls.Removebookmark)
+    Call<RemoveBookmarks> REMOVE_BOOKMARKS_CALL( @Field("bookmark_id") String bookmark_id);
 
     @FormUrlEncoded
     @POST(Retro_Urls.Getbasicinfo)

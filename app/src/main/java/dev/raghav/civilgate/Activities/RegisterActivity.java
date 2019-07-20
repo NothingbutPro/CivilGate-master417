@@ -226,6 +226,7 @@ public class RegisterActivity extends AppCompatActivity {
 //            toolbar_post.requestFocus();
             valBoolean = false;
         }
+
         if(mobile.getText().toString().length() <=9)
         {
             mobile.setError("Number is inValid");

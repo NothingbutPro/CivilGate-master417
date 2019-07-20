@@ -31,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static dev.raghav.civilgate.Activities.MaBookmarks.ixp;
 
 public class Profile_Activity extends AppCompatActivity   {
-    TextView pronamemn ,credit,email , mobilenumber,addresspx, passout_year;
+    TextView pronamemn ,credit,email , mobilenumber,addresspx, passout_year,collage_name;
     SessionManager sessionManager;
     FloatingActionButton moreeditActionButton;
     ProgressBar proprogres;
@@ -49,6 +49,7 @@ public class Profile_Activity extends AppCompatActivity   {
         email = findViewById(R.id.email);
         addresspx = findViewById(R.id.addresspx);
         passout_year = findViewById(R.id.passout_year);
+        collage_name = findViewById(R.id.collage_name);
         sessionManager = new SessionManager(Profile_Activity.this);
         mobilenumber = findViewById(R.id.mobilefx);
         moreeditActionButton = findViewById(R.id.moreedit);
@@ -80,6 +81,13 @@ public class Profile_Activity extends AppCompatActivity   {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Profile_Activity.this , Edit_Profile.class);
+                intent.putExtra("email_str" , ""+email.getText());
+                intent.putExtra("mobile_str" , ""+mobilenumber.getText());
+                intent.putExtra("name_str" , ""+pronamemn.getText());
+                intent.putExtra("address_str" , ""+addresspx.getText());
+                intent.putExtra("passout_str" , ""+passout_year.getText());
+                intent.putExtra("collage_name" , ""+collage_name.getText());
+
                 startActivity(intent);
             }
         });
@@ -165,6 +173,8 @@ public class Profile_Activity extends AppCompatActivity   {
                         pronamemn.setText(response.body().getData().get(k).getName());
                         addresspx.setText(addresspx.getText().toString().concat(response.body().getData().get(k).getAddress()));
                         passout_year.setText(passout_year.getText().toString().concat(response.body().getData().get(k).getPassoutYear()));
+                        collage_name.setText(collage_name.getText().toString().concat(response.body().getData().get(k).getCollageName()));
+
                     }
 
 //                    Intent intent=new Intent(ShowAllPakages.this,MainActivity.class);

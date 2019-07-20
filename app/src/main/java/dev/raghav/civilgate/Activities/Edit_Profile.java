@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.entity.mime.HttpMultipartMode;
@@ -56,17 +57,20 @@ public class Edit_Profile extends AppCompatActivity {
     private static final int READ_REQUEST_CODE = 101;
     CollapsingToolbarLayout toolbar_post;
     // private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = ;
-    EditText email_et , password_et , passing_year_et , ful_name_et , mobile_et,address_et,collage_name_et;
+    EditText  password_et , passing_year_et , ful_name_et ,address_et,collage_name_et;
     ImageView gate_degree_photo_et , gate_sign_et ,profile_et;
+    TextView email_et ,mobile_et;
     File gate_degree_file_et , gate_sign_file_et ,profile_phote_file_et ;
     Button edit_btn;
     SessionManager sessionManager;
     View gv;
     Api apiInterface;
+//    String Email_str,Password_str , Passoutyear_str,Collagename, Mobile_str,Name_str;
     int a = 0;
     int px =0;
     private static final int MY_PERMISSIONS_REQUESTS = 101;
     private ProgressDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,16 +133,15 @@ public class Edit_Profile extends AppCompatActivity {
                 {
                     registerthestupiduser();
                     Toast.makeText(Edit_Profile.this, "ok now you can upload", Toast.LENGTH_SHORT).show();
-                }else{
-
+                }
+                else{
+                    registerthestupiduser();
                     Toast.makeText(Edit_Profile.this, "something is wrong", Toast.LENGTH_SHORT).show();
                 }
 //            }
 
         });
-
         //
-
     }
 
     private void registerthestupiduser() {
@@ -194,6 +197,7 @@ public class Edit_Profile extends AppCompatActivity {
 //        }
         new Final_Image_upload().execute();
 
+
     }
 
     private void init() {
@@ -212,6 +216,21 @@ public class Edit_Profile extends AppCompatActivity {
         address_et = findViewById(R.id.address_edt);
         collage_name_et = findViewById(R.id.collage_name_edt);
         sessionManager = new SessionManager(Edit_Profile.this);
+        try{
+            if(getIntent() !=null)
+            {
+              email_et.setText(getIntent().getStringExtra("email_str"));
+              mobile_et.setText(getIntent().getStringExtra("mobile_str"));
+              ful_name_et.setText(getIntent().getStringExtra("name_str"));
+              address_et.setText(getIntent().getStringExtra("address_str"));
+              passing_year_et.setText(getIntent().getStringExtra("passout_str"));
+              collage_name_et.setText(getIntent().getStringExtra("collage_name"));
+            }
+        }catch (Exception e)
+        {
+            Toast.makeText(this, "Please chekc your internet", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
 
     }
 
@@ -529,6 +548,7 @@ public class Edit_Profile extends AppCompatActivity {
 
             } else {
                 dialog.dismiss();
+                Log.e("result1", result1);
                 Toast.makeText(Edit_Profile.this, "Some Problem", Toast.LENGTH_LONG).show();
             }
 

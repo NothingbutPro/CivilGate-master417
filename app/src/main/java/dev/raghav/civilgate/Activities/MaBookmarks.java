@@ -69,9 +69,8 @@ public class MaBookmarks extends AppCompatActivity {
                             response.body().getData().get(i).getQue(),response.body().getData().get(i).getAns1(),response.body().getData().get(i).getAns2(),
                             response.body().getData().get(i).getAns3(),response.body().getData().get(i).getAns4(),response.body().getData().get(i).getAns3(),response.body().getData().get(i).getQue(),
                             response.body().getData().get(i).getAns3(),response.body().getData().get(i).getFromAns(), response.body().getData().get(i).getToAns(),response.body().getData().get(i).getSolution(),response.body().getData().get(i).getStatus(),response.body().getData().get(i).getVideo(),response.body().getData().get(i).getVideoUrl(),response.body().getData().get(i).getCreatedate(),response.body().getData().get(i).getType()
-                            ,response.body().getData().get(i).getTestName()
+                            ,response.body().getData().get(i).getTestName(),response.body().getData().get(i).getBookmarkId()
                             ));
-
                 }
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

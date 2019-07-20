@@ -1,24 +1,24 @@
-package dev.raghav.civilgate.Const_Files;
+package dev.raghav.civilgate.Other_Parsing_Files;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class BooktheMarks {
+public class Schedule {
 
     @SerializedName("data")
     @Expose
-    private List<BooktheMarksData> data = null;
+    private List<Schedule_Data> data ;
     @SerializedName("responce")
     @Expose
     private Boolean responce;
 
-    public List<BooktheMarksData> getData() {
+    public List<Schedule_Data> getData() {
         return data;
     }
 
-    public void setData(List<BooktheMarksData> data) {
+    public void setData(List<Schedule_Data> data) {
         this.data = data;
     }
 
@@ -29,4 +29,5 @@ public class BooktheMarks {
     public void setResponce(Boolean responce) {
         this.responce = responce;
     }
+
 }

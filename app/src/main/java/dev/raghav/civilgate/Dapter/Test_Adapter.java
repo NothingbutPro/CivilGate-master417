@@ -75,16 +75,19 @@ public class Test_Adapter  extends RecyclerView.Adapter<Test_Adapter.MyViewHolde
 
         Tests_Name tests_Name = levelAdapterList.get(i);
 //        myViewHolder.id.setText(String.valueOf(tests_Name.getTest_start_date()) );
-        Log.e("test at adapter", "name at" + tests_Name.getTest_start_date());
-        Log.e("test at adapter", "time at" + tests_Name.getTest_len());
+        Log.e("test at adapter", "name at" + tests_Name.getTest_id());
+        Log.e("test at adapter", "qustatus at" + tests_Name.getQStatus());
+        String qs = tests_Name.getQStatus();
    //     Log.e("test at adapter", "time at" + tests_Name.);
         myViewHolder.Test_name.setText("Test Name : "+tests_Name.getTest_name());
         try {
-            if (tests_Name.getQStatus().equals("2"))
+            if (qs.equals("2"))
             {
                 myViewHolder.teststatus.setText("Report");
-            }else {
+            }else if(qs.equals("1")){
                 myViewHolder.teststatus.setText("Incomplete");
+            }else {
+                myViewHolder.teststatus.setText("Open");
             }
         }catch (Exception e)
         {

@@ -201,7 +201,6 @@ public class Main_Test_Activity extends AppCompatActivity {
             } else {
                 fab.setText("Close Question Tab");
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-
             }
 
         });

@@ -201,8 +201,6 @@ public class Level_Tab_Activities extends AppCompatActivity {
 
                     viewPager.setAdapter(serviceGeneratoradapter);
                     tabLayout.setupWithViewPager(viewPager);
-
-
                 }
 
             }

@@ -11,16 +11,13 @@ public class BooktheMarksData {
     private String id;
 
     public String getTest_id() {
-        return test_id;
+        return testId;
     }
 
     public void setTest_id(String test_id) {
-        this.test_id = test_id;
+        this.testId = test_id;
     }
 
-    @SerializedName("test_id")
-    @Expose
-    private String test_id;
     @SerializedName("sub_id")
     @Expose
     private String subId;
@@ -78,9 +75,15 @@ public class BooktheMarksData {
     @SerializedName("test_name")
     @Expose
     private String testName;
+    @SerializedName("bookmark_id")
+    @Expose
+    private String bookmarkId;
+    @SerializedName("test_id")
+    @Expose
+    private String testId;
 
-    public BooktheMarksData(String test_id,String id, String subId, String que, String ans1, String ans2, String ans3, String ans4, String ans, String minusmark, String marks, String fromAns, String toAns, String solution, String multipleAns, String status, String video, String videoUrl, String createdate, String type) {
-        this.test_id = test_id;
+    public BooktheMarksData(String test_id,String id, String subId, String que, String ans1, String ans2, String ans3, String ans4, String ans, String minusmark, String marks, String fromAns, String toAns, String solution, String multipleAns, String status, String video, String videoUrl, String createdate, String type ,String bookmark_id) {
+        this.testId = test_id;
         this.id = id;
         this.subId = subId;
         this.que = que;
@@ -101,6 +104,7 @@ public class BooktheMarksData {
         this.createdate = createdate;
         this.type = type;
         this.testName = testName;
+        this.bookmarkId = bookmark_id;
     }
 
     public String getId() {
@@ -261,5 +265,21 @@ public class BooktheMarksData {
 
     public void setTestName(String testName) {
         this.testName = testName;
+    }
+
+    public String getBookmarkId() {
+        return bookmarkId;
+    }
+
+    public void setBookmarkId(String bookmarkId) {
+        this.bookmarkId = bookmarkId;
+    }
+
+    public String getTestId() {
+        return testId;
+    }
+
+    public void setTestId(String testId) {
+        this.testId = testId;
     }
 }

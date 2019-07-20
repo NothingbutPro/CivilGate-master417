@@ -180,13 +180,13 @@
                             android:layout_weight="0.9"
                             app:srcCompat="@drawable/email_icon" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/email_edt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="0.1"
-                            android:background="#fff"
+                            android:background="#D1CECE"
                             android:hint="Email"
                             android:inputType="textEmailAddress"
                             android:textSize="14dp"
@@ -257,13 +257,13 @@
                         <!--android:layout_width="match_parent"-->
                         <!--android:layout_height="wrap_content"-->
                         <!--app:passwordToggleEnabled="true">-->
-                        <EditText
+                        <TextView
                             android:id="@+id/mobile_edt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
                             android:layout_weight="0.1"
-                            android:background="#fff"
+                            android:background="#D6D5D5"
                             android:hint="Mobile"
                             android:inputType="number"
                             android:textSize="14dp"

@@ -8,6 +8,7 @@ public interface Retro_Urls {
   public String Login = "login";
   public String Gettimelinetest = "gettimelinetest";
   public String Get_level = "Get_level";
+  public String Getschedule = "getschedule";
   public String Get_GetExam = "GetExam";
   public String GetQuestion = "GetQuestion";
   public String Gettestrecord = "Gettestrecord";
@@ -20,4 +21,5 @@ public interface Retro_Urls {
   public String Toppers_list = "toppers_list";
   public String Srarttest = "starttest";
   public String About_us = "aboutus";
+  public String Removebookmark = "removebookmark";
 }

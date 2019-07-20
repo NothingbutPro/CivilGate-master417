@@ -54,6 +54,7 @@ public class Forgotten_Password extends AppCompatActivity {
                   //  Toast.makeText(Forgotten_Password.this, "email is "+Forgotemail.getText().toString(), Toast.LENGTH_SHORT).show();
 
                 }else {
+                    Forgotemail.setError("Please check email");
                     Toast.makeText(Forgotten_Password.this, "Not a email which you have typed", Toast.LENGTH_SHORT).show();
                 }
             }
