@@ -140,7 +140,5 @@ public class HisHistoryActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 }

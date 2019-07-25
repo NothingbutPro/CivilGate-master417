@@ -14,6 +14,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -51,12 +53,14 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Main_Test_Activity extends AppCompatActivity {
+
     public static Questions_Adapter questions_adapter;
     public static int queposition = 0;
     RecyclerView quelinrecy;
     static int no_of_questions;
     TextView fab23;
     BottomNavigationView navigation;
+    AlertDialog.Builder builder;
     TextView fab2;
     TextView fab;
     Boolean res = false;
@@ -77,6 +81,7 @@ public class Main_Test_Activity extends AppCompatActivity {
     String student_id;
    // public static int Ansposition =0;
     List<Questions_jJava> questions_jJavaList = new ArrayList<>();
+    private boolean bx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -584,8 +589,10 @@ public class Main_Test_Activity extends AppCompatActivity {
 //                        menuItem4.setVisibility(View.VISIBLE);
 //                        e.printStackTrace();
 //                    }
+                    Log.d("saveornot" , ""+questions_jJavaList.get(yessave).getQue());
+                    Log.d("saveornot" , ""+questions_jJavaList.get(yessave).getType());
                     try {
-                        if (questions_jJavaList.get(saveornot).getType() == 1) {
+                        if (questions_jJavaList.get(yessave).getType() == 1) {
 
                             if (questionsJJavaHashMap.get(yessave).getWritten_ans().equals("0")) {
 //                            ++queposition;
@@ -884,15 +891,68 @@ public class Main_Test_Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        queposition =0;
-        Toast.makeText(this, "backf pressed", Toast.LENGTH_SHORT).show();
-        Thread.currentThread().interrupt();
+        builder = new AlertDialog.Builder(this);
+        ShowBackDialog();
+//        queposition =0;
+//        Toast.makeText(this, "backf pressed", Toast.LENGTH_SHORT).show();
+//        Thread.currentThread().interrupt();
+////        Thread.currentThread().stop();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.getFragments().clear();
+////        questionsJJavaHashMap =null;
+////        questionsJJavaLinkedList = null;
+//        finish();
+            if(bx) {
+                super.onBackPressed();
+            }else {
+                Toast.makeText(this, "Proceeds", Toast.LENGTH_SHORT).show();
+            }
+
+    }
+
+    private Boolean ShowBackDialog() {
+
+        //Uncomment the below code to Set the message and title from the strings.xml file
+        builder.setMessage("Exam Alert!") .setTitle("You are backing up");
+
+        //Setting message manually and performing action on button click
+        builder.setMessage("Are you sure want to quit")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        queposition =0;
+                        Toast.makeText(getApplicationContext(), "back pressed", Toast.LENGTH_SHORT).show();
+                        Thread.currentThread().interrupt();
 //        Thread.currentThread().stop();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.getFragments().clear();
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        fragmentManager.getFragments().clear();
 //        questionsJJavaHashMap =null;
 //        questionsJJavaLinkedList = null;
-        finish();
-        super.onBackPressed();
+                        bx = true;
+
+                        finish();
+
+
+//                        Toast.makeText(getApplicationContext(),"you choose yes action for alertbox",
+//                                Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //  Action for 'NO' Button
+                        dialog.cancel();
+                        Toast.makeText(getApplicationContext(),"you choose no action for alertbox",
+                                Toast.LENGTH_SHORT).show();
+                        bx = false;
+                    }
+                });
+        //Creating dialog box
+        AlertDialog alert = builder.create();
+        //Setting the title manually
+        alert.setTitle("You are backing up");
+        alert.show();
+        return bx;
     }
 }
+
