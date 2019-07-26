@@ -400,7 +400,13 @@ public class Main_Test_Activity extends AppCompatActivity {
                 case R.id.navigation_forwardsdfsdf:
 //                    if()
                     int next = ++queposition;
+
                     int frontback = next - 1;
+                    if(frontback==0) {
+
+                    }else {
+//                        questionsJJavaHashMap.get(next).setPosition(next);
+                    }
                     Toast.makeText(Main_Test_Activity.this, "that's que" +queposition, Toast.LENGTH_SHORT).show();
                   //  int nextquery = ++Ansposition;
                     try {
@@ -570,7 +576,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                     int yessave = saveornot-1;
                     Toast.makeText(Main_Test_Activity.this, "that's que" +queposition, Toast.LENGTH_SHORT).show();
                     questionsJJavaHashMap.remove(queposition);
-                    questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(5) , 0));
+                    questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(5) , 0 ,queposition));
 
                     Log.e("Position" , ""+queposition);
 //                    try {

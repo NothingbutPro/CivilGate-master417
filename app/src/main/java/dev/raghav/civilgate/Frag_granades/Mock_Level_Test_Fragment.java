@@ -155,7 +155,7 @@ TextView cred_mie;
                         p =new int[response.body().getData().size()];
                         questions.setText(questions.getText().toString().concat(" "+response.body().getData().get(0).getTotalQue()));
                         groupmarks.setText(groupmarks.getText().toString().concat(" "+response.body().getData().get(0).getTotalMark()));
-                        grouptesttime.setText(grouptesttime.getText().toString().concat(" "+response.body().getData().get(0).getTesttime()));
+                        grouptesttime.setText(grouptesttime.getText().toString().concat(" "+response.body().getData().get(0).getTesttime()).concat(" min"));
                         groupexpiry.setText(groupexpiry.getText().toString().concat(" "+response.body().getData().get(0).getTestEndDate()));
                         for(int i=0;i<response.body().getData().size();i++)
                         {

@@ -125,8 +125,8 @@ public class Score_Card extends Fragment {
                             negative.setText(String.valueOf(response.body().getData().get(0).getNegative()));
                             left.setText(String.valueOf(response.body().getData().get(0).getLeft()));
                             mytime.setText(String.valueOf(response.body().getData().get(0).getMytime()));
-                            unproductive.setText(String.valueOf(response.body().getData().get(0).getUnproductive()));
-                            mark.setText(String.valueOf(response.body().getData().get(0).getMark()));
+                        //    unproductive.setText(String.valueOf(response.body().getData().get(0).getUnproductive()));
+                        //    mark.setText(String.valueOf(response.body().getData().get(0).getMark()));
                             //  idleTime.setText(String.valueOf(response.body().getData().getIdleTime()));
                             Log.e("leftedddd", "submited marks" + response.body().getData().get(0).getLeft());
                             idleTime.setText(String.valueOf(response.body().getData().get(0).getIdleTime()));
@@ -137,8 +137,8 @@ public class Score_Card extends Fragment {
                             negative.setText(String.valueOf(response.body().getData().get(0).getNegative()));
                             left.setText(String.valueOf(response.body().getData().get(0).getLeft()));
                             mytime.setText(String.valueOf(response.body().getData().get(0).getMytime()));
-                            unproductive.setText(String.valueOf(response.body().getData().get(0).getUnproductive()));
-                            idleTime.setText(String.valueOf(response.body().getData().get(0).getIdleTime()));
+                        //    unproductive.setText(String.valueOf(response.body().getData().get(0).getUnproductive()));
+                          //  idleTime.setText(String.valueOf(response.body().getData().get(0).getIdleTime()));
                             correctans.setText(String.valueOf(response.body().getData().get(0).getCorrect()));
                             leftans.setText(String.valueOf(response.body().getData().get(0).getLeft()));
                             wrongans.setText(String.valueOf(response.body().getData().get(0).getIncorrect()));

@@ -20,6 +20,7 @@ public interface Retro_Urls {
   public String StudentQue = "StudentQue";
   public String Toppers_list = "toppers_list";
   public String Srarttest = "starttest";
+  public String Addquedoubt = "addquedoubt";
   public String About_us = "aboutus";
   public String Removebookmark = "removebookmark";
 }

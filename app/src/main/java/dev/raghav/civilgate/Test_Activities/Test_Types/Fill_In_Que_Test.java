@@ -194,7 +194,7 @@ public class Fill_In_Que_Test extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 questionsJJavaHashMap.remove(queposition);
-                questionsJJavaHashMap.put(queposition , new Questions_jJava(s.toString(), TimeTaken));
+                questionsJJavaHashMap.put(queposition , new Questions_jJava(s.toString(), TimeTaken ,queposition));
                 Log.d("writtebn xfsadf" , "sdf "+questionsJJavaHashMap.get(queposition).getWritten_ans());
             }
 

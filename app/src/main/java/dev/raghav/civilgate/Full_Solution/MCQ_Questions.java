@@ -1,5 +1,6 @@
 package dev.raghav.civilgate.Full_Solution;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,16 +26,23 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import dev.raghav.civilgate.Activities.About_All;
 import dev.raghav.civilgate.Activities.All_Reviews_Questions;
 import dev.raghav.civilgate.Api.Api;
 import dev.raghav.civilgate.Api.Retro_Urls;
 import dev.raghav.civilgate.Const_Files.Detailed_Analysis_const;
 import dev.raghav.civilgate.Const_Files.Detailed_Analysis_const_data;
+import dev.raghav.civilgate.Const_Files.Full_Solution_Data;
 import dev.raghav.civilgate.Const_Files.Full_Solutions;
 import dev.raghav.civilgate.Const_Files.PostBookMarks;
 import dev.raghav.civilgate.Detailed_Analysis.Analysis_Recy_Adapter;
+import dev.raghav.civilgate.Other_Parsing_Files.Get_About;
 import dev.raghav.civilgate.R;
 import dev.raghav.civilgate.SessionManage.SessionManager;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -55,12 +65,15 @@ public class MCQ_Questions extends Fragment {
    ImageView bookmark;
    int nx,pre;
    TextView iwrote,actualwrote;
+   LinearLayout doubsol;
    Full_Solutions full_solutions;
+   String ques_at;
    TextView next ,previous;
     int rightans;
     String rightansstr;
     CardView multiqueli , fillinwque;
     private String maanstr;
+    //ArrayList<Full_Solution_Data> full_solutionsArrayList = new ArrayList<>();
 
     private int maans;
 
@@ -72,6 +85,7 @@ public class MCQ_Questions extends Fragment {
         webque = view.findViewById(R.id.webque);
         next = view.findViewById(R.id.next);
         previous = view.findViewById(R.id.previous);
+        doubsol = view.findViewById(R.id.doubsol);
         bookmark = view.findViewById(R.id.bookmark);
         multiqueli = view.findViewById(R.id.multisolve);
         fillinwque = view.findViewById(R.id.fillcard);
@@ -93,6 +107,43 @@ public class MCQ_Questions extends Fragment {
         opt4 = view.findViewById(R.id.opt4);
 
         GetTheFullSolution();
+        doubsol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create custom dialog object
+                final Dialog dialog = new Dialog(getActivity());
+                // Include dialog.xml file
+                dialog.setContentView(R.layout.anydoubt);
+                // Set dialog title
+                dialog.setTitle("Custom Dialog");
+
+                // set values for custom dialog components - text, image and button
+                TextView Ques = (TextView) dialog.findViewById(R.id.ques_no);
+                Ques.setText("Ques "+solutioncounter);
+                TextView ques_doubt = dialog.findViewById(R.id.ques_doubt);
+                EditText madoubt = dialog.findViewById(R.id.madoubt);
+                ques_doubt.setText(""+ques_at);
+
+                dialog.show();
+
+                Button askydbt = (Button) dialog.findViewById(R.id.askydbt);
+                askydbt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String Askysting = madoubt.getText().toString();
+                        AsyITAway(Askysting);
+                    }
+                });
+                // if decline button is clicked, close the custom dialog
+                askydbt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Close dialog
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
         allques.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,6 +215,30 @@ public class MCQ_Questions extends Fragment {
 //        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    private void AsyITAway(String askysting) {
+//        OkHttpClient client = new OkHttpClient.Builder()
+//                .connectTimeout(100, TimeUnit.SECONDS)
+//                .readTimeout(100,TimeUnit.SECONDS).build();
+//        Retrofit RetroLogin = new Retrofit.Builder()
+//                .baseUrl(Retro_Urls.The_Base).client(client).addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        Api AbloutApi = RetroLogin.create(Api.class);
+//        Call<Get_About> get_aboutCall = AbloutApi.TellAbout();
+//        get_aboutCall.enqueue(new Callback<Get_About>() {
+//            @Override
+//            public void onResponse(Call<Get_About> call, Response<Get_About> response) {
+//                Toast.makeText(About_All.this, ""+response.body().getData().getDescription(), Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Get_About> call, Throwable t) {
+//
+//            }
+//        });
+
+
+    }
+
     private void HaveABookMArk(String queid, String testId, String sId) {
         Retrofit RetroLogin = new Retrofit.Builder()
                 .baseUrl(Retro_Urls.The_Base).addConverterFactory(GsonConverterFactory.create())
@@ -217,7 +292,7 @@ public class MCQ_Questions extends Fragment {
             @Override
             public void onResponse(Call<Full_Solutions> call, Response<Full_Solutions> response) {
                 Log.d("string" , ""+response.body().getResponce());
-
+                //full_solutionsArrayList = response.body().getData();
 //                            Log.d("string" , ""+response.body().getData().getEmail());
                 if(response.body().getResponce())
                 {

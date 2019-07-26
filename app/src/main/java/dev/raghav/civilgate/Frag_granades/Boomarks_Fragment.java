@@ -1,10 +1,13 @@
 package dev.raghav.civilgate.Frag_granades;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +15,9 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,11 +47,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Boomarks_Fragment extends Fragment {
 
     SessionManager sessionManager;
+    LinearLayout anydbt;
     WebView webquebk;
     ImageView opt1 ,opt2 ,opt3,opt4;
     TextView optxt1 ,optxt2 ,optxt3 ,optxt4 ;
     TextView allques;
-    TextView soleditbk, ansss1bk,ansss2bk,ansss3bk,ansss4bk;
+    TextView soleditbk, ansss1bk,ansss2bk,ansss3bk,ansss4bk,queno;
     static public int solutioncounter =0;
     ImageView unbookmark;
     int nx,pre;
@@ -58,7 +64,8 @@ public class Boomarks_Fragment extends Fragment {
     ArrayList<Bookmark_ids> integerstest_ids = new ArrayList<>();
     ArrayList<String> integidsonly = new ArrayList<>();
     Spinner bookmarksid;
-
+    AlertDialog.Builder builder;
+    private String k1;
 
     @Nullable
     @Override
@@ -69,6 +76,8 @@ public class Boomarks_Fragment extends Fragment {
         sessionManager = new SessionManager(getActivity());
         webquebk = view.findViewById(R.id.webquebk);
         next = view.findViewById(R.id.nextbx);
+        anydbt = view.findViewById(R.id.anydbt);
+        queno = view.findViewById(R.id.queno);
         previous = view.findViewById(R.id.previousbx);
         bookmarksid = view.findViewById(R.id.bookmarksid);
         unbookmark = view.findViewById(R.id.ubbookmark);
@@ -88,6 +97,36 @@ public class Boomarks_Fragment extends Fragment {
         opt4 = view.findViewById(R.id.opt4);
    //     Toast.makeText(getActivity(), "hiiiiiiiiiii", Toast.LENGTH_SHORT).show();
         GetTheFullSolution(0);
+    /*    anydbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create custom dialog object
+                final Dialog dialog = new Dialog(getActivity());
+                // Include dialog.xml file
+                dialog.setContentView(R.layout.anydoubt);
+                // Set dialog title
+                dialog.setTitle("Custom Dialog");
+
+                // set values for custom dialog components - text, image and button
+                TextView text = (TextView) dialog.findViewById(R.id.textDialog);
+                text.setText("Custom dialog Android example.");
+                ImageView image = (ImageView) dialog.findViewById(R.id.imageDialog);
+                image.setImageResource(R.drawable.arrow);
+
+                dialog.show();
+
+                Button declineButton = (Button) dialog.findViewById(R.id.declineButton);
+                // if decline button is clicked, close the custom dialog
+                declineButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Close dialog
+                        dialog.dismiss();
+                    }
+                });
+
+            }
+        });*/
         unbookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -269,6 +308,7 @@ public class Boomarks_Fragment extends Fragment {
                                 ansss3bk.setText(ansss3bk.getText().toString().concat("" + response.body().getData().get(solutioncounter).getAns3()));
                                 ansss4bk.setText(ansss4bk.getText().toString().concat("" + response.body().getData().get(solutioncounter).getAns4()));
                                 soleditbk.setText(response.body().getData().get(solutioncounter).getSolution());
+                                queno.setText(String.valueOf(solutioncounter));
                             int maans = Integer.valueOf(response.body().getData().get(solutioncounter).getAns());
                             if(maans ==1)
                             {
@@ -309,24 +349,53 @@ public class Boomarks_Fragment extends Fragment {
                 }
                 if(testid ==0) {
                     for(int k=0;k<response.body().getData().size(); ++k) {
-                        for(int j=0;j<k;j++) {
-                            String j1 = response.body().getData().get(j).getTestName();
-                            String k1 = response.body().getData().get(k).getTestName();
-                            if(!k1.equals(j1)) {
+//                        for(int j=0;j<=k;j++) {
+                            String j1 = response.body().getData().get(k).getTestName();
+                            if(k !=0)
+                            {
+                                 k1 = response.body().getData().get(k-1).getTestName();
+                            }else {
+                                 k1 ="xyz";
+                                integidsonly.add(response.body().getData().get(k).getTestName());
+                            }
+                            if(k==0) {
+                                integidsonly.add(response.body().getData().get(k).getTestName());
 
-                                integidsonly.add(response.body().getData().get(j).getTestName());
+                            }else if(!j1.equals(k1))
+                            {
+                                integidsonly.add(response.body().getData().get(k).getTestName());
 
                             }else {
                                 try {
-                                    if (integidsonly.get(j).length() != 0) {
-                                        integidsonly.remove(k);
-                                    }
+                                    integidsonly.remove(k);
                                 }catch (Exception e)
                                 {
                                     e.printStackTrace();
+                                    Toast.makeText(getActivity(), "last i guess", Toast.LENGTH_SHORT).show();
                                 }
+
                             }
-                        }
+
+
+//                            if(j==k)
+//                            {
+//                                integidsonly.add(response.body().getData().get(j).getTestName());
+//                            }
+//                            if(!k1.equals(j1)) {
+//
+//                                integidsonly.add(response.body().getData().get(j).getTestName());
+//
+//                            }else {
+//                                try {
+//                                    if (integidsonly.get(j).length() != 0) {
+//                                        integidsonly.remove(k);
+//                                    }
+//                                }catch (Exception e)
+//                                {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        }
 
                     }
 //                    if(testid ==0) {

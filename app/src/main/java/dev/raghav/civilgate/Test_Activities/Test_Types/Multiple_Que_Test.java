@@ -41,7 +41,7 @@ import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.questionsJ
 import static dev.raghav.civilgate.Test_Activities.Main_Test_Activity.questionsJJavaLinkedList;
 
 public class Multiple_Que_Test extends Fragment {
-    TextView que_txt;
+    TextView que_txt ,que_no;
     RadioGroup radio_grp;
     RadioButton ans1, ans2, ans3, ans4;
     SpannableString spannableStringque;
@@ -74,6 +74,7 @@ public class Multiple_Que_Test extends Fragment {
         que_txt = MultipleView.findViewById(R.id.que_txtview);
         radio_grp = MultipleView.findViewById(R.id.radio_grp);
         clear_all = MultipleView.findViewById(R.id.clear_all);
+        que_no = MultipleView.findViewById(R.id.que_no);
         ansinput = MultipleView.findViewById(R.id.ansinput);
         ans1 = MultipleView.findViewById(R.id.ans1);
         ans2 = MultipleView.findViewById(R.id.ans2);
@@ -94,6 +95,7 @@ public class Multiple_Que_Test extends Fragment {
             ans2.setText(questionsJJavaLinkedList.get(queposition).getAns_2());
             ans3.setText(questionsJJavaLinkedList.get(queposition).getAns_3());
             ans4.setText(questionsJJavaLinkedList.get(queposition).getAns_4());
+            que_no.setText("Que "+questionsJJavaLinkedList.get(queposition).getPosition());
             if(questionsJJavaLinkedList.get(queposition).getAns_1().length() !=0)
             {
 
@@ -331,7 +333,7 @@ public class Multiple_Que_Test extends Fragment {
 //                        }
                         questionsJJavaHashMap.remove(queposition);
                         Log.e("Time taken" , " is" +TimeTaken);
-                        questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(1) , TimeTaken));
+                        questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(1) , TimeTaken ,queposition));
                         Log.e("writtebn xfsadf" , "sdf "+questionsJJavaHashMap.get(queposition).getWritten_ans());
                      //   Log.d("Level id is" , ""+questionsJJavaHashMap.get(queposition).getId());
                        // Log.d("Level id is" , ""+questionsJJavaHashMap.get(queposition).getSub_id());
@@ -364,7 +366,7 @@ public class Multiple_Que_Test extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 questionsJJavaHashMap.remove(queposition);
-                questionsJJavaHashMap.put(queposition , new Questions_jJava(s.toString(), TimeTaken));
+                questionsJJavaHashMap.put(queposition , new Questions_jJava(s.toString(), TimeTaken,queposition));
                 Log.d("writtebn xfsadf" , "sdf "+questionsJJavaHashMap.get(queposition).getWritten_ans());
             }
 
@@ -467,7 +469,7 @@ public class Multiple_Que_Test extends Fragment {
 //
 //                    }
                     questionsJJavaHashMap.remove(queposition);
-                    questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(2) , TimeTaken));
+                    questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(2) , TimeTaken ,queposition));
                     Log.d("writtebn xfsadf" , "sdf"+questionsJJavaHashMap.get(queposition).getWritten_ans());
                     ans1.setChecked(false);
                     ans3.setChecked(false);
@@ -569,7 +571,7 @@ public class Multiple_Que_Test extends Fragment {
 //
 //                    }
                     questionsJJavaHashMap.remove(queposition);
-                    questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(3) , TimeTaken));
+                    questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(3) , TimeTaken,queposition));
                     Log.d("writtebn xfsadf" , "sdf"+questionsJJavaHashMap.get(queposition).getWritten_ans());
                     ans4.setChecked(false);
                     ans2.setChecked(false);
@@ -672,7 +674,7 @@ public class Multiple_Que_Test extends Fragment {
 //
 //                    }
                     questionsJJavaHashMap.remove(queposition);
-                    questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(4) , TimeTaken));
+                    questionsJJavaHashMap.put(queposition , new Questions_jJava(String.valueOf(4) , TimeTaken,queposition));
                     Log.d("writtebn xfsadf" , "sdf"+questionsJJavaHashMap.get(queposition).getWritten_ans());
                     ans2.setChecked(false);
                     ans3.setChecked(false);

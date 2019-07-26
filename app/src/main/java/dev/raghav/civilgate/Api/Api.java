@@ -162,7 +162,10 @@ Call<Package> Get_Package();
     @Headers("Content-Type: application/x-www-form-urlencoded")
     @GET("Get_creditPoin")
     Call<Credit> Get_Credits(@Query("student_id") int student_id);
-@Headers("Content-Type: application/x-www-form-urlencoded")
+//@Headers("Content-Type: application/x-www-form-urlencoded")
+//@GET(Retro_Urls.About_us)
+//Call<Get_About> TellAbout();
+//@Headers("Content-Type: application/x-www-form-urlencoded")
 @GET(Retro_Urls.About_us)
 Call<Get_About> TellAbout();
 @Headers("Content-Type: application/x-www-form-urlencoded")
@@ -206,6 +209,13 @@ Call<TestStart> GetTestQuestionCall(
         @Field("student_id") int student_id,
         @Field("level_id") int level_id,
         @Field("level_sub_id") String level_sub_id, @Field("subject_id") String subject_id );
+
+//@FormUrlEncoded
+//@POST(Retro_Urls.Addquedoubt)
+//Call<TestStart> GetTestQuestionCall(
+//        @Field("student_id") int student_id,
+//        @Field("level_id") int level_id,
+//        @Field("level_sub_id") String level_sub_id, @Field("subject_id") String subject_id );
 
 
 

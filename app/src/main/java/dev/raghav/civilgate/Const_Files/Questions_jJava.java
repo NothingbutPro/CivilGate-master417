@@ -15,12 +15,26 @@ public class Questions_jJava {
     String video_url;
     String Createdate;
 
+    public void setMinusmark(float minusmark) {
+        this.minusmark = minusmark;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    int position;
     String Written_ans;
     int TIme_taken;
 
-    public Questions_jJava(int id ) {
-        this.id = id;
-    }
+//    public Questions_jJava(String s, int id, int queposition) {
+//        this.id = id;
+//
+//    }
     public String getWritten_ans() {
         return Written_ans;
     }
@@ -42,9 +56,10 @@ public class Questions_jJava {
         this.Que = que;
     }
 
-    public Questions_jJava(String Ans, int timeTaken) {
+    public Questions_jJava(String Ans, int timeTaken , int que_number) {
         this.Written_ans = Ans;
         this.TIme_taken = timeTaken;
+        this.position = que_number;
     }
 
     public int getType() {

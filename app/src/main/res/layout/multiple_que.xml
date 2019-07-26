@@ -26,14 +26,27 @@
         app:layout_constraintTop_toBottomOf="@+id/cock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <TextView
+            android:layout_weight="0.90"
+            android:padding="8dp"
+            android:textColor="#000"
+            android:id="@+id/que_no"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_weight="0.10"
             android:padding="8dp"
             android:textColor="#000"
             android:id="@+id/que_txtview"
             android:textSize="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+    </LinearLayout>
     </android.support.v7.widget.CardView>
 
 
@@ -100,41 +113,41 @@
         </RadioGroup>
 
 
-
         <LinearLayout
             android:id="@+id/textnas"
-            android:padding="5dp"
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <android.support.design.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
-                    android:visibility="gone"
                     android:id="@+id/fillque"
-                    android:padding="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-                </TextView>
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:visibility="gone"></TextView>
 
 
             </android.support.design.card.MaterialCardView>
+
             <android.support.design.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <AutoCompleteTextView
                     android:id="@+id/ansinput"
-                    android:digits="0123456789.-"
-
-                    android:hint="Type your answer here"
-                    android:padding="10dp"
-                    android:background="#fff"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
+
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:digits="0123456789.-"
+                    android:hint="Type your answer here"
+                    android:padding="10dp">
 
 
                 </AutoCompleteTextView>
@@ -145,19 +158,27 @@
     </LinearLayout>
 
 
-
     <LinearLayout
-        app:layout_constraintTop_toBottomOf="@+id/ll_radio"
-        android:layout_marginTop="30dp"
+        android:foregroundGravity="bottom"
+        android:gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_radio">
+
         <TextView
             android:id="@+id/clear_all"
-            android:textSize="15dp"
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="clear answer"
             android:textColor="#000"
+            android:textSize="15dp"
 
             />
     </LinearLayout>

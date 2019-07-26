@@ -128,7 +128,7 @@ public class Instant_Results_Activity extends AppCompatActivity {
                         negative.setText(String.valueOf(response.body().getData().getNegative()));
                        left.setText(String.valueOf(response.body().getData().getLeft()));
                        mytime.setText(String.valueOf(response.body().getData().getMytime()));
-                        unproductive.setText(String.valueOf(response.body().getData().getUnproductive()));
+                      //  unproductive.setText(String.valueOf(response.body().getData().getUnproductive()));
                         mark.setText(String.valueOf(response.body().getData().getMark()));
                       //  idleTime.setText(String.valueOf(response.body().getData().getIdleTime()));
                         Log.e("leftedddd" , "submited marks"+response.body().getData().getLeft());
@@ -140,8 +140,8 @@ public class Instant_Results_Activity extends AppCompatActivity {
                         negative.setText(String.valueOf(response.body().getData().getNegative()));
                         left.setText(String.valueOf(response.body().getData().getLeft()));
                         mytime.setText(String.valueOf(response.body().getData().getMytime()));
-                        unproductive.setText(String.valueOf(response.body().getData().getUnproductive()));
-                        idleTime.setText(String.valueOf(response.body().getData().getIdleTime()));
+                       // unproductive.setText(String.valueOf(response.body().getData().getUnproductive()));
+                      //  idleTime.setText(String.valueOf(response.body().getData().getIdleTime()));
                         correctans.setText(String.valueOf(response.body().getData().getCorrect()));
                         leftans.setText(String.valueOf(response.body().getData().getLeft()));
                         wrongans.setText(String.valueOf(response.body().getData().getIncorrect()));
