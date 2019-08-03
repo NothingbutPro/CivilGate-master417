@@ -294,7 +294,7 @@ public class Main_Test_Activity extends AppCompatActivity {
                         questionsJJavaLinkedList.add(new Questions_jJava(response.body().getData().get(k).getId(), response.body().getData().get(k).getSubId(),
                                 response.body().getData().get(k).getMarks(), response.body().getData().get(k).getMarks(), response.body().getData().get(k).getSolution(),
                                 response.body().getData().get(k).getStatus(), response.body().getData().get(k).getCreatedate(), response.body().getData().get(k).getVideo()
-                                , response.body().getData().get(k).getQue(), response.body().getData().get(k).getVideoUrl()));
+                                , response.body().getData().get(k).getQue(), response.body().getData().get(k).getVideoUrl() ));
                     }
                 }
                 questions_adapter = new Questions_Adapter(Main_Test_Activity.this, questions_jJavaList);
